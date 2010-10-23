@@ -1,0 +1,21 @@
+<h1>Listing arrangements</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @arrangements.each do |arrangement| %>
+  <tr>
+    <td><%= link_to 'Show', arrangement %></td>
+    <td><%= link_to 'Edit', edit_arrangement_path(arrangement) %></td>
+    <td><%= link_to 'Destroy', arrangement, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Arrangement', new_arrangement_path %>

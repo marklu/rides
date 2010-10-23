@@ -1,4 +1,12 @@
 Rides::Application.routes.draw do
+  resources :arrangements
+
+  resources :trips
+
+  resources :vehicles
+
+  resources :people
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
