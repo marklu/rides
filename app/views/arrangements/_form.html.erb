@@ -1,4 +1,4 @@
-<%= form_for(@arrangement) do |f| %>
+<%= form_for([@trip, @arrangement]) do |f| %>
   <% if @arrangement.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@arrangement.errors.count, "error") %> prohibited this arrangement from being saved:</h2>

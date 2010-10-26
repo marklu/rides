@@ -1,5 +1,5 @@
-<h1>New vehicle</h1>
+<h1>New vehicle for <%=h @owner.name %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', vehicles_path %>
+<%= link_to 'Back', person_vehicles_path(@owner) %>

@@ -1,23 +1,30 @@
 <h1>Listing vehicles</h1>
 
-<table>
-  <tr>
-    <th>Capacity</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @vehicles.each do |vehicle| %>
-  <tr>
-    <td><%= vehicle.capacity %></td>
-    <td><%= link_to 'Show', vehicle %></td>
-    <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
-    <td><%= link_to 'Destroy', vehicle, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% if @vehicles.count > 0 %>
+  <table>
+    <tr>
+      <th>Capacity</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  
+  <% @vehicles.each do |vehicle| %>
+    <tr>
+      <td><%= vehicle.capacity %></td>
+      <td><%= link_to 'Show', [@owner, vehicle] %></td>
+      <td><%= link_to 'Edit', edit_person_vehicle_path(@owner, vehicle) %></td>
+      <td><%= link_to 'Destroy', [@owner, vehicle], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <p><%=h @owner.name %> hasn't added any cars yet.</p>
 <% end %>
-</table>
 
 <br />
 
-<%= link_to 'New Vehicle', new_vehicle_path %>
+<p>
+  <%= link_to 'New Vehicle', new_person_vehicle_path(@owner) %>
+  <%= link_to 'Back', @owner %>
+</p>
