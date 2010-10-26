@@ -1,6 +1,7 @@
 class Trip < ActiveRecord::Base
-  has_and_belongs_to_many :people
-  has_many :vehicles
   has_many :arrangements
-  has_one :organizer, :class_name => 'person'
+  belongs_to :organizer, :class_name => "Person", :foreign_key => "organizer_id"
+  has_and_belongs_to_many :participants, :class_name => "Person",
+    :join_table => "participants_trips", :association_foreign_key => "participant_id"
+  has_and_belongs_to_many :vehicles
 end
