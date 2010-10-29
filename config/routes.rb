@@ -1,6 +1,6 @@
 Rides::Application.routes.draw do
-  devise_for :people
   root :to => 'people#index'
+  devise_for :people
 
   resources :people do
     resources :vehicles
