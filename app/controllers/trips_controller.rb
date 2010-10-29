@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
 
   # Creating a trip requires being logged in.
-  before_filter :authenticate_user!
+  before_filter :authenticate_person!
 
 
   # GET /trips

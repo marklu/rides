@@ -629,3 +629,154 @@ Started GET "/people/" for 127.0.0.1 at 2010-10-28 20:00:48 -0700
   [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
 Rendered people/index.html.erb within layouts/application (132.1ms)
 Completed 200 OK in 176ms (Views: 136.1ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/people/sign_out" for 127.0.0.1 at 2010-10-28 20:01:46 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 128ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-28 20:01:46 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (28.0ms)
+Completed 200 OK in 56ms (Views: 32.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/people/sign_in" for 127.0.0.1 at 2010-10-28 20:01:47 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/shared/_links.erb (4.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 48ms (Views: 12.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people/sign_in" for 127.0.0.1 at 2010-10-28 20:01:57 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VAWx4t21OzkHRiCs/6mYQPgtTxmuBVPD1dgsLKFU0AE=", "person"=>{"email"=>"jasonk@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'jasonk@berkeley.edu') LIMIT 1[0m
+Completed   in 28ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VAWx4t21OzkHRiCs/6mYQPgtTxmuBVPD1dgsLKFU0AE=", "person"=>{"email"=>"jasonk@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/shared/_links.erb (0.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (44.0ms)
+Completed 200 OK in 192ms (Views: 48.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people/sign_in" for 127.0.0.1 at 2010-10-28 20:02:05 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VAWx4t21OzkHRiCs/6mYQPgtTxmuBVPD1dgsLKFU0AE=", "person"=>{"email"=>"jasonku@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'jasonku@berkeley.edu') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-10-29 03:02:05.293347', "last_sign_in_at" = '2010-10-29 02:52:32.611149', "sign_in_count" = 3, "updated_at" = '2010-10-29 03:02:05.293347' WHERE ("people"."id" = 4)[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 220ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-28 20:02:05 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people"
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Rendered people/index.html.erb within layouts/application (68.0ms)
+Completed 200 OK in 100ms (Views: 76.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-28 20:02:46 -0700
+  Processing by TripsController#index as HTML
+Completed   in 76ms
+
+NoMethodError (undefined method `authenticate_user!' for #<TripsController:0xb9af80c>):
+  
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (136.1ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (140.1ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+
+
+Started GET "/people/sign_out" for 127.0.0.1 at 2010-10-28 20:03:41 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[35mPerson Load (4.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 132ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-28 20:03:42 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (8.0ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 76ms (Views: 28.0ms | ActiveRecord: 12.0ms)
+
+
+Started GET "/people/password/new" for 127.0.0.1 at 2010-10-28 20:04:27 -0700
+  Processing by Devise::PasswordsController#new as HTML
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/shared/_links.erb (0.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/passwords/new.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 60ms (Views: 32.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people/password" for 127.0.0.1 at 2010-10-28 20:04:35 -0700
+  Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VAWx4t21OzkHRiCs/6mYQPgtTxmuBVPD1dgsLKFU0AE=", "person"=>{"email"=>"jasonku@berkeley.edu"}, "commit"=>"Send me reset password instructions"}
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'jasonku@berkeley.edu') LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."reset_password_token" = '3BT_YFDDJkMae1L3G6TH') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  UPDATE "people" SET "reset_password_token" = '3BT_YFDDJkMae1L3G6TH', "updated_at" = '2010-10-29 03:04:35.200263' WHERE ("people"."id" = 4)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/mailer/reset_password_instructions.html.erb (0.0ms)
+
+Sent mail to jasonku@berkeley.edu (148ms)
+Date: Thu, 28 Oct 2010 20:04:37 -0700
+From: please-change-me@config-initializers-devise.com
+To: jasonku@berkeley.edu
+Message-ID: <4cca39c5b6fe1_55a15c97e8a26bb@jku-cs169.mail>
+Subject: Reset password instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Hello jasonku@berkeley.edu!</p>
+
+<p>Someone has requested a link to change your password, and you can do this through the link below.</p>
+
+<p><a href="http://localhost:3000/people/password/edit?reset_password_token=3BT_YFDDJkMae1L3G6TH">Change my password</a></p>
+
+<p>If you didn't request this, please ignore this email.</p>
+<p>Your password won't change until you access the link above and create a new one.</p>
+Redirected to http://localhost:3000/people/sign_in
+Completed 302 Found in 2693ms
+
+
+Started GET "/people/sign_in" for 127.0.0.1 at 2010-10-28 20:04:37 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/shared/_links.erb (4.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 164ms (Views: 20.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-28 20:05:25 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (80.0ms)
+Completed 200 OK in 116ms (Views: 88.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-28 20:05:26 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (84.0ms)
+Completed 200 OK in 116ms (Views: 92.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-28 20:06:04 -0700
+  Processing by TripsController#index as HTML
+Completed   in 40ms
+
+
+Started GET "/people/sign_in" for 127.0.0.1 at 2010-10-28 20:06:04 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/shared/_links.erb (4.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/devise-1.1.3/app/views/devise/sessions/new.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 128ms (Views: 20.0ms | ActiveRecord: 0.0ms)
