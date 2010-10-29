@@ -1,4 +1,9 @@
 class TripsController < ApplicationController
+
+  # Creating a trip requires being logged in.
+  before_filter :authenticate_user!
+
+
   # GET /trips
   # GET /trips.xml
   def index

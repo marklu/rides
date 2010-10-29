@@ -21,8 +21,6 @@ class IntegratingDevise < ActiveRecord::Migration
     add_index :people, :reset_password_token, :unique => true
     # add_index :people, :unlock_token,         :unique => true
 
-
-
   end
 
   def self.down
