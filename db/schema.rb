@@ -54,6 +54,10 @@ ActiveRecord::Schema.define(:version => 20101029021446) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "music"
+    t.integer  "smoking"
   end
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
@@ -79,6 +83,8 @@ ActiveRecord::Schema.define(:version => 20101029021446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
+    t.string   "make"
+    t.string   "model"
   end
 
   add_index "vehicles", ["owner_id"], :name => "index_vehicles_on_owner_id"
