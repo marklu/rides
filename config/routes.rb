@@ -19,26 +19,11 @@ Rides::Application.routes.draw do
                 + Invite Participant (not yet)
 =end
   devise_for :people, :skip => [:sessions, :registrations] do
-    # Session routes for Authenticatable (default)
-    #      new_person_session GET  /people/sign_in                    {:controller=>"devise/sessions", :action=>"new"}
-    #          person_session POST /people/sign_in                    {:controller=>"devise/sessions", :action=>"create"}
-    #  destroy_person_session GET  /people/sign_out                   {:controller=>"devise/sessions", :action=>"destroy"}
 
     get "/signin" => "devise/sessions#new", :as => "new_person_session"
     post "/signin" => "devise/sessions#create", :as => "person_session"
     get "/signout" => "devise/sessions#destroy", :as => "destroy_person_session"
 
-
-    #     person_registration POST   /people(.:format)               {:action=>"create", :controller=>"devise/registrations"}
-    # new_person_registration GET    /people/sign_up(.:format)       {:action=>"new", :controller=>"devise/registrations"}
-    #edit_person_registration GET    /people/edit(.:format)          {:action=>"edit", :controller=>"devise/registrations"}
-    #     person_registration PUT    /people(.:format)               {:action=>"update", :controller=>"devise/registrations"}
-    #     person_registration DELETE /people(.:format)               {:action=>"destroy", :controller=>"devise/registrations"
-#    post "/people" => "people#create", :as => "person_registration"
-#    get "/signup" => "people#new", :as => "new_person_registration"
-#    get "/editprofile" => "people#edit", :as => "edit_person_registration"
-#    put "/people" => "people#put", :as => "person_registration"
-#    delete "/people" => "people#destroy", :as => "person_registration"
     post "/people" => "devise/registrations#create", :as => "person_registration"
     get "/signup" => "devise/registrations#new", :as => "new_person_registration"
     get "/editprofile" => "devise/registrations#edit", :as => "edit_person_registration"
