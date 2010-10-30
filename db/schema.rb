@@ -43,6 +43,10 @@ ActiveRecord::Schema.define(:version => 20101030203230) do
     t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "music"
+    t.integer  "smoking"
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
     t.string   "password_salt",                       :default => "", :null => false
@@ -54,10 +58,6 @@ ActiveRecord::Schema.define(:version => 20101030203230) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "city"
-    t.string   "state"
-    t.integer  "music"
-    t.integer  "smoking"
   end
 
   add_index "people", ["email"], :name => "index_people_on_email", :unique => true
