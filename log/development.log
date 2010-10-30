@@ -2677,3 +2677,558 @@ ActionView::Template::Error (undefined method `person_path' for #<#<Class:0xa1bc
 Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
 Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (72.3ms)
 Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (80.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 13:46:55 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (33.6ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (578.8ms)
+Completed   in 755ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0xa495584>:0xa494170>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___347567864_86282110_636992704'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___347567864_86282110_636992704'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (207.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (213.1ms)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2010-10-30 13:46:58 -0700
+
+ActionController::RoutingError (No route matches "/sign_up"):
+  
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/people/sign_up" for 127.0.0.1 at 2010-10-30 13:47:01 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[35mPerson Load (5.3ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 139ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 13:47:01 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (10.1ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (201.4ms)
+Completed   in 271ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0xa1d0a24>:0xa1cf4d0>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___347567864_84833190_636992704'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___347567864_84833190_636992704'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (73.2ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (81.1ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:10:54 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (1.5ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 198ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:10:55 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (7.9ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (232.1ms)
+Completed   in 340ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0xb0fc91c>:0xb0fb670>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___1064554477_92788230_626989134'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___1064554477_92788230_626989134'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (47.9ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (89.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:12:05 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (28.8ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (297.0ms)
+Completed   in 436ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0xaf7fc24>:0xaf7e7d4>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_registration_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___1064554477_91981950_626989134'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___1064554477_91981950_626989134'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (5.9ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (79.8ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (91.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:13:13 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (17.6ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (415.6ms)
+Completed   in 487ms
+
+ActionView::Template::Error (undefined local variable or method `new_person_path' for #<#<Class:0xaec97bc>:0xaec86f0>):
+    26: 
+    27: <br />
+    28: 
+    29: <%= link_to 'New Person', new_person_path %>
+  app/views/people/index.html.erb:29:in `_app_views_people_index_html_erb___1064554477_91635270_626989134'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.7ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (71.6ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (79.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:13:24 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (221.7ms)[0m  SELECT "people".* FROM "people"
+  [1m[36mPerson Load (22.7ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Rendered people/index.html.erb within layouts/application (190.5ms)
+Completed 200 OK in 482ms (Views: 181.6ms | ActiveRecord: 244.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:13:55 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (220.6ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (394.7ms)
+Completed   in 789ms
+
+ActionView::Template::Error (undefined local variable or method `new_person_path' for #<#<Class:0xb45cb20>:0xb45bb44>):
+    26: 
+    27: <br />
+    28: 
+    29: <%= link_to 'New Person', new_person_path %>
+  app/views/people/index.html.erb:29:in `_app_views_people_index_html_erb___1064554477_94556470_626989134'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (7.8ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (180.7ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (196.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:14:09 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (13.1ms)[0m  [1mSELECT "people".* FROM "people"[0m
+ERROR: compiling _app_views_people_index_html_erb___1064554477_94312420_626989134 RAISED /home/jku/rides2/app/views/people/index.html.erb:25: unknown regexp options - tabl
+unmatched close parenthesis: /tr>
+'); end 
+@output_buffer.safe_concat('</
+/home/jku/rides2/app/views/people/index.html.erb:27: syntax error, unexpected '<'
+<br />
+ ^
+/home/jku/rides2/app/views/people/index.html.erb:27: unterminated regexp meets end of file
+/home/jku/rides2/app/views/people/index.html.erb:27: syntax error, unexpected $end, expecting ')'
+Function body:           def _app_views_people_index_html_erb___1064554477_94312420_626989134(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "people/index";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new;@output_buffer.safe_concat('<h1>Listing people</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Address</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+');@output_buffer.append_if_string=  @people.each do |person| 
+@output_buffer.safe_concat('  <tr>
+    <td>');@output_buffer.append= ( person.name );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( person.email );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( person.phone );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( person.address );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( #link_to 'Show', person );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( #link_to 'Edit', edit_person_registration_path(person) );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( #link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete );@output_buffer.safe_concat('</td>
+  </tr>
+'); end 
+@output_buffer.safe_concat('</table>
+
+<br />
+
+');@output_buffer.append= ( link_to 'New Person', new_person_path );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_view/template.rb:255:in `module_eval'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_view/template.rb:255:in `compile'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_view/template.rb:134:in `block in render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/notifications.rb:54:in `instrument'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_view/template.rb:127:in `render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_view/render/rendering.rb:59:in `block in _render_template'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/notifications.rb:52:in `block in instrument'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/notifications.rb:52:in `instrument'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_view/render/rendering.rb:56:in `_render_template'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_view/render/rendering.rb:26:in `render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/rendering.rb:114:in `_render_template'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/rendering.rb:108:in `render_to_body'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/rendering.rb:101:in `render_to_string'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/rendering.rb:92:in `render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/rendering.rb:17:in `render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+/usr/local/ruby/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activerecord-3.0.1/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/instrumentation.rb:39:in `render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/mime_responds.rb:261:in `block in retrieve_response_from_mimes'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/mime_responds.rb:192:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/mime_responds.rb:192:in `respond_to'
+/home/jku/rides2/app/controllers/people_controller.rb:7:in `index'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/base.rb:150:in `process_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/rendering.rb:11:in `process_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/callbacks.rb:435:in `_run__193475419__process_action__396525291__callbacks'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/callbacks.rb:409:in `_run_process_action_callbacks'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/callbacks.rb:93:in `run_callbacks'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/notifications.rb:52:in `block in instrument'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/notifications.rb:52:in `instrument'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/rescue.rb:17:in `process_action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/base.rb:119:in `process'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/abstract_controller/rendering.rb:40:in `process'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal.rb:133:in `dispatch'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_controller/metal.rb:173:in `block in action'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/routing/route_set.rb:62:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/routing/route_set.rb:27:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/route_set.rb:148:in `block in call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/code_generation.rb:93:in `block in recognize'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/code_generation.rb:68:in `optimized_each'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/code_generation.rb:92:in `recognize'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-mount-0.6.13/lib/rack/mount/route_set.rb:139:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/routing/route_set.rb:492:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/warden-0.10.7/lib/warden/manager.rb:35:in `block in call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/warden-0.10.7/lib/warden/manager.rb:34:in `catch'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/warden-0.10.7/lib/warden/manager.rb:34:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/head.rb:14:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/methodoverride.rb:24:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/flash.rb:182:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/cookies.rb:287:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activerecord-3.0.1/lib/active_record/query_cache.rb:32:in `block in call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activerecord-3.0.1/lib/active_record/query_cache.rb:12:in `cache'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activerecord-3.0.1/lib/active_record/query_cache.rb:31:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:355:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/sendfile.rb:107:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/show_exceptions.rb:46:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/railties-3.0.1/lib/rails/rack/logger.rb:13:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/runtime.rb:17:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/activesupport-3.0.1/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/lock.rb:11:in `block in call'
+<internal:prelude>:10:in `synchronize'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/lock.rb:11:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/static.rb:30:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/railties-3.0.1/lib/rails/application.rb:168:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/railties-3.0.1/lib/rails/application.rb:77:in `method_missing'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/railties-3.0.1/lib/rails/rack/log_tailer.rb:14:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/content_length.rb:13:in `call'
+/usr/local/ruby/lib/ruby/gems/1.9.1/gems/rack-1.2.1/lib/rack/handler/webrick.rb:52:in `service'
+/usr/local/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/usr/local/ruby/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/usr/local/ruby/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+Rendered people/index.html.erb within layouts/application (41.8ms)
+Completed   in 247ms
+
+ActionView::Template::Error (/home/jku/rides2/app/views/people/index.html.erb:25: unknown regexp options - tabl
+unmatched close parenthesis: /tr>
+'); end 
+@output_buffer.safe_concat('</
+/home/jku/rides2/app/views/people/index.html.erb:27: syntax error, unexpected '<'
+<br />
+ ^
+/home/jku/rides2/app/views/people/index.html.erb:27: unterminated regexp meets end of file
+/home/jku/rides2/app/views/people/index.html.erb:27: syntax error, unexpected $end, expecting ')'):
+    22:     <td><%= #link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+    24: <% end %>
+    25: </table>
+    26: 
+    27: <br />
+    28: 
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.3ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (143.5ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (154.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:14:41 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (39.4ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (761.4ms)
+Completed   in 892ms
+
+ActionView::Template::Error (undefined local variable or method `new_person_path' for #<#<Class:0xaed4b08>:0xaed37bc>):
+    23: 
+    24: <br />
+    25: 
+    26: <%= link_to 'New Person', new_person_path %>
+  app/views/people/index.html.erb:26:in `_app_views_people_index_html_erb___1064554477_91657490_626989134'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (11.1ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (123.6ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (139.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:14:53 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (116.1ms)[0m  [1mSELECT "people".* FROM "people"[0m
+  [1m[35mPerson Load (2.8ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Rendered people/index.html.erb within layouts/application (57.8ms)
+Completed 200 OK in 259ms (Views: 60.1ms | ActiveRecord: 118.9ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:14:54 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mPerson Load (1.4ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 117ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:14:55 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (23.4ms)[0m  SELECT "people".* FROM "people"
+  [1m[36mPerson Load (1.9ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Rendered people/index.html.erb within layouts/application (236.9ms)
+Completed 200 OK in 355ms (Views: 248.2ms | ActiveRecord: 25.3ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:15:00 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[35mPerson Load (2.3ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 101ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:15:00 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (29.7ms)[0m  [1mSELECT "people".* FROM "people"[0m
+  [1m[35mPerson Load (1.9ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Rendered people/index.html.erb within layouts/application (239.3ms)
+Completed 200 OK in 474ms (Views: 258.6ms | ActiveRecord: 33.1ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:15:53 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mSQL (1.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (47.8ms)[0m  SELECT "people".* FROM "people"
+  [1m[36mPerson Load (3.3ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Rendered people/index.html.erb within layouts/application (119.7ms)
+Completed 200 OK in 255ms (Views: 120.5ms | ActiveRecord: 52.3ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:15:55 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[35mPerson Load (1.9ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 247ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:15:56 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (12.9ms)[0m  [1mSELECT "people".* FROM "people"[0m
+  [1m[35mPerson Load (1.5ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Rendered people/index.html.erb within layouts/application (99.7ms)
+Completed 200 OK in 235ms (Views: 103.6ms | ActiveRecord: 14.4ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:16:02 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mPerson Load (36.6ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 96ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:16:02 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (9.3ms)[0m  SELECT "people".* FROM "people"
+  [1m[36mPerson Load (1.9ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Rendered people/index.html.erb within layouts/application (79.8ms)
+Completed 200 OK in 119ms (Views: 82.7ms | ActiveRecord: 11.2ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:16:12 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[35mPerson Load (3.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 135ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:16:12 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (7.5ms)[0m  [1mSELECT "people".* FROM "people"[0m
+  [1m[35mPerson Load (1.8ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Rendered people/index.html.erb within layouts/application (93.4ms)
+Completed 200 OK in 153ms (Views: 95.7ms | ActiveRecord: 9.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:16:28 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (10.4ms)[0m  [1mSELECT "people".* FROM "people"[0m
+  [1m[35mPerson Load (11.2ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Rendered people/index.html.erb within layouts/application (209.8ms)
+Completed 200 OK in 450ms (Views: 204.1ms | ActiveRecord: 21.6ms)
+
+
+Started GET "/people" for 127.0.0.1 at 2010-10-30 14:16:31 -0700
+
+ActionController::RoutingError (No route matches "/people"):
+  
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/editprofile" for 127.0.0.1 at 2010-10-30 14:18:14 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (2.1ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 127ms (Views: 14.8ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-30 14:18:16 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (2.4ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 223ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:18:16 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (8.2ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (84.4ms)
+Completed 200 OK in 161ms (Views: 91.7ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:18:19 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered devise/shared/_links.erb (1.8ms)
+Rendered devise/registrations/new.html.erb within layouts/application (145.7ms)
+Completed 200 OK in 187ms (Views: 153.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 14:18:32 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered devise/shared/_links.erb (2.6ms)
+Rendered devise/registrations/new.html.erb within layouts/application (30.0ms)
+Completed 200 OK in 149ms (Views: 43.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 14:18:35 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 100ms (Views: 11.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-30 14:18:44 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"jasonku@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (1.7ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'jasonku@berkeley.edu') LIMIT 1[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-10-30 21:18:44.548865', "last_sign_in_at" = '2010-10-30 20:11:59.035275', "sign_in_count" = 7, "updated_at" = '2010-10-30 21:18:44.549096' WHERE ("people"."id" = 4)
+Redirected to http://localhost:3000/
+Completed 302 Found in 297ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 14:18:44 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (7.4ms)[0m  [1mSELECT "people".* FROM "people"[0m
+  [1m[35mPerson Load (1.9ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Rendered people/index.html.erb within layouts/application (85.8ms)
+Completed 200 OK in 187ms (Views: 88.2ms | ActiveRecord: 9.2ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
