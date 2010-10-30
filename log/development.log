@@ -2461,3 +2461,219 @@ ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x0000
 Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
 Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (43.1ms)
 Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (46.6ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 13:03:31 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (101.2ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (615.0ms)
+Completed   in 966ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0xa5702ec>:0xa56f284>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___11679964_86733860__1067607983'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___11679964_86733860__1067607983'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (280.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (306.3ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 13:04:18 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.9ms)
+Rendered devise/sessions/new.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 97ms (Views: 12.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people/sign_in" for 127.0.0.1 at 2010-10-30 13:04:28 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"jasonku@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (1.8ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'jasonku@berkeley.edu') LIMIT 1[0m
+  [1m[35mSQL (1.2ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-10-30 20:04:29.176201', "last_sign_in_at" = '2010-10-29 07:43:18.901935', "sign_in_count" = 5, "updated_at" = '2010-10-30 20:04:29.176770' WHERE ("people"."id" = 4)
+Redirected to http://localhost:3000/
+Completed 302 Found in 512ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 13:04:29 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (20.3ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (281.7ms)
+Completed   in 364ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x9f3d974>:0x9f3c31c>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___11679964_83483200__1067607983'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___11679964_83483200__1067607983'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (133.1ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (159.0ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-30 13:04:36 -0700
+
+ActionController::RoutingError (No route matches "/signout"):
+  
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-10-30 13:04:40 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[35mPerson Load (1.4ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 99ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 13:04:40 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (7.8ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (194.0ms)
+Completed   in 237ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x9fe5f20>:0x9fe4ae4>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___11679964_83828300__1067607983'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___11679964_83828300__1067607983'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (73.0ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (80.7ms)
+
+
+Started GET "/people/signin" for 127.0.0.1 at 2010-10-30 13:05:36 -0700
+
+ActionController::RoutingError (No route matches "/people/signin"):
+  
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/people/sign_in" for 127.0.0.1 at 2010-10-30 13:05:40 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.3ms)
+Rendered devise/sessions/new.html.erb within layouts/application (56.5ms)
+Completed 200 OK in 144ms (Views: 62.6ms | ActiveRecord: 0.0ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+
+
+Started GET "/people/sign_in" for 127.0.0.1 at 2010-10-30 13:08:58 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.3ms)
+Rendered devise/sessions/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 83ms (Views: 12.7ms | ActiveRecord: 0.0ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 13:10:20 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/sessions/new.html.erb within layouts/application (128.1ms)
+Completed   in 205ms
+
+ActionView::Template::Error (undefined method `person_session_path' for #<#<Class:0xa7addc0>:0xa7a5918>):
+    1: <h2>Sign in</h2>
+    2: 
+    3: <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    4:   <p><%= f.label :email %><br />
+    5:   <%= f.text_field :email %></p>
+    6: 
+  app/views/devise/sessions/new.html.erb:3:in `_app_views_devise_sessions_new_html_erb__99246487_87893580_911014338'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (69.3ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (79.5ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 13:11:53 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.3ms)
+Rendered devise/sessions/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 75ms (Views: 11.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-30 13:11:58 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"jasonku@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (1.5ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'jasonku@berkeley.edu') LIMIT 1
+  [1m[36mSQL (1.7ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-10-30 20:11:59.035275', "last_sign_in_at" = '2010-10-30 20:04:29.176201', "sign_in_count" = 6, "updated_at" = '2010-10-30 20:11:59.035646' WHERE ("people"."id" = 4)[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 471ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 13:11:59 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (7.7ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (235.3ms)
+Completed   in 291ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0xa1bc36c>:0xa1bb14c>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___347567864_84792250_636992704'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___347567864_84792250_636992704'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (72.3ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (80.6ms)
