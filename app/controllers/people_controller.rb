@@ -2,6 +2,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
+    logger.info('people#index')
     @people = Person.all
 
     respond_to do |format|
@@ -10,20 +11,21 @@ class PeopleController < ApplicationController
     end
   end
 
-  # GET /people/1
-  # GET /people/1.xml
-  def show
-    @person = Person.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @person }
-    end
-  end
+#  # GET /people/1
+#  # GET /people/1.xml
+#  def show
+#    @person = Person.find(params[:id])
+#
+#    respond_to do |format|
+#      format.html # show.html.erb
+#      format.xml  { render :xml => @person }
+#    end
+#  end
 
   # GET /people/new
   # GET /people/new.xml
   def new
+    logger.info('people#new')
     @person = Person.new
 
     respond_to do |format|
@@ -34,12 +36,14 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
+    logger.info('people#edit')
     @person = Person.find(params[:id])
   end
 
   # POST /people
   # POST /people.xml
   def create
+    logger.info('people#create')
     @person = Person.new(params[:person])
 
     respond_to do |format|
@@ -56,6 +60,7 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update
+    logger.info('people#update')
     @person = Person.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +77,7 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.xml
   def destroy
+    logger.info('people#destroy')
     @person = Person.find(params[:id])
     @person.destroy
 

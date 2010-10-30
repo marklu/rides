@@ -18,8 +18,7 @@ Rides::Application.routes.draw do
           o Trip Participants (/trips/:id/participants)
                 + Invite Participant (not yet)
 =end
-
-  devise_for :people, :skip => [:sessions, :registration] do
+  devise_for :people, :skip => [:sessions, :registrations] do
     # Session routes for Authenticatable (default)
     #      new_person_session GET  /people/sign_in                    {:controller=>"devise/sessions", :action=>"new"}
     #          person_session POST /people/sign_in                    {:controller=>"devise/sessions", :action=>"create"}
@@ -35,12 +34,16 @@ Rides::Application.routes.draw do
     #edit_person_registration GET    /people/edit(.:format)          {:action=>"edit", :controller=>"devise/registrations"}
     #     person_registration PUT    /people(.:format)               {:action=>"update", :controller=>"devise/registrations"}
     #     person_registration DELETE /people(.:format)               {:action=>"destroy", :controller=>"devise/registrations"
+#    post "/people" => "people#create", :as => "person_registration"
+#    get "/signup" => "people#new", :as => "new_person_registration"
+#    get "/editprofile" => "people#edit", :as => "edit_person_registration"
+#    put "/people" => "people#put", :as => "person_registration"
+#    delete "/people" => "people#destroy", :as => "person_registration"
     post "/people" => "devise/registrations#create", :as => "person_registration"
     get "/signup" => "devise/registrations#new", :as => "new_person_registration"
     get "/editprofile" => "devise/registrations#edit", :as => "edit_person_registration"
     put "/people" => "devise/registrations#put", :as => "person_registration"
     delete "/people" => "devise/registrations#destroy", :as => "person_registration"
-
 
     #         person_password POST   /people/password(.:format)      {:action=>"create", :controller=>"devise/passwords"}
     #     new_person_password GET    /people/password/new(.:format)  {:action=>"new", :controller=>"devise/passwords"}
