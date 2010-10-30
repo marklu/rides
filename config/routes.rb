@@ -19,8 +19,11 @@ Rides::Application.routes.draw do
                 + Invite Participant (not yet)
 =end
 
-  devise_for :people, :path => ''
-
+  devise_for :people do
+    get "/signin" => "devise/sessions#new"
+    get "/logout" => "devise/sessions#destroy"
+    get "/signup" => "devise/registrations#new"
+  end
 
 =begin
   # Session routes for Authenticatable (default)

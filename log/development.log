@@ -2103,3 +2103,361 @@ Started GET "/sign_in" for 127.0.0.1 at 2010-10-30 00:32:43 -0700
 Rendered devise/shared/_links.erb (1.3ms)
 Rendered devise/sessions/new.html.erb within layouts/application (8.1ms)
 Completed 200 OK in 99ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 02:42:22 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (7.2ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (219.5ms)
+Completed   in 358ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x00000004bb48e8>:0x00000004bb2818>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb__2656616220710260531_39679360__2370689590608056815'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb__2656616220710260531_39679360__2370689590608056815'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (42.3ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (50.8ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 02:43:05 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (7.3ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (219.6ms)
+Completed   in 311ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x0000000212ec40>:0x000000021203c0>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___3523568922229574753_17340460_165750081956819138'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___3523568922229574753_17340460_165750081956819138'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (72.0ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (79.5ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 02:44:49 -0700
+
+ActionController::RoutingError (No route matches "/signup"):
+  
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.6ms)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2010-10-30 02:44:54 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered devise/shared/_links.erb (2.3ms)
+Rendered devise/registrations/new.html.erb within layouts/application (39.0ms)
+Completed 200 OK in 115ms (Views: 45.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2010-10-30 02:44:57 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 96ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/mlu/edu/fa10/cs169/rides/config/environment.rb:5)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 02:53:51 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (12.3ms)
+Completed 200 OK in 87ms (Views: 18.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 02:53:54 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 54ms (Views: 8.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/people/sign_up" for 127.0.0.1 at 2010-10-30 02:53:56 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered devise/shared/_links.erb (1.1ms)
+Rendered devise/registrations/new.html.erb within layouts/application (21.8ms)
+Completed 200 OK in 66ms (Views: 27.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 02:54:00 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered devise/shared/_links.erb (21.3ms)
+Rendered devise/registrations/new.html.erb within layouts/application (37.8ms)
+Completed 200 OK in 58ms (Views: 40.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 02:54:11 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 108ms (Views: 18.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people/sign_in" for 127.0.0.1 at 2010-10-30 02:54:17 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'mlu@berkeley.edu') LIMIT 1
+Completed   in 179ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered devise/shared/_links.erb (2.3ms)
+Rendered devise/sessions/new.html.erb within layouts/application (43.7ms)
+Completed 200 OK in 307ms (Views: 49.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/people/sign_in" for 127.0.0.1 at 2010-10-30 02:54:21 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (0.6ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'mlu@berkeley.edu') LIMIT 1[0m
+Completed   in 76ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered devise/shared/_links.erb (2.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 224ms (Views: 18.1ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/people/sign_in" for 127.0.0.1 at 2010-10-30 02:54:26 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'mlu@berkeley.edu') LIMIT 1
+Completed   in 77ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered devise/shared/_links.erb (2.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 227ms (Views: 17.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/people/sign_up" for 127.0.0.1 at 2010-10-30 02:54:29 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered devise/shared/_links.erb (2.4ms)
+Rendered devise/registrations/new.html.erb within layouts/application (21.9ms)
+Completed 200 OK in 88ms (Views: 26.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 02:54:35 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+Rendered devise/shared/_links.erb (2.3ms)
+Rendered devise/registrations/new.html.erb within layouts/application (35.8ms)
+Completed 200 OK in 114ms (Views: 42.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-30 02:55:06 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Mark Lu", "phone"=>"7144827057", "address"=>"2041 Francisco St Apt 7", "city"=>"Berkeley", "state"=>"CA"}, "commit"=>"Sign up"}
+WARNING: Can't mass-assign protected attributes: name, phone, address
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('mlu@berkeley.edu')) LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES (NULL, 'Berkeley', '2010-10-30 09:55:06.442900', NULL, NULL, 'mlu@berkeley.edu', '$2a$10$uimovQy4hO5V93c7ucLejeICSduFIB2zCCOFLB1qverHRh6koDmC6', NULL, NULL, NULL, NULL, '$2a$10$uimovQy4hO5V93c7ucLeje', NULL, NULL, NULL, NULL, 0, NULL, 'CA', '2010-10-30 09:55:06.442900')
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-10-30 09:55:06.558273', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-10-30 09:55:06.558273', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-10-30 09:55:06.558784' WHERE ("people"."id" = 8)[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 479ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 02:55:06 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (39.6ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (127.5ms)
+Completed   in 207ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x000000042fe168>:0x000000042fbc60>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___3513589178529190804_35113600__2447804123469610156'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___3513589178529190804_35113600__2447804123469610156'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (54.3ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (61.5ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-30 02:55:13 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mPerson Load (1.8ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 8) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 107ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 02:55:13 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (41.9ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (194.4ms)
+Completed   in 275ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x000000042b9ab8>:0x000000042b7330>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___3513589178529190804_34975140__2447804123469610156'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___3513589178529190804_34975140__2447804123469610156'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (81.4ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (88.9ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 02:55:18 -0700
+  Processing by Devise::SessionsController#new as HTML
+  [1m[36mPerson Load (1.8ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 8) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 108ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 02:55:18 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (41.8ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (190.4ms)
+Completed   in 271ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x000000042cb7b8>:0x000000042c8d88>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___3513589178529190804_34987380__2447804123469610156'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___3513589178529190804_34987380__2447804123469610156'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (82.1ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (89.8ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-30 02:55:24 -0700
+
+ActionController::RoutingError (No route matches "/signout"):
+  
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2010-10-30 02:55:29 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (1.8ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 8) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 111ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 02:55:29 -0700
+  Processing by PeopleController#index as HTML
+  [1m[35mPerson Load (3.9ms)[0m  SELECT "people".* FROM "people"
+Rendered people/index.html.erb within layouts/application (184.4ms)
+Completed   in 256ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x000000042811b8>:0x00000004279b98>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___3513589178529190804_34849680__2447804123469610156'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___3513589178529190804_34849680__2447804123469610156'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (83.1ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (90.4ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-30 02:55:34 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 108ms (Views: 17.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people/sign_in" for 127.0.0.1 at 2010-10-30 02:55:40 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0b+Xr9fHb9LrUVs+239lpzJIv8BdxHf8YJ+xzoWSWh8=", "person"=>{"email"=>"mlu@berkeley.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (1.7ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'mlu@berkeley.edu') LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-10-30 09:55:40.614198', "sign_in_count" = 2, "updated_at" = '2010-10-30 09:55:40.614912' WHERE ("people"."id" = 8)
+Redirected to http://localhost:3000/
+Completed 302 Found in 400ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-30 02:55:40 -0700
+  Processing by PeopleController#index as HTML
+  [1m[36mPerson Load (3.6ms)[0m  [1mSELECT "people".* FROM "people"[0m
+Rendered people/index.html.erb within layouts/application (102.1ms)
+Completed   in 145ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x000000041b0f68>:0x000000041ad8e0>):
+    17:     <td><%= person.email %></td>
+    18:     <td><%= person.phone %></td>
+    19:     <td><%= person.address %></td>
+    20:     <td><%= link_to 'Show', person %></td>
+    21:     <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    22:     <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+    23:   </tr>
+  app/views/people/index.html.erb:20:in `block in _app_views_people_index_html_erb___3513589178529190804_34431560__2447804123469610156'
+  app/views/people/index.html.erb:14:in `each'
+  app/views/people/index.html.erb:14:in `_app_views_people_index_html_erb___3513589178529190804_34431560__2447804123469610156'
+  app/controllers/people_controller.rb:7:in `index'
+
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (43.1ms)
+Rendered /usr/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (46.6ms)
