@@ -17,8 +17,12 @@ Rides::Application.routes.draw do
           o Join Trip (/trips/:id/join)
           o Trip Participants (/trips/:id/participants)
                 + Invite Participant (not yet)
-=end  
+=end
 
+  devise_for :people, :path => ''
+
+
+=begin
   # Session routes for Authenticatable (default)
   #      new_person_session GET  /people/sign_in                    {:controller=>"devise/sessions", :action=>"new"}
   match '/signin' => 'devise/sessions#new', :as => :new_person_session, :via => "get"
@@ -37,7 +41,7 @@ Rides::Application.routes.draw do
   match '/password' => 'devise/passwords#edit', :as => :person_password, :via => "put"
   #                       POST /people/password(.:format)         {:controller=>"devise/passwords", :action=>"create"}
   match '/password' => 'devise/passwords#create', :as => :person_password, :via => "post"
-
+=end
   # # Confirmation routes for Confirmable, if person model has :confirmable configured
   # JKU: I don't think we need Confirmable.
   # new_person_confirmation GET  /people/confirmation/new(.:format) {:controller=>"devise/confirmations", :action=>"new"}
