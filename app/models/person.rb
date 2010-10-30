@@ -15,6 +15,7 @@ class Person < ActiveRecord::Base
   has_many :vehicles, :foreign_key => "owner_id"
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation,
+    :city, :state, :music, :smoking
 
 end
