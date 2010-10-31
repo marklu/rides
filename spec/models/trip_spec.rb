@@ -29,11 +29,8 @@ describe Trip do
     it "should not allow a trip with invalid time" do
       @invalid_time_attributes = {
         :name => "Epic Trip of Epicness",
-<<<<<<< HEAD
         :time => "Invalid time!",
-=======
         :time => "This is not a time field sadly",
->>>>>>> bf4180daa48242a4c70650e369a7debca9167dec
         :address => "2650 Haste Street",
         :city => "Berkeley",
         :state => "CA"
