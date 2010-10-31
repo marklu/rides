@@ -6,14 +6,14 @@ Feature: User can log in
 
   Scenario: User logs in with valid credentials
     Given I am on the sign in page
-    And I fill in "person_email" with "test@test.com"
-    And I fill in "person_password" with "testpassword"
+    And I fill in "person[email]" with "test@test.com"
+    And I fill in "person[password]" with "testpassword"
     When I press "Sign in"
     Then I should be on the dashboard
 
   Scenario: User logs in with invalid credentials
     Given I am on the sign in page
-    And I fill in "person_email" with "test@test.com"
-    And I fill in "person_password" with "wrongpassword"
+    And I fill in "person[email]" with "test@test.com"
+    And I fill in "person[password]" with "wrongpassword"
     When I press "Sign in"
     Then I should be on the sign in page
