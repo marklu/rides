@@ -20,6 +20,8 @@ Rides::Application.routes.draw do
 =end
   devise_for :people, :skip => [:sessions, :registrations] do
 
+    #root :to => 'trips#index'
+
     get "/signin" => "devise/sessions#new", :as => "new_person_session"
     post "/signin" => "devise/sessions#create", :as => "person_session"
     get "/signout" => "devise/sessions#destroy", :as => "destroy_person_session"
@@ -38,7 +40,7 @@ Rides::Application.routes.draw do
   end
 
 
-  root :to => 'people#index'
+  root :to => 'trips#index'
 
   resources :vehicles
   

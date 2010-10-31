@@ -9,6 +9,7 @@ module NavigationHelpers
     case page_name
     when /the home\s?page/ then '/'
     when /the edit profile page/ then '/profile'
+    when /the sign up page/ then '/signup'
     when /the sign in page/ then '/signin'
     when /the trips dashboard/ then '/trips'
 
