@@ -1,6 +1,7 @@
 Given /^I want to .*?$/ do
 end
 
+
 #Given /^I am logged in as a user$/ do
 #  visit "/signout"
 #  visit "/signin"
@@ -11,10 +12,10 @@ end
 #end
 
 Given /^I am not authenticated$/ do
-  visit('/sign_out') # ensure that at least
+  visit('/signout') # ensure that at least
 end
 
-Given /^I have one\s+person "([^\"]*)" with password "([^\"]*)""$/ do |email, password|
+Given /^I have one\s+person "([^\"]*)" with password "([^\"]*)"$/ do |email, password|
   Person.new(:email => email,
            :password => password,
            :password_confirmation => password).save!

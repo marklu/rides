@@ -1144,3 +1144,111 @@ Completed   in 2ms
 WARNING: Can't mass-assign protected attributes: remember_me
 Rendered devise/shared/_links.erb (0.4ms)
 Completed 200 OK in 15ms (Views: 4.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/sign_out" for 127.0.0.1 at 2010-10-31 16:34:03 -0700
+
+
+Started GET "/sign_out" for 127.0.0.1 at 2010-10-31 16:34:03 -0700
+
+
+Started GET "/sign_out" for 127.0.0.1 at 2010-10-31 16:36:41 -0700
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.1ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES (NULL, NULL, '2010-10-31 23:36:42.221996', NULL, NULL, 'test@test.com', '$2a$10$gJsdq9F/KDQRoputPtyKZen/jk5ymvATuwKOtoLO6XBqPPrJBRouC', NULL, NULL, NULL, NULL, '$2a$10$gJsdq9F/KDQRoputPtyKZe', NULL, NULL, NULL, NULL, 0, NULL, NULL, '2010-10-31 23:36:42.221996')[0m
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 16:36:42 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.9ms)
+Rendered devise/sessions/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 14ms (Views: 14.0ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 16:36:42 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (3.4ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-10-31 23:36:42.433581', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-10-31 23:36:42.433581', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-10-31 23:36:42.433974' WHERE ("people"."id" = 1)[0m
+Redirected to http://example.org/
+Completed 302 Found in 123ms
+
+
+Started GET "/sign_out" for 127.0.0.1 at 2010-10-31 16:36:42 -0700
+  [1m[35mPerson Load (0.3ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES (NULL, NULL, '2010-10-31 23:36:42.557542', NULL, NULL, 'test@test.com', '$2a$10$X6EKK9Hm2i7KSwgPRCLIleHEFargGvUwK1GfehkzLy3rs/TmcbcUG', NULL, NULL, NULL, NULL, '$2a$10$X6EKK9Hm2i7KSwgPRCLIle', NULL, NULL, NULL, NULL, 0, NULL, NULL, '2010-10-31 23:36:42.557542')[0m
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 16:36:42 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.9ms)
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 4.5ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 16:36:42 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (49.5ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+Completed   in 151ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered devise/shared/_links.erb (0.8ms)
+Completed 200 OK in 109ms (Views: 5.2ms | ActiveRecord: 49.5ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 16:39:41 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES (NULL, NULL, '2010-10-31 23:39:42.274649', NULL, NULL, 'test@test.com', '$2a$10$m3jPcp.WqdO6DBo9iGsjmOcQOz3.WWIIU8QlGwhxeQwgV3gefm.Ba', NULL, NULL, NULL, NULL, '$2a$10$m3jPcp.WqdO6DBo9iGsjmO', NULL, NULL, NULL, NULL, 0, NULL, NULL, '2010-10-31 23:39:42.274649')[0m
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 16:39:42 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.4ms)
+Rendered devise/sessions/new.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 16ms (Views: 15.0ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 16:39:42 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (5.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-10-31 23:39:42.464682', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-10-31 23:39:42.464682', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-10-31 23:39:42.464913' WHERE ("people"."id" = 1)[0m
+Redirected to http://example.org/
+Completed 302 Found in 131ms
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 16:39:42 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES (NULL, NULL, '2010-10-31 23:39:42.588456', NULL, NULL, 'test@test.com', '$2a$10$vw/TYxIBjnAmVY1LoO9veuJ46uz5eAvmVw30UKUhoadQuJreL4krW', NULL, NULL, NULL, NULL, '$2a$10$vw/TYxIBjnAmVY1LoO9veu', NULL, NULL, NULL, NULL, 0, NULL, NULL, '2010-10-31 23:39:42.588456')[0m
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 16:39:42 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 9ms (Views: 8.2ms | ActiveRecord: 6.1ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 16:39:42 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (50.3ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+Completed   in 150ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 105ms (Views: 5.8ms | ActiveRecord: 50.3ms)
