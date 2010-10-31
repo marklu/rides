@@ -9,7 +9,11 @@ Feature: User can log in
     And I fill in "person_email" with "test@test.com"
     And I fill in "person_password" with "testpassword"
     When I press "Sign in"
-    Then I should see "Dashboard"
+    Then I should be on the dashboard
 
   Scenario: User logs in with invalid credentials
-
+    Given I am on the sign in page
+    And I fill in "person_email" with "test@test.com"
+    And I fill in "person_password" with "wrongpassword"
+    When I press "Sign in"
+    Then I should be on the sign in page
