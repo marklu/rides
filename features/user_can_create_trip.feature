@@ -15,6 +15,7 @@ Feature: User can create trip
 	Given I want to create a trip
 	And I am logged in as a user
 	When I go to the create trip page
+	Then I should see "Name"
 	Then I should see "Time"
 	Then I should see "Address"
 	Then I should see "City"
