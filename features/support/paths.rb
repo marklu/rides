@@ -10,7 +10,11 @@ module NavigationHelpers
     when /the home\s?page/ then '/'
     when /the edit profile page/ then '/profile'
     when /the sign in page/ then '/signin'
+<<<<<<< HEAD
     when /the trips dashboard/ then '/trips'
+=======
+    when /the dashboard/ then '/trips'
+>>>>>>> 3d97c0425c936f39d743374c6aa5c2a8e4c18bc6
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
