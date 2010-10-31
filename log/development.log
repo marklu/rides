@@ -2664,3 +2664,111 @@ Started GET "/profile" for 127.0.0.1 at 2010-10-31 16:38:57 -0700
   [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
 Rendered devise/registrations/edit.html.erb within layouts/application (15.0ms)
 Completed 200 OK in 101ms (Views: 35.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 16:55:59 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+Completed   in 24ms
+
+ActiveRecord::StatementInvalid (Could not find table 'people'):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (121.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (136.0ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (187.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (109.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreatePeople (20101023201003)
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023201003')
+Migrating to CreateVehicles (20101023204531)
+  [1m[36mSQL (15.6ms)[0m  [1mCREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023204531')
+Migrating to CreateTrips (20101023205013)
+  [1m[36mSQL (15.6ms)[0m  [1mCREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "location" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023205013')
+Migrating to CreateArrangements (20101023205913)
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023205913')
+Migrating to AddDriverIdToArrangement (20101023213150)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "arrangements" ADD "driver_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023213150')
+Migrating to AddOrganizerIdToTrip (20101023221347)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "trips" ADD "organizer_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023221347')
+Migrating to AddTripAndVehicleToArrangement (20101026043241)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "arrangements" ADD "trip_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "arrangements" ADD "vehicle_id" integer
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043241')
+Migrating to AddOwnerToVehicle (20101026043334)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "vehicles" ADD "owner_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("vehicles")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043334')
+Migrating to CreateArrangementsPassengers (20101026043439)
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043439')
+Migrating to CreateParticipantsTrips (20101026043506)
+  [1m[36mSQL (15.6ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043506')
+Migrating to CreateTripsVehicles (20101026043531)
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("trips_vehicles")
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043531')
+Migrating to AddProfileAndPreferencesToPerson (20101026224322)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "people" ADD "city" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "state" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "music" integer[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "smoking" integer
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101026224322')[0m
+Migrating to AddMakeAndModelToVehicle (20101026224408)
+  [1m[35mSQL (2.0ms)[0m  ALTER TABLE "vehicles" ADD "make" varchar(255)
+  [1m[36mSQL (1.0ms)[0m  [1mALTER TABLE "vehicles" ADD "model" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026224408')
+Migrating to IntegratingDevise (20101029021446)
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TEMPORARY TABLE "altered_people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (1.0ms)[0m  [1mDROP TABLE "people"[0m
+  [1m[35mSQL (1.0ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (1.0ms)[0m  DROP TABLE "altered_people"
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 16:56:54 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Completed   in 58ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 16:56:54 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 92ms (Views: 30.0ms | ActiveRecord: 1.0ms)
