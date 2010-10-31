@@ -14,9 +14,8 @@ Given /^I am not authenticated$/ do
   visit('/sign_out') # ensure that at least
 end
 
-Given /^I have one\s+person "([^\"]*)" with password "([^\"]*)" and login "([^\"]*)"$/ do |email, password, login|
-  person.new(:email => email,
-           :login => login,
+Given /^I have one\s+person "([^\"]*)" with password "([^\"]*)""$/ do |email, password|
+  Person.new(:email => email,
            :password => password,
            :password_confirmation => password).save!
 end
