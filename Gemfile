@@ -28,8 +28,8 @@ gem 'devise', '1.1.3'
 # and rake tasks are available in development mode:
 group :development, :test do
    gem 'webrat'
-   gem 'rspec'
-   gem 'rspec-rails'
+   gem 'rspec', '>=2.0.0.beta.16'
+   gem 'rspec-rails', '>=2.0.0.beta.16'
    gem 'cucumber'
    gem 'cucumber-rails'
 end
