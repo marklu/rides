@@ -25,3 +25,7 @@ Given /^(?:|I )have an account with email "([^"]*)" and password "([^"]*)"$/ do 
   visit "/signout"
 
 end
+
+Given /^There is a person named "([^"]*)"$/ do |name|
+  Person.create!(:name => name)
+end
