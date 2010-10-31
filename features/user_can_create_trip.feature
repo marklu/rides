@@ -6,14 +6,14 @@ Feature: User can create trip
 
   Scenario: User can view the create trip page
 	Given I want to create a trip
-	And I am logged in as an user
-	When I go to the dashboard page
-	And I follow "Create trip"
+	And I am logged in as a user
+	When I go to the trips dashboard page
+	And I follow "New Trip"
 	Then I should be on the create trip page
 
   Scenario: User can create a new trip
 	Given I want to create a trip
-	And I am logged in as an user
+	And I am logged in as a user
 	When I go to the create trip page
 	Then I should see "Time"
 	Then I should see "Address"
@@ -21,7 +21,7 @@ Feature: User can create trip
 	Then I should see "State"
 
   Scenario Outline: User creates trip
-	Given I am logged in as an user
+	Given I am logged in as a user
 	And I am on the create trip page
 	When I fill in "Time" with "<time>"
 	And I fill in "Address" with "<address>"
