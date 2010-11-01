@@ -1320,3 +1320,57 @@ Started GET "/trips" for 127.0.0.1 at 2010-11-01 11:33:05 -0700
   [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
 Rendered trips/index.html.erb within layouts/application (4.0ms)
 Completed 200 OK in 157ms (Views: 26.0ms | ActiveRecord: 2.0ms)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (1.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+Migrating to CreatePeople (20101023201003)
+Migrating to CreateVehicles (20101023204531)
+Migrating to CreateTrips (20101023205013)
+Migrating to CreateArrangements (20101023205913)
+Migrating to AddDriverIdToArrangement (20101023213150)
+Migrating to AddOrganizerIdToTrip (20101023221347)
+Migrating to AddTripAndVehicleToArrangement (20101026043241)
+Migrating to AddOwnerToVehicle (20101026043334)
+Migrating to CreateArrangementsPassengers (20101026043439)
+Migrating to CreateParticipantsTrips (20101026043506)
+Migrating to CreateTripsVehicles (20101026043531)
+Migrating to AddProfileAndPreferencesToPerson (20101026224322)
+Migrating to AddMakeAndModelToVehicle (20101026224408)
+Migrating to IntegratingDevise (20101029021446)
+Migrating to RemoveLocationFromTrips (20101030202953)
+Migrating to AddAddressCityStateToTrips (20101030203230)
+Migrating to AddNameToTrips (20101031095702)
+Migrating to ChangeMusicAndSmokingToString (20101101181156)
+Migrating to AddDefaultMusicAndSmoking (20101101181706)
+Migrating to RemoveTimeFromTrips (20101101215100)
+Migrating to AddTimeToTrips (20101101215151)
+  [1m[35mSQL (0.0ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_arrangements_on_vehicle_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements_passengers")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_passengers_on_arrangement_id_and_passenger_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("participants_trips")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_participants_trips_on_participant_id_and_trip_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("trips")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_trips_vehicles_on_trip_id_and_vehicle_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_vehicles_on_owner_id')
