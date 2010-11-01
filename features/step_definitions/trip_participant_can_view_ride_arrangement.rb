@@ -12,7 +12,14 @@ Given /^the following people are on the same ride arrangement for "([^"]*)":$/ d
   end
 end
 
-Given /^the following people do not have a ride arrangement for "([^"]*)":$/ do |arg1, table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+Given /^the following people do not have a ride arrangement for "([^"]*)":$/ do |trip_name, participants|
+  trip = Trip.where(:name => trip_name).first
+  participants.hashes.each do |participant|
+    person = Person.where(:email => participant['email'])
+    if !person.nil?
+      trip.arrangements.each do |arrangement|
+        arrangement.participants.delete person
+      end
+    end
+  end
 end
