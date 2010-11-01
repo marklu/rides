@@ -704,6 +704,7 @@ people#index
   [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people"
 Rendered people/index.html.erb within layouts/application (5.0ms)
 Completed 200 OK in 97ms (Views: 25.0ms | ActiveRecord: 0.0ms)
+<<<<<<< HEAD
 DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
 DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
 DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
@@ -2772,3 +2773,5 @@ Started GET "/signin" for 127.0.0.1 at 2010-10-31 16:56:54 -0700
 Rendered devise/shared/_links.erb (1.0ms)
 Rendered devise/sessions/new.html.erb within layouts/application (12.0ms)
 Completed 200 OK in 92ms (Views: 30.0ms | ActiveRecord: 1.0ms)
+=======
+>>>>>>> parent of abc93eb... "User can edit profile" mostly passing

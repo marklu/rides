@@ -15,39 +15,6 @@
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
 
-  <p><%= f.label :name %><br />
-    <%= f.text_field :name %></p>
-
-  <p><%= f.label :phone %><br />
-    <%= f.text_field :phone %></p>
-
-  <p><%= f.label :address %><br />
-    <%= f.text_field :address %></p>
-
-  <p><%= f.label :city %><br />
-    <%= f.text_field :city %></p>
-
-  <p><%= f.label :state %><br />
-    <%= f.text_field :state %></p>
-
-  <p><%= f.label :music %><br />
-    <%= f.radio_button :music, '0' %>
-    <%= label :music_null, 'No Preference' %><br />
-    <%= f.radio_button :music, '1' %>
-    <%= label :music_none, 'No Music' %><br />
-    <%= f.radio_button :music, '2' %>
-    <%= label :music_none, 'Quiet Music' %><br />
-    <%= f.radio_button :music, '3' %>
-    <%= label :music_none, 'Loud Music' %></p>
-
-  <p><%= f.label :smoking %><br />
-    <%= f.radio_button :smoking, '0' %>
-    <%= label :smoking_null, 'No Preference' %><br />
-    <%= f.radio_button :smoking, '1' %>
-    <%= label :smoking_none, 'No Smoking' %><br />
-    <%= f.radio_button :smoking, '2' %>
-    <%= label :smoking_none, 'Smoking' %><br /></p>
-
   <p><%= f.submit "Update" %></p>
 <% end %>
 
