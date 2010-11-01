@@ -19,7 +19,7 @@
     <%= f.text_field :name %></p>
 
   <p><%= f.label :phone %><br />
-    <%= f.text_field :phone %></p>
+    <%= f.phone_field :phone %></p>
 
   <p><%= f.label :address %><br />
     <%= f.text_field :address %></p>
@@ -31,11 +31,18 @@
     <%= f.text_field :state %></p>
 
   <p><%= f.label :music %><br />
-    <%= f.text_field :music %></p>
+    <% ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref| %>
+      <%= f.radio_button :music, pref %>
+      <%= f.label "music_#{pref}", pref.humanize %><br />
+    <% end %>
+  </p>
 
   <p><%= f.label :smoking %><br />
-    <%= f.text_field :smoking %></p>
-
+    <% ['no_preference', 'no_smoking', 'smoking'].each do |pref| %>
+      <%= f.radio_button :smoking, pref %>
+      <%= f.label "smoking_#{pref}", pref.humanize %><br />
+    <% end %>
+  </p>
 
   <p><%= f.submit "Update" %></p>
 <% end %>

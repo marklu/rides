@@ -2772,3 +2772,572 @@ Started GET "/signin" for 127.0.0.1 at 2010-10-31 16:56:54 -0700
 Rendered devise/shared/_links.erb (1.0ms)
 Rendered devise/sessions/new.html.erb within layouts/application (12.0ms)
 Completed 200 OK in 92ms (Views: 30.0ms | ActiveRecord: 1.0ms)
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (1.0ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (122.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (122.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreatePeople (20101023201003)
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023201003')
+Migrating to CreateVehicles (20101023204531)
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023204531')
+Migrating to CreateTrips (20101023205013)
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "location" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023205013')
+Migrating to CreateArrangements (20101023205913)
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023205913')
+Migrating to AddDriverIdToArrangement (20101023213150)
+  [1m[36mSQL (1.0ms)[0m  [1mALTER TABLE "arrangements" ADD "driver_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023213150')
+Migrating to AddOrganizerIdToTrip (20101023221347)
+  [1m[36mSQL (3.0ms)[0m  [1mALTER TABLE "trips" ADD "organizer_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023221347')
+Migrating to AddTripAndVehicleToArrangement (20101026043241)
+  [1m[36mSQL (3.0ms)[0m  [1mALTER TABLE "arrangements" ADD "trip_id" integer[0m
+  [1m[35mSQL (1.0ms)[0m  ALTER TABLE "arrangements" ADD "vehicle_id" integer
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043241')
+Migrating to AddOwnerToVehicle (20101026043334)
+  [1m[36mSQL (3.0ms)[0m  [1mALTER TABLE "vehicles" ADD "owner_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("vehicles")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043334')
+Migrating to CreateArrangementsPassengers (20101026043439)
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043439')
+Migrating to CreateParticipantsTrips (20101026043506)
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043506')
+Migrating to CreateTripsVehicles (20101026043531)
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("trips_vehicles")
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043531')
+Migrating to AddProfileAndPreferencesToPerson (20101026224322)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "people" ADD "city" varchar(255)[0m
+  [1m[35mSQL (1.0ms)[0m  ALTER TABLE "people" ADD "state" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "music" integer[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "smoking" integer
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101026224322')[0m
+Migrating to AddMakeAndModelToVehicle (20101026224408)
+  [1m[35mSQL (2.0ms)[0m  ALTER TABLE "vehicles" ADD "make" varchar(255)
+  [1m[36mSQL (1.0ms)[0m  [1mALTER TABLE "vehicles" ADD "model" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026224408')
+Migrating to IntegratingDevise (20101029021446)
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TEMPORARY TABLE "altered_people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (1.0ms)[0m  [1mDROP TABLE "people"[0m
+  [1m[35mSQL (1.0ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (1.0ms)[0m  DROP TABLE "altered_people"
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "email" varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "encrypted_password" varchar(128) DEFAULT '' NOT NULL
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "password_salt" varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "reset_password_token" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "remember_token" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "remember_created_at" datetime
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "sign_in_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "current_sign_in_at" datetime
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "last_sign_in_at" datetime[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "current_sign_in_ip" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "last_sign_in_ip" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101029021446')[0m
+Migrating to RemoveLocationFromTrips (20101030202953)
+  [1m[35mSQL (1.0ms)[0m  CREATE TEMPORARY TABLE "altered_trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "location" varchar(255), "created_at" datetime, "updated_at" datetime, "organizer_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips")[0m
+  [1m[35mSQL (1.0ms)[0m  DROP TABLE "trips"
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("altered_trips")
+  [1m[36mSQL (0.0ms)[0m  [1mDROP TABLE "altered_trips"[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101030202953')
+Migrating to AddAddressCityStateToTrips (20101030203230)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "trips" ADD "address" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "trips" ADD "city" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "trips" ADD "state" varchar(255)[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101030203230')
+Migrating to AddNameToTrips (20101031095702)
+  [1m[36mSQL (3.0ms)[0m  [1mALTER TABLE "trips" ADD "name" varchar(255)[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101031095702')
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_arrangements_on_vehicle_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements_passengers")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_passengers_on_arrangement_id_and_passenger_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("participants_trips")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_participants_trips_on_participant_id_and_trip_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("trips")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_trips_vehicles_on_trip_id_and_vehicle_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_vehicles_on_owner_id')
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (1.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.0ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (130.0ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (112.0ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (117.0ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (124.0ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (121.0ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (1.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (138.0ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (136.0ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (1.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (224.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (310.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (234.0ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (210.0ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (143.0ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (103.0ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (179.0ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (138.0ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (136.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (127.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (115.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (134.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (146.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (118.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (139.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (116.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (128.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
+  [1m[35mSQL (135.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043241')
+  [1m[36mSQL (152.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (133.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (126.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043506')[0m
+  [1m[35mSQL (122.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (143.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224322')[0m
+  [1m[35mSQL (123.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224408')
+  [1m[36mSQL (144.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (141.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (121.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at D:/Projects/CS169/Rides/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-31 21:23:53 -0700
+  Processing by TripsController#index as HTML
+Completed   in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 21:23:53 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 76ms (Views: 29.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-31 21:23:56 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/registrations/new.html.erb within layouts/application (30.0ms)
+Completed 200 OK in 79ms (Views: 46.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 21:24:12 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psTRo+/V3PGAavA2BT+W/KYNT7E8lwXBpa8O/yii/YA=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234", "address"=>"1234 test", "city"=>"test", "state"=>"TEST"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('1234 test', 'test', '2010-11-01 04:24:13.697007', NULL, NULL, 'test@test.com', '$2a$10$8j8TsIKq7j5.yBFuLf8W.eF2BnBnlg4h0KWfYjUv5XxzO.8exgQju', NULL, NULL, NULL, 'Test', '$2a$10$8j8TsIKq7j5.yBFuLf8W.e', '1231231234', NULL, NULL, NULL, 0, NULL, 'TEST', '2010-11-01 04:24:13.697007')[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-01 04:24:13.927020', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 04:24:13.927020', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 04:24:13.929020' WHERE ("people"."id" = 1)
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 1029ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-31 21:24:14 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (30.0ms)
+Completed 200 OK in 198ms (Views: 48.0ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:24:16 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 93ms (Views: 31.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:25:31 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 116ms (Views: 32.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:25:32 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 158ms (Views: 30.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:28:33 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 117ms (Views: 31.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:28:51 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 229ms (Views: 31.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:35:29 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (41.0ms)
+Completed 200 OK in 127ms (Views: 60.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 21:35:57 -0700
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psTRo+/V3PGAavA2BT+W/KYNT7E8lwXBpa8O/yii/YA=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234", "address"=>"1234 test", "city"=>"test", "state"=>"TEST", "music"=>"0", "smoking"=>"0"}, "commit"=>"Update"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (41.0ms)
+Completed 200 OK in 248ms (Views: 81.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 21:36:02 -0700
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psTRo+/V3PGAavA2BT+W/KYNT7E8lwXBpa8O/yii/YA=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234", "address"=>"1234 test", "city"=>"test", "state"=>"TEST", "music"=>"0", "smoking"=>"0"}, "commit"=>"Update"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) AND ("people".id <> 1) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "music" = 0, "smoking" = 0, "updated_at" = '2010-11-01 04:36:02.334991' WHERE ("people"."id" = 1)
+Redirected to http://127.0.0.1:3000/trips
+Completed 302 Found in 343ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 21:36:02 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 137ms (Views: 26.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:36:04 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (17.0ms)
+Completed 200 OK in 225ms (Views: 37.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 21:36:08 -0700
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psTRo+/V3PGAavA2BT+W/KYNT7E8lwXBpa8O/yii/YA=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234", "address"=>"1234 test", "city"=>"test", "state"=>"TEST", "music"=>"1", "smoking"=>"1"}, "commit"=>"Update"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 242ms (Views: 32.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 21:36:12 -0700
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psTRo+/V3PGAavA2BT+W/KYNT7E8lwXBpa8O/yii/YA=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234", "address"=>"1234 test", "city"=>"test", "state"=>"TEST", "music"=>"1", "smoking"=>"1"}, "commit"=>"Update"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) AND ("people".id <> 1) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "music" = 1, "smoking" = 1, "updated_at" = '2010-11-01 04:36:12.453570' WHERE ("people"."id" = 1)
+Redirected to http://127.0.0.1:3000/trips
+Completed 302 Found in 375ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 21:36:12 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 157ms (Views: 22.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:36:16 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (50.0ms)
+Completed 200 OK in 132ms (Views: 69.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:38:14 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 103ms (Views: 33.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:46:00 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 121ms (Views: 35.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:46:33 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 117ms (Views: 31.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:48:38 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 125ms (Views: 31.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:51:18 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (43.0ms)
+Completed 200 OK in 128ms (Views: 64.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:52:12 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (47.0ms)
+Completed 200 OK in 142ms (Views: 67.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:54:06 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 126ms (Views: 33.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:55:32 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (17.0ms)
+Completed 200 OK in 136ms (Views: 38.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:56:24 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 131ms (Views: 31.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:56:30 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 128ms (Views: 32.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:56:41 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (296.0ms)
+Completed   in 435ms
+
+ActionView::Template::Error (undefined local variable or method `perf' for #<#<Class:0x405b700>:0x4059858>):
+    40:   <p><%= f.label :smoking %><br />
+    41:     <% ['No Preference', 'No Smoking', 'Smoking'].each do |pref| %>
+    42:       <%= f.radio_button :smoking, pref %>
+    43:       <%= f.label "smoking_#{perf}", pref %><br />
+    44:     <% end %>
+    45:   </p>
+    46: 
+  app/views/devise/registrations/edit.html.erb:43:in `block (2 levels) in _app_views_devise_registrations_edit_html_erb__559761619_33735348_122465071'
+  app/views/devise/registrations/edit.html.erb:41:in `each'
+  app/views/devise/registrations/edit.html.erb:41:in `block in _app_views_devise_registrations_edit_html_erb__559761619_33735348_122465071'
+  app/views/devise/registrations/edit.html.erb:3:in `_app_views_devise_registrations_edit_html_erb__559761619_33735348_122465071'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (86.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (112.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:56:50 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 100ms (Views: 32.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:57:29 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 99ms (Views: 32.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 21:58:23 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 124ms (Views: 32.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 22:07:02 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 124ms (Views: 31.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 22:07:07 -0700
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psTRo+/V3PGAavA2BT+W/KYNT7E8lwXBpa8O/yii/YA=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234ff", "address"=>"1234 test", "city"=>"test", "state"=>"TEST"}, "commit"=>"Update"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 257ms (Views: 33.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 22:07:11 -0700
+  Processing by Devise::RegistrationsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psTRo+/V3PGAavA2BT+W/KYNT7E8lwXBpa8O/yii/YA=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "current_password"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234ff", "address"=>"1234 test", "city"=>"test", "state"=>"TEST"}, "commit"=>"Update"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) AND ("people".id <> 1) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "phone" = '1231231234ff', "updated_at" = '2010-11-01 05:07:12.208942' WHERE ("people"."id" = 1)
+Redirected to http://127.0.0.1:3000/trips
+Completed 302 Found in 657ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 22:07:12 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 203ms (Views: 24.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-10-31 22:07:14 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 99ms (Views: 33.0ms | ActiveRecord: 1.0ms)

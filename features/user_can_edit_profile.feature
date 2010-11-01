@@ -44,7 +44,6 @@ Feature: User can edit profile
     And I fill in "State" with "<state>"
     And I fill in "Phone" with "<phone>"
     And I press "Update"
-    And I follow "redirected"
     Then I should see "<result>"
 
     Scenarios: with valid information
@@ -58,21 +57,21 @@ Feature: User can edit profile
     Scenarios: with invalid information
       | name     | email              | address         | city      | state | phone      | result |
       |          | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    | 1231231234 | error  |
-      | John     | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    | 1231231234 | error  |
       | John Doe |                    | 1 Infinite Loop | Cupertino | CA    | 1231231234 | error  |
       | John Doe | gmail.com          | 1 Infinite Loop | Cupertino | CA    | 1231231234 | error  |
       | John Doe | John.Doe@gmail.com |                 | Cupertino | CA    | 1231231234 | error  |
       | John Doe | John.Doe@gmail.com | 1 Infinite Loop |           | CA    | 1231231234 | error  |
       | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino |       | 1231231234 | error  |
       | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    |            | error  |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    | abcd       | error  |
 
   Scenario Outline: User updates personal preferences
     Given I have an account with email "test@test.com" and password "testpassword"
     And I am logged in as a user
     And I am on the edit profile page
-    When I choose "<music>"
+    When I fill in "Current password" with "testpassword"
+    And I choose "<music>"
     And I choose "<smoking>"
+    And I press "Update"
     Then I should see "<result>"
 
     Scenarios: with valid information
