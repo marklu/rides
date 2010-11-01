@@ -10,7 +10,7 @@ Feature: User can log in
     When I fill in "person[email]" with "test@test.com"
     And I fill in "person[password]" with "testpassword"
     And I press "Sign in"
-    And I follow "redirect"
+
     Then I should be on the trips dashboard
 
   Scenario: User logs in with invalid credentials

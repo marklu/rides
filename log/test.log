@@ -31270,3 +31270,323 @@ Started GET "/trips" for 127.0.0.1 at 2010-10-31 22:15:33 -0700
   [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
   [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
 Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:28:25 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 2ms
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:28:25 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:29:33 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:29:33 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (3.2ms)
+Rendered devise/sessions/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 134ms (Views: 45.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (2.1ms)
+Rendered devise/registrations/new.html.erb within layouts/application (11.6ms)
+Completed 200 OK in 20ms (Views: 19.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test Name", "phone"=>"123-Test-Phone", "address"=>"123 Test Street", "city"=>"Testville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.1ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-01 06:33:38.730425', NULL, NULL, 'test@test.com', '$2a$10$9BvyRP3EiUi5X.Uxrw0zU.RrWhvthMeCFnEJpLNrcPtH45atQOBj2', NULL, NULL, NULL, 'Test Name', '$2a$10$9BvyRP3EiUi5X.Uxrw0zU.', '123-Test-Phone', NULL, NULL, NULL, 0, NULL, 'CA', '2010-11-01 06:33:38.730425')[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-01 06:33:38.770413', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 06:33:38.770413', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 06:33:38.772551' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 537ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.7ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.1ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 38ms (Views: 22.9ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (1.5ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Redirected to http://example.org/signin
+Completed 302 Found in 3ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.7ms)
+Rendered devise/sessions/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.6ms)
+Rendered devise/sessions/new.html.erb within layouts/application (89.4ms)
+Completed 200 OK in 91ms (Views: 90.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 23:33:38 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (1.6ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-11-01 06:33:39.164027', "sign_in_count" = 2, "updated_at" = '2010-11-01 06:33:39.164419' WHERE ("people"."id" = 1)[0m
+Redirected to http://example.org/trips
+Completed 302 Found in 208ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (2.4ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.4ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 7ms (Views: 3.0ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 8ms (Views: 7.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test Name", "phone"=>"123-Test-Phone", "address"=>"123 Test Street", "city"=>"Testville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-01 06:33:39.321914', NULL, NULL, 'test@test.com', '$2a$10$EU3AH3W2bZf8.w8S95Y2uOZ8.iNFjs.4YZLk9I1UGzP0f73XUgPhS', NULL, NULL, NULL, 'Test Name', '$2a$10$EU3AH3W2bZf8.w8S95Y2uO', '123-Test-Phone', NULL, NULL, NULL, 0, NULL, 'CA', '2010-11-01 06:33:39.321914')[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-01 06:33:39.324948', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 06:33:39.324948', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 06:33:39.325172' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 111ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.1ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.1ms)[0m  SELECT "trips".* FROM "trips"
+Completed 200 OK in 7ms (Views: 4.7ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (1.1ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Redirected to http://example.org/signin
+Completed 302 Found in 5ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 9ms (Views: 8.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 8ms (Views: 7.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 23:33:39 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (0.7ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+Completed   in 151ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered devise/shared/_links.erb (0.3ms)
+Completed 200 OK in 140ms (Views: 5.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.4ms)
+Rendered devise/sessions/new.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 85ms (Views: 18.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Rendered devise/registrations/new.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test Name", "phone"=>"123-Test-Phone", "address"=>"123 Test Street", "city"=>"Testville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.1ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-01 06:42:10.505301', NULL, NULL, 'test@test.com', '$2a$10$NppIFJb6RAiXeD9/fAdmtu0hl9XxNvvvvpPK6mZYBSOIE7osUEjta', NULL, NULL, NULL, 'Test Name', '$2a$10$NppIFJb6RAiXeD9/fAdmtu', '123-Test-Phone', NULL, NULL, NULL, 0, NULL, 'CA', '2010-11-01 06:42:10.505301')[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-01 06:42:10.541357', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 06:42:10.541357', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 06:42:10.541488' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 319ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.5ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.1ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 20ms (Views: 5.9ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (1.7ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Redirected to http://example.org/signin
+Completed 302 Found in 3ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Rendered devise/sessions/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.6ms)
+Rendered devise/sessions/new.html.erb within layouts/application (45.9ms)
+Completed 200 OK in 46ms (Views: 46.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (1.3ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-11-01 06:42:10.746973', "sign_in_count" = 2, "updated_at" = '2010-11-01 06:42:10.747403' WHERE ("people"."id" = 1)[0m
+Redirected to http://example.org/trips
+Completed 302 Found in 102ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.1ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 52ms (Views: 51.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test Name", "phone"=>"123-Test-Phone", "address"=>"123 Test Street", "city"=>"Testville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-01 06:42:10.938855', NULL, NULL, 'test@test.com', '$2a$10$.WsCdnNnyFglCGroaBHNWuVQCuMtMYG6HTAp75l.qWBylsyfuEfem', NULL, NULL, NULL, 'Test Name', '$2a$10$.WsCdnNnyFglCGroaBHNWu', '123-Test-Phone', NULL, NULL, NULL, 0, NULL, 'CA', '2010-11-01 06:42:10.938855')[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-01 06:42:10.941158', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 06:42:10.941158', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 06:42:10.941225' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 102ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.4ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.1ms)[0m  SELECT "trips".* FROM "trips"
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Redirected to http://example.org/signin
+Completed 302 Found in 2ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.9ms)
+Completed 200 OK in 5ms (Views: 5.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-10-31 23:42:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.7ms)
+Completed 200 OK in 32ms (Views: 32.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-10-31 23:42:11 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[35mPerson Load (1.4ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'test@test.com') LIMIT 1
+Completed   in 130ms
+  Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+WARNING: Can't mass-assign protected attributes: remember_me
+Rendered devise/shared/_links.erb (0.3ms)
+Completed 200 OK in 101ms (Views: 5.1ms | ActiveRecord: 1.4ms)

@@ -51,3 +51,455 @@ Migrating to AddNameToTrips (20101031095702)
   [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_trips_vehicles_on_trip_id_and_vehicle_id')
   [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
   [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_vehicles_on_owner_id')
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.3ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (99.5ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (13.3ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.2ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (45.4ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (7.6ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (20.3ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (65.1ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (28.0ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (39.3ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (19.7ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.2ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (9.8ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (37.3ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (33.8ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (30.1ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (30.3ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (59.2ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (23.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (36.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (19.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (19.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (30.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (22.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043506')
+  [1m[36mSQL (7.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+  [1m[35mSQL (31.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224322')
+  [1m[36mSQL (27.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (30.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (30.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (33.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (25.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043241')[0m
+  [1m[35mSQL (30.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (29.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224408')[0m
+  [1m[35mSQL (34.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (25.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (30.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (24.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.1ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (54.1ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (11.5ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (15.3ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (9.9ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (12.5ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (20.3ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (20.0ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (36.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (10.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (12.8ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (30.6ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (14.6ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (21.4ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (34.6ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (42.1ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (21.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (11.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (20.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (25.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (19.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (9.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043506')
+  [1m[36mSQL (15.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+  [1m[35mSQL (40.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224322')
+  [1m[36mSQL (23.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (28.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (30.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (39.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (20.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043241')[0m
+  [1m[35mSQL (30.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (20.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224408')[0m
+  [1m[35mSQL (17.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (15.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (30.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (35.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.3ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (78.3ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (18.7ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (27.1ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (15.6ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (12.4ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (21.0ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (17.1ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (21.7ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (14.7ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (23.4ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (14.7ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (10.5ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (10.0ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (14.6ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (22.0ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (10.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (10.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.9ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (11.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (32.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (10.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (14.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043506')
+  [1m[36mSQL (11.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+  [1m[35mSQL (9.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224322')
+  [1m[36mSQL (31.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (12.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (13.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (27.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (9.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043241')[0m
+  [1m[35mSQL (25.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (32.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224408')[0m
+  [1m[35mSQL (15.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (20.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (8.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (14.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
+DEPRECATION WARNING: The I18n message 'devise.mailer.confirmation_instructions' is deprecated. Please use 'devise.mailer.confirmation_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.reset_password_instructions' is deprecated. Please use 'devise.mailer.reset_password_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is deprecated. Please use 'devise.mailer.unlock_instructions.subject' instead. (called from <top (required)> at /home/jku/rides2/config/environment.rb:5)
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (59.1ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (9.8ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (11.6ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (14.7ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (18.0ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (41.9ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (13.9ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (18.1ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (19.3ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (16.5ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (18.2ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (11.0ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (14.3ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (11.4ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (17.1ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (10.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (11.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (9.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (21.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (11.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (10.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043506')
+  [1m[36mSQL (12.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+  [1m[35mSQL (12.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224322')
+  [1m[36mSQL (11.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (11.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (28.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (10.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (26.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043241')[0m
+  [1m[35mSQL (11.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (10.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224408')[0m
+  [1m[35mSQL (12.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (11.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (10.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (17.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.8ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (79.6ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (19.9ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (18.2ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (13.5ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (11.9ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (28.0ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (12.5ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (22.2ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (28.1ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (9.9ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (63.8ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (23.3ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (35.5ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (12.4ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.2ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (47.8ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (28.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (22.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (35.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (24.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (28.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (10.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043506')
+  [1m[36mSQL (16.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+  [1m[35mSQL (13.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224322')
+  [1m[36mSQL (27.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (32.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (36.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (29.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (10.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043241')[0m
+  [1m[35mSQL (14.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (29.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224408')[0m
+  [1m[35mSQL (12.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (10.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (13.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (9.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
