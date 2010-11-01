@@ -12,6 +12,7 @@ module NavigationHelpers
     when /the sign up page/ then '/signup'
     when /the sign in page/ then '/signin'
     when /the trips dashboard|the dashboard page/ then '/trips'
+    when /the person registration page/ then '/people'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

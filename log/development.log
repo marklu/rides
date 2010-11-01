@@ -503,3 +503,339 @@ DEPRECATION WARNING: The I18n message 'devise.mailer.unlock_instructions' is dep
   [1m[36mSQL (10.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
   [1m[35mSQL (13.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
   [1m[36mSQL (9.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 00:28:18 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mSQL (0.7ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (3.5ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.2ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 281ms (Views: 7.1ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:28:24 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[35mPerson Load (0.7ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Redirected to http://localhost:3000/signin
+Completed 302 Found in 87ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:28:24 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.3ms)
+Rendered devise/sessions/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 96ms (Views: 11.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:28:27 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (1.7ms)
+Rendered devise/registrations/new.html.erb within layouts/application (24.5ms)
+Completed 200 OK in 61ms (Views: 29.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:31:41 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"awg", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"", "phone"=>"", "address"=>"", "city"=>"", "state"=>""}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('awg')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (1.4ms)
+Rendered devise/registrations/new.html.erb within layouts/application (56.4ms)
+Completed 200 OK in 377ms (Views: 78.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:31:51 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"awg", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"asdfagr", "phone"=>"ag", "address"=>"awgawg", "city"=>"grrg", "state"=>"rgg"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('awg')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (1.1ms)
+Rendered devise/registrations/new.html.erb within layouts/application (23.1ms)
+Completed 200 OK in 531ms (Views: 27.2ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:31:57 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"awg@asdf.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"asdfagr", "phone"=>"ag", "address"=>"awgawg", "city"=>"grrg", "state"=>"rgg"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('awg@asdf.com')) LIMIT 1[0m
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('awgawg', 'grrg', '2010-11-01 07:31:58.225540', NULL, NULL, 'awg@asdf.com', '$2a$10$rg9KoYcmVkoiShajgdruPu.fq/xUYLfBxm6aYGM2hctrcXvllh3m6', NULL, NULL, NULL, 'asdfagr', '$2a$10$rg9KoYcmVkoiShajgdruPu', 'ag', NULL, NULL, NULL, 0, NULL, 'rgg', '2010-11-01 07:31:58.225540')
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-11-01 07:31:58.282403', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 07:31:58.282403', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 07:31:58.282541' WHERE ("people"."id" = 2)[0m
+Redirected to http://localhost:3000/trips
+Completed 302 Found in 463ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 00:31:58 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (2.2ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (0.2ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 249ms (Views: 10.8ms | ActiveRecord: 2.3ms)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.2ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (59.6ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (6.8ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (12.0ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (12.0ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (4.8ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (39.9ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (26.4ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (36.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.2ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (12.7ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (21.5ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (31.6ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (31.1ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (32.6ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (32.5ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (25.4ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (12.2ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (9.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (3.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (29.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (10.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (33.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (17.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043506')
+  [1m[36mSQL (13.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+  [1m[35mSQL (15.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224322')
+  [1m[36mSQL (18.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (15.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (10.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (30.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (16.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043241')[0m
+  [1m[35mSQL (31.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (15.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224408')[0m
+  [1m[35mSQL (14.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (27.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (29.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (29.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:37:29 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[35mPerson Load (0.9ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+Redirected to http://localhost:3000/signin
+Completed 302 Found in 104ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:37:29 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.9ms)
+Rendered devise/sessions/new.html.erb within layouts/application (32.0ms)
+Completed 200 OK in 309ms (Views: 48.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:37:31 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (1.1ms)
+Rendered devise/registrations/new.html.erb within layouts/application (87.1ms)
+Completed 200 OK in 186ms (Views: 114.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:37:33 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"", "phone"=>"", "address"=>"", "city"=>"", "state"=>""}, "commit"=>"Sign up"}
+sign up form
+Rendered devise/shared/_links.erb (1.4ms)
+Rendered devise/registrations/new.html.erb within layouts/application (23.4ms)
+Completed 200 OK in 323ms (Views: 28.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:37:42 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (15.9ms)
+Rendered devise/registrations/new.html.erb within layouts/application (181.5ms)
+Completed 200 OK in 447ms (Views: 248.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:37:52 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"", "phone"=>"", "address"=>"", "city"=>"", "state"=>""}, "commit"=>"Sign up"}
+sign up form
+Rendered devise/shared/_links.erb (2.4ms)
+Rendered devise/registrations/new.html.erb within layouts/application (21.2ms)
+Completed 200 OK in 105ms (Views: 25.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:46:39 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"awrt@arga.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"asdfasdf", "phone"=>"awrg", "address"=>"wrg", "city"=>"wrg", "state"=>"g"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (8.1ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('awrt@arga.com')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (9.1ms)
+Rendered devise/registrations/new.html.erb within layouts/application (51.4ms)
+Completed 200 OK in 531ms (Views: 69.1ms | ActiveRecord: 8.1ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:47:36 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"awrt@arga.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"asdfasdf", "phone"=>"awrg", "address"=>"wrg", "city"=>"wrg", "state"=>"g"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('awrt@arga.com')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (1.6ms)
+Rendered devise/registrations/new.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 439ms (Views: 22.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:47:50 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"awrt@arga.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"asdfasdf", "phone"=>"awrg", "address"=>"wrg", "city"=>"wrg", "state"=>"g"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('awrt@arga.com')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (1.4ms)
+Rendered devise/registrations/new.html.erb within layouts/application (20.6ms)
+Completed 200 OK in 478ms (Views: 25.6ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:48:25 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/BsBeIuvs/ljIoc2vSoM4cVgm0jCEFW9k/2FnBBuslM=", "person"=>{"email"=>"awgg", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"asdfasdf", "phone"=>"awrg", "address"=>"wrg", "city"=>"wrg", "state"=>"g"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('awgg')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (1.3ms)
+Rendered devise/registrations/new.html.erb within layouts/application (11.6ms)
+Completed 200 OK in 248ms (Views: 15.4ms | ActiveRecord: 0.0ms)
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.3ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.7ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (59.1ms)[0m  CREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "driver_id" integer, "trip_id" integer, "vehicle_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (7.1ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.3ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (11.6ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (7.7ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (12.4ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (19.6ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (21.0ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (35.4ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (9.9ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (12.3ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (26.3ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (21.9ms)[0m  CREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips_vehicles")[0m
+  [1m[35mSQL (35.8ms)[0m  CREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (23.3ms)[0m  CREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime, "owner_id" integer, "make" varchar(255), "model" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
+  [1m[35mSQL (48.3ms)[0m  CREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (23.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35mSQL (30.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36mSQL (37.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101031095702')[0m
+  [1m[35mSQL (38.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043439')
+  [1m[36mSQL (28.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023205913')[0m
+  [1m[35mSQL (33.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043506')
+  [1m[36mSQL (26.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101030203230')[0m
+  [1m[35mSQL (33.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026224322')
+  [1m[36mSQL (17.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043334')[0m
+  [1m[35mSQL (9.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101030202953')
+  [1m[36mSQL (40.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023204531')[0m
+  [1m[35mSQL (12.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023201003')
+  [1m[36mSQL (13.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026043241')[0m
+  [1m[35mSQL (29.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023213150')
+  [1m[36mSQL (15.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101026224408')[0m
+  [1m[35mSQL (21.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101026043531')
+  [1m[36mSQL (32.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101029021446')[0m
+  [1m[35mSQL (14.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20101023205013')
+  [1m[36mSQL (14.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20101023221347')[0m

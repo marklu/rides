@@ -31590,3 +31590,396 @@ Completed   in 130ms
 WARNING: Can't mass-assign protected attributes: remember_me
 Rendered devise/shared/_links.erb (0.3ms)
 Completed 200 OK in 101ms (Views: 5.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:32:47 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:32:47 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.6ms)
+Rendered devise/sessions/new.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 99ms (Views: 16.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:32:47 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Rendered devise/registrations/new.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 13ms (Views: 12.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:32:47 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"testregister@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test Register", "phone"=>"123-456-7890", "address"=>"123 Register St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('testregister@test.com')) LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Register St.', 'Registerville', '2010-11-01 07:32:47.805289', NULL, NULL, 'testregister@test.com', '$2a$10$TuxhumMowvnIG2X6Ydrp1.7S2e7v8ct.WP6HHrK.sLdJAofLAzgOy', NULL, NULL, NULL, 'Test Register', '$2a$10$TuxhumMowvnIG2X6Ydrp1.', '123-456-7890', NULL, NULL, NULL, 0, NULL, 'CA', '2010-11-01 07:32:47.805289')[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-01 07:32:47.838343', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 07:32:47.838343', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 07:32:47.838565' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 354ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 00:32:47 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.8ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.1ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 60ms (Views: 45.9ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:34 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:34 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.9ms)
+Rendered devise/sessions/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 87ms (Views: 16.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:34 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Rendered devise/registrations/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 13ms (Views: 12.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:34 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"testregister@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test Register", "phone"=>"123-456-7890", "address"=>"123 Register St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.1ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('testregister@test.com')) LIMIT 1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Register St.', 'Registerville', '2010-11-01 07:49:34.942682', NULL, NULL, 'testregister@test.com', '$2a$10$60DAutohly5McvtyM/mPsuMBCKCLoQOQJo3J6PJ6zjIRQKEFx4lEi', NULL, NULL, NULL, 'Test Register', '$2a$10$60DAutohly5McvtyM/mPsu', '123-456-7890', NULL, NULL, NULL, 0, NULL, 'CA', '2010-11-01 07:49:34.942682')[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-01 07:49:35.014275', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-01 07:49:35.014275', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-01 07:49:35.014545' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 369ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (0.9ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.8ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 22ms (Views: 5.5ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 2ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (1.3ms)
+Completed 200 OK in 10ms (Views: 9.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 113ms (Views: 9.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 8ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 12ms (Views: 11.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (1.3ms)
+Completed 200 OK in 16ms (Views: 9.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.6ms)
+Completed 200 OK in 7ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 7ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (1.4ms)
+Completed 200 OK in 113ms (Views: 8.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.7ms)
+Completed 200 OK in 52ms (Views: 51.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 116ms (Views: 9.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.6ms)
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 112ms (Views: 9.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 48ms (Views: 47.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 8ms (Views: 7.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:35 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 113ms (Views: 13.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 7ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.1ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 116ms (Views: 9.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 68ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.2ms)
+Completed 200 OK in 8ms (Views: 7.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 8ms (Views: 8.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 113ms (Views: 9.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 6ms (Views: 5.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 7ms (Views: 6.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 119ms (Views: 11.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.5ms)
+Completed 200 OK in 8ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"test2@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>""}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test2@test.com')) LIMIT 1[0m
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 108ms (Views: 8.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.5ms)
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (0.4ms)
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 00:49:36 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"asdfasdfasdf", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"RegisterName", "phone"=>"123-456-7890", "address"=>"123 Main St.", "city"=>"Registerville", "state"=>"CA"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('asdfasdfasdf')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (0.6ms)
+Completed 200 OK in 156ms (Views: 54.4ms | ActiveRecord: 0.2ms)
