@@ -5,6 +5,14 @@ class Trip < ActiveRecord::Base
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
   has_and_belongs_to_many :vehicles
 
+  validates_presence_of :organizer_id
+  validates_numericality_of :organizer_id
+  validates_presence_of :name
+  validates_presence_of :time
+  validates_presence_of :address
+  validates_presence_of :city
+  validates_presence_of :state
+  
   def upcoming?
     return time >= Time.now
   end
