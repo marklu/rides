@@ -8,10 +8,10 @@ Feature: Trip participant can view ride arrangement
   Given there is a trip named "Company Picnic"
   And the following people are on the same ride arrangement for "Company Picnic":
     | name  | email             | password |
-    | Joe   | joe@exmaple.com   | test     |
-    | Alice | alice@example.com | test     |
-    | Bob   | bob@example.com   | test     |
-  When I sign in with email "joe@example.com" and password "test" 
+    | Joe   | joe@exmaple.com   | Test123! |
+    | Alice | alice@example.com | Test123! |
+    | Bob   | bob@example.com   | Test123! |
+  When I sign in with email "joe@example.com" and password "Test123!" 
   And I go to the trips dashboard
   Then I should see "Company Picnic"
   And I should see "Alice"
@@ -19,10 +19,10 @@ Feature: Trip participant can view ride arrangement
 
   Scenario: I am notified if I am not in a ride arrangement
   Given there is a trip named "Company Picnic"
-  And there following people do not have a ride arrangement for "Company Picnic":
+  And the following people do not have a ride arrangement for "Company Picnic":
     | name | email           | password |
-    | Joe  | joe@example.com | test     |
-  When I sign in with email "joe@example.com" and password "test"
+    | Joe  | joe@example.com | Test123! |
+  When I sign in with email "joe@example.com" and password "Test123!"
   And I go to the trips dashboard
   Then I should see "Company Picnic"
   And I should see "You have no ride arrangement."

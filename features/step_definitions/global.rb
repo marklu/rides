@@ -31,6 +31,19 @@ Given /^(?:|I )have an account with email "([^"]*)" and password "([^"]*)"$/ do 
 
 end
 
-Given /^There is a person named "([^"]*)"$/ do |name|
+Given /^there is a person named "([^"]*)"$/ do |name|
   Person.create!(:name => name)
 end
+
+Given /^there is a person named "([^"]*)" with email "([^"]*)" and password "([^"]*)"$/ do |name, email, password|
+  Person.create!(:name => name, :email => email, :password => password, :address => "123 Test Street", :city => "Testville", :state => "CA", :phone => "510-555-0199")
+end
+
+When /^I sign in with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
+  Given %{I am not authenticated}
+  visit "/signin"
+  fill_in "person[email]", :with => email
+  fill_in "person[password]", :with => password
+  click_button("Sign in")
+end
+
