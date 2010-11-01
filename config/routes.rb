@@ -14,6 +14,13 @@ Rides::Application.routes.draw do
   * Trip Participants (/trips/:id/participants)
     * Invite Participant (not yet)
 =end
+
+  resources :vehicles
+
+  resources :trips do
+    resources :arrangements
+  end
+  
   devise_for :people, :skip => [:sessions, :registrations] do
     match '/trips' => 'trips#index', :as => 'person_root'
 
@@ -34,10 +41,4 @@ Rides::Application.routes.draw do
   end
 
   root :to => 'trips#index'
-
-  resources :vehicles
-  
-  resources :trips do
-    resources :arrangements
-  end
 end
