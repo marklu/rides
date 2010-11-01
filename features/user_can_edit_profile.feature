@@ -77,8 +77,8 @@ Feature: User can edit profile
 
     Scenarios: with valid information
       | music         | smoking       | result                                 |
-      | No preference | No preference | You updated your account successfully. |
-      | No music      | No smoking    | You updated your account successfully. |
-      | Quiet music   | No smoking    | You updated your account successfully. |
-      | Loud music    | No smoking    | You updated your account successfully. |
-      | Loud music    | smoking       | You updated your account successfully. |
+      | No Preference | No Preference | You updated your account successfully. |
+      | No Music      | No Smoking    | You updated your account successfully. |
+      | Quiet Music   | No Smoking    | You updated your account successfully. |
+      | Loud Music    | No Smoking    | You updated your account successfully. |
+      | Loud Music    | Smoking       | You updated your account successfully. |
