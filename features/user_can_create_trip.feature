@@ -34,7 +34,6 @@ Feature: User can create trip
 	And I fill in "City" with "<city>"
 	And I fill in "State" with "<state>"
 	And I press "Create"
-	And I follow "redirect"
 	Then I should see "<result>"
 	
 	Scenarios: with valid information

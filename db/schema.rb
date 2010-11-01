@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101101181706) do
+ActiveRecord::Schema.define(:version => 20101101215151) do
 
   create_table "arrangements", :force => true do |t|
     t.datetime "created_at"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(:version => 20101101181706) do
   add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
 
   create_table "trips", :force => true do |t|
-    t.time     "time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organizer_id"
@@ -72,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20101101181706) do
     t.string   "city"
     t.string   "state"
     t.string   "name"
+    t.datetime "time"
   end
 
   create_table "trips_vehicles", :id => false, :force => true do |t|
