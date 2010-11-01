@@ -23,7 +23,7 @@ Feature: User can create trip
 	And I should see "City"
 	And I should see "State"
 
-  Scenario Outline: User creates trip with valid time
+  Scenario Outline: User creates trip with valid information
 	Given I want to create a trip
 	And I have an account with email "test@test.com" and password "testpassword"
 	And I am logged in as a user
@@ -33,41 +33,31 @@ Feature: User can create trip
 	And I fill in "Address" with "<address>"
 	And I fill in "City" with "<city>"
 	And I fill in "State" with "<state>"
-	And I click on "Create trip"
+	And I press "Create"
+	And I follow "redirect"
 	Then I should see "<result>"
 	
 	Scenarios: with valid information
-		| name      | address          | city     | state      | result       |
-		| Epic trip | 1 Infinite Drive | Berkeley | CA         | Trip created |
-		| Epic trip | 1 Infinite Drive | Berkeley | California | Trip created |
+		| name      | address          | city     | state      | result                        |
+		| Epic trip | 1 Infinite Drive | Berkeley | CA         | Trip was successfully created |
+		| Epic trip | 1 Infinite Drive | Berkeley | California | Trip was successfully created |
 	
-	Scenarios: with invalid information
-		| name      | address          | city     | state | result |
-		|           | 1 Infinite Drive | Berkeley | CA    | Error  |
-		| Epic trip |                  | Berkeley | CA    | Error  |
-		| Epic trip | 1 Infinite Drive |          | CA    | Error  |
-		| Epic trip | 1 Infinite Drive | Berkeley |       | Error  |
-	
-  Scenario Outline: User creates trip with invalid time
+  Scenario Outline: User creates trip with invalid information	
 	Given I want to create a trip
 	And I have an account with email "test@test.com" and password "testpassword"
 	And I am logged in as a user
 	And I am on the create trip page
-	When I fill in "Name" with "<name>"
+	When I select "December 25, 2010 10:00" as the date and time
+	And I fill in "Name" with "<name>"
 	And I fill in "Address" with "<address>"
 	And I fill in "City" with "<city>"
 	And I fill in "State" with "<state>"
-	And I click on "Create trip"
+	And I press "Create"
 	Then I should see "<result>"
-	
-	Scenarios: with valid information
-		| name      | address          | city     | state      | result |
-		| Epic trip | 1 Infinite Drive | Berkeley | CA         | Error  |
-		| Epic trip | 1 Infinite Drive | Berkeley | California | Error  |
 	
 	Scenarios: with invalid information
 		| name      | address          | city     | state | result |
-		|           | 1 Infinite Drive | Berkeley | CA    | Error  |
-		| Epic trip |                  | Berkeley | CA    | Error  |
-		| Epic trip | 1 Infinite Drive |          | CA    | Error  |
-		| Epic trip | 1 Infinite Drive | Berkeley |       | Error  |
+		|           | 1 Infinite Drive | Berkeley | CA    | error  |
+		| Epic trip |                  | Berkeley | CA    | error  |
+		| Epic trip | 1 Infinite Drive |          | CA    | error  |
+		| Epic trip | 1 Infinite Drive | Berkeley |       | error  |

@@ -9,6 +9,7 @@ class Trip < ActiveRecord::Base
   validates_numericality_of :organizer_id
   validates_presence_of :name
   validates_presence_of :time
+  validates_datetime :time
   validates_presence_of :address
   validates_presence_of :city
   validates_presence_of :state

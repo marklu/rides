@@ -20,7 +20,7 @@ describe Trip do
     
     it "should not allow a trip with invalid organizer" do
       @invalid_organizer_attributes = {
-        :organizer_id => "RAGE AGAINST THE SYSTEM"
+        :organizer_id => "RAGE AGAINST THE SYSTEM",
         :time => Time.parse("Sun Oct 31 13:13 GMT 2010"),
         :address => "2650 Haste Street",
         :city => "Berkeley",
@@ -139,18 +139,5 @@ describe Trip do
     }
     
     Trip.create(@valid_attributes).should be_true
-  end
-  
-  it "should not create a new instance given invalid attributes" do
-    @invalid_attributes = {
-      :organizer_id => "WHAT DID YOU SAY?",
-      :name => "Rage!@!@%^%$^%$&%$&",
-      :time => "Invalid Time",
-      :address => "2650 Haste Street",
-      :city => "Berkeley",
-      :state => "CA"
-    }
-    
-    Trip.create(@invalid_attributes).should be_false
   end
 end
