@@ -11,9 +11,5 @@ group :development, :test do
    gem 'rspec-rails'
    gem 'cucumber'
    gem 'cucumber-rails'
-<<<<<<< HEAD
-=======
    gem 'launchy'
-  # gem 'win32console'
->>>>>>> d6d2fba1f4b25fb492cefb6b1ae142e5c63d6248
 end
