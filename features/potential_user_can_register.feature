@@ -70,3 +70,18 @@ Feature: Potential user can register
     And the "State" field should contain "CA"
 
   Scenario: Newly registered user has neutral personal preferences
+    Given I am not authenticated
+    And I am on the sign up page
+    And I fill in "Email" with "testregister3@test.com"
+    And I fill in "Password" with "testpassword"
+    And I fill in "Password confirmation" with "testpassword"
+    And I fill in "Name" with "Test Register"
+    And I fill in "Phone" with "123-456-7890"
+    And I fill in "Address" with "123 Register St."
+    And I fill in "City" with "Registerville"
+    And I fill in "State" with "CA"
+    And I press "Sign up"
+    When I follow "Edit Profile"
+    Then I should be on the edit profile page
+    And the "person_music_no_preference" radio button should be selected
+    And the "person_smoking_no_preference" radio button should be selected

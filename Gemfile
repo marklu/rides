@@ -10,5 +10,6 @@ group :development, :test do
    gem 'rspec-rails'
    gem 'cucumber'
    gem 'cucumber-rails'
-   gem 'win32console'
+   gem 'launchy'
+  # gem 'win32console'
 end
