@@ -10,6 +10,11 @@ Given /^I am logged in as a user$/ do
 
 end
 
+Given /^I am not authenticated$/ do
+  visit('/signout') # ensure that at least
+end
+
+
 Given /^(?:|I )have an account with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
   visit "/signout"
   visit "/signup"

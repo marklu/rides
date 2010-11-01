@@ -1,26 +1,21 @@
 Rides::Application.routes.draw do
 =begin
-    * Home (/)
-    * Login (/signin) (DEVISE)
-    * Register (/signup) (DEVISE)
-    *
-
-      Dashboard (/dashboard)
-          o Create Trip (/trips/create)
-          o Trip History (/trips/history
-          o Edit Profile (/profile) (vehicles are shown here) (DEVISE)
-          o Add Vehicle (/vehicles/add)
-    *
-
-      Trip Info (/trips/:id)
-          o All Trip Arrangements (Trip Organizer) (/trips/:id/arrangements)
-          o Join Trip (/trips/:id/join)
-          o Trip Participants (/trips/:id/participants)
-                + Invite Participant (not yet)
+* Home (/)
+* Login (/signin) (DEVISE)
+* Register (/signup) (DEVISE)
+* Dashboard (/dashboard)
+  * Create Trip (/trips/create)
+  * Trip History (/trips/history)
+  * Edit Profile (/profile) (vehicles are shown here) (DEVISE)
+  * Add Vehicle (/vehicles/add)
+* Trip Info (/trips/:id)
+  * All Trip Arrangements (Trip Organizer) (/trips/:id/arrangements)
+  * Join Trip (/trips/:id/join)
+  * Trip Participants (/trips/:id/participants)
+    * Invite Participant (not yet)
 =end
   devise_for :people, :skip => [:sessions, :registrations] do
-
-    #root :to => 'trips#index'
+    match '/trips' => 'trips#index', :as => 'person_root'
 
     get "/signin" => "devise/sessions#new", :as => "new_person_session"
     post "/signin" => "devise/sessions#create", :as => "person_session"
@@ -36,9 +31,7 @@ Rides::Application.routes.draw do
     #     new_person_password GET    /people/password/new(.:format)  {:action=>"new", :controller=>"devise/passwords"}
     #    edit_person_password GET    /people/password/edit(.:format) {:action=>"edit", :controller=>"devise/passwords"}
     #         person_password PUT    /people/password(.:format)      {:action=>"update", :controller=>"devise/passwords"}
-
   end
-
 
   root :to => 'trips#index'
 
