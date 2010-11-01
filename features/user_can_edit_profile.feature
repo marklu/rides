@@ -5,14 +5,16 @@ Feature: User can edit profile
   So that I can receive a valid and favorable ride arrangement
 
   Scenario: User can view the edit profile page
-    Given I want to update my profile
+    Given I have an account with email "test@test.com" and password "testpassword"
+    And I want to update my profile
     And I am logged in as a user
     When I go to the dashboard page
     And I follow "Edit Profile"
     Then I should be on the edit profile page
     
   Scenario: User can modify personal information
-    Given I want to update my personal information
+    Given I have an account with email "test@test.com" and password "testpassword"
+    And I want to update my personal information
     And I am logged in as a user
     When I go to the edit profile page
     Then I should see "Name"
@@ -23,15 +25,18 @@ Feature: User can edit profile
     And I should see "Phone"
 
   Scenario: User can indicate personal preferences
-    Given I want to update my personal preferences
+    Given I have an account with email "test@test.com" and password "testpassword"
+    And I want to update my personal preferences
     And I am logged in as a user
     When I go to the edit profile page
     Then I should see "Music"
     And I should see "Smoking"
 
   Scenario Outline: User updates personal information
-    Given I am logged in as a user
+    Given I have an account with email "test@test.com" and password "testpassword"
+    And I am logged in as a user
     And I am on the edit profile page
+    When I fill in "Current password" with "testpassword"
     When I fill in "Name" with "<name>"
     And I fill in "Email" with "<email>"
     And I fill in "Address" with "<address>"
@@ -42,12 +47,12 @@ Feature: User can edit profile
     Then I should see "<result>"
 
     Scenarios: with valid information
-      | name     | email              | address         | city      | state      | phone            | result          |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 1231231234       | Profile Updated |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | California | 1231231234       | Profile Updated |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 11231231234      | Profile Updated |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | (123) 123-1234   | Profile Updated |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 1 (123) 123-1234 | Profile Updated |
+      | name     | email              | address         | city      | state      | phone            | result                                 |
+      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 1231231234       | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | California | 1231231234       | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 11231231234      | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | (123) 123-1234   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 1 (123) 123-1234 | You updated your account successfully. |
 
     Scenarios: with invalid information
       | name     | email              | address         | city      | state | phone      | result |
@@ -60,7 +65,8 @@ Feature: User can edit profile
       | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    |            | error  |
 
   Scenario Outline: User updates personal preferences
-    Given I am logged in as a user
+    Given I have an account with email "test@test.com" and password "testpassword"
+    And I am logged in as a user
     And I am on the edit profile page
     When I fill in "Current password" with "testpassword"
     And I choose "<music>"

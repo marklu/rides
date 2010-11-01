@@ -24,7 +24,7 @@ Rides::Application.routes.draw do
     post "/people" => "devise/registrations#create", :as => "person_registration"
     get "/signup" => "devise/registrations#new", :as => "new_person_registration"
     get "/profile" => "devise/registrations#edit", :as => "edit_person_registration"
-    put "/people" => "devise/registrations#put", :as => "person_registration"
+    put "/people" => "devise/registrations#update", :as => "person_registration"
     delete "/people" => "devise/registrations#destroy", :as => "person_registration"
 
     #         person_password POST   /people/password(.:format)      {:action=>"create", :controller=>"devise/passwords"}
