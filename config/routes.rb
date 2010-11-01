@@ -19,8 +19,8 @@ Rides::Application.routes.draw do
                 + Invite Participant (not yet)
 =end
   devise_for :people, :skip => [:sessions, :registrations] do
-
-    #root :to => 'trips#index'
+    match '/trips' => 'trips#index', :as => 'person_root'
+    
 
     get "/signin" => "devise/sessions#new", :as => "new_person_session"
     post "/signin" => "devise/sessions#create", :as => "person_session"
@@ -38,6 +38,7 @@ Rides::Application.routes.draw do
     #         person_password PUT    /people/password(.:format)      {:action=>"update", :controller=>"devise/passwords"}
 
   end
+
 
 
   root :to => 'trips#index'
