@@ -47,3 +47,8 @@ When /^I sign in with email "([^"]*)" and password "([^"]*)"$/ do |email, passwo
   click_button("Sign in")
 end
 
+Then /^the "([^"]*)" radio button should be selected$/ do |choice|
+  #  input("##{choice}").should be_checked
+  response_body.should have_selector "input[id=#{choice}][type=radio][checked=checked]"
+
+end
