@@ -28,7 +28,37 @@ describe Vehicle do
 
     it "should not allow a vehicle without capacity" do
       @no_capacity_attributes = {
-        #        :capacity => 5,
+        #:capacity => 5,
+        :owner_id => @owner.id,
+        :make => "Toyota",
+        :model => "Camry"
+      }
+      Vehicle.new(@no_capacity_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle without numeric capacity" do
+      @no_capacity_attributes = {
+        :capacity => "aaa",
+        :owner_id => @owner.id,
+        :make => "Toyota",
+        :model => "Camry"
+      }
+      Vehicle.new(@no_capacity_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle with zero capacity" do
+      @no_capacity_attributes = {
+        :capacity => 0,
+        :owner_id => @owner.id,
+        :make => "Toyota",
+        :model => "Camry"
+      }
+      Vehicle.new(@no_capacity_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle with negative capacity" do
+      @no_capacity_attributes = {
+        :capacity => -1,
         :owner_id => @owner.id,
         :make => "Toyota",
         :model => "Camry"
@@ -39,7 +69,7 @@ describe Vehicle do
     it "should not allow a vehicle without owner" do
       @no_owner_attributes = {
         :capacity => 5,
-#        :owner_id => @owner.id,
+        #:owner_id => @owner.id,
         :make => "Toyota",
         :model => "Camry"
       }
