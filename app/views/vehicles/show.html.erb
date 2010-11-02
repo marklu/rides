@@ -1,10 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Make:</b>
+  <%= @vehicle.make %>
+</p>
+<p>
+  <b>Model:</b>
+  <%= @vehicle.model %>
+</p>
+<p>
   <b>Capacity:</b>
   <%= @vehicle.capacity %>
 </p>
 
 
-<%= link_to 'Edit', edit_person_vehicle_path(@owner, @vehicle) %> |
-<%= link_to 'Back', person_vehicles_path(@owner) %>
+<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Back', vehicles_path %>

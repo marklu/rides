@@ -1374,3 +1374,962 @@ Migrating to AddTimeToTrips (20101101215151)
   [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_trips_vehicles_on_trip_id_and_vehicle_id')
   [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
   [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_vehicles_on_owner_id')
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 17:04:05 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 528ms (Views: 24.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 17:04:10 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 167ms (Views: 23.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:07:50 -0700
+  Processing by VehiclesController#index as HTML
+Completed   in 37ms
+
+ActiveRecord::RecordNotFound (Couldn't find Person without an ID):
+  app/controllers/vehicles_controller.rb:89:in `get_owner'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (86.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (134.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:13:40 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (16.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered vehicles/index.html.erb within layouts/application (299.0ms)
+Completed   in 507ms
+
+ActionView::Template::Error (undefined method `new_person_vehicle_path' for #<#<Class:0x4aeb8d0>:0x4ae9728>):
+    25: <br />
+    26: 
+    27: <p>
+    28:   <%= link_to 'New Vehicle', new_person_vehicle_path(@owner) %>
+    29:   <%= link_to 'Back', @owner %>
+    30: </p>
+  app/views/vehicles/index.html.erb:28:in `_app_views_vehicles_index_html_erb___572097206_39273000_727068516'
+  app/controllers/vehicles_controller.rb:10:in `index'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (92.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (134.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:21:05 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered vehicles/index.html.erb within layouts/application (11.0ms)
+Completed   in 152ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    19:   <% end %>
+    20:   </table>
+    21: <% else %>
+    22:   <p><%=h @owner.name %> hasn't added any cars yet.</p>
+    23: <% end %>
+    24: 
+    25: <br />
+  app/views/vehicles/index.html.erb:22:in `_app_views_vehicles_index_html_erb___572097206_38862012_727068516'
+  app/controllers/vehicles_controller.rb:9:in `index'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (125.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (142.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:21:05 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered vehicles/index.html.erb within layouts/application (14.0ms)
+Completed   in 175ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    19:   <% end %>
+    20:   </table>
+    21: <% else %>
+    22:   <p><%=h @owner.name %> hasn't added any cars yet.</p>
+    23: <% end %>
+    24: 
+    25: <br />
+  app/views/vehicles/index.html.erb:22:in `_app_views_vehicles_index_html_erb___572097206_46548000_727068516'
+  app/controllers/vehicles_controller.rb:9:in `index'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  [1m[35mVehicle Load (1.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (113.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (131.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:25:01 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered vehicles/index.html.erb within layouts/application (13.0ms)
+Completed   in 145ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    19:   <% end %>
+    20:   </table>
+    21: <% else %>
+    22:   <p><%=h @owner.name %> hasn't added any cars yet.</p>
+    23: <% end %>
+    24: 
+    25: <br />
+  app/views/vehicles/index.html.erb:22:in `_app_views_vehicles_index_html_erb___572097206_39268476_727068516'
+  app/controllers/vehicles_controller.rb:9:in `index'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (98.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (114.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:25:02 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered vehicles/index.html.erb within layouts/application (12.0ms)
+Completed   in 149ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    19:   <% end %>
+    20:   </table>
+    21: <% else %>
+    22:   <p><%=h @owner.name %> hasn't added any cars yet.</p>
+    23: <% end %>
+    24: 
+    25: <br />
+  app/views/vehicles/index.html.erb:22:in `_app_views_vehicles_index_html_erb___572097206_47105160_727068516'
+  app/controllers/vehicles_controller.rb:9:in `index'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+  [1m[35mVehicle Load (1.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (92.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (108.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:25:21 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered vehicles/index.html.erb within layouts/application (220.0ms)
+Completed   in 353ms
+
+ActionView::Template::Error (undefined method `person_path' for #<#<Class:0x3ada720>:0x3ad9250>):
+    26: 
+    27: <p>
+    28:   <%= link_to 'New Vehicle', new_vehicle_path %>
+    29:   <%= link_to 'Back', current_person %>
+    30: </p>
+  app/views/vehicles/index.html.erb:29:in `_app_views_vehicles_index_html_erb___572097206_30851232_727068516'
+  app/controllers/vehicles_controller.rb:9:in `index'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (88.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (110.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:25:45 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered vehicles/index.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 147ms (Views: 35.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:25:52 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered vehicles/new.html.erb within layouts/application (1.0ms)
+Completed   in 144ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: <h1>New vehicle for <%=h @owner.name %></h1>
+    2: 
+    3: <%= render 'form' %>
+    4: 
+  app/views/vehicles/new.html.erb:1:in `_app_views_vehicles_new_html_erb___476612195_30644784_727068516'
+  app/controllers/vehicles_controller.rb:31:in `new'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (213.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (230.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:27:18 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (9.0ms)
+Rendered vehicles/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 155ms (Views: 40.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:27:33 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered vehicles/index.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 222ms (Views: 33.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:27:34 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered vehicles/_form.html.erb (11.0ms)
+Rendered vehicles/new.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 189ms (Views: 41.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:27:36 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered vehicles/index.html.erb within layouts/application (17.0ms)
+Completed 200 OK in 228ms (Views: 43.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:28:45 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (11.0ms)
+Rendered vehicles/new.html.erb within layouts/application (27.0ms)
+Completed 200 OK in 466ms (Views: 58.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 17:28:53 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Toyota", "model"=>"Corolla", "capacity"=>"4"}, "commit"=>"Create Vehicle"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (4, '2010-11-02 00:28:53.616032', 'Toyota', 'Corolla', 3, '2010-11-02 00:28:53.616032')[0m
+Redirected to http://127.0.0.1:3000/vehicles/1
+Completed 302 Found in 280ms
+
+
+Started GET "/vehicles/1" for 127.0.0.1 at 2010-11-01 17:28:53 -0700
+  Processing by VehiclesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 1) LIMIT 1[0m
+Rendered vehicles/show.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 158ms (Views: 36.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:28:55 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered vehicles/index.html.erb within layouts/application (29.0ms)
+Completed 200 OK in 160ms (Views: 49.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:28:57 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered vehicles/index.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 158ms (Views: 42.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:29:45 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered vehicles/index.html.erb within layouts/application (31.0ms)
+Completed 200 OK in 161ms (Views: 51.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 17:32:38 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (35.0ms)
+Completed 200 OK in 159ms (Views: 57.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:32:39 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (17.0ms)
+Completed 200 OK in 131ms (Views: 36.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:33:51 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 110ms (Views: 34.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:34:21 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 274ms (Views: 35.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:35:08 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (11.0ms)
+Completed   in 137ms
+
+ActionView::Template::Error (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.count):
+    53: 
+    54: <h3>Vehicles</h3>
+    55: 
+    56: <% if @vehicles.count > 0 %>
+    57:   <table>
+    58:     <tr>
+    59:       <th>Make</th>
+  app/views/devise/registrations/edit.html.erb:56:in `_app_views_devise_registrations_edit_html_erb__672356360_35167440_727068516'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (99.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (116.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:35:17 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (209.0ms)
+Completed   in 326ms
+
+ActionView::Template::Error (undefined local variable or method `current_user' for #<#<Class:0x5804088>:0x57fa410>):
+    53: 
+    54: <h3>Vehicles</h3>
+    55: 
+    56: <% if current_user.vehicles.count > 0 %>
+    57:   <table>
+    58:     <tr>
+    59:       <th>Make</th>
+  app/views/devise/registrations/edit.html.erb:56:in `_app_views_devise_registrations_edit_html_erb__672356360_46123356_727068516'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (123.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (140.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:35:55 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (222.0ms)
+Completed   in 340ms
+
+ActionView::Template::Error (undefined local variable or method `current_user' for #<#<Class:0x4523fd0>:0x4517fa0>):
+    53: 
+    54: <h3>Vehicles</h3>
+    55: 
+    56: <% if current_user.vehicles.count > 0 %>
+    57:   <table>
+    58:     <tr>
+    59:       <th>Make</th>
+  app/views/devise/registrations/edit.html.erb:56:in `_app_views_devise_registrations_edit_html_erb__672356360_36220116_727068516'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (95.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (111.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:38:41 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered devise/registrations/edit.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 134ms (Views: 33.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:38:55 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (228.0ms)
+Completed   in 348ms
+
+ActionView::Template::Error (undefined local variable or method `current_user' for #<#<Class:0x29798b8>:0x35ecdb8>):
+    65:       <th></th>
+    66:     </tr>
+    67:   
+    68:   <% current_user.each do |vehicle| %>
+    69:     <tr>
+    70:       <td><%= vehicle.make %></td>
+    71:       <td><%= vehicle.model %></td>
+  app/views/devise/registrations/edit.html.erb:68:in `_app_views_devise_registrations_edit_html_erb__672356360_30842208_727068516'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (118.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (181.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:39:04 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered devise/registrations/edit.html.erb within layouts/application (45.0ms)
+Completed   in 215ms
+
+ActionView::Template::Error (undefined method `each' for #<Person:0x5e27578>):
+    65:       <th></th>
+    66:     </tr>
+    67:   
+    68:   <% resource.each do |vehicle| %>
+    69:     <tr>
+    70:       <td><%= vehicle.make %></td>
+    71:       <td><%= vehicle.model %></td>
+  app/views/devise/registrations/edit.html.erb:68:in `_app_views_devise_registrations_edit_html_erb__672356360_49355940_727068516'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (159.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (180.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:39:15 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (1.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered devise/registrations/edit.html.erb within layouts/application (58.0ms)
+Completed 200 OK in 184ms (Views: 74.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/vehicles/1" for 127.0.0.1 at 2010-11-01 17:42:12 -0700
+  Processing by VehiclesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 1) LIMIT 1
+Rendered vehicles/show.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 156ms (Views: 39.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/1/edit" for 127.0.0.1 at 2010-11-01 17:42:14 -0700
+  Processing by VehiclesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 1) LIMIT 1
+Rendered vehicles/_form.html.erb (72.0ms)
+Rendered vehicles/edit.html.erb within layouts/application (81.0ms)
+Completed 200 OK in 194ms (Views: 103.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles/1" for 127.0.0.1 at 2010-11-01 17:42:21 -0700
+  Processing by VehiclesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "id"=>"1"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Completed   in 98ms
+
+NoMethodError (undefined method `vehicles' for nil:NilClass):
+  app/controllers/vehicles_controller.rb:77:in `destroy'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (99.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (117.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:43:07 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (56.0ms)
+Completed 200 OK in 178ms (Views: 76.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles/1" for 127.0.0.1 at 2010-11-01 17:43:10 -0700
+  Processing by VehiclesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "id"=>"1"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "vehicles" WHERE ("vehicles"."id" = 1)
+Redirected to http://127.0.0.1:3000/vehicles
+Completed 302 Found in 287ms
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:43:10 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered vehicles/index.html.erb within layouts/application (20.0ms)
+Completed 200 OK in 180ms (Views: 40.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:43:15 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (58.0ms)
+Completed 200 OK in 207ms (Views: 79.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:46:56 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered devise/registrations/edit.html.erb within layouts/application (48.0ms)
+Completed 200 OK in 165ms (Views: 71.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:46:58 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (109.0ms)
+Rendered vehicles/new.html.erb within layouts/application (118.0ms)
+Completed 200 OK in 233ms (Views: 148.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 17:47:12 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Toyota", "model"=>"4Runner", "capacity"=>"4"}, "commit"=>"Create Vehicle"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (4, '2010-11-02 00:47:13.078777', 'Toyota', '4Runner', 3, '2010-11-02 00:47:13.078777')[0m
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 439ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:47:13 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (98.0ms)
+Completed 200 OK in 340ms (Views: 116.0ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/vehicles/2/edit" for 127.0.0.1 at 2010-11-01 17:47:16 -0700
+  Processing by VehiclesController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 2) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (72.0ms)
+Rendered vehicles/edit.html.erb within layouts/application (81.0ms)
+Completed 200 OK in 199ms (Views: 102.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/vehicles/2" for 127.0.0.1 at 2010-11-01 17:47:17 -0700
+  Processing by VehiclesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Toyota", "model"=>"4Runner", "capacity"=>"4"}, "commit"=>"Update Vehicle", "id"=>"2"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 2) LIMIT 1[0m
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 134ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:47:18 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (55.0ms)
+Completed 200 OK in 171ms (Views: 76.0ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/vehicles/2" for 127.0.0.1 at 2010-11-01 17:47:21 -0700
+  Processing by VehiclesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "id"=>"2"}
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 2) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "vehicles" WHERE ("vehicles"."id" = 2)
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 292ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:47:22 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (54.0ms)
+Completed 200 OK in 231ms (Views: 113.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:48:06 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered devise/registrations/edit.html.erb within layouts/application (82.0ms)
+Completed 200 OK in 171ms (Views: 103.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:48:08 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (53.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (9.0ms)
+Rendered vehicles/new.html.erb within layouts/application (20.0ms)
+Completed 200 OK in 202ms (Views: 44.0ms | ActiveRecord: 53.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 17:48:14 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Toyota", "model"=>"4Runner", "capacity"=>"4"}, "commit"=>"Create Vehicle"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (4, '2010-11-02 00:48:14.596295', 'Toyota', '4Runner', 3, '2010-11-02 00:48:14.596295')[0m
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 284ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:48:14 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (137.0ms)
+Completed 200 OK in 221ms (Views: 155.0ms | ActiveRecord: 5.0ms)
+
+
+Started POST "/vehicles/3" for 127.0.0.1 at 2010-11-01 17:48:20 -0700
+  Processing by VehiclesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "id"=>"3"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  DELETE FROM "vehicles" WHERE ("vehicles"."id" = 3)
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 263ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:48:20 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (49.0ms)
+Completed 200 OK in 256ms (Views: 74.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:48:43 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered vehicles/_form.html.erb (9.0ms)
+Rendered vehicles/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 166ms (Views: 47.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 17:48:48 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Toyota", "model"=>"Camery", "capacity"=>"4"}, "commit"=>"Create Vehicle"}
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (4, '2010-11-02 00:48:48.499234', 'Toyota', 'Camery', 3, '2010-11-02 00:48:48.499234')
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 315ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:48:48 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (1.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered devise/registrations/edit.html.erb within layouts/application (122.0ms)
+Completed 200 OK in 209ms (Views: 143.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/vehicles/4" for 127.0.0.1 at 2010-11-01 17:48:52 -0700
+  Processing by VehiclesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "id"=>"4"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 4) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "vehicles" WHERE ("vehicles"."id" = 4)[0m
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 309ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:48:53 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered devise/registrations/edit.html.erb within layouts/application (67.0ms)
+Completed 200 OK in 239ms (Views: 135.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:48:55 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (42.0ms)
+Rendered vehicles/new.html.erb within layouts/application (74.0ms)
+Completed 200 OK in 212ms (Views: 99.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 17:49:01 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Toyota", "model"=>"Prius", "capacity"=>"4"}, "commit"=>"Create Vehicle"}
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (4, '2010-11-02 00:49:01.985006', 'Toyota', 'Prius', 3, '2010-11-02 00:49:01.985006')[0m
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 316ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:49:02 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (92.0ms)
+Completed 200 OK in 210ms (Views: 112.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/vehicles/5/edit" for 127.0.0.1 at 2010-11-01 17:49:03 -0700
+  Processing by VehiclesController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 5) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (154.0ms)
+Rendered vehicles/edit.html.erb within layouts/application (164.0ms)
+Completed 200 OK in 309ms (Views: 190.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles/5" for 127.0.0.1 at 2010-11-01 17:49:06 -0700
+  Processing by VehiclesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Toyota", "model"=>"Corolla", "capacity"=>"4"}, "commit"=>"Update Vehicle", "id"=>"5"}
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 5) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "vehicles" SET "model" = 'Corolla', "updated_at" = '2010-11-02 00:49:06.857284' WHERE ("vehicles"."id" = 5)
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 311ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:49:07 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (1.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered devise/registrations/edit.html.erb within layouts/application (74.0ms)
+Completed 200 OK in 191ms (Views: 92.0ms | ActiveRecord: 4.0ms)
+
+
+Started POST "/vehicles/5" for 127.0.0.1 at 2010-11-01 17:49:10 -0700
+  Processing by VehiclesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "id"=>"5"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mVehicle Load (1.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 5) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mDELETE FROM "vehicles" WHERE ("vehicles"."id" = 5)[0m
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 307ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:49:10 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+Rendered devise/registrations/edit.html.erb within layouts/application (50.0ms)
+Completed 200 OK in 163ms (Views: 70.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:51:50 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (8.0ms)
+Rendered vehicles/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 159ms (Views: 39.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:52:54 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered vehicles/_form.html.erb (12.0ms)
+Rendered vehicles/new.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 192ms (Views: 51.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 17:52:58 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"a", "model"=>"a", "capacity"=>"4"}, "commit"=>"Create Vehicle"}
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (4, '2010-11-02 00:52:58.597539', 'a', 'a', 3, '2010-11-02 00:52:58.597539')
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 304ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:52:58 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (1.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered devise/registrations/edit.html.erb within layouts/application (124.0ms)
+Completed 200 OK in 208ms (Views: 142.0ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 17:53:35 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered devise/registrations/edit.html.erb within layouts/application (54.0ms)
+Completed 200 OK in 181ms (Views: 77.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:54:35 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (9.0ms)
+Rendered vehicles/new.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 157ms (Views: 40.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 17:54:47 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered vehicles/index.html.erb within layouts/application (25.0ms)
+Completed 200 OK in 227ms (Views: 54.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 17:55:16 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (8.0ms)
+Rendered vehicles/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 125ms (Views: 38.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 18:03:51 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered vehicles/_form.html.erb (10.0ms)
+Rendered vehicles/new.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 139ms (Views: 47.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 18:03:53 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"", "model"=>"", "capacity"=>""}, "commit"=>"Create Vehicle"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (10.0ms)
+Rendered vehicles/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 296ms (Views: 43.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 18:03:57 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"", "model"=>"", "capacity"=>"-1"}, "commit"=>"Create Vehicle"}
+  [1m[35mPerson Load (10.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered vehicles/_form.html.erb (7.0ms)
+Rendered vehicles/new.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 224ms (Views: 36.0ms | ActiveRecord: 10.0ms)
+
+
+Started GET "/vehicles" for 127.0.0.1 at 2010-11-01 18:07:35 -0700
+  Processing by VehiclesController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered vehicles/index.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 161ms (Views: 42.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 18:16:58 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 156ms (Views: 25.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 18:16:59 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (56.0ms)
+Completed 200 OK in 144ms (Views: 77.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/vehicles/6" for 127.0.0.1 at 2010-11-01 18:17:03 -0700
+  Processing by VehiclesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "id"=>"6"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mVehicle Load (0.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 6) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  DELETE FROM "vehicles" WHERE ("vehicles"."id" = 6)
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 328ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 18:17:04 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (51.0ms)
+Completed 200 OK in 213ms (Views: 107.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 18:18:47 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Rendered vehicles/_form.html.erb (11.0ms)
+Rendered vehicles/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 160ms (Views: 40.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 18:18:54 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"A", "model"=>"A", "capacity"=>"4"}, "commit"=>"Create Vehicle"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (4, '2010-11-02 01:18:55.152569', 'A', 'A', 3, '2010-11-02 01:18:55.152569')
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 295ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 18:18:55 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 3)) AS subquery[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3)
+Rendered devise/registrations/edit.html.erb within layouts/application (93.0ms)
+Completed 200 OK in 207ms (Views: 112.0ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/vehicles/7/edit" for 127.0.0.1 at 2010-11-01 18:28:46 -0700
+  Processing by VehiclesController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+  [1m[35mVehicle Load (0.0ms)[0m  SELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 3) AND ("vehicles"."id" = 7) LIMIT 1
+Rendered vehicles/_form.html.erb (19.0ms)
+Rendered vehicles/edit.html.erb within layouts/application (29.0ms)
+Completed 200 OK in 188ms (Views: 50.0ms | ActiveRecord: 1.0ms)
