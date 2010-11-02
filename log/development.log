@@ -371,3 +371,15 @@ Started GET "/trips/1" for 127.0.0.1 at 2010-11-01 21:48:30 -0700
   [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
 Rendered trips/show.html.erb within layouts/application (28.0ms)
 Completed 200 OK in 203ms (Views: 50.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:55:27 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" INNER JOIN "participants_trips" ON "people".id = "participants_trips".participant_id WHERE ("participants_trips".trip_id = 1 ) AND ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE (organizer_id = 1)
+  [1m[36mArrangement Load (0.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 1)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 1)
+Rendered trips/index.html.erb within layouts/application (42.0ms)
+Completed 200 OK in 235ms (Views: 63.0ms | ActiveRecord: 2.0ms)

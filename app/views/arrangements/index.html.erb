@@ -1,21 +1,15 @@
 <h1>Listing trip arrangements</h1>
 
 <% if @arrangements.count > 0 %>
-  <table>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  
   <% @arrangements.each do |arrangement| %>
-    <tr>
-      <td><%= link_to 'Show', [@trip, arrangement] %></td>
-      <td><%= link_to 'Edit', edit_trip_arrangement_path(@trip, arrangement) %></td>
-      <td><%= link_to 'Destroy', [@trip, arrangement], :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
+    <table>
+      <tr>
+        <% arrangement.passengers.each do |passenger| %>
+          <td><%= passenger.name %></td>
+        <% end %>
+      </tr>
+    </table>
   <% end %>
-  </table>
 <% else %>
   <p>This trip has no arrangements yet.</p>
 <% end %>
@@ -23,6 +17,5 @@
 <br />
 
 <p>
-  <%= link_to 'New Arrangement', new_trip_arrangement_path(@trip) %>
   <%= link_to 'Back', @trip %>
 </p>
