@@ -15,10 +15,14 @@ class Trip < ActiveRecord::Base
   validates_presence_of :state
   
   def upcoming?
-    return time >= Time.now
+    return time >= Time.now()
   end
   
-  def self.upcoming_for(user)
-    return self.find(:all).select { |trip| trip.upcoming? && trip.participants.include?(user) }
+  def arrangement_for(person)
+    return arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
+  end
+
+  def self.upcoming_for(person)
+    return self.find(:all).select { |trip| trip.upcoming? && trip.participants.include?(person) }
   end
 end
