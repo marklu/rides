@@ -12,4 +12,8 @@ group :development, :test do
    gem 'cucumber'
    gem 'cucumber-rails'
    gem 'launchy'
+<<<<<<< HEAD
+=======
+   gem 'win32console'
+>>>>>>> bea218182afb0ba60aa5c0278fc7097fd5cc980e
 end
