@@ -5166,3 +5166,452 @@ Started GET "/signin" for 127.0.0.1 at 2010-11-01 19:18:27 -0700
   Processing by Devise::SessionsController#new as HTML
 Rendered devise/shared/_links.erb (1.0ms)
 Completed 200 OK in 5ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('testorganizer@example.com')) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:32:59.864614', NULL, NULL, 'testorganizer@example.com', '$2a$10$UpI5lwf0baSCxp9ljuX0dOB9CZ3lWn29/CLv0b9sv5sgwxnlPDwAi', NULL, NULL, 'no_preference', 'Test Organizer', '$2a$10$UpI5lwf0baSCxp9ljuX0dO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:32:59.864614')[0m
+  [1m[35mPerson Load (28.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('123 Main St', 'Testville', '2010-11-02 04:32:59.987621', 'Company Picnic', 1, 'CA', '2010-11-03 04:32:59.956619', '2010-11-02 04:32:59.987621')[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('allan@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:00.103628', NULL, NULL, 'allan@exmaple.com', '$2a$10$jpU.cUwUzoaYzfEEmAWYJ.tcgAs5ouiWyVFwwDN22LRiOJITTHUV2', NULL, NULL, 'no_preference', 'Allan', '$2a$10$jpU.cUwUzoaYzfEEmAWYJ.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:00.103628')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (2, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alyssa@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:00.225635', NULL, NULL, 'alyssa@example.com', '$2a$10$5726R0KHCUOuaQE4T9uutOi.kmlRgFKqeoxXtnBjZGYzNC42sEhDq', NULL, NULL, 'no_preference', 'Alyssa', '$2a$10$5726R0KHCUOuaQE4T9uutO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:00.225635')[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (3, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alex@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:00.334641', NULL, NULL, 'alex@example.com', '$2a$10$/jfs2nBRhGwiPEPlPX7/eOLy6XZvH2ZZ47AwTHWA3wrfMTEiQ2M8i', NULL, NULL, 'no_preference', 'Alex', '$2a$10$/jfs2nBRhGwiPEPlPX7/eO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:00.334641')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (4, 1)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:33:00.360642', NULL, 1, '2010-11-02 04:33:00.360642', NULL)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 2)
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 3)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 4)
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Baron@exmaple.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:00.561654', NULL, NULL, 'Baron@exmaple.com', '$2a$10$wPOHPQqjjftRFgSSaUzbE.wrLAXgZemX8gPIki3otbcUmX4MdnB0C', NULL, NULL, 'no_preference', 'Baron', '$2a$10$wPOHPQqjjftRFgSSaUzbE.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:00.561654')
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (5, 1)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Bailey@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:00.674660', NULL, NULL, 'Bailey@example.com', '$2a$10$UB7yHRxuJiM4fvtOD.rd..DQSVJwTbf08B7DLp2GFvbnRtUVTgxEC', NULL, NULL, 'no_preference', 'Bailey', '$2a$10$UB7yHRxuJiM4fvtOD.rd..', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:00.674660')
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (6, 1)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('bob@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:00.784667', NULL, NULL, 'bob@example.com', '$2a$10$M7eAeves9D36kxXff.zbAOs25EmNOcdW1BxySwDViL4B7RMOMsCnS', NULL, NULL, 'no_preference', 'Bob', '$2a$10$M7eAeves9D36kxXff.zbAO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:00.784667')
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (7, 1)
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:33:00.794667', NULL, 1, '2010-11-02 04:33:00.794667', NULL)[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 5)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 6)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 7)[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('cassie@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:00.919674', NULL, NULL, 'cassie@exmaple.com', '$2a$10$U./G5zPpjyN/1ByXD/fmlukVL2WwANdMQmOEd1ZYSJY/x/yDYcDhq', NULL, NULL, 'no_preference', 'Cassie', '$2a$10$U./G5zPpjyN/1ByXD/fmlu', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:00.919674')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (8, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('caleb@example.com')) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:01.028681', NULL, NULL, 'caleb@example.com', '$2a$10$PgKNO//DpIR6DoDLQthWse/gL6vhf8P9NOhBKP54Bz0716yb458i2', NULL, NULL, 'no_preference', 'Caleb', '$2a$10$PgKNO//DpIR6DoDLQthWse', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:01.028681')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (9, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('chase@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:33:01.164688', NULL, NULL, 'chase@example.com', '$2a$10$URsJEKQ7I/IpjVhbLuqA8.sXeHvNKPsjv8CqoKeBYhpnOGG5/ww7q', NULL, NULL, 'no_preference', 'Chase', '$2a$10$URsJEKQ7I/IpjVhbLuqA8.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:33:01.164688')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (10, 1)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:33:01.174689', NULL, 1, '2010-11-02 04:33:01.174689', NULL)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 8)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 9)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 10)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 21:33:01 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 0ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:33:01 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 25ms (Views: 24.0ms | ActiveRecord: 54.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:33:01 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-11-01 21:33:01 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"testorganizer@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-02 04:33:01.491707', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-02 04:33:01.491707', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-02 04:33:01.491707' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 101ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:33:01 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" INNER JOIN "participants_trips" ON "people".id = "participants_trips".participant_id WHERE ("participants_trips".trip_id = 1 ) AND ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 16ms (Views: 13.0ms | ActiveRecord: 4.0ms)
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('testorganizer@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:24.157902', NULL, NULL, 'testorganizer@example.com', '$2a$10$Gmsa4rLZMXIIIWk.FHINR.202hkOK0TjyFnDvmgfZre67i0B152rK', NULL, NULL, 'no_preference', 'Test Organizer', '$2a$10$Gmsa4rLZMXIIIWk.FHINR.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:24.157902')[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('123 Main St', 'Testville', '2010-11-02 04:37:24.265904', 'Company Picnic', 1, 'CA', '2010-11-03 04:37:24.234704', '2010-11-02 04:37:24.265904')[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('allan@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:24.375105', NULL, NULL, 'allan@exmaple.com', '$2a$10$INpAtoPvlm0eRdXvN.tgheuc7EuHtapCZAZxeoWPgCY45FqF8qnMu', NULL, NULL, 'no_preference', 'Allan', '$2a$10$INpAtoPvlm0eRdXvN.tghe', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:24.375105')[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (2, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alyssa@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:24.499905', NULL, NULL, 'alyssa@example.com', '$2a$10$NtXBvBYqZdTgy7ETLQiYc.yCkEJgm12GaOzOU1KYOsOmIEItvNf5m', NULL, NULL, 'no_preference', 'Alyssa', '$2a$10$NtXBvBYqZdTgy7ETLQiYc.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:24.499905')[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (3, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alex@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:24.609105', NULL, NULL, 'alex@example.com', '$2a$10$3hx0EiHMHmwzOcNTncICXOX3Jdy98ywXd0cmtF1LONTF.F3Du5oaC', NULL, NULL, 'no_preference', 'Alex', '$2a$10$3hx0EiHMHmwzOcNTncICXO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:24.609105')[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (4, 1)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:37:24.640305', NULL, 1, '2010-11-02 04:37:24.640305', NULL)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 2)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 3)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 4)
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Baron@exmaple.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:24.811905', NULL, NULL, 'Baron@exmaple.com', '$2a$10$xP3E4Kh.yvk5OZ8snvJUNuumeSLnb5WSeL8XI/.E5RipYLVefmQwu', NULL, NULL, 'no_preference', 'Baron', '$2a$10$xP3E4Kh.yvk5OZ8snvJUNu', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:24.811905')
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (5, 1)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Bailey@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:24.936706', NULL, NULL, 'Bailey@example.com', '$2a$10$YXunKRjZKgWpPtwqmHGIy.hpjpK4T/J5YMfcB08bjaJYc4iLi9/ca', NULL, NULL, 'no_preference', 'Bailey', '$2a$10$YXunKRjZKgWpPtwqmHGIy.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:24.936706')
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (6, 1)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('bob@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:25.045906', NULL, NULL, 'bob@example.com', '$2a$10$4QbIbYdTq/q1meTu5cezOuhuJTWHeIVGJw1i0RDw8o.Lsp.H.3ntm', NULL, NULL, 'no_preference', 'Bob', '$2a$10$4QbIbYdTq/q1meTu5cezOu', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:25.045906')
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (7, 1)
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:37:25.045906', NULL, 1, '2010-11-02 04:37:25.045906', NULL)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 5)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 6)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 7)[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('cassie@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:25.170706', NULL, NULL, 'cassie@exmaple.com', '$2a$10$qIIj/95nixnrcZ.pkh7ByuZ23LqjJpXam73K01mF4RgzmEKDjyNES', NULL, NULL, 'no_preference', 'Cassie', '$2a$10$qIIj/95nixnrcZ.pkh7Byu', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:25.170706')[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (8, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('caleb@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:25.284708', NULL, NULL, 'caleb@example.com', '$2a$10$kl8pZkbMb1NLJSP417OAI.NafJmnsfmCLa/AAABE9aTXd9nwKUj7m', NULL, NULL, 'no_preference', 'Caleb', '$2a$10$kl8pZkbMb1NLJSP417OAI.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:25.284708')[0m
+  [1m[35mPerson Load (31.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (9, 1)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('chase@example.com')) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:37:25.420716', NULL, NULL, 'chase@example.com', '$2a$10$z3tM/dQybl56YkUg.q50fOOj04SR/94jZ6Iw8l9crPcxdJ.fi8N4S', NULL, NULL, 'no_preference', 'Chase', '$2a$10$z3tM/dQybl56YkUg.q50fO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:37:25.420716')[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (10, 1)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:37:25.430716', NULL, 1, '2010-11-02 04:37:25.430716', NULL)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 8)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 9)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 10)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 21:37:25 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:37:25 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 23ms (Views: 22.0ms | ActiveRecord: 39.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:37:25 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-11-01 21:37:25 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"testorganizer@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-02 04:37:25.746735', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-02 04:37:25.746735', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-02 04:37:25.747735' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 102ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:37:25 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" INNER JOIN "participants_trips" ON "people".id = "participants_trips".participant_id WHERE ("participants_trips".trip_id = 1 ) AND ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 16ms (Views: 13.0ms | ActiveRecord: 4.0ms)
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('testorganizer@example.com')) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:09.109976', NULL, NULL, 'testorganizer@example.com', '$2a$10$1AbRrihfTyPgWDs.hI7/T.E8k35JMhih0wTGgXRhiW4fkPD45CR3G', NULL, NULL, 'no_preference', 'Test Organizer', '$2a$10$1AbRrihfTyPgWDs.hI7/T.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:09.109976')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('123 Main St', 'Testville', '2010-11-02 04:40:09.233983', 'Company Picnic', 1, 'CA', '2010-11-03 04:40:09.202981', '2010-11-02 04:40:09.233983')[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('allan@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:09.350989', NULL, NULL, 'allan@exmaple.com', '$2a$10$sddOTG0PSxExpMw6NFdfj.wNv9sNZ9slXu3TG32DhKDVfPk3sjuF.', NULL, NULL, 'no_preference', 'Allan', '$2a$10$sddOTG0PSxExpMw6NFdfj.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:09.350989')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (2, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alyssa@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:09.467996', NULL, NULL, 'alyssa@example.com', '$2a$10$3iyJN4r1BduYpAGQ2cm6u.fAU4hO7brWt9cficavy2ONrfMs3lNiS', NULL, NULL, 'no_preference', 'Alyssa', '$2a$10$3iyJN4r1BduYpAGQ2cm6u.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:09.467996')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (3, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alex@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:09.575002', NULL, NULL, 'alex@example.com', '$2a$10$i0kSGbLOGy5XcSENnO9dD.sL2Fn8YZP2EB.5PmJHYD7YudI2FXvIO', NULL, NULL, 'no_preference', 'Alex', '$2a$10$i0kSGbLOGy5XcSENnO9dD.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:09.575002')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (4, 1)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:40:09.601004', NULL, 1, '2010-11-02 04:40:09.601004', NULL)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 2)
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 3)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 4)
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Baron@exmaple.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:09.806015', NULL, NULL, 'Baron@exmaple.com', '$2a$10$JYl2ntSIgqLZyZjgTqkuIOGBKQR11xAWTLHUzzoy6bApAi0XcE2nS', NULL, NULL, 'no_preference', 'Baron', '$2a$10$JYl2ntSIgqLZyZjgTqkuIO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:09.806015')
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (5, 1)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Bailey@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:09.919022', NULL, NULL, 'Bailey@example.com', '$2a$10$LAqAMmfRva0l.DWqembXqu70Awy9tdLnx3ucYrmW.hKSH08H6fXv.', NULL, NULL, 'no_preference', 'Bailey', '$2a$10$LAqAMmfRva0l.DWqembXqu', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:09.919022')
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (6, 1)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('bob@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:10.027028', NULL, NULL, 'bob@example.com', '$2a$10$SyTCpcSmjSbaZgqta.cu1ev5czEKzOQJ0OApNhxsVX4EHgumLOCwG', NULL, NULL, 'no_preference', 'Bob', '$2a$10$SyTCpcSmjSbaZgqta.cu1e', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:10.027028')
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (7, 1)
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:40:10.038029', NULL, 1, '2010-11-02 04:40:10.038029', NULL)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 5)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 6)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 7)[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('cassie@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:10.166036', NULL, NULL, 'cassie@exmaple.com', '$2a$10$1RRtPmzxBTqzoAkswL1xce5xeRZGkl3nTnaLDZZP8GSeC134MYgyC', NULL, NULL, 'no_preference', 'Cassie', '$2a$10$1RRtPmzxBTqzoAkswL1xce', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:10.166036')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (8, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('caleb@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:10.274042', NULL, NULL, 'caleb@example.com', '$2a$10$9pWN.rSRqczRy/SJaqBuQO4yUIpvN7B1lGsektrEZws6UWVp71tUa', NULL, NULL, 'no_preference', 'Caleb', '$2a$10$9pWN.rSRqczRy/SJaqBuQO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:10.274042')[0m
+  [1m[35mPerson Load (32.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (9, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('chase@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:40:10.409050', NULL, NULL, 'chase@example.com', '$2a$10$CYQm/vCoDVjTuwDKDq/UX.JjzW6IjCn/rexiQgtHRO/O/DwzziRAW', NULL, NULL, 'no_preference', 'Chase', '$2a$10$CYQm/vCoDVjTuwDKDq/UX.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:40:10.409050')[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (10, 1)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:40:10.419051', NULL, 1, '2010-11-02 04:40:10.419051', NULL)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 8)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 9)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 10)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 21:40:10 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:40:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 24ms (Views: 24.0ms | ActiveRecord: 59.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:40:10 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 5ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-11-01 21:40:10 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"testorganizer@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-02 04:40:10.735069', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-02 04:40:10.735069', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-02 04:40:10.735069' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 102ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:40:10 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" INNER JOIN "participants_trips" ON "people".id = "participants_trips".participant_id WHERE ("participants_trips".trip_id = 1 ) AND ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 17ms (Views: 14.0ms | ActiveRecord: 4.0ms)
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('testorganizer@example.com')) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:16.005802', NULL, NULL, 'testorganizer@example.com', '$2a$10$ODKt52CoiT5tJGup5Glk8O2znME.AFKhb1C4StnFm85jhUd8aDXku', NULL, NULL, 'no_preference', 'Test Organizer', '$2a$10$ODKt52CoiT5tJGup5Glk8O', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:16.005802')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('123 Main St', 'Testville', '2010-11-02 04:41:16.128809', 'Company Picnic', 1, 'CA', '2010-11-03 04:41:16.096807', '2010-11-02 04:41:16.128809')[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('allan@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:16.244816', NULL, NULL, 'allan@exmaple.com', '$2a$10$OjiOHGd7/XJ8M1JmyEBf8.QvveDHdQRj6iEwKYYDtY5.AQz6R2IL.', NULL, NULL, 'no_preference', 'Allan', '$2a$10$OjiOHGd7/XJ8M1JmyEBf8.', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:16.244816')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (2, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alyssa@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:16.367823', NULL, NULL, 'alyssa@example.com', '$2a$10$G1OO6cDQe3rVyde8x/SWOum4f90YWU/HGWqiZju2ecvFOT4NRhBLi', NULL, NULL, 'no_preference', 'Alyssa', '$2a$10$G1OO6cDQe3rVyde8x/SWOu', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:16.367823')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (3, 1)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('alex@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:16.475829', NULL, NULL, 'alex@example.com', '$2a$10$VnajQsJ2z1qGcAVz9LUe.OjVAWwF6AdAFrpspRdjOcwjPKeRxtmiq', NULL, NULL, 'no_preference', 'Alex', '$2a$10$VnajQsJ2z1qGcAVz9LUe.O', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:16.475829')[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (4, 1)[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:41:16.503830', NULL, 1, '2010-11-02 04:41:16.503830', NULL)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'allan@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 2)
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alyssa@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 3)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'alex@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (1, 4)
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Baron@exmaple.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:16.742844', NULL, NULL, 'Baron@exmaple.com', '$2a$10$hwFdr4/bu1B2PBZDNiLSxOrlif2OG/bHHBDaGkz0eMzzBBowwVTjO', NULL, NULL, 'no_preference', 'Baron', '$2a$10$hwFdr4/bu1B2PBZDNiLSxO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:16.742844')
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (5, 1)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('Bailey@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:16.860851', NULL, NULL, 'Bailey@example.com', '$2a$10$UMDorhYGkhcv/p7rEhyk8OQMLBoiukuCrBR022GBvmjTsoHgaGDgq', NULL, NULL, 'no_preference', 'Bailey', '$2a$10$UMDorhYGkhcv/p7rEhyk8O', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:16.860851')
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (6, 1)
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('bob@example.com')) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:16.968857', NULL, NULL, 'bob@example.com', '$2a$10$X0.G00gOkKY77Wpjet0LqeC4rWsJcdhgC2G7lX7jzXI3I94hzphSa', NULL, NULL, 'no_preference', 'Bob', '$2a$10$X0.G00gOkKY77Wpjet0Lqe', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:16.968857')
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (7, 1)
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:41:16.979858', NULL, 1, '2010-11-02 04:41:16.979858', NULL)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Baron@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 5)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'Bailey@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 6)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'bob@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (2, 7)[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('cassie@exmaple.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:17.108865', NULL, NULL, 'cassie@exmaple.com', '$2a$10$cQxxsiTaYwBoKMEkkPzAvOnK3r/Chs89X.yzD0N6WmVx/vqjmSuKO', NULL, NULL, 'no_preference', 'Cassie', '$2a$10$cQxxsiTaYwBoKMEkkPzAvO', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:17.108865')[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (8, 1)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('caleb@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:17.218871', NULL, NULL, 'caleb@example.com', '$2a$10$R4df3/ILVfVM.gvq5.jHmeeAP8w0hm9wj1FacF4C5VD70cEL.fQ1K', NULL, NULL, 'no_preference', 'Caleb', '$2a$10$R4df3/ILVfVM.gvq5.jHme', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:17.218871')[0m
+  [1m[35mPerson Load (37.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (9, 1)[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('chase@example.com')) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Test Street', 'Testville', '2010-11-02 04:41:17.371880', NULL, NULL, 'chase@example.com', '$2a$10$U9DBpKGfpTAq4D.wS7OVpe8ncEgDGE9phgI9r0AY8bmiHAtbzeXEy', NULL, NULL, 'no_preference', 'Chase', '$2a$10$U9DBpKGfpTAq4D.wS7OVpe', '510-555-0199', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 04:41:17.371880')[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (10, 1)[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:41:17.383881', NULL, 1, '2010-11-02 04:41:17.383881', NULL)
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'cassie@exmaple.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 8)
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'caleb@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 9)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'chase@example.com') LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "arrangements_passengers" ("arrangement_id", "passenger_id") VALUES (3, 10)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 21:41:17 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+Redirected to http://example.org/signin
+Completed 302 Found in 1ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:41:17 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 29ms (Views: 28.0ms | ActiveRecord: 70.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:41:17 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (0.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2010-11-01 21:41:17 -0700
+  Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "person"=>{"email"=>"testorganizer@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."email" = 'testorganizer@example.com') LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-02 04:41:17.750902', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-02 04:41:17.750902', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-02 04:41:17.751902' WHERE ("people"."id" = 1)
+Redirected to http://example.org/trips
+Completed 302 Found in 115ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:41:17 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" INNER JOIN "participants_trips" ON "people".id = "participants_trips".participant_id WHERE ("participants_trips".trip_id = 1 ) AND ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 20ms (Views: 15.0ms | ActiveRecord: 4.0ms)
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."name" = 'Company Picnic') LIMIT 1
+
+
+Started GET "/trips/1/arrangements" for 127.0.0.1 at 2010-11-01 21:41:17 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"1"}
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 1)) AS subquery
+  [1m[36mArrangement Load (2.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 1)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered arrangements/index.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 27ms (Views: 23.0ms | ActiveRecord: 3.0ms)

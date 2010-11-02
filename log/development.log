@@ -497,3 +497,806 @@ Migrating to AddTimeToTrips (20101101215151)
   [1m[35mSQL (1.0ms)[0m  PRAGMA index_info('index_trips_vehicles_on_trip_id_and_vehicle_id')
   [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("vehicles")[0m
   [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_vehicles_on_owner_id')
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 20:30:14 -0700
+  Processing by TripsController#new as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered trips/_form.html.erb (34.0ms)
+Rendered trips/new.html.erb within layouts/application (42.0ms)
+Completed 200 OK in 183ms (Views: 61.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/trips/stylesheets/style.css" for 127.0.0.1 at 2010-11-01 20:30:14 -0700
+
+ActionController::RoutingError (No route matches "/trips/stylesheets/style.css"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/trips/images/rides.png" for 127.0.0.1 at 2010-11-01 20:30:14 -0700
+
+ActionController::RoutingError (No route matches "/trips/images/rides.png"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 20:30:30 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test Trip", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"03", "time(5i)"=>"30", "address"=>"1234 Test", "city"=>"Test", "state"=>"Test", "organizer_id"=>"4"}, "commit"=>"Create Trip"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('1234 Test', 'Test', '2010-11-02 03:30:31.016198', 'Test Trip', 4, 'Test', '2010-11-02 03:30:00.000000', '2010-11-02 03:30:31.016198')
+Redirected to http://127.0.0.1:3000/trips/1
+Completed 302 Found in 364ms
+
+
+Started GET "/trips/1" for 127.0.0.1 at 2010-11-01 20:30:31 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 1) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 182ms (Views: 36.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips/stylesheets/style.css" for 127.0.0.1 at 2010-11-01 20:30:31 -0700
+
+ActionController::RoutingError (No route matches "/trips/stylesheets/style.css"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/trips/images/rides.png" for 127.0.0.1 at 2010-11-01 20:30:31 -0700
+
+ActionController::RoutingError (No route matches "/trips/images/rides.png"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 20:30:35 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 180ms (Views: 22.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 20:30:40 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 149ms (Views: 23.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 20:30:48 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test Trip", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"03", "time(5i)"=>"30", "address"=>"1234 Test", "city"=>"Test", "state"=>"Test", "organizer_id"=>"4"}, "commit"=>"Create Trip"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('1234 Test', 'Test', '2010-11-02 03:30:48.995227', 'Test Trip', 4, 'Test', '2010-11-02 03:30:00.000000', '2010-11-02 03:30:48.995227')
+Redirected to http://127.0.0.1:3000/trips/2
+Completed 302 Found in 349ms
+
+
+Started GET "/trips/2" for 127.0.0.1 at 2010-11-01 20:30:49 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 165ms (Views: 35.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips/stylesheets/style.css" for 127.0.0.1 at 2010-11-01 20:30:49 -0700
+
+ActionController::RoutingError (No route matches "/trips/stylesheets/style.css"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/trips/images/rides.png" for 127.0.0.1 at 2010-11-01 20:30:49 -0700
+
+ActionController::RoutingError (No route matches "/trips/images/rides.png"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 20:32:40 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 183ms (Views: 21.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 20:33:42 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 206ms (Views: 23.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/index" for 127.0.0.1 at 2010-11-01 20:34:01 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"index"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 0) LIMIT 1
+Completed   in 148ms
+
+ActiveRecord::RecordNotFound (Couldn't find Trip with ID=index):
+  app/controllers/trips_controller.rb:20:in `show'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (87.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (104.0ms)
+
+
+Started GET "/trips/" for 127.0.0.1 at 2010-11-01 20:34:04 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 174ms (Views: 25.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips/stylesheets/style.css" for 127.0.0.1 at 2010-11-01 20:34:04 -0700
+
+ActionController::RoutingError (No route matches "/trips/stylesheets/style.css"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (2.0ms)
+
+
+Started GET "/trips/images/rides.png" for 127.0.0.1 at 2010-11-01 20:34:04 -0700
+
+ActionController::RoutingError (No route matches "/trips/images/rides.png"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 20:37:13 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 153ms (Views: 22.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 20:40:43 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 154ms (Views: 21.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 20:41:22 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 236ms (Views: 25.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 20:41:24 -0700
+  Processing by TripsController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/_form.html.erb (21.0ms)
+Rendered trips/new.html.erb within layouts/application (28.0ms)
+Completed 200 OK in 190ms (Views: 46.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/2" for 127.0.0.1 at 2010-11-01 20:41:29 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 204ms (Views: 33.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/1" for 127.0.0.1 at 2010-11-01 20:41:31 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 1) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 209ms (Views: 33.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/1" for 127.0.0.1 at 2010-11-01 20:41:36 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 1) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 159ms (Views: 35.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/1/arrangements" for 127.0.0.1 at 2010-11-01 20:45:13 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"1"}
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 1) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 1)) AS subquery[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered arrangements/index.html.erb within layouts/application (108.0ms)
+Completed 200 OK in 263ms (Views: 142.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 21:12:03 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 177ms (Views: 23.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:12:04 -0700
+  Processing by TripsController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/_form.html.erb (20.0ms)
+Rendered trips/new.html.erb within layouts/application (27.0ms)
+Completed 200 OK in 186ms (Views: 47.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:12:09 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"12", "address"=>"Test", "city"=>"Test", "state"=>"Test"}, "commit"=>"Create Trip"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered trips/_form.html.erb (15.0ms)
+Rendered trips/new.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 232ms (Views: 64.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:12:39 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"12", "address"=>"Test", "city"=>"Test", "state"=>"Test"}, "commit"=>"Create Trip"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('Test', 'Test', '2010-11-02 04:12:39.708825', 'Test', NULL, 'Test', '2010-11-02 04:12:00.000000', '2010-11-02 04:12:39.708825')
+Redirected to http://127.0.0.1:3000/trips/3
+Completed 302 Found in 299ms
+
+
+Started GET "/trips/3" for 127.0.0.1 at 2010-11-01 21:12:39 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 3) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 156ms (Views: 34.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:13:29 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 152ms (Views: 22.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:13:31 -0700
+  Processing by TripsController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/_form.html.erb (18.0ms)
+Rendered trips/new.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 195ms (Views: 67.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:13:38 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"13", "address"=>"Test", "city"=>"Test", "state"=>"Test"}, "commit"=>"Create Trip"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('Test', 'Test', '2010-11-02 04:13:38.233173', 'Test', NULL, 'Test', '2010-11-02 04:13:00.000000', '2010-11-02 04:13:38.233173')[0m
+Redirected to http://127.0.0.1:3000/trips/4
+Completed 302 Found in 361ms
+
+
+Started GET "/trips/4" for 127.0.0.1 at 2010-11-01 21:13:38 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 4) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 154ms (Views: 34.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips/4" for 127.0.0.1 at 2010-11-01 21:17:17 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 4) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 159ms (Views: 35.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/4" for 127.0.0.1 at 2010-11-01 21:17:18 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 4) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (19.0ms)
+Completed 200 OK in 199ms (Views: 39.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:17:57 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 179ms (Views: 23.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:17:58 -0700
+  Processing by TripsController#new as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered trips/_form.html.erb (18.0ms)
+Rendered trips/new.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 163ms (Views: 45.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:18:17 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 182ms (Views: 23.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/2/arrangements" for 127.0.0.1 at 2010-11-01 21:18:22 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"2"}
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 2)) AS subquery
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered arrangements/index.html.erb within layouts/application (136.0ms)
+Completed 200 OK in 257ms (Views: 154.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/2/arrangements" for 127.0.0.1 at 2010-11-01 21:18:54 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"2"}
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 2)) AS subquery[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered arrangements/index.html.erb within layouts/application (111.0ms)
+Completed 200 OK in 231ms (Views: 129.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/2/arrangements" for 127.0.0.1 at 2010-11-01 21:18:55 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"2"}
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 2)) AS subquery
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered arrangements/index.html.erb within layouts/application (133.0ms)
+Completed 200 OK in 234ms (Views: 154.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/2/arrangements/new" for 127.0.0.1 at 2010-11-01 21:18:56 -0700
+  Processing by ArrangementsController#new as HTML
+  Parameters: {"trip_id"=>"2"}
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1
+Rendered arrangements/_form.html.erb (6.0ms)
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered arrangements/new.html.erb within layouts/application (104.0ms)
+Completed 200 OK in 271ms (Views: 169.0ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/trips/2/arrangements" for 127.0.0.1 at 2010-11-01 21:18:58 -0700
+  Processing by ArrangementsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "commit"=>"Create Arrangement", "trip_id"=>"2"}
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "arrangements" ("created_at", "driver_id", "trip_id", "updated_at", "vehicle_id") VALUES ('2010-11-02 04:18:58.602497', NULL, 2, '2010-11-02 04:18:58.602497', NULL)[0m
+Redirected to http://127.0.0.1:3000/trips/2/arrangements/1
+Completed 302 Found in 359ms
+
+
+Started GET "/trips/2/arrangements/1" for 127.0.0.1 at 2010-11-01 21:18:58 -0700
+  Processing by ArrangementsController#show as HTML
+  Parameters: {"trip_id"=>"2", "id"=>"1"}
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1
+  [1m[36mArrangement Load (1.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 2) AND ("arrangements"."id" = 1) LIMIT 1[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered arrangements/show.html.erb within layouts/application (138.0ms)
+Completed 200 OK in 262ms (Views: 155.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips/2/arrangements" for 127.0.0.1 at 2010-11-01 21:19:00 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"2"}
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 2)) AS subquery
+  [1m[36mArrangement Load (0.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 2)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered arrangements/index.html.erb within layouts/application (118.0ms)
+Completed 200 OK in 208ms (Views: 137.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/2/arrangements" for 127.0.0.1 at 2010-11-01 21:19:04 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"2"}
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 2)) AS subquery
+  [1m[36mArrangement Load (0.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 2)[0m
+  [1m[35mPerson Load (2.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered arrangements/index.html.erb within layouts/application (118.0ms)
+Completed 200 OK in 284ms (Views: 184.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/2" for 127.0.0.1 at 2010-11-01 21:19:12 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 157ms (Views: 35.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/trips/2/arrangements" for 127.0.0.1 at 2010-11-01 21:19:17 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"2"}
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 2)) AS subquery
+  [1m[36mArrangement Load (1.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 2)[0m
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered arrangements/index.html.erb within layouts/application (146.0ms)
+Completed 200 OK in 234ms (Views: 163.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/2" for 127.0.0.1 at 2010-11-01 21:22:04 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 2) LIMIT 1
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 4) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (131.0ms)
+Completed   in 317ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    7: 
+    8: <p>
+    9:   <b>Organizer:</b>
+    10:   <%= @trip.organizer.name %>
+    11: </p>
+    12: 
+    13: <p>
+  app/views/trips/show.html.erb:10:in `_app_views_trips_show_html_erb___604633915_23892144__320635600'
+  app/controllers/trips_controller.rb:19:in `show'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (110.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (125.0ms)
+
+
+Started GET "/trips/" for 127.0.0.1 at 2010-11-01 21:22:17 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 156ms (Views: 27.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:22:19 -0700
+  Processing by TripsController#new as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered trips/_form.html.erb (18.0ms)
+Rendered trips/new.html.erb within layouts/application (25.0ms)
+Completed 200 OK in 173ms (Views: 45.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:22:26 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Trip", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"22", "address"=>"1234 Trip", "city"=>"Trip", "state"=>"Trip"}, "commit"=>"Create Trip"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('1234 Trip', 'Trip', '2010-11-02 04:22:27.152425', 'Trip', NULL, 'Trip', '2010-11-02 04:22:00.000000', '2010-11-02 04:22:27.152425')
+Redirected to http://127.0.0.1:3000/trips/5
+Completed 302 Found in 377ms
+
+
+Started GET "/trips/5" for 127.0.0.1 at 2010-11-01 21:22:27 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 5) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (39.0ms)
+Completed   in 180ms
+
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    7: 
+    8: <p>
+    9:   <b>Organizer:</b>
+    10:   <%= @trip.organizer.name %>
+    11: </p>
+    12: 
+    13: <p>
+  app/views/trips/show.html.erb:10:in `_app_views_trips_show_html_erb___604633915_29239620__320635600'
+  app/controllers/trips_controller.rb:19:in `show'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (110.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (127.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:22:32 -0700
+  Processing by TripsController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered trips/_form.html.erb (18.0ms)
+Rendered trips/new.html.erb within layouts/application (25.0ms)
+Completed 200 OK in 166ms (Views: 47.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:26:41 -0700
+  Processing by TripsController#new as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered trips/_form.html.erb (18.0ms)
+Rendered trips/new.html.erb within layouts/application (27.0ms)
+Completed 200 OK in 227ms (Views: 71.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:26:47 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"26", "address"=>"Test", "city"=>"Test", "state"=>"Test"}, "commit"=>"Create Trip"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Completed   in 131ms
+
+NoMethodError (undefined method `owner=' for #<Trip:0x43dd9a8>):
+  app/controllers/trips_controller.rb:45:in `create'
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (123.0ms)
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (164.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:27:01 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"26", "address"=>"Test", "city"=>"Test", "state"=>"Test"}, "commit"=>"Create Trip"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('Test', 'Test', '2010-11-02 04:27:01.301105', 'Test', 1, 'Test', '2010-11-02 04:26:00.000000', '2010-11-02 04:27:01.301105')[0m
+Redirected to http://127.0.0.1:3000/trips/6
+Completed 302 Found in 300ms
+
+
+Started GET "/trips/6" for 127.0.0.1 at 2010-11-01 21:27:01 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 6) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 185ms (Views: 41.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:27:07 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mTrip Load (2.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 232ms (Views: 23.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2010-11-01 21:27:07 -0700
+  Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Redirected to http://127.0.0.1:3000/signin
+Completed 302 Found in 117ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 21:27:08 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 130ms (Views: 34.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 21:27:10 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (1.0ms)
+Rendered devise/registrations/new.html.erb within layouts/application (28.0ms)
+Completed 200 OK in 135ms (Views: 74.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 21:27:22 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "person"=>{"email"=>"poo@poo.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"poo", "phone"=>"12341234", "address"=>"1234 Poo", "city"=>"Poo", "state"=>"Poo"}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('poo@poo.com')) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('1234 Poo', 'Poo', '2010-11-02 04:27:23.411370', NULL, NULL, 'poo@poo.com', '$2a$10$R1.CssnVomArW2XFtF1KCuTEnWdvZLtjHjtW93C1d5NY2VwSraej.', NULL, NULL, 'no_preference', 'poo', '$2a$10$R1.CssnVomArW2XFtF1KCu', '12341234', NULL, NULL, NULL, 0, 'no_preference', 'Poo', '2010-11-02 04:27:23.411370')[0m
+  [1m[35mSQL (3.0ms)[0m  UPDATE "people" SET "current_sign_in_at" = '2010-11-02 04:27:23.554378', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-02 04:27:23.554378', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-02 04:27:23.555378' WHERE ("people"."id" = 2)
+Redirected to http://127.0.0.1:3000/trips
+Completed 302 Found in 621ms
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:27:23 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 192ms (Views: 24.0ms | ActiveRecord: 7.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:27:26 -0700
+  Processing by TripsController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+Rendered trips/_form.html.erb (18.0ms)
+Rendered trips/new.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 196ms (Views: 69.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:27:34 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Poo", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"27", "address"=>"1234 Poo", "city"=>"Poo", "state"=>"Poo"}, "commit"=>"Create Trip"}
+  [1m[35mPerson Load (28.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('1234 Poo', 'Poo', '2010-11-02 04:27:34.391998', 'Poo', 2, 'Poo', '2010-11-02 04:27:00.000000', '2010-11-02 04:27:34.391998')[0m
+Redirected to http://127.0.0.1:3000/trips/7
+Completed 302 Found in 352ms
+
+
+Started GET "/trips/7" for 127.0.0.1 at 2010-11-01 21:27:34 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 7) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 160ms (Views: 40.0ms | ActiveRecord: 31.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:27:56 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 203ms (Views: 21.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:27:59 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 156ms (Views: 24.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:28:25 -0700
+  Processing by TripsController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+Rendered trips/_form.html.erb (41.0ms)
+Rendered trips/new.html.erb within layouts/application (47.0ms)
+Completed 200 OK in 254ms (Views: 67.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:28:32 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Test", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"2", "time(4i)"=>"04", "time(5i)"=>"28", "address"=>"Test", "city"=>"Test", "state"=>"Test"}, "commit"=>"Create Trip"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('Test', 'Test', '2010-11-02 04:28:32.272309', 'Test', 2, 'Test', '2010-11-02 04:28:00.000000', '2010-11-02 04:28:32.272309')[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (2, 8)
+Redirected to http://127.0.0.1:3000/trips/8
+Completed 302 Found in 389ms
+
+
+Started GET "/trips/8" for 127.0.0.1 at 2010-11-01 21:28:32 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 8) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 185ms (Views: 42.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:28:34 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 179ms (Views: 22.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:28:36 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 179ms (Views: 21.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:28:37 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 155ms (Views: 23.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 21:28:56 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 2)) AS subquery
+Rendered devise/registrations/edit.html.erb within layouts/application (45.0ms)
+Completed 200 OK in 158ms (Views: 63.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:29:01 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+  [1m[35mTrip Load (1.0ms)[0m  SELECT "trips".* FROM "trips"
+Rendered trips/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 156ms (Views: 23.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/new" for 127.0.0.1 at 2010-11-01 21:29:04 -0700
+  Processing by TripsController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+Rendered trips/_form.html.erb (17.0ms)
+Rendered trips/new.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 165ms (Views: 41.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/trips" for 127.0.0.1 at 2010-11-01 21:29:22 -0700
+  Processing by TripsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "trip"=>{"name"=>"Trip", "time(1i)"=>"2010", "time(2i)"=>"11", "time(3i)"=>"12", "time(4i)"=>"20", "time(5i)"=>"29", "address"=>"Trip", "city"=>"Trip", "state"=>"Trip"}, "commit"=>"Create Trip"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('Trip', 'Trip', '2010-11-02 04:29:22.558185', 'Trip', 2, 'Trip', '2010-11-12 20:29:00.000000', '2010-11-02 04:29:22.558185')[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "participants_trips" ("participant_id", "trip_id") VALUES (2, 9)
+Redirected to http://127.0.0.1:3000/trips/9
+Completed 302 Found in 363ms
+
+
+Started GET "/trips/9" for 127.0.0.1 at 2010-11-01 21:29:22 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+  [1m[35mTrip Load (0.0ms)[0m  SELECT "trips".* FROM "trips" WHERE ("trips"."id" = 9) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+Rendered trips/show.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 187ms (Views: 43.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:29:24 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" INNER JOIN "participants_trips" ON "people".id = "participants_trips".participant_id WHERE ("participants_trips".trip_id = 9 ) AND ("people"."id" = 2) LIMIT 1
+  [1m[36mArrangement Load (0.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 9)[0m
+Rendered trips/index.html.erb within layouts/application (39.0ms)
+Completed 200 OK in 203ms (Views: 57.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/trips" for 127.0.0.1 at 2010-11-01 21:29:25 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (1.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people"."id" FROM "people" INNER JOIN "participants_trips" ON "people".id = "participants_trips".participant_id WHERE ("participants_trips".trip_id = 9 ) AND ("people"."id" = 2) LIMIT 1
+  [1m[36mArrangement Load (0.0ms)[0m  [1mSELECT "arrangements".* FROM "arrangements" WHERE ("arrangements".trip_id = 9)[0m
+Rendered trips/index.html.erb within layouts/application (38.0ms)
+Completed 200 OK in 201ms (Views: 58.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/trips/9" for 127.0.0.1 at 2010-11-01 21:29:38 -0700
+  Processing by TripsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 9) LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1
+Rendered trips/show.html.erb within layouts/application (54.0ms)
+Completed 200 OK in 197ms (Views: 74.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/trips/9/arrangements" for 127.0.0.1 at 2010-11-01 21:29:47 -0700
+  Processing by ArrangementsController#index as HTML
+  Parameters: {"trip_id"=>"9"}
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips" WHERE ("trips"."id" = 9) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "arrangements" WHERE ("arrangements".trip_id = 9)) AS subquery
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 2) LIMIT 1[0m
+Rendered arrangements/index.html.erb within layouts/application (111.0ms)
+Completed 200 OK in 229ms (Views: 130.0ms | ActiveRecord: 1.0ms)

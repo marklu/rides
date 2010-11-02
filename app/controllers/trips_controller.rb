@@ -1,8 +1,5 @@
 class TripsController < ApplicationController
-
-  # Creating a trip requires being logged in.
   before_filter :authenticate_person!
-
 
   # GET /trips
   # GET /trips.xml
@@ -28,7 +25,7 @@ class TripsController < ApplicationController
   # GET /trips/new
   # GET /trips/new.xml
   def new
-    @trip = Trip.new
+    @trip = current_person.trips.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +41,9 @@ class TripsController < ApplicationController
   # POST /trips
   # POST /trips.xml
   def create
-    @trip = Trip.new(params[:trip])
+    @trip = current_person.trips.build(params[:trip])
+    @trip.organizer = current_person
+    @trip.participants << current_person
 
     respond_to do |format|
       if @trip.save
