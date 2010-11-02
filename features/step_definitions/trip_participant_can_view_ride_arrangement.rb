@@ -27,11 +27,12 @@ end
 
 Given /^the following people do not have a ride arrangement for "([^"]*)":$/ do |trip_name, participants|
   trip = Trip.where(:name => trip_name).first
+  Given %{the following people are participants of "#{trip_name}":}, participants 
   participants.hashes.each do |participant|
     person = Person.where(:email => participant['email']).first
     if !person.nil?
       trip.arrangements.each do |arrangement|
-        arrangement.participants.delete person
+        arrangement.passengers.delete person
         arrangement.save!
       end
     end
