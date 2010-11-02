@@ -1,28 +1,24 @@
 <%= link_to 'Edit Profile', edit_person_registration_path %><br />
 <p style="color: green"><%= flash[:notice] %></p>
 <p style="color: red"><%= flash[:error] %></p>
-<h1>Listing trips</h1>
-
-<table>
-  <tr>
-    <th>Time</th>
-    <th>Location</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Upcoming Trips</h1>
 
 <% @trips.each do |trip| %>
-  <tr>
-    <td><%= trip.time %></td>
-    <td><%= trip.location %></td>
-    <td><%= link_to 'Show', trip %></td>
-    <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
-    <td><%= link_to 'Destroy', trip, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<div class="trip">
+	<h2 class="tripheader"><span class="triptitle"><%= link_to trip.name, trip %></span><span class="tripdate"><%= trip.time.strftime("%B %d, %Y") %></span></h2>
+	<div class="tripinfo">
+		<h3>Location</h3>
+		<p><%= trip.address %><br /><%= trip.city %>, <%= trip.state %></p>
+		<h3>Date</h3>
+		<p><%= trip.time %></p>
+		<h3>Arrangement</h3>
+		<p>
+		<% trip.arrangement_for(current_person).passengers.each do |passenger| %>
+		<%= passenger.name %> 
+		<% end %>
+		</p>
+	</div>
+</div>
 <% end %>
-</table>
-
-<br />
 
 <%= link_to 'New Trip', new_trip_path %>
