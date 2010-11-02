@@ -99,11 +99,7 @@ describe Vehicle do
     it "should not allow a vehicle without owner" do
       @no_owner_attributes = {
         :capacity => 5,
-<<<<<<< HEAD
         #:owner_id => @owner.id,
-=======
-        #        :owner_id => @owner.id,
->>>>>>> 0601eebcda8f8fa4de650686a79eb5801b3593ec
         :make => "Toyota",
         :model => "Camry"
       }
@@ -125,7 +121,7 @@ describe Vehicle do
         :capacity => 5,
         :owner_id => @owner.id,
         :make => "Toyota"
-#        :model => "Camry"
+        #:model => "Camry"
       }
       Vehicle.new(@no_model_attributes).should_not be_valid
     end
