@@ -4,7 +4,9 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.xml
   def index
+   
     @trips = Trip.upcoming_for(current_person)
+    @organized_trips = Trip.organized_by(current_person)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @trips }
