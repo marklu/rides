@@ -66,14 +66,68 @@ describe Vehicle do
       Vehicle.new(@no_capacity_attributes).should_not be_valid
     end
 
-    it "should not allow a vehicle without owner" do
+    it "should not allow a vehicle with non-numeric capacity" do
       @no_owner_attributes = {
-        :capacity => 5,
-        #:owner_id => @owner.id,
+        :capacity => "lol",
+        :owner_id => @owner.id,
         :make => "Toyota",
         :model => "Camry"
       }
       Vehicle.new(@no_owner_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle with noninteger capacity" do
+      @no_owner_attributes = {
+        :capacity => 5.5,
+        :owner_id => @owner.id,
+        :make => "Toyota",
+        :model => "Camry"
+      }
+      Vehicle.new(@no_owner_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle with zero capacity" do
+      @no_owner_attributes = {
+        :capacity => 0,
+        :owner_id => @owner.id,
+        :make => "Toyota",
+        :model => "Camry"
+      }
+      Vehicle.new(@no_owner_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle without owner" do
+      @no_owner_attributes = {
+        :capacity => 5,
+<<<<<<< HEAD
+        #:owner_id => @owner.id,
+=======
+        #        :owner_id => @owner.id,
+>>>>>>> 0601eebcda8f8fa4de650686a79eb5801b3593ec
+        :make => "Toyota",
+        :model => "Camry"
+      }
+      Vehicle.new(@no_owner_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle without make" do
+      @no_make_attributes = {
+        :capacity => 5,
+        :owner_id => @owner.id,
+        #        :make => "Toyota",
+        :model => "Camry"
+      }
+      Vehicle.new(@no_make_attributes).should_not be_valid
+    end
+
+    it "should not allow a vehicle without model" do
+      @no_model_attributes = {
+        :capacity => 5,
+        :owner_id => @owner.id,
+        :make => "Toyota"
+#        :model => "Camry"
+      }
+      Vehicle.new(@no_model_attributes).should_not be_valid
     end
 
   end
