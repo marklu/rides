@@ -15,7 +15,7 @@ class Trip < ActiveRecord::Base
   validates_presence_of :state
   
   def upcoming?
-    return time >= Time.now()
+    return self.time >= Time.now()
   end
   
   def arrangement_for(person)
@@ -25,4 +25,9 @@ class Trip < ActiveRecord::Base
   def self.upcoming_for(person)
     return self.find(:all).select { |trip| trip.upcoming? && trip.participants.include?(person) }
   end
+
+  def self.organized_by(person)
+    return self.find(:all, :conditions => ["organizer_id = ?", person.id ])
+  end
+
 end

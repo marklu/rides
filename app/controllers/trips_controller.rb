@@ -7,7 +7,9 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.xml
   def index
+   
     @trips = Trip.upcoming_for(current_person)
+    @organized_trips = Trip.organized_by(current_person)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @trips }
@@ -44,7 +46,11 @@ class TripsController < ApplicationController
   # POST /trips
   # POST /trips.xml
   def create
+    logger.info("params:")
+    logger.info(params[:trip].inspect)
     @trip = Trip.new(params[:trip])
+    @trip.participants << current_person
+
 
     respond_to do |format|
       if @trip.save
