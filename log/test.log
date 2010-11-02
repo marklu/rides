@@ -22937,6 +22937,7 @@ Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 1.0ms)
   [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
   [1m[35mSQL (1.0ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('2650 Haste Street', 'Berkeley', '2010-11-02 06:44:39.618798', 'Epic Trip of Epicness', 1, 'CA', '2010-10-31 13:13:00.000000', '2010-11-02 06:44:39.618798')
   [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (5, '2010-11-02 06:44:39.918815', 'Toyota', 'Camry', 1, '2010-11-02 06:44:39.918815')[0m
+<<<<<<< HEAD
   [1m[36mSQL (0.0ms)[0m  [1m SELECT name
  FROM sqlite_master
  WHERE type = 'table' AND NOT name = 'sqlite_sequence'
@@ -22955,3 +22956,77 @@ Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 1.0ms)
   [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
   [1m[35mSQL (1.0ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('2650 Haste Street', 'Berkeley', '2010-11-02 07:09:47.678054', 'Epic Trip of Epicness', 1, 'CA', '2010-10-31 13:13:00.000000', '2010-11-02 07:09:47.678054')
   [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (5, '2010-11-02 07:09:47.985072', 'Toyota', 'Camry', 1, '2010-11-02 07:09:47.985072')[0m
+=======
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('2650 Haste Street', 'Berkeley', '2010-11-02 06:56:18.944978', 'Epic Trip of Epicness', 1, 'CA', '2010-10-31 13:13:00.000000', '2010-11-02 06:56:18.944978')
+  [1m[36mPerson Load (2.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Main St.', 'Testville', '2010-11-02 06:56:19.531544', NULL, NULL, 'test@test.com', '$2a$10$aPISXBbspq5M2T0AWn7c9u1vzTCaLi2sYgVwtjxoAKR8r0WVNotxq', NULL, NULL, 'no_preference', 'John Test', '$2a$10$aPISXBbspq5M2T0AWn7c9u', '123-456-7890', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 06:56:19.531544')
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.7ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail')) LIMIT 1
+  [1m[36mPerson Load (0.1ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail@test')) LIMIT 1[0m
+  [1m[35mPerson Load (0.8ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.3ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.7ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.3ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (5, '2010-11-02 06:56:20.735184', 'Toyota', 'Camry', 1, '2010-11-02 06:56:20.735184')[0m
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('2650 Haste Street', 'Berkeley', '2010-11-02 06:56:48.827022', 'Epic Trip of Epicness', 1, 'CA', '2010-10-31 13:13:00.000000', '2010-11-02 06:56:48.827022')
+  [1m[36mPerson Load (0.8ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Main St.', 'Testville', '2010-11-02 06:56:49.419244', NULL, NULL, 'test@test.com', '$2a$10$irtrwTXAznI1itYe8JfZSuFwsqTEB4tDFITD7AQPmOKq1CCvRF7RS', NULL, NULL, 'no_preference', 'John Test', '$2a$10$irtrwTXAznI1itYe8JfZSu', '123-456-7890', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 06:56:49.419244')
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.1ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail@test')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.5ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (5, '2010-11-02 06:56:50.635121', 'Toyota', 'Camry', 1, '2010-11-02 06:56:50.635121')[0m
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('2650 Haste Street', 'Berkeley', '2010-11-02 06:58:26.875915', 'Epic Trip of Epicness', 1, 'CA', '2010-10-31 13:13:00.000000', '2010-11-02 06:58:26.875915')
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Main St.', 'Testville', '2010-11-02 06:58:27.593762', NULL, NULL, 'test@test.com', '$2a$10$DaPcE2V1.9o9m/h6jAv.6e6hwx1h0MIrS/1Zviw.1y4l2pALa8Vu6', NULL, NULL, 'no_preference', 'John Test', '$2a$10$DaPcE2V1.9o9m/h6jAv.6e', '123-456-7890', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 06:58:27.593762')
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.7ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail')) LIMIT 1
+  [1m[36mPerson Load (0.1ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail@test')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.5ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (5, '2010-11-02 06:58:28.935753', 'Toyota', 'Camry', 1, '2010-11-02 06:58:28.935753')[0m
+  [1m[36mSQL (0.6ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (2.3ms)[0m  INSERT INTO "trips" ("address", "city", "created_at", "name", "organizer_id", "state", "time", "updated_at") VALUES ('2650 Haste Street', 'Berkeley', '2010-11-02 06:59:06.244180', 'Epic Trip of Epicness', 1, 'CA', '2010-10-31 13:13:00.000000', '2010-11-02 06:59:06.244180')
+  [1m[36mPerson Load (0.9ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('123 Main St.', 'Testville', '2010-11-02 06:59:07.009420', NULL, NULL, 'test@test.com', '$2a$10$fm3JNVAKITG6QRKN4Fv8..2AbYY8VkrCWTMgsGD3o.fawHQWGEvA2', NULL, NULL, 'no_preference', 'John Test', '$2a$10$fm3JNVAKITG6QRKN4Fv8..', '123-456-7890', NULL, NULL, NULL, 0, 'no_preference', 'CA', '2010-11-02 06:59:07.009420')
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.3ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('invalidemail@test')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.2ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.1ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (0.3ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mPerson Load (1.3ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mPerson Load (0.2ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (5, '2010-11-02 06:59:08.335704', 'Toyota', 'Camry', 1, '2010-11-02 06:59:08.335704')[0m
+>>>>>>> 4a5449ac58363131a73b747b858194442e7d880a
