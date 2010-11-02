@@ -15,10 +15,10 @@ Rides::Application.routes.draw do
     * Invite Participant (not yet)
 =end
 
-  resources :vehicles
+  resources :vehicles, :except => [:index]
 
   resources :trips do
-    resources :arrangements
+    resources :arrangements, :only => [:index, :show]
   end
   
   devise_for :people, :skip => [:sessions, :registrations] do
@@ -27,7 +27,6 @@ Rides::Application.routes.draw do
     get "/signin" => "devise/sessions#new", :as => "new_person_session"
     post "/signin" => "devise/sessions#create", :as => "person_session"
     get "/signout" => "devise/sessions#destroy", :as => "destroy_person_session"
-
     post "/people" => "devise/registrations#create", :as => "person_registration"
     get "/signup" => "devise/registrations#new", :as => "new_person_registration"
     get "/profile" => "devise/registrations#edit", :as => "edit_person_registration"

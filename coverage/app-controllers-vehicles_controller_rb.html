@@ -28,14 +28,14 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-vehicles_controller_rb.html">app/controllers/vehicles_controller.rb</a></td>
-            <td class='right_align'><tt>85</tt></td>
-            <td class='right_align'><tt>59</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>11.76%</tt></div>
+            <td class='right_align'><tt>74</tt></td>
+            <td class='right_align'><tt>52</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>12.16%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:12px"></div>
             <div class="uncovered" style="width:88px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>15.25%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>15.38%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:15px"></div>
             <div class="uncovered" style="width:85px"></div>
@@ -75,25 +75,25 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line4">4</a>   # GET /vehicles</pre></td>
+            <td><pre><a name="line4">4</a>   # GET /vehicles/1</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line5">5</a>   # GET /vehicles.xml</pre></td>
+            <td><pre><a name="line5">5</a>   # GET /vehicles/1.xml</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line6">6</a>   def index</pre></td>
+            <td><pre><a name="line6">6</a>   def show</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line7">7</a>     @vehicles = current_person.vehicles</pre></td>
+            <td><pre><a name="line7">7</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
           </tr>
         
           
@@ -111,13 +111,13 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line10">10</a>       format.html # index.html.erb</pre></td>
+            <td><pre><a name="line10">10</a>       format.html # show.html.erb</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line11">11</a>       format.xml  { render :xml =&gt; @vehicles }</pre></td>
+            <td><pre><a name="line11">11</a>       format.xml  { render :xml =&gt; @vehicle }</pre></td>
           </tr>
         
           
@@ -141,25 +141,25 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line15">15</a>   # GET /vehicles/1</pre></td>
+            <td><pre><a name="line15">15</a>   # GET /vehicles/new</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line16">16</a>   # GET /vehicles/1.xml</pre></td>
+            <td><pre><a name="line16">16</a>   # GET /vehicles/new.xml</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line17">17</a>   def show</pre></td>
+            <td><pre><a name="line17">17</a>   def new</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line18">18</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
+            <td><pre><a name="line18">18</a>     @vehicle = current_person.vehicles.build</pre></td>
           </tr>
         
           
@@ -177,7 +177,7 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line21">21</a>       format.html # show.html.erb</pre></td>
+            <td><pre><a name="line21">21</a>       format.html # new.html.erb</pre></td>
           </tr>
         
           
@@ -207,25 +207,25 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line26">26</a>   # GET /vehicles/new</pre></td>
+            <td><pre><a name="line26">26</a>   # GET /vehicles/1/edit</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line27">27</a>   # GET /vehicles/new.xml</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line28">28</a>   def new</pre></td>
+            <td><pre><a name="line27">27</a>   def edit</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line29">29</a>     @vehicle = current_person.vehicles.build</pre></td>
+            <td><pre><a name="line28">28</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a>   end</pre></td>
           </tr>
         
           
@@ -237,91 +237,91 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line31">31</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line31">31</a>   # POST /vehicles</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line32">32</a>       format.html # new.html.erb</pre></td>
+            <td><pre><a name="line32">32</a>   # POST /vehicles.xml</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line33">33</a>       format.xml  { render :xml =&gt; @vehicle }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line34">34</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line35">35</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line36">36</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line37">37</a>   # GET /vehicles/1/edit</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line38">38</a>   def edit</pre></td>
+            <td><pre><a name="line33">33</a>   def create</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line39">39</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line40">40</a>   end</pre></td>
+            <td><pre><a name="line34">34</a>     @vehicle = current_person.vehicles.build(params[:vehicle])</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line41">41</a> </pre></td>
+            <td><pre><a name="line35">35</a> </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line42">42</a>   # POST /vehicles</pre></td>
+            <td><pre><a name="line36">36</a>     respond_to do |format|</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line43">43</a>   # POST /vehicles.xml</pre></td>
+            <td><pre><a name="line37">37</a>       if @vehicle.save</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line44">44</a>   def create</pre></td>
+            <td><pre><a name="line38">38</a>         format.html { redirect_to(edit_person_registration_url, :notice =&gt; 'Vehicle was successfully added.') }</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line45">45</a>     @vehicle = current_person.vehicles.build(params[:vehicle])</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line39">39</a>         format.xml  { render :xml =&gt; @vehicle, :status =&gt; :created, :location =&gt; @vehicle }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line40">40</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line41">41</a>         format.html { render :action =&gt; &quot;new&quot; }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line42">42</a>         format.xml  { render :xml =&gt; @vehicle.errors, :status =&gt; :unprocessable_entity }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line43">43</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line44">44</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line45">45</a>   end</pre></td>
           </tr>
         
           
@@ -333,91 +333,91 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line47">47</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line47">47</a>   # PUT /vehicles/1</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line48">48</a>       if @vehicle.save</pre></td>
+            <td><pre><a name="line48">48</a>   # PUT /vehicles/1.xml</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line49">49</a>         format.html { redirect_to(edit_person_registration_url, :notice =&gt; 'Vehicle was successfully added.') }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line50">50</a>         format.xml  { render :xml =&gt; @vehicle, :status =&gt; :created, :location =&gt; @vehicle }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line51">51</a>       else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line52">52</a>         format.html { render :action =&gt; &quot;new&quot; }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line53">53</a>         format.xml  { render :xml =&gt; @vehicle.errors, :status =&gt; :unprocessable_entity }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line54">54</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line55">55</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line56">56</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line57">57</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line58">58</a>   # PUT /vehicles/1</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line59">59</a>   # PUT /vehicles/1.xml</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line60">60</a>   def update</pre></td>
+            <td><pre><a name="line49">49</a>   def update</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line61">61</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
+            <td><pre><a name="line50">50</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line51">51</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line52">52</a>     respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line53">53</a>       if @vehicle.update_attributes(params[:vehicle])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line54">54</a>         format.html { redirect_to(edit_person_registration_url, :notice =&gt; 'Vehicle was successfully updated.') }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line55">55</a>         format.xml  { head :ok }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line56">56</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line57">57</a>         format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line58">58</a>         format.xml  { render :xml =&gt; @vehicle.errors, :status =&gt; :unprocessable_entity }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line59">59</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line60">60</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line61">61</a>   end</pre></td>
           </tr>
         
           
@@ -429,145 +429,79 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line63">63</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line63">63</a>   # DELETE /vehicles/1</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line64">64</a>       if @vehicle.update_attributes(params[:vehicle])</pre></td>
+            <td><pre><a name="line64">64</a>   # DELETE /vehicles/1.xml</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line65">65</a>         format.html { redirect_to(edit_person_registration_url, :notice =&gt; 'Vehicle was successfully updated.') }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line66">66</a>         format.xml  { head :ok }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line67">67</a>       else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line68">68</a>         format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line69">69</a>         format.xml  { render :xml =&gt; @vehicle.errors, :status =&gt; :unprocessable_entity }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line70">70</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line71">71</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line72">72</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line73">73</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line74">74</a>   # DELETE /vehicles/1</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line75">75</a>   # DELETE /vehicles/1.xml</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line76">76</a>   def destroy</pre></td>
+            <td><pre><a name="line65">65</a>   def destroy</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line77">77</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
+            <td><pre><a name="line66">66</a>     @vehicle = current_person.vehicles.find(params[:id])</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line78">78</a>     @vehicle.destroy</pre></td>
+            <td><pre><a name="line67">67</a>     @vehicle.destroy</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line79">79</a> </pre></td>
+            <td><pre><a name="line68">68</a> </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line80">80</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line69">69</a>     respond_to do |format|</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line81">81</a>       format.html { redirect_to(edit_person_registration_url) }</pre></td>
+            <td><pre><a name="line70">70</a>       format.html { redirect_to(edit_person_registration_url) }</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line82">82</a>       format.xml  { head :ok }</pre></td>
+            <td><pre><a name="line71">71</a>       format.xml  { head :ok }</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line83">83</a>     end</pre></td>
+            <td><pre><a name="line72">72</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line84">84</a>   end</pre></td>
+            <td><pre><a name="line73">73</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line85">85</a> end</pre></td>
+            <td><pre><a name="line74">74</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on 2010-11-01 22:30:08 -0700 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on 2010-11-01 23:44:40 -0700 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>
