@@ -11,4 +11,5 @@ group :development, :test do
    gem 'rspec-rails'
    gem 'cucumber'
    gem 'cucumber-rails'
+   gem 'launchy'
 end

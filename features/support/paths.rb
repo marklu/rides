@@ -14,6 +14,7 @@ module NavigationHelpers
     when /the trips dashboard|the dashboard page/ then '/trips'
     when /the person registration page/ then '/people'
     when /the create trip page/ then '/trips/new'
+    when /the add vehicle page/ then '/vehicles/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

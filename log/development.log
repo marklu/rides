@@ -1,0 +1,341 @@
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (116.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (85.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreatePeople (20101023201003)
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023201003')
+Migrating to CreateVehicles (20101023204531)
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE "vehicles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "capacity" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023204531')
+Migrating to CreateTrips (20101023205013)
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "location" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023205013')
+Migrating to CreateArrangements (20101023205913)
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TABLE "arrangements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023205913')
+Migrating to AddDriverIdToArrangement (20101023213150)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "arrangements" ADD "driver_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023213150')
+Migrating to AddOrganizerIdToTrip (20101023221347)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "trips" ADD "organizer_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101023221347')
+Migrating to AddTripAndVehicleToArrangement (20101026043241)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "arrangements" ADD "trip_id" integer[0m
+  [1m[35mSQL (1.0ms)[0m  ALTER TABLE "arrangements" ADD "vehicle_id" integer
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE INDEX "index_arrangements_on_trip_id" ON "arrangements" ("trip_id")
+  [1m[36mSQL (1.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_trip_id')
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE INDEX "index_arrangements_on_vehicle_id" ON "arrangements" ("vehicle_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043241')
+Migrating to AddOwnerToVehicle (20101026043334)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "vehicles" ADD "owner_id" integer[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("vehicles")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE INDEX "index_vehicles_on_owner_id" ON "vehicles" ("owner_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043334')
+Migrating to CreateArrangementsPassengers (20101026043439)
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE "arrangements_passengers" ("arrangement_id" integer NOT NULL, "passenger_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "index_arrangements_passengers_on_arrangement_id_and_passenger_id" ON "arrangements_passengers" ("arrangement_id", "passenger_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043439')
+Migrating to CreateParticipantsTrips (20101026043506)
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE "participants_trips" ("participant_id" integer NOT NULL, "trip_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "index_participants_trips_on_participant_id_and_trip_id" ON "participants_trips" ("participant_id", "trip_id")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043506')
+Migrating to CreateTripsVehicles (20101026043531)
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TABLE "trips_vehicles" ("trip_id" integer NOT NULL, "vehicle_id" integer NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("trips_vehicles")
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "index_trips_vehicles_on_trip_id_and_vehicle_id" ON "trips_vehicles" ("trip_id", "vehicle_id")[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026043531')
+Migrating to AddProfileAndPreferencesToPerson (20101026224322)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "people" ADD "city" varchar(255)[0m
+  [1m[35mSQL (1.0ms)[0m  ALTER TABLE "people" ADD "state" varchar(255)
+  [1m[36mSQL (1.0ms)[0m  [1mALTER TABLE "people" ADD "music" integer[0m
+  [1m[35mSQL (1.0ms)[0m  ALTER TABLE "people" ADD "smoking" integer
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101026224322')[0m
+Migrating to AddMakeAndModelToVehicle (20101026224408)
+  [1m[35mSQL (2.0ms)[0m  ALTER TABLE "vehicles" ADD "make" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "vehicles" ADD "model" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101026224408')
+Migrating to IntegratingDevise (20101029021446)
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TEMPORARY TABLE "altered_people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (3.0ms)[0m  [1mDROP TABLE "people"[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (17.0ms)[0m  DROP TABLE "altered_people"
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "email" varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35mSQL (1.0ms)[0m  ALTER TABLE "people" ADD "encrypted_password" varchar(128) DEFAULT '' NOT NULL
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "password_salt" varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "reset_password_token" varchar(255)
+  [1m[36mSQL (1.0ms)[0m  [1mALTER TABLE "people" ADD "remember_token" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "remember_created_at" datetime
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "sign_in_count" integer DEFAULT 0[0m
+  [1m[35mSQL (1.0ms)[0m  ALTER TABLE "people" ADD "current_sign_in_at" datetime
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "last_sign_in_at" datetime[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "people" ADD "current_sign_in_ip" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "people" ADD "last_sign_in_ip" varchar(255)[0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101029021446')[0m
+Migrating to RemoveLocationFromTrips (20101030202953)
+  [1m[35mSQL (0.0ms)[0m  CREATE TEMPORARY TABLE "altered_trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "location" varchar(255), "created_at" datetime, "updated_at" datetime, "organizer_id" integer) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips")[0m
+  [1m[35mSQL (2.0ms)[0m  DROP TABLE "trips"
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("altered_trips")
+  [1m[36mSQL (0.0ms)[0m  [1mDROP TABLE "altered_trips"[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101030202953')
+Migrating to AddAddressCityStateToTrips (20101030203230)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "trips" ADD "address" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  ALTER TABLE "trips" ADD "city" varchar(255)
+  [1m[36mSQL (0.0ms)[0m  [1mALTER TABLE "trips" ADD "state" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101030203230')
+Migrating to AddNameToTrips (20101031095702)
+  [1m[36mSQL (2.0ms)[0m  [1mALTER TABLE "trips" ADD "name" varchar(255)[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101031095702')
+Migrating to ChangeMusicAndSmokingToString (20101101181156)
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE TEMPORARY TABLE "altered_people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" integer, "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_reset_password_token')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_email')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "temp_index_altered_people_on_reset_password_token" ON "altered_people" ("reset_password_token")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('temp_index_altered_people_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE UNIQUE INDEX "temp_index_altered_people_on_email" ON "altered_people" ("email")[0m
+  [1m[35mSQL (2.0ms)[0m  DROP TABLE "people"
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" varchar(255), "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("altered_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('temp_index_altered_people_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (1.0ms)[0m  CREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_email')
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")[0m
+  [1m[35mSQL (1.0ms)[0m  DROP TABLE "altered_people"
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE TEMPORARY TABLE "altered_people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" varchar(255), "smoking" integer, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_reset_password_token')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_email')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "temp_index_altered_people_on_reset_password_token" ON "altered_people" ("reset_password_token")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('temp_index_altered_people_on_reset_password_token')
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "temp_index_altered_people_on_email" ON "altered_people" ("email")[0m
+  [1m[35mSQL (0.0ms)[0m  DROP TABLE "people"
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" varchar(255), "smoking" varchar(255), "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("altered_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('temp_index_altered_people_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_email')
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")[0m
+  [1m[35mSQL (0.0ms)[0m  DROP TABLE "altered_people"
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101101181156')[0m
+Migrating to AddDefaultMusicAndSmoking (20101101181706)
+  [1m[35mSQL (1.0ms)[0m  CREATE TEMPORARY TABLE "altered_people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" varchar(255), "smoking" varchar(255), "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("altered_people")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE UNIQUE INDEX "temp_index_altered_people_on_reset_password_token" ON "altered_people" ("reset_password_token")[0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("altered_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_people_on_reset_password_token')[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "temp_index_altered_people_on_email" ON "altered_people" ("email")
+  [1m[36mSQL (1.0ms)[0m  [1mDROP TABLE "people"[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" varchar(255) DEFAULT 'no_preference', "smoking" varchar(255), "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) 
+  [1m[36mSQL (1.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('temp_index_altered_people_on_email')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_people_on_reset_password_token')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.0ms)[0m  [1mDROP TABLE "altered_people"[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE TEMPORARY TABLE "altered_people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" varchar(255) DEFAULT 'no_preference', "smoking" varchar(255), "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("altered_people")
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE UNIQUE INDEX "temp_index_altered_people_on_reset_password_token" ON "altered_people" ("reset_password_token")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("altered_people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_people_on_reset_password_token')[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "temp_index_altered_people_on_email" ON "altered_people" ("email")
+  [1m[36mSQL (0.0ms)[0m  [1mDROP TABLE "people"[0m
+  [1m[35mSQL (1.0ms)[0m  CREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone" varchar(255), "address" varchar(255), "created_at" datetime, "updated_at" datetime, "city" varchar(255), "state" varchar(255), "music" varchar(255) DEFAULT 'no_preference', "smoking" varchar(255) DEFAULT 'no_preference', "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_people")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('temp_index_altered_people_on_email')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('temp_index_altered_people_on_reset_password_token')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE UNIQUE INDEX "index_people_on_email" ON "people" ("email")[0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_email')[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE UNIQUE INDEX "index_people_on_reset_password_token" ON "people" ("reset_password_token")
+  [1m[36mSQL (0.0ms)[0m  [1mDROP TABLE "altered_people"[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20101101181706')
+Migrating to RemoveTimeFromTrips (20101101215100)
+  [1m[36mSQL (0.0ms)[0m  [1mCREATE TEMPORARY TABLE "altered_trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "time" time, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) [0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("trips")
+  [1m[36mSQL (1.0ms)[0m  [1mDROP TABLE "trips"[0m
+  [1m[35mSQL (0.0ms)[0m  CREATE TABLE "trips" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime, "organizer_id" integer, "address" varchar(255), "city" varchar(255), "state" varchar(255), "name" varchar(255)) 
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("altered_trips")[0m
+  [1m[35mSQL (0.0ms)[0m  DROP TABLE "altered_trips"
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101101215100')[0m
+Migrating to AddTimeToTrips (20101101215151)
+  [1m[35mSQL (2.0ms)[0m  ALTER TABLE "trips" ADD "time" datetime
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20101101215151')[0m
+  [1m[35mSQL (1.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (1.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.0ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("arrangements")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_arrangements_on_vehicle_id')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_arrangements_on_trip_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("arrangements_passengers")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_arrangements_passengers_on_arrangement_id_and_passenger_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("participants_trips")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_participants_trips_on_participant_id_and_trip_id')[0m
+  [1m[35mSQL (1.0ms)[0m  PRAGMA index_list("people")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_people_on_reset_password_token')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_people_on_email')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("trips")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("trips_vehicles")
+  [1m[36mSQL (1.0ms)[0m  [1mPRAGMA index_info('index_trips_vehicles_on_trip_id_and_vehicle_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("vehicles")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_vehicles_on_owner_id')[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 18:32:55 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mPerson Load (0.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1
+Completed   in 403ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 18:32:57 -0700
+  Processing by TripsController#index as HTML
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 3) LIMIT 1[0m
+Completed   in 105ms
+
+
+Started GET "/signin" for 127.0.0.1 at 2010-11-01 18:32:58 -0700
+  Processing by Devise::SessionsController#new as HTML
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/sessions/new.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 111ms (Views: 29.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2010-11-01 18:33:12 -0700
+  Processing by Devise::RegistrationsController#new as HTML
+sign up form
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/registrations/new.html.erb within layouts/application (29.0ms)
+Completed 200 OK in 163ms (Views: 47.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 18:33:26 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Vinson", "phone"=>"", "address"=>"", "city"=>"", "state"=>""}, "commit"=>"Sign up"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1
+sign up form
+Rendered devise/shared/_links.erb (2.0ms)
+Rendered devise/registrations/new.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 397ms (Views: 40.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/people" for 127.0.0.1 at 2010-11-01 18:33:39 -0700
+  Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "person"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Test", "phone"=>"1231231234", "address"=>"1234 Test", "city"=>"Test", "state"=>"TA"}, "commit"=>"Sign up"}
+  [1m[36mPerson Load (0.0ms)[0m  [1mSELECT "people"."id" FROM "people" WHERE (LOWER("people"."email") = LOWER('test@test.com')) LIMIT 1[0m
+  [1m[35mSQL (4.0ms)[0m  INSERT INTO "people" ("address", "city", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "last_sign_in_at", "last_sign_in_ip", "music", "name", "password_salt", "phone", "remember_created_at", "remember_token", "reset_password_token", "sign_in_count", "smoking", "state", "updated_at") VALUES ('1234 Test', 'Test', '2010-11-02 01:33:39.530153', NULL, NULL, 'test@test.com', '$2a$10$8gPqdHMxnhz.31pB.bGR8uWa1XR5y9BljzkEeCAHaXh9SCjIoMnTq', NULL, NULL, 'no_preference', 'Test', '$2a$10$8gPqdHMxnhz.31pB.bGR8u', '1231231234', NULL, NULL, NULL, 0, 'no_preference', 'TA', '2010-11-02 01:33:39.530153')
+  [1m[36mSQL (2.0ms)[0m  [1mUPDATE "people" SET "current_sign_in_at" = '2010-11-02 01:33:39.731164', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2010-11-02 01:33:39.731164', "last_sign_in_ip" = '127.0.0.1', "sign_in_count" = 1, "updated_at" = '2010-11-02 01:33:39.732164' WHERE ("people"."id" = 1)[0m
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 516ms
+
+
+Started GET "/" for 127.0.0.1 at 2010-11-01 18:33:39 -0700
+  Processing by TripsController#index as HTML
+  [1m[35mPerson Load (54.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mTrip Load (0.0ms)[0m  [1mSELECT "trips".* FROM "trips"[0m
+Rendered trips/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 262ms (Views: 26.0ms | ActiveRecord: 60.0ms)
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 18:33:41 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 1)) AS subquery
+Rendered devise/registrations/edit.html.erb within layouts/application (99.0ms)
+Completed 200 OK in 224ms (Views: 117.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/vehicles/new" for 127.0.0.1 at 2010-11-01 18:33:43 -0700
+  Processing by VehiclesController#new as HTML
+  [1m[36mPerson Load (1.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+Rendered vehicles/_form.html.erb (10.0ms)
+Rendered vehicles/new.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 160ms (Views: 45.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/vehicles/images/rides.png" for 127.0.0.1 at 2010-11-01 18:33:43 -0700
+
+ActionController::RoutingError (No route matches "/vehicles/images/rides.png"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/vehicles/stylesheets/style.css" for 127.0.0.1 at 2010-11-01 18:33:43 -0700
+
+ActionController::RoutingError (No route matches "/vehicles/stylesheets/style.css"):
+  
+
+Rendered C:/PROGRA~2/Ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started POST "/vehicles" for 127.0.0.1 at 2010-11-01 18:33:54 -0700
+  Processing by VehiclesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UflzOOB4uQxNy0O33x1yEESRAph+M2tpoXAxWX+59tg=", "vehicle"=>{"make"=>"Test", "model"=>"Test", "capacity"=>"1"}, "commit"=>"Create Vehicle"}
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "vehicles" ("capacity", "created_at", "make", "model", "owner_id", "updated_at") VALUES (1, '2010-11-02 01:33:55.119044', 'Test', 'Test', 1, '2010-11-02 01:33:55.119044')[0m
+Redirected to http://127.0.0.1:3000/profile
+Completed 302 Found in 376ms
+
+
+Started GET "/profile" for 127.0.0.1 at 2010-11-01 18:33:55 -0700
+  Processing by Devise::RegistrationsController#edit as HTML
+  [1m[35mPerson Load (1.0ms)[0m  SELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "people".* FROM "people" WHERE ("people"."id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT COUNT(*) AS count_id FROM (SELECT 1 FROM "vehicles" WHERE ("vehicles".owner_id = 1)) AS subquery
+  [1m[36mVehicle Load (1.0ms)[0m  [1mSELECT "vehicles".* FROM "vehicles" WHERE ("vehicles".owner_id = 1)[0m
+Rendered devise/registrations/edit.html.erb within layouts/application (161.0ms)
+Completed 200 OK in 246ms (Views: 179.0ms | ActiveRecord: 4.0ms)
