@@ -1,0 +1,6 @@
+(in /home/jku/rides3)
+** WARNING: Ruby 1.9 Support is experimental at best. Don't expect correct results! **
+...............................
+
+Finished in 2.31 seconds
+31 examples, 0 failures

@@ -1,0 +1,5 @@
+(in /home/jku/rides3)
+...............................
+
+Finished in 1.98 seconds
+31 examples, 0 failures
