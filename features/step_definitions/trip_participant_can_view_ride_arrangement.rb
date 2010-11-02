@@ -4,11 +4,20 @@ Given /^there is a trip named "([^"]*)"$/ do |name|
   Trip.create!(:name => name, :organizer => organizer, :time => Time.now() + 86400, :address => "123 Main St", :city => "Testville", :state => "CA")
 end
 
-Given /^the following people are on the same ride arrangement for "([^"]*)":$/ do |trip_name, participants|
+Given /^the following people are participants of "([^"]*)":$/ do |trip_name, participants|
   trip = Trip.where(:name => trip_name).first
-  arrangement = trip.arrangements.create!
   participants.hashes.each do |participant|
     Given %{there is a person named "#{participant['name']}" with email "#{participant['email']}" and password "#{participant['password']}"}
+    person = Person.where(:email => participant['email'])
+    trip.participants << person
+  end
+end
+
+Given /^the following people are on the same ride arrangement for "([^"]*)":$/ do |trip_name, participants|
+  trip = Trip.where(:name => trip_name).first
+  Given %{the following people are participants of "#{trip_name}":}, participants 
+  arrangement = trip.arrangements.create!
+  participants.hashes.each do |participant|
     person = Person.where(:email => participant['email'])
     arrangement.passengers << person
   end
