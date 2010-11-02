@@ -1,10 +1,10 @@
 class VehiclesController < ApplicationController
-  before_filter :get_owner
+  before_filter :authenticate_person!
 
   # GET /vehicles
   # GET /vehicles.xml
   def index
-    @vehicles = @owner.vehicles
+    @vehicles = current_person.vehicles
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class VehiclesController < ApplicationController
   # GET /vehicles/1
   # GET /vehicles/1.xml
   def show
-    @vehicle = @owner.vehicles.find(params[:id])
+    @vehicle = current_person.vehicles.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +26,7 @@ class VehiclesController < ApplicationController
   # GET /vehicles/new
   # GET /vehicles/new.xml
   def new
-    @vehicle = @owner.vehicles.build
+    @vehicle = current_person.vehicles.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,17 +36,17 @@ class VehiclesController < ApplicationController
 
   # GET /vehicles/1/edit
   def edit
-    @vehicle = @owner.vehicles.find(params[:id])
+    @vehicle = current_person.vehicles.find(params[:id])
   end
 
   # POST /vehicles
   # POST /vehicles.xml
   def create
-    @vehicle = @owner.vehicles.build(params[:vehicle])
+    @vehicle = current_person.vehicles.build(params[:vehicle])
 
     respond_to do |format|
       if @vehicle.save
-        format.html { redirect_to([@owner, @vehicle], :notice => 'Vehicle was successfully created.') }
+        format.html { redirect_to(edit_person_registration_url, :notice => 'Vehicle was successfully added.') }
         format.xml  { render :xml => @vehicle, :status => :created, :location => @vehicle }
       else
         format.html { render :action => "new" }
@@ -58,11 +58,11 @@ class VehiclesController < ApplicationController
   # PUT /vehicles/1
   # PUT /vehicles/1.xml
   def update
-    @vehicle = @owner.vehicles.find(params[:id])
+    @vehicle = current_person.vehicles.find(params[:id])
 
     respond_to do |format|
       if @vehicle.update_attributes(params[:vehicle])
-        format.html { redirect_to([@owner, @vehicle], :notice => 'Vehicle was successfully updated.') }
+        format.html { redirect_to(edit_person_registration_url, :notice => 'Vehicle was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -74,18 +74,12 @@ class VehiclesController < ApplicationController
   # DELETE /vehicles/1
   # DELETE /vehicles/1.xml
   def destroy
-    @vehicle = @owner.vehicles.find(params[:id])
+    @vehicle = current_person.vehicles.find(params[:id])
     @vehicle.destroy
 
     respond_to do |format|
-      format.html { redirect_to(person_vehicles_path(@owner)) }
+      format.html { redirect_to(edit_person_registration_url) }
       format.xml  { head :ok }
     end
-  end
-
-  private
-
-  def get_owner
-    @owner = Person.find(params[:person_id])
   end
 end

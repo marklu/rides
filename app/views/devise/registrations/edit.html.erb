@@ -3,6 +3,8 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
+<h3>Personal Info</h3>
+
   <p><%= f.label :email %><br />
   <%= f.text_field :email %></p>
 
@@ -30,6 +32,8 @@
   <p><%= f.label :state %><br />
     <%= f.text_field :state %></p>
 
+<h3>Personal Preferences</h3>
+
   <p><%= f.label :music %><br />
     <% ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref| %>
       <%= f.radio_button :music, pref %>
@@ -46,6 +50,41 @@
 
   <p><%= f.submit "Update" %></p>
 <% end %>
+
+<h3>Vehicles</h3>
+<p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:error] %></p>
+
+<% if resource.vehicles.count > 0 %>
+  <table>
+    <tr>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Capacity</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  
+  <% resource.vehicles.each do |vehicle| %>
+    <tr>
+      <td><%= vehicle.make %></td>
+      <td><%= vehicle.model %></td>
+      <td><%= vehicle.capacity %></td>
+      <td><%= link_to 'Update Vehicle', edit_vehicle_path(vehicle) %></td>
+      <td><%= link_to 'Remove Vehicle', vehicle, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <p><%=h current_person.name %> hasn't added any cars yet.</p>
+<% end %>
+
+<br />
+
+<p>
+  <%= link_to 'Add Vehicle', new_vehicle_path %>
+</p>
 
 <h3>Cancel my account</h3>
 

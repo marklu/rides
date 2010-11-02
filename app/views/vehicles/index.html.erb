@@ -3,7 +3,10 @@
 <% if @vehicles.count > 0 %>
   <table>
     <tr>
+      <th>Make</th>
+      <th>Model</th>
       <th>Capacity</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -11,20 +14,21 @@
   
   <% @vehicles.each do |vehicle| %>
     <tr>
+      <td><%= vehicle.make %></td>
+      <td><%= vehicle.model %></td>
       <td><%= vehicle.capacity %></td>
-      <td><%= link_to 'Show', [@owner, vehicle] %></td>
-      <td><%= link_to 'Edit', edit_person_vehicle_path(@owner, vehicle) %></td>
-      <td><%= link_to 'Destroy', [@owner, vehicle], :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Show', vehicle %></td>
+      <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
+      <td><%= link_to 'Destroy', vehicle, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
   </table>
 <% else %>
-  <p><%=h @owner.name %> hasn't added any cars yet.</p>
+  <p><%=h current_person.name %> hasn't added any cars yet.</p>
 <% end %>
 
 <br />
 
 <p>
-  <%= link_to 'New Vehicle', new_person_vehicle_path(@owner) %>
-  <%= link_to 'Back', @owner %>
+  <%= link_to 'New Vehicle', new_vehicle_path %>
 </p>
