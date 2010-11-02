@@ -9,8 +9,8 @@ group :development, :test do
    gem 'webrat'
    gem 'rspec'
    gem 'rspec-rails'
+   gem 'rcov'
    gem 'cucumber'
    gem 'cucumber-rails'
    gem 'launchy'
-   gem 'win32console'
 end

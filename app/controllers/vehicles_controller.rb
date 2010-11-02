@@ -1,17 +1,6 @@
 class VehiclesController < ApplicationController
   before_filter :authenticate_person!
 
-  # GET /vehicles
-  # GET /vehicles.xml
-  def index
-    @vehicles = current_person.vehicles
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @vehicles }
-    end
-  end
-
   # GET /vehicles/1
   # GET /vehicles/1.xml
   def show
