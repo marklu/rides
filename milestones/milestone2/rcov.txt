@@ -1,6 +1,12 @@
-(in /home/jku/rides3)
+D:\Projects\CS169\Rides>rake spec:rcov
+(in D:/Projects/CS169/Rides)
+C:/PROGRA~2/Ruby/bin/ruby.exe -S bundle exec rcov -Ispec --exclude /gems/,/Library/,/usr/,lib/tasks,.bundle,config,/lib/rspec/,/lib/rspec- "./spec/models/person_spec.rb" "./spec/models/trip_spec.rb" "./spec/models/vehicle_spec.rb"
 ** WARNING: Ruby 1.9 Support is experimental at best. Don't expect correct results! **
-...............................
+....................................
 
-Finished in 2.31 seconds
-31 examples, 0 failures
+Finished in 3.52 seconds
+36 examples, 0 failures
+
+
+
+IMPORTANT: More rcov output in /milestones/minestone2/coverage
