@@ -49,5 +49,39 @@ Feature: Potential user can register
             | asdfasdfasdf   | testpassword | testpassword | RegisterName | 123-456-7890  | 123 Main St. | Registerville | CA    | Email is invalid                     |
 
   Scenario: Newly registered user sees entered information in profile
+    Given I am not authenticated
+    And I am on the sign up page
+    And I fill in "Email" with "testregister2@test.com"
+    And I fill in "Password" with "testpassword"
+    And I fill in "Password confirmation" with "testpassword"
+    And I fill in "Name" with "Test Register"
+    And I fill in "Phone" with "123-456-7890"
+    And I fill in "Address" with "123 Register St."
+    And I fill in "City" with "Registerville"
+    And I fill in "State" with "CA"
+    And I press "Sign up"
+    When I follow "Edit Profile"
+    Then I should be on the edit profile page
+    And the "Email" field should contain "testregister2@test.com"
+    And the "Name" field should contain "Test Register"
+    And the "Phone" field should contain "123-456-7890"
+    And the "Address" field should contain "123 Register St."
+    And the "City" field should contain "Registerville"
+    And the "State" field should contain "CA"
 
   Scenario: Newly registered user has neutral personal preferences
+    Given I am not authenticated
+    And I am on the sign up page
+    And I fill in "Email" with "testregister3@test.com"
+    And I fill in "Password" with "testpassword"
+    And I fill in "Password confirmation" with "testpassword"
+    And I fill in "Name" with "Test Register"
+    And I fill in "Phone" with "123-456-7890"
+    And I fill in "Address" with "123 Register St."
+    And I fill in "City" with "Registerville"
+    And I fill in "State" with "CA"
+    And I press "Sign up"
+    When I follow "Edit Profile"
+    Then I should be on the edit profile page
+    And the "person_music_no_preference" radio button should be selected
+    And the "person_smoking_no_preference" radio button should be selected
