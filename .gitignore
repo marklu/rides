@@ -1,0 +1,11 @@
+# Exclude Files
+/coverage/
+/db/*.sqlite3
+/log/
+/tmp/
+/.project
+/Gemfile.lock
+/webrat.log
+
+# Keep Empty Directories containing .gitkeep
+!.gitkeep
