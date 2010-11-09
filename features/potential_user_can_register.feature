@@ -60,7 +60,7 @@ Feature: Potential user can register
     And I fill in "City" with "Registerville"
     And I fill in "State" with "CA"
     And I press "Sign up"
-    When I follow "Edit Profile"
+    When I follow "Profile"
     Then I should be on the edit profile page
     And the "Email" field should contain "testregister2@test.com"
     And the "Name" field should contain "Test Register"
@@ -81,7 +81,7 @@ Feature: Potential user can register
     And I fill in "City" with "Registerville"
     And I fill in "State" with "CA"
     And I press "Sign up"
-    When I follow "Edit Profile"
+    When I follow "Profile"
     Then I should be on the edit profile page
     And the "person_music_no_preference" radio button should be selected
     And the "person_smoking_no_preference" radio button should be selected

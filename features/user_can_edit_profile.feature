@@ -9,7 +9,7 @@ Feature: User can edit profile
     And I want to update my profile
     And I am logged in as a user
     When I go to the dashboard page
-    And I follow "Edit Profile"
+    And I follow "Profile"
     Then I should be on the edit profile page
     
   Scenario: User can modify personal information
