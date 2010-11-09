@@ -10,13 +10,13 @@ Rides::Application.routes.draw do
 
   devise_for :people, :skip => [:sessions, :registrations] do
     get '/signin' => 'devise/sessions#new', :as => 'new_person_session'
-    post '/signin' => 'devise/sessions#create', :as => 'person_session'
+    post '/signin' => 'devise/sessions#create', :as => 'create_person_session'
     get '/signout' => 'devise/sessions#destroy', :as => 'destroy_person_session'
 
     get '/signup' => 'devise/registrations#new', :as => 'new_person_registration'
-    post '/profile' => 'devise/registrations#create', :as => 'person_registration'
+    post '/signup' => 'devise/registrations#create', :as => 'create_person_registration'
     get '/profile' => 'devise/registrations#edit', :as => 'edit_person_registration'
-    put '/profile' => 'devise/registrations#update', :as => 'person_registration'
-    delete '/profile' => 'devise/registrations#destroy', :as => 'person_registration'
+    put '/profile' => 'devise/registrations#update', :as => 'update_person_registration'
+    delete '/profile' => 'devise/registrations#destroy', :as => 'destroy_person_registration'
   end
 end

@@ -26,8 +26,8 @@ describe "Routes" do
       {:get => "/signup"}.should route_to(:controller => "devise/registrations", :action => "new")
     end
 
-    it "routes POST /profile to devise/registrations#create" do
-      {:post => "/profile"}.should route_to(:controller => "devise/registrations", :action => "create")
+    it "routes POST /signup to devise/registrations#create" do
+      {:post => "/signup"}.should route_to(:controller => "devise/registrations", :action => "create")
     end
   end
 
