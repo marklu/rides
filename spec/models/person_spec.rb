@@ -1,218 +1,180 @@
 require 'spec_helper'
 
 describe Person do
-
   before(:each) do
-    #    @current_user = mock_model(Person, {:id => 1})
-  end
-  #  attr_accessible :email, :password, :password_confirmation, :name, :phone,
-  #    :address, :city, :state, :music, :smoking
-
-  describe "when validating a person" do
-
-    it "should create a new instance given valid attributes" do
-      @valid_attributes= {
-        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      Person.create(@valid_attributes).should be_true
-    end
-
-    it "should not allow a person with no name" do
-      @no_name_attributes = {
-        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        #        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_name_attributes)
-      @person.should_not be_valid
-    end
-
-    it "should not allow a person with no email" do
-      @no_email_attributes = {
-        #        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_email_attributes)
-      @person.should_not be_valid
-    end
-
-    it "should not allow a person with an invalid email" do
-      @invalid_email_1_attributes = {
-        :email => "invalidemail",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person1 = Person.new(@invalid_email_1_attributes)
-      @person1.should_not be_valid
-
-      @invalid_email_2_attributes = {
-        :email => "invalidemail@test",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person2 = Person.new(@invalid_email_2_attributes)
-      @person2.should_not be_valid
-    end
-
-    it "should not allow a person with no password" do
-      @no_password_attributes = {
-        :email => "test@test.com",
-        #        :password => "testpassword",
-        #        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_password_attributes)
-      @person.should_not be_valid
-    end
-
-    it "should not allow a person with a password that is too short" do
-      @no_password_attributes = {
-        :email => "test@test.com",
-        :password => "srt",
-       :password_confirmation => "srt",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_password_attributes)
-      @person.should_not be_valid
-    end
-
-
-    it "should not allow a person with mismatched password and password confirmation" do
-      @mismatched_password_attributes = {
-        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "wrongpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@mismatched_password_attributes)
-      @person.should_not be_valid
-    end
-
-    it "should not allow a person with no phone" do
-      @no_phone_attributes = {
-        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        #        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_phone_attributes)
-      @person.should_not be_valid
-    end
-
-    it "should not allow a person with no address" do
-      @no_address_attributes = {
-        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-#        :address => "123 Main St.",
-        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_address_attributes)
-      @person.should_not be_valid
-    end
-
-    it "should not allow a person with no city" do
-      @no_city_attributes = {
-        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-#        :city => "Testville",
-        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_city_attributes)
-      @person.should_not be_valid
-    end
-
-    it "should not allow a person with no state" do
-      @no_state_attributes = {
-        :email => "test@test.com",
-        :password => "testpassword",
-        :password_confirmation => "testpassword",
-        :name => "John Test",
-        :phone => "123-456-7890",
-        :address => "123 Main St.",
-        :city => "Testville",
-#        :state => "CA",
-        :music => "no_preference",
-        :smoking => "no_preference"
-      }
-      @person = Person.new(@no_state_attributes)
-      @person.should_not be_valid
-    end
-
+    @attributes = {
+      :email => 'email@email.com',
+      :password => 'testpassword123',
+      :password_confirmation => 'testpassword123',
+      :name => 'John Test',
+      :phone => '123-456-7890',
+      :address => '123 Main St.',
+      :city => 'Testville',
+      :state => 'CA',
+      :music => 'no_preference',
+      :smoking => 'no_preference'
+    }
+    @person = Person.create(@attributes)
   end
 
+  context "when creating" do
+    it "does not allow an empty password" do
+      @attributes.delete :password
+      @attributes.delete :password_confirmation
+      Person.create(@attributes).should_not be_valid
+    end
 
+    it "does not allow a password shorter than 6 characters" do
+      @attributes[:password] = "12345"
+      @attributes[:password_confirmation] = "12345"
+      Person.create(@attributes).should_not be_valid
+    end
+
+    it "does not allow a mismatch between password and password confirmation" do
+      @attributes[:password_confirmation] = "12345"
+      Person.create(@attributes).should_not be_valid
+    end
+
+    it "sets the music preference to 'No Preference' by default" do
+      @attributes.delete :music
+      Person.create(@attributes).music.should == 'no_preference'
+    end
+
+    it "sets the smoking preference to 'No Preference' by default" do
+      @attributes.delete :smoking
+      Person.create(@attributes).smoking.should == 'no_preference'
+    end
+  end
+
+  context "when validating" do
+    it "is valid with valid attributes" do
+      @person.should be_valid
+    end
+
+    it "is not valid without an email" do
+      @person.email = nil
+      @person.should_not be_valid
+    end
+
+    it "is not valid with an invalid email" do
+      ["invalidemail", "invalidemail@test"].each do |invalid_email|
+        @person.email = invalid_email
+        @person.should_not be_valid
+      end
+    end
+
+    it "is not valid without a name" do
+      @person.name = nil
+      @person.should_not be_valid
+    end
+
+    it "is not valid without a phone" do
+      @person.phone = nil
+      @person.should_not be_valid
+    end
+
+    it "is not valid without an address" do
+      @person.address = nil
+      @person.should_not be_valid
+    end
+
+    it "is not valid without a city" do
+      @person.city = nil
+      @person.should_not be_valid
+    end
+
+    it "is not valid without a state" do
+      @person.state = nil
+      @person.should_not be_valid
+    end
+
+    it "is valid with a valid music preference (No Preference, No Music, Quiet Music, Loud Music)" do
+      ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |preference|
+        @person.music = preference
+        @person.should be_valid
+      end
+    end
+
+    it "is not valid with an invalid music preference" do
+      ['No Preference', 'invalid', '0'].each do |preference|
+        @person.music = preference
+        @person.should_not be_valid
+      end
+    end
+
+    it "is valid with a valid smoking preference (No Preference, No Smoking, Smoking)" do
+      ['no_preference', 'no_smoking', 'smoking'].each do |preference|
+        @person.smoking = preference
+        @person.should be_valid
+      end
+    end
+
+    it "is not valid with an invalid smoking preference" do
+      ['No Preference', 'invalid', '0'].each do |preference|
+        @person.smoking = preference
+        @person.should_not be_valid
+      end
+    end
+  end
+
+  context "when organizing many trips" do
+    before(:each) do
+      @trip_attributes = {
+        :name => "Some Trip",
+        :time => Time.now,
+        :address => "1234 Main St",
+        :city => "Berkeley",
+        :state => "CA",
+        :organizer => @person
+      }
+      @trip1 = Trip.create!(@trip_attributes)
+      @trip2 = Trip.create!(@trip_attributes)
+    end
+
+    it "has a list of organized trips" do
+      @person.organized_trips.should include(@trip1)
+      @person.organized_trips.should include(@trip2)
+    end
+  end
+
+  context "when participating in many trips" do
+    before(:each) do
+      @trip1 = stub_model(Trip)
+      @trip2 = stub_model(Trip)
+      @person.trips << @trip1
+      @person.trips << @trip2
+    end
+
+    it "has a list of trips" do
+      @person.trips.should include(@trip1)
+      @person.trips.should include(@trip2)
+    end
+
+    it "has a list of upcoming trips" do
+      @trip1.stub(:upcoming?).and_return(true)
+      @trip2.stub(:upcoming?).and_return(true)
+      @person.upcoming_trips.should include(@trip1)
+      @person.upcoming_trips.should include(@trip2)
+    end
+
+    it "does not have passed trips in its list of upcoming trips" do
+      @trip1.stub(:upcoming?).and_return(false)
+      @trip2.stub(:upcoming?).and_return(true)
+      @person.upcoming_trips.should_not include(@trip1)
+    end
+  end
+
+  context "when has many vehicles" do
+    before(:each) do
+      @vehicle1 = stub_model(Vehicle)
+      @vehicle2 = stub_model(Vehicle)
+      @person.vehicles << @vehicle1
+      @person.vehicles << @vehicle2
+    end
+
+    it "has a list of vehicles" do
+      @person.vehicles.should include(@vehicle1)
+      @person.vehicles.should include(@vehicle2)
+    end
+  end
 end

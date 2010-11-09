@@ -1,9 +1,9 @@
 class Vehicle < ActiveRecord::Base
-  validates_presence_of :owner_id
-  validates_presence_of :make
-  validates_presence_of :model
-  validates_presence_of :capacity
-  validates_numericality_of :capacity, :only_integer => true, :greater_than => 0
+  validates :make, :presence => true
+  validates :model, :presence => true
+  validates :capacity, :presence => true,
+    :numericality => {:only_integer => true, :greater_than => 0}
+  validates :owner, :existence => {:allow_nil => false}
 
   belongs_to :owner, :class_name => "Person", :foreign_key => "owner_id"
 end
