@@ -4,8 +4,32 @@
 <h1>Upcoming Trips</h1>
 
 <% @trips.each do |trip| %>
-<div class="trip">
-	<h2 class="tripheader"><span class="triptitle"><%= link_to trip.name, trip %></span><span class="tripdate"><%= trip.time.strftime("%B %d, %Y") %></span></h2>
+<div class="section">
+	<h2><span class="triptitle"><%= link_to trip.name, trip %></span><span class="tripdate"><%= trip.time.strftime("%B %d, %Y") %></span></h2>
+	<div class="tripinfo">
+		<h3>Location</h3>
+		<p><%= trip.address %><br /><%= trip.city %>, <%= trip.state %></p>
+		<h3>Date</h3>
+		<p><%= trip.time %></p>
+		<h3>Arrangement</h3>
+		<p>
+		<% if trip.arrangement_for(current_person).nil? %>
+			You have no ride arrangement.
+		<% else %>
+			<% trip.arrangement_for(current_person).passengers.each do |passenger| %>
+			<%= passenger.name %> 
+			<% end %>
+		<% end %>
+		</p>
+	</div>
+</div>
+<% end %>
+
+<h1>Trips You Organized</h1>
+
+<% @organized_trips.each do |trip| %>
+<div class="section">
+	<h2><span class="triptitle"><%= link_to trip.name, trip %></span><span class="tripdate"><%= trip.time.strftime("%B %d, %Y") %></span></h2>
 	<div class="tripinfo">
 		<h3>Location</h3>
 		<p><%= trip.address %><br /><%= trip.city %>, <%= trip.state %></p>

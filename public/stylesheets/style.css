@@ -83,7 +83,7 @@ body
 	-webkit-border-radius: 20px;
 }
 
-.trip
+.section
 {
 	width: 600px;
 	background-color: #eee;
@@ -93,33 +93,34 @@ body
 	-webkit-border-radius: 20px;
 }
 
-.trip .tripheader
+.section h2
 {
 	background-color: #333;
 	color: #eee;
 	font-size: 20px;
 	font-weight: bold;
 	padding: 5px 20px;
+	margin-bottom: 0px;
 	-moz-border-radius: 20px 20px 0px 0px;
 	-webkit-border-radius: 20px 20px 0px 0px;
 }
 
-.trip .tripheader .triptitle
+.section h2 .triptitle
 {
 	text-align: left;
 }
 
-.trip .tripheader .tripdate
+.section h2 .tripdate
 {
 	float: right;
 }
 
-.trip .tripinfo
+.section div
 {
-	padding: 0px 20px 20px 20px;
+	padding: 20px;
 }
 
-.trip .tripinfo h3
+.section .tripinfo h3
 {
 	font-size: 15px;
 	float: left;
@@ -130,9 +131,10 @@ body
 	text-align: right;
 }
 
-.trip .tripinfo p
+.section .tripinfo p
 {
 	margin-left: 115px;
+	margin-top: 0px;
 }
 
 #footer
