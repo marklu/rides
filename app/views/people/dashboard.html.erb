@@ -2,7 +2,7 @@
 <p style="color: red"><%= flash[:error] %></p>
 <h1>Upcoming Trips</h1>
 
-<% @trips.each do |trip| %>
+<% @upcoming_trips.each do |trip| %>
 <div class="trip">
   <h2 class="tripheader"><span class="triptitle"><%= link_to trip.name, trip %></span><span class="tripdate"><%= trip.time.strftime("%B %d, %Y") %></span></h2>
   <div class="tripinfo">

@@ -2,25 +2,7 @@ require 'spec_helper'
 
 describe Trip do
   before(:each) do
-    @trip_organizer = Person.create(
-      :email => 'email@email.com',
-      :password => 'testpassword123',
-      :password_confirmation => 'testpassword123',
-      :name => 'John Test',
-      :phone => '123-456-7890',
-      :address => '123 Main St.',
-      :city => 'Testville',
-      :state => 'CA',
-    )
-    @attributes = {
-      :name => "Some Trip",
-      :time => Time.now,
-      :address => "1234 Main St",
-      :city => "Berkeley",
-      :state => "CA",
-      :organizer => @trip_organizer
-    }
-    @trip = Trip.create(@attributes)
+    @trip = make("Trip")
   end
 
   context "when validating" do
@@ -72,7 +54,7 @@ describe Trip do
     end
 
     it "is not valid with an invalid organizer" do
-      @trip_organizer.destroy
+      @trip.organizer.destroy
       @trip.should_not be_valid
     end
   end

@@ -1,4 +1,5 @@
 class ArrangementsController < ApplicationController
+  before_filter :authenticate_person!
   before_filter :get_trip
 
   # GET /arrangements

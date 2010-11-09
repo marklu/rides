@@ -2,47 +2,37 @@ require 'spec_helper'
 
 describe Person do
   before(:each) do
-    @attributes = {
-      :email => 'email@email.com',
-      :password => 'testpassword123',
-      :password_confirmation => 'testpassword123',
-      :name => 'John Test',
-      :phone => '123-456-7890',
-      :address => '123 Main St.',
-      :city => 'Testville',
-      :state => 'CA',
-      :music => 'no_preference',
-      :smoking => 'no_preference'
-    }
-    @person = Person.create(@attributes)
+    @person = make("Person")
   end
 
   context "when creating" do
     it "does not allow an empty password" do
-      @attributes.delete :password
-      @attributes.delete :password_confirmation
-      Person.create(@attributes).should_not be_valid
+      make("Person",
+        :password => nil,
+        :password_confirmation => nil
+      ).should_not be_valid
     end
 
     it "does not allow a password shorter than 6 characters" do
-      @attributes[:password] = "12345"
-      @attributes[:password_confirmation] = "12345"
-      Person.create(@attributes).should_not be_valid
+      make("Person",
+        :password => "12345",
+        :password_confirmation => "12345"
+      ).should_not be_valid
     end
 
     it "does not allow a mismatch between password and password confirmation" do
-      @attributes[:password_confirmation] = "12345"
-      Person.create(@attributes).should_not be_valid
+      make("Person",
+        :password => "testpassword123",
+        :password_confirmation => "differentpassword456"
+      ).should_not be_valid
     end
 
     it "sets the music preference to 'No Preference' by default" do
-      @attributes.delete :music
-      Person.create(@attributes).music.should == 'no_preference'
+      make("Person", :music => nil).music.should == 'no_preference'
     end
 
     it "sets the smoking preference to 'No Preference' by default" do
-      @attributes.delete :smoking
-      Person.create(@attributes).smoking.should == 'no_preference'
+      make("Person", :smoking => nil).smoking.should == 'no_preference'
     end
   end
 
@@ -119,16 +109,8 @@ describe Person do
 
   context "when organizing many trips" do
     before(:each) do
-      @trip_attributes = {
-        :name => "Some Trip",
-        :time => Time.now,
-        :address => "1234 Main St",
-        :city => "Berkeley",
-        :state => "CA",
-        :organizer => @person
-      }
-      @trip1 = Trip.create!(@trip_attributes)
-      @trip2 = Trip.create!(@trip_attributes)
+      @trip1 = make!("Trip", :organizer => @person)
+      @trip2 = make!("Trip", :organizer => @person)
     end
 
     it "has a list of organized trips" do

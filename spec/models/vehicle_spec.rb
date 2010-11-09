@@ -2,22 +2,7 @@ require 'spec_helper'
 
 describe Vehicle do
   before(:each) do
-    @owner = Person.create(
-      :email => 'email@email.com',
-      :password => 'testpassword123',
-      :password_confirmation => 'testpassword123',
-      :name => 'John Test',
-      :phone => '123-456-7890',
-      :address => '123 Main St.',
-      :city => 'Testville',
-      :state => 'CA',
-    )
-    @vehicle = Vehicle.create(
-      :make => "Make",
-      :model => "Model",
-      :capacity => 4,
-      :owner => @owner
-    )
+    @vehicle = make("Vehicle")
   end
 
   context "when validating" do
@@ -53,7 +38,7 @@ describe Vehicle do
     end
 
     it "is not valid with an invalid owner" do
-      @owner.destroy
+      @vehicle.owner.destroy
       @vehicle.should_not be_valid
     end
   end

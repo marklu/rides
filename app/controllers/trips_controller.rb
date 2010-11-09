@@ -2,7 +2,6 @@ class TripsController < ApplicationController
   before_filter :authenticate_person!
 
   # GET /trips
-  # GET /trips.xml
   def index
     @trips = current_person.trips
   end

@@ -8,6 +8,6 @@ class PeopleController < ApplicationController
 
   # GET /dashboard
   def dashboard
-    @trips = current_person.upcoming_trips
+    @upcoming_trips = current_person.upcoming_trips
   end
 end
