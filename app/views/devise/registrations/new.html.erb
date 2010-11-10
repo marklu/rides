@@ -1,33 +1,28 @@
-<h2>Sign up</h2>
+<h1>Sign Up</h1>
 
 <%= form_for(resource, :as => resource_name, :url => create_person_registration_path) do |f| %>
-  <%= devise_error_messages! %>
+	<%= devise_error_messages! %>
 
-  <p><%= f.label :email %><br />
-    <%= f.text_field :email %></p>
 
-  <p><%= f.label :password %><br />
-    <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.label :name %><br />
-    <%= f.text_field :name %></p>
-
-  <p><%= f.label :phone %><br />
-    <%= f.text_field :phone %></p>
-
-  <p><%= f.label :address %><br />
-    <%= f.text_field :address %></p>
-
-  <p><%= f.label :city %><br />
-    <%= f.text_field :city %></p>
-
-  <p><%= f.label :state %><br />
-    <%= f.text_field :state %></p>
-
-  <p><%= f.submit "Sign up" %></p>
+<div class="section">
+	<h2>Account</h2>
+	<fieldset>
+		<p><%= f.label :email %><%= f.text_field :email %></p>
+		<p><%= f.label :password %><%= f.password_field :password %></p>
+		<p><%= f.label :password_confirmation, "Confirm" %><%= f.password_field :password_confirmation %></p>
+	</fieldset>
+</div>
+<div class="section">
+	<h2>Profile</h2>
+	<fieldset>
+		<p><%= f.label :name %><%= f.text_field :name %></p>
+		<p><%= f.label :phone %><%= f.text_field :phone %></p>
+		<p><%= f.label :address %><%= f.text_field :address %></p>
+		<p><%= f.label :city %><%= f.text_field :city %></p>
+		<p><%= f.label :state %><%= f.text_field :state %></p>
+	</fieldset>
+</div>
+	<p><%= f.submit "Sign up" %></p>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

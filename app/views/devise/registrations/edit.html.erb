@@ -1,93 +1,89 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h1>Profile</h1>
 
 <%= form_for(resource, :as => resource_name, :url => update_person_registration_path, :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+	<%= devise_error_messages! %>
 
-<h3>Personal Info</h3>
+<div class="section">
+	<h2>Account</h2>
+	<fieldset>
+		<p><%= f.label :email %><%= f.text_field :email %></p>
+		<p><em>Leave blank to keep your current password:</em></p>
+		<p><%= f.label :password, "New Password" %><%= f.password_field :password %></p>
+		<p><%= f.label :password_confirmation, "Confirm" %><%= f.password_field :password_confirmation %></p>
+		<p><em>Confirm your current password to edit account information:</em></p>
+		<p><%= f.label :current_password, "Password" %><%= f.password_field :current_password %></p>
+	</fieldset>
+</div>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+<div class="section">
+	<h2>Profile</h2>
+	<fieldset>
+		<p><%= f.label :name %><%= f.text_field :name %></p>
+		<p><%= f.label :phone %><%= f.phone_field :phone %></p>
+		<p><%= f.label :address %><%= f.text_field :address %></p>
+		<p><%= f.label :city %><%= f.text_field :city %></p>
+		<p><%= f.label :state %><%= f.text_field :state %></p>
+	</fieldset>
+</div>
 
-  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password %></p>
+<div class="section">
+	<h2>Personal Preferences</h2>
+	<fieldset>
+		<p><%= f.label :music %>
+		<% ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref| %>
+			<%= f.radio_button :music, pref %>
+			<%= f.label "music_#{pref}", pref.humanize, {:class => 'choice'} %>
+		<% end %>
+		</p>
+		<p><%= f.label :smoking %>
+		<% ['no_preference', 'no_smoking', 'smoking'].each do |pref| %>
+			<%= f.radio_button :smoking, pref %>
+			<%= f.label "smoking_#{pref}", pref.humanize, {:class => 'choice'} %>
+		<% end %>
+		</p>
+	</fieldset>
+</div>
 
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></p>
-
-  <p><%= f.label :name %><br />
-    <%= f.text_field :name %></p>
-
-  <p><%= f.label :phone %><br />
-    <%= f.phone_field :phone %></p>
-
-  <p><%= f.label :address %><br />
-    <%= f.text_field :address %></p>
-
-  <p><%= f.label :city %><br />
-    <%= f.text_field :city %></p>
-
-  <p><%= f.label :state %><br />
-    <%= f.text_field :state %></p>
-
-<h3>Personal Preferences</h3>
-
-  <p><%= f.label :music %><br />
-    <% ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref| %>
-      <%= f.radio_button :music, pref %>
-      <%= f.label "music_#{pref}", pref.humanize %><br />
-    <% end %>
-  </p>
-
-  <p><%= f.label :smoking %><br />
-    <% ['no_preference', 'no_smoking', 'smoking'].each do |pref| %>
-      <%= f.radio_button :smoking, pref %>
-      <%= f.label "smoking_#{pref}", pref.humanize %><br />
-    <% end %>
-  </p>
-
-  <p><%= f.submit "Update" %></p>
+<p><%= f.submit "Update" %></p>
 <% end %>
 
-<h3>Vehicles</h3>
+<h2>Vehicles</h2>
 <p style="color: green"><%= flash[:notice] %></p>
 <p style="color: red"><%= flash[:error] %></p>
 
 <% if resource.vehicles.count > 0 %>
-  <table>
-    <tr>
-      <th>Make</th>
-      <th>Model</th>
-      <th>Capacity</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  
-  <% resource.vehicles.each do |vehicle| %>
-    <tr>
-      <td><%= vehicle.make %></td>
-      <td><%= vehicle.model %></td>
-      <td><%= vehicle.capacity %></td>
-      <td><%= link_to 'Update Vehicle', edit_vehicle_path(vehicle) %></td>
-      <td><%= link_to 'Remove Vehicle', vehicle, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-  </table>
+	<table>
+		<tr>
+			<th>Make</th>
+			<th>Model</th>
+			<th>Capacity</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	
+	<% resource.vehicles.each do |vehicle| %>
+		<tr>
+			<td><%= vehicle.make %></td>
+			<td><%= vehicle.model %></td>
+			<td><%= vehicle.capacity %></td>
+			<td><%= link_to 'Update Vehicle', edit_vehicle_path(vehicle) %></td>
+			<td><%= link_to 'Remove Vehicle', vehicle, :confirm => 'Are you sure?', :method => :delete %></td>
+		</tr>
+	<% end %>
+	</table>
 <% else %>
-  <p><%=h current_person.name %> hasn't added any cars yet.</p>
+	<p><%=h current_person.name %> hasn't added any cars yet.</p>
 <% end %>
 
 <br />
 
 <p>
-  <%= link_to 'Add Vehicle', new_vehicle_path %>
+	<%= link_to 'Add Vehicle', new_vehicle_path %>
 </p>
 
-<h3>Cancel my account</h3>
+<h2>Cancel my account</h2>
 
-<p>Unhappy? <%= link_to "Cancel my account", destroy_person_registration_path, :confirm => "Are you sure?", :method => :delete %>.</p>
+<p>Unhappy? <%= link_to "Cancel my account", update_person_registration_path, :confirm => "Are you sure?", :method => :delete %>.</p>
 
 <%= link_to "Back", :back %>
