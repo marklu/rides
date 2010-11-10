@@ -10,7 +10,7 @@
 	<body>
 		<div id="header">
 			<div id="logo">
-				<img src="/images/rides.png" alt="Rideshare Organizer" />
+				<%= link_to image_tag("/images/rides.png", :alt => "Rideshare Organizer"), root_path %>
 			</div>
 			<div id="account">
 				<% if person_signed_in? %>
@@ -20,8 +20,8 @@
  				<% end %>
 				<ul>
 					<% if person_signed_in? %>
+					<li><%= link_to "Dashboard", person_root_path %></li>
 					<li><%= link_to "Profile", edit_person_registration_path %></li>
-					<li><%= link_to "Trips", trips_path %></li>
 					<li><%= link_to "Sign out", destroy_person_session_path %></li>
 					<% else %>
 					<li><%= link_to "Sign up", new_person_registration_path %></li>

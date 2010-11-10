@@ -27,6 +27,11 @@ body
 	float: left;
 }
 
+#logo img
+{
+	border: none;
+}
+
 #account
 {
 	right: 0px;
