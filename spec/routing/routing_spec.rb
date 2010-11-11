@@ -7,7 +7,7 @@ describe "Routes" do
     end
   end
 
-  context "Login" do
+  context "Sign In" do
     it "routes GET /signin to devise/sessions#new" do
       {:get => "/signin"}.should route_to(:controller => "devise/sessions", :action => "new")
     end
@@ -21,7 +21,7 @@ describe "Routes" do
     end
   end
 
-  context "Register" do
+  context "Sign Up" do
     it "routes GET /signup to devise/registrations#new" do
       {:get => "/signup"}.should route_to(:controller => "devise/registrations", :action => "new")
     end
@@ -36,7 +36,7 @@ describe "Routes" do
       {:get => "/dashboard"}.should route_to(:controller => "people", :action => "dashboard")
     end
 
-    context "Edit Profile" do
+    context "Profile" do
       it "routes GET /profile to devise/registrations#edit" do
         {:get => "/profile"}.should route_to(:controller => "devise/registrations", :action => "edit")
       end
@@ -59,7 +59,7 @@ describe "Routes" do
         end
       end
 
-      context "Manage Vehicle" do
+      context "Manage Vehicles" do
         it "routes GET /vehicles/1/edit to vehicles#edit" do
           {:get => "/vehicles/1/edit"}.should route_to(:controller => "vehicles", :action => "edit", :id => "1")
         end

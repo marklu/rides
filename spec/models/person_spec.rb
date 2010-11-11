@@ -27,6 +27,10 @@ describe Person do
       ).should_not be_valid
     end
 
+    it "does not allow an empty password confirmation" do
+      create_valid("Person", :password_confirmation => nil).should_not be_valid
+    end
+
     it "sets the music preference to 'No Preference' by default" do
       create_valid("Person", :music => nil).music.should == 'no_preference'
     end

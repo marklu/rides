@@ -1,7 +1,7 @@
 module ModelFactory
   def valid_attributes_for(model)
     case model
-    when "Person"
+    when 'Person'
       return {
         :email => 'email@email.com',
         :password => 'testpassword123',
@@ -14,7 +14,7 @@ module ModelFactory
         :music => 'no_preference',
         :smoking => 'no_preference'
       }
-    when "Trip"
+    when 'Trip'
       return {
         :name => "Trip Name",
         :time => Time.now,
@@ -23,7 +23,7 @@ module ModelFactory
         :state => "State",
         :organizer => create_valid("Person")
       }
-    when "Vehicle"
+    when 'Vehicle'
       return {
         :make => "Make",
         :model => "Model",
