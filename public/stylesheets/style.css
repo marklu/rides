@@ -27,6 +27,11 @@ body
 	float: left;
 }
 
+#logo img
+{
+	border: none;
+}
+
 #account
 {
 	right: 0px;
@@ -117,7 +122,54 @@ body
 
 .section div
 {
-	padding: 20px;
+	padding: 20px 20px 5px 20px;
+}
+
+.section div.field_with_errors
+{
+	display: inline;
+	margin: 0px;
+	padding: 0px;
+}
+
+.section fieldset
+{
+	border: none;
+	margin: 0px;
+	padding: 5px 20px;
+}
+
+.section label
+{
+	display: block;
+	float: left;
+	clear: left;
+	color: #666;
+	font-weight: bold;
+	width: 100px;
+	margin-right: 20px;
+	padding: 5px 0px;
+	text-align: right;
+}
+
+.section label.choice
+{
+	display: inline;
+	width: auto;
+	font-weight: normal;
+	color: #333;
+	float: none;
+	clear: none;
+	margin: auto;
+}
+
+.section input
+{
+	border: none;
+	background-color: #fff;
+	padding: 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
 }
 
 .section .tripinfo h3
@@ -125,7 +177,7 @@ body
 	font-size: 15px;
 	float: left;
 	clear: left;
-	margin: 0px 10px 0px 0px;
+	margin: 0px 20px 0px 0px;
 	display: block;
 	width: 100px;
 	text-align: right;
@@ -133,8 +185,7 @@ body
 
 .section .tripinfo p
 {
-	margin-left: 115px;
-	margin-top: 0px;
+	margin: 0px 20px 15px 120px;
 }
 
 #footer
