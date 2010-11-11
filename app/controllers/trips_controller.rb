@@ -13,12 +13,12 @@ class TripsController < ApplicationController
 
   # GET /trips/new
   def new
-    @trip = current_person.trips.build
+    @trip = current_person.organized_trips.build
   end
 
   # GET /trips/1/edit
   def edit
-    @trip = Trip.find(params[:id])
+    @trip = current_person.organized_trips.find(params[:id])
   end
 
   # POST /trips
@@ -49,6 +49,6 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     @trip.destroy
 
-    redirect_to(trips_url)
+    redirect_to(person_root_url)
   end
 end
