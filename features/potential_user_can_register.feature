@@ -9,7 +9,7 @@ Feature: Potential user can register
     And I am on the sign up page
     When I fill in "Email" with "testregister@test.com"
     And I fill in "Password" with "testpassword"
-    And I fill in "Password confirmation" with "testpassword"
+    And I fill in "Confirm" with "testpassword"
     And I fill in "Name" with "Test Register"
     And I fill in "Phone" with "123-456-7890"
     And I fill in "Address" with "123 Register St."
@@ -24,7 +24,7 @@ Feature: Potential user can register
     And I am on the sign up page
     When I fill in "Email" with "<email>"
     And I fill in "Password" with "<password>"
-    And I fill in "Password confirmation" with "<confirmation>"
+    And I fill in "Confirm" with "<confirmation>"
     And I fill in "Name" with "<name>"
     And I fill in "Phone" with "<phone>"
     And I fill in "Address" with "<address>"
@@ -53,7 +53,7 @@ Feature: Potential user can register
     And I am on the sign up page
     And I fill in "Email" with "testregister2@test.com"
     And I fill in "Password" with "testpassword"
-    And I fill in "Password confirmation" with "testpassword"
+    And I fill in "Confirm" with "testpassword"
     And I fill in "Name" with "Test Register"
     And I fill in "Phone" with "123-456-7890"
     And I fill in "Address" with "123 Register St."
@@ -74,7 +74,7 @@ Feature: Potential user can register
     And I am on the sign up page
     And I fill in "Email" with "testregister3@test.com"
     And I fill in "Password" with "testpassword"
-    And I fill in "Password confirmation" with "testpassword"
+    And I fill in "Confirm" with "testpassword"
     And I fill in "Name" with "Test Register"
     And I fill in "Phone" with "123-456-7890"
     And I fill in "Address" with "123 Register St."

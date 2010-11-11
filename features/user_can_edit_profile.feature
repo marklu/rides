@@ -36,7 +36,7 @@ Feature: User can edit profile
     Given I have an account with email "test@test.com" and password "testpassword"
     And I am logged in as a user
     And I am on the edit profile page
-    When I fill in "Current password" with "testpassword"
+    When I fill in "Password" with "testpassword"
     When I fill in "Name" with "<name>"
     And I fill in "Email" with "<email>"
     And I fill in "Address" with "<address>"
@@ -68,7 +68,7 @@ Feature: User can edit profile
     Given I have an account with email "test@test.com" and password "testpassword"
     And I am logged in as a user
     And I am on the edit profile page
-    When I fill in "Current password" with "testpassword"
+    When I fill in "Password" with "testpassword"
     And I choose "<music>"
     And I choose "<smoking>"
     And I press "Update"
