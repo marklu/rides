@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Trip do
   before(:each) do
-    @trip = make("Trip")
+    @trip = create_valid("Trip")
   end
 
   context "when validating" do

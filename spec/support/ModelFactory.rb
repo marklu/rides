@@ -1,45 +1,45 @@
 module ModelFactory
-  def attributes_for(model)
+  def valid_attributes_for(model)
     case model
     when "Person"
       return {
         :email => 'email@email.com',
         :password => 'testpassword123',
         :password_confirmation => 'testpassword123',
-        :name => 'John Test',
+        :name => 'First Last',
         :phone => '123-456-7890',
-        :address => '123 Main St.',
-        :city => 'Testville',
-        :state => 'CA',
+        :address => '123 Address',
+        :city => 'City',
+        :state => 'State',
         :music => 'no_preference',
         :smoking => 'no_preference'
       }
     when "Trip"
       return {
-        :name => "Some Trip",
+        :name => "Trip Name",
         :time => Time.now,
-        :address => "1234 Main St",
-        :city => "Berkeley",
-        :state => "CA",
-        :organizer => make("Person")
+        :address => "1234 Address",
+        :city => "City",
+        :state => "State",
+        :organizer => create_valid("Person")
       }
     when "Vehicle"
       return {
         :make => "Make",
         :model => "Model",
         :capacity => 4,
-        :owner => make("Person")
+        :owner => create_valid("Person")
       }
     else
       raise "Unrecognized Model: #{model}"
     end
   end
 
-  def make(model, params = {})
-    model.constantize.create(attributes_for(model).merge(params))    
+  def create_valid(model, params = {})
+    model.constantize.create(valid_attributes_for(model).merge(params))    
   end
 
-  def make!(model, params = {})
-    model.constantize.create!(attributes_for(model).merge(params))    
+  def create_valid!(model, params = {})
+    model.constantize.create!(valid_attributes_for(model).merge(params))    
   end
 end

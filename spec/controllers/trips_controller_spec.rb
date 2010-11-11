@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe TripsController do
   before(:each) do
-    @person = make!("Person")
-    @trip = make!("Trip", :organizer => @person)
+    @person = create_valid!("Person")
+    @trip = create_valid!("Trip", :organizer => @person)
   end
 
   describe "GET index" do

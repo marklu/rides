@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PeopleController do
   before(:each) do
-    @person = make!("Person")
+    @person = create_valid!("Person")
   end
 
   describe "GET index" do

@@ -2,37 +2,37 @@ require 'spec_helper'
 
 describe Person do
   before(:each) do
-    @person = make("Person")
+    @person = create_valid("Person")
   end
 
   context "when creating" do
     it "does not allow an empty password" do
-      make("Person",
+      create_valid("Person",
         :password => nil,
         :password_confirmation => nil
       ).should_not be_valid
     end
 
     it "does not allow a password shorter than 6 characters" do
-      make("Person",
+      create_valid("Person",
         :password => "12345",
         :password_confirmation => "12345"
       ).should_not be_valid
     end
 
     it "does not allow a mismatch between password and password confirmation" do
-      make("Person",
+      create_valid("Person",
         :password => "testpassword123",
         :password_confirmation => "differentpassword456"
       ).should_not be_valid
     end
 
     it "sets the music preference to 'No Preference' by default" do
-      make("Person", :music => nil).music.should == 'no_preference'
+      create_valid("Person", :music => nil).music.should == 'no_preference'
     end
 
     it "sets the smoking preference to 'No Preference' by default" do
-      make("Person", :smoking => nil).smoking.should == 'no_preference'
+      create_valid("Person", :smoking => nil).smoking.should == 'no_preference'
     end
   end
 
@@ -109,8 +109,8 @@ describe Person do
 
   context "when organizing many trips" do
     before(:each) do
-      @trip1 = make!("Trip", :organizer => @person)
-      @trip2 = make!("Trip", :organizer => @person)
+      @trip1 = create_valid!("Trip", :organizer => @person)
+      @trip2 = create_valid!("Trip", :organizer => @person)
     end
 
     it "has a list of organized trips" do

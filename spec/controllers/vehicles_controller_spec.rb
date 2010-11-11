@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe VehiclesController do
   before(:each) do
-    @person = make!("Person")
-    @vehicle = make!("Vehicle", :owner => @person)
+    @person = create_valid!("Person")
+    @vehicle = create_valid!("Vehicle", :owner => @person)
   end
 
   describe "GET new" do
