@@ -6,8 +6,10 @@ Feature: User can view upcoming trips
 
   Background: I am a participant of many trips
     Given I am signed in
-    Given I am participating in a trip named "Trip 1" at "123 Address", "City", "State" on "December 25, 2015 10:00"
-    And I am participating in a trip named "Trip 2" at "123 Address", "City", "State" on "December 25, 2015 10:00"
+    Given I am participating in the following trips:
+      | name   | address     | city | state | time                    |
+      | Trip 1 | 123 Address | City | State | December 25, 2015 10:00 |
+      | Trip 2 | 123 Address | City | State | December 25, 2015 10:00 |
 
   Scenario: I see a list of upcoming trips on my dashboard
     When I go to the dashboard page

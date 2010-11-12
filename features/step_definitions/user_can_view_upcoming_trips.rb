@@ -1,11 +1,13 @@
-Given /^I am participating in a trip named "([^"]*)" at "([^"]*)", "([^"]*)", "([^"]*)" on "([^"]*)"$/ do |name, address, city, state, time|
-  trip = create_valid!('Trip',
-    :name => name,
-    :address => address,
-    :city => city,
-    :state => state,
-    :time => Time.parse(time)
-  )
-  trip.participants << @person
-  trip.save!
+Given /^I am participating in the following trips:$/ do |trips|
+  trips.hashes.each do |trip|
+    trip = create_valid!('Trip',
+      :name => trip['name'],
+      :address => trip['address'],
+      :city => trip['city'],
+      :state => trip['state'],
+      :time => Time.parse(trip['time'])
+    )
+    trip.participants << @person
+    trip.save!
+  end
 end
