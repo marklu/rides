@@ -8,6 +8,7 @@ module NavigationHelpers
     when /the profile page/ then edit_person_registration_path
     when /the add vehicle page/ then new_vehicle_path
     when /the plan trip page/ then new_trip_path
+    when /the trip history page/ then trips_path
     else
       begin
         page_name =~ /the (.*) page/

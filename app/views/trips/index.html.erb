@@ -1,7 +1,6 @@
-<%= link_to 'Edit Profile', edit_person_registration_path %><br />
 <p style="color: green"><%= flash[:notice] %></p>
 <p style="color: red"><%= flash[:error] %></p>
-<h1>Upcoming Trips</h1>
+<h1>Trip History</h1>
 
 <% @trips.each do |trip| %>
 <div class="section">
@@ -24,5 +23,3 @@
 	</div>
 </div>
 <% end %>
-
-<%= link_to 'New Trip', new_trip_path %>

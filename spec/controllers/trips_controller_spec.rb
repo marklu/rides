@@ -13,6 +13,26 @@ describe TripsController do
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
+
+    context "when logged in" do
+      before(:each) do
+        @organizer = create_valid!('Person', :email => 'email2@email.com')
+        @trip1 = create_valid!("Trip", :organizer => @organizer)
+        @trip2 = create_valid!("Trip", :organizer => @organizer)
+        @person.stub(:trips).and_return([@trip1, @trip2])
+        signin(@person)
+      end
+
+      it "assigns to @trips a list of trips @person is participating in" do
+        get :index
+        assigns[:trips].should eq([@trip1, @trip2])
+      end
+
+      it "renders the index template" do
+        get :index
+        response.should render_template("index")
+      end
+    end
   end
 
   describe "GET show" do
