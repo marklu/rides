@@ -37,7 +37,7 @@ Feature: Trip organizer can view all ride arrangements
       | Cassie |
       | Caleb  |
       | Chase  |
-    When I visit the all arrangements page for "Company Picnic"
+    When I go to the all arrangements page
     Then I should see "Allan"
     And I should see "Baron"
     And I should see "Cassie"

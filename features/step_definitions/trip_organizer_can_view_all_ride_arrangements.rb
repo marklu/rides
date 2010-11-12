@@ -11,8 +11,3 @@ Given /^the following people are on the same ride arrangement:$/ do |passengers|
   end
   arrangement.save!
 end
-
-When /^I visit the all arrangements page for "([^"]*)"$/ do |trip_name|
-  trip = Trip.where(:name => trip_name).first
-  visit "/trips/#{trip.id}/arrangements"
-end
