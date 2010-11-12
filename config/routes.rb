@@ -5,6 +5,7 @@ Rides::Application.routes.draw do
   resources :vehicles, :except => [:index, :show]
 
   resources :trips do
+    get :participants, :on => :member, :as => 'participants'
     resources :arrangements, :only => [:index, :show]
   end
 

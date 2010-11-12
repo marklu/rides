@@ -80,6 +80,55 @@ describe TripsController do
     end
   end
 
+  describe "GET participants" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        get :participants, :id => 1
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in as trip organizer" do
+      before(:each) do
+        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
+        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
+        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
+        @trip.participants << @participant1 << @participant3 << @participant2
+        signin(@person)
+      end
+
+      it "assigns to @participants a sorted list of trip participants" do
+        get :participants, :id => @trip.id
+        assigns[:participants].should == [@participant1, @participant2, @participant3]
+      end
+
+      it "renders the participants template" do
+        get :participants, :id => @trip.id
+        response.should render_template("participants")
+      end
+    end
+
+    context "when logged in as trip participant" do
+      before(:each) do
+        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
+        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
+        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
+        @trip.participants << @participant1 << @participant3 << @participant2
+        signin(@participant1)
+      end
+
+      it "assigns to @participants a sorted list of trip participants" do
+        get :participants, :id => @trip.id
+        assigns[:participants].should == [@participant1, @participant2, @participant3]
+      end
+
+      it "renders the participants template" do
+        get :participants, :id => @trip.id
+        response.should render_template("participants")
+      end
+    end
+  end
+
   describe "GET show" do
     context "when not logged in" do
       it "redirects to the signin page" do

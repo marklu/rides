@@ -1,0 +1,8 @@
+<div id="main">
+  <h1>Trip Participants</h1>
+  <ul>
+    <% @participants.each do |participant| %>
+      <li><%= participant.name %></li>
+    <% end %>
+  </ul>
+</div>

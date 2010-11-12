@@ -30,5 +30,7 @@
   <%= @trip.state %>
 </p>
 
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+<ul>
+  <li><%= link_to 'Edit', edit_trip_path(@trip) %></li>
+  <li><%= link_to 'Participants', participants_trip_path(@trip) %></li>
+</ul>

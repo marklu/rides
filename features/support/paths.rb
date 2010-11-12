@@ -9,6 +9,8 @@ module NavigationHelpers
     when /the add vehicle page/ then new_vehicle_path
     when /the plan trip page/ then new_trip_path
     when /the trip history page/ then trips_path
+    when /the trip info page/ then trip_path(@trip)
+    when /the trip participants page/ then participants_trip_path(@trip)
     else
       begin
         page_name =~ /the (.*) page/

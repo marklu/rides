@@ -18,6 +18,12 @@ class TripsController < ApplicationController
     end.uniq
   end
 
+  # GET /trips/1/participants
+  def participants
+    @trip = Trip.find(params[:id])
+    @participants = @trip.participants.sort_by {|participant| participant.name}
+  end
+
   # GET /trips/1
   def show
     @trip = Trip.find(params[:id])
