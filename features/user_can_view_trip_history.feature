@@ -43,3 +43,18 @@ Feature: User can view trip history
     And I should see "UCity 1"
     And I should see "UState 1"
     And I should see "2012-01-05"
+
+  Scenario: I can filter by month
+    When I go to the trip history page
+    Then I should see "February 2012"
+    And I should see "January 2012"
+    And I should see "February 2009"
+    And I should see "January 2009"
+
+  Scenario: I filter by month
+    When I go to the trip history page
+    And I follow "January 2012"
+    Then I should see "Upcoming Trip 1"
+    But I should not see "Upcoming Trip 2"
+    And I should not see "Passed Trip 1"
+    And I should not see "Passed Trip 2"

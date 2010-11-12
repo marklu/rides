@@ -16,16 +16,61 @@ describe TripsController do
 
     context "when logged in" do
       before(:each) do
-        @organizer = create_valid!('Person', :email => 'email2@email.com')
-        @trip1 = create_valid!("Trip", :organizer => @organizer)
-        @trip2 = create_valid!("Trip", :organizer => @organizer)
-        @person.stub(:trips).and_return([@trip1, @trip2])
+        @organizer = create_valid!('Person', :email => 'organizer@email.com')
+        @upcoming_trip1 = @organizer.organized_trips.create!(
+          :name => 'Upcoming Trip 1',
+          :address => '1 Upcoming',
+          :city => 'UCity 1',
+          :state => 'UState 1',
+          :time => Time.parse('January 5, 2012 10:00')
+        )
+        @upcoming_trip2 = @organizer.organized_trips.create!(
+          :name => 'Upcoming Trip 2',
+          :address => '2 Upcoming',
+          :city => 'UCity 2',
+          :state => 'UState 2',
+          :time => Time.parse('February 5, 2012 10:00')
+        )
+        @passed_trip1 = @organizer.organized_trips.create!(
+          :name => 'Passed Trip 1',
+          :address => '1 Upcoming',
+          :city => 'PCity 1',
+          :state => 'PState 1',
+          :time => Time.parse('January 5, 2009 10:00')
+        )
+        @passed_trip2 = @organizer.organized_trips.create!(
+          :name => 'Passed Trip 2',
+          :address => '2 Passed',
+          :city => 'PCity 2',
+          :state => 'PState 2',
+          :time => Time.parse('February 5, 2009 10:00')
+        )
+        @person.stub(:trips).and_return([@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2])
         signin(@person)
       end
 
-      it "assigns to @trips a list of trips @person is participating in" do
+      context "when no month or an invalid month is given" do
+        it "assigns to @trips a list of trips in which @person is a participant" do
+          get :index
+          assigns[:trips].should == [@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2]
+        end
+      end
+
+      context "when a valid month is given" do
+        it "assigns to @trips a list of trips occuring in the given month in which @person is a participant" do
+          get :index, :month => 1, :year => 2012
+          assigns[:trips].should == [@upcoming_trip1]
+        end
+      end
+
+      it "assigns to @months_with_trips a sorted list of months in which a trip occured" do
         get :index
-        assigns[:trips].should eq([@trip1, @trip2])
+        assigns[:months_with_trips].should == [
+          {'month' => 2, 'year' => 2012},
+          {'month' => 1, 'year' => 2012},
+          {'month' => 2, 'year' => 2009},
+          {'month' => 1, 'year' => 2009}
+        ]
       end
 
       it "renders the index template" do

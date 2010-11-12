@@ -12,11 +12,11 @@ class Trip < ActiveRecord::Base
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
   has_and_belongs_to_many :vehicles
   
-  def upcoming?
-    return self.time >= Time.now()
-  end
-  
   def arrangement_for(person)
     return arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
+  end
+
+  def upcoming?
+    return self.time >= Time.now()
   end
 end
