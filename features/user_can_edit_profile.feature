@@ -1,22 +1,19 @@
 Feature: User can edit profile
 
+  So that I can receive valid and favorable ride arrangements
   As a user
   I want to update my profile
-  So that I can receive a valid and favorable ride arrangement
 
-  Scenario: User can view the edit profile page
-    Given I have an account with email "test@test.com" and password "testpassword"
-    And I want to update my profile
-    And I am logged in as a user
-    When I go to the dashboard page
+  Background: I am signed in
+    Given I am signed in with password "password123"
+
+  Scenario: I can view the profile page
+    Given I am on the dashboard page
     And I follow "Profile"
-    Then I should be on the edit profile page
+    Then I should be on the profile page
     
-  Scenario: User can modify personal information
-    Given I have an account with email "test@test.com" and password "testpassword"
-    And I want to update my personal information
-    And I am logged in as a user
-    When I go to the edit profile page
+  Scenario: I can modify personal information
+    When I go to the profile page
     Then I should see "Name"
     And I should see "Email"
     And I should see "Address"
@@ -24,19 +21,14 @@ Feature: User can edit profile
     And I should see "State"
     And I should see "Phone"
 
-  Scenario: User can indicate personal preferences
-    Given I have an account with email "test@test.com" and password "testpassword"
-    And I want to update my personal preferences
-    And I am logged in as a user
-    When I go to the edit profile page
+  Scenario: I can indicate personal preferences
+    When I go to the profile page
     Then I should see "Music"
     And I should see "Smoking"
 
-  Scenario Outline: User updates personal information
-    Given I have an account with email "test@test.com" and password "testpassword"
-    And I am logged in as a user
-    And I am on the edit profile page
-    When I fill in "Password" with "testpassword"
+  Scenario Outline: I update my personal information
+    Given I am on the profile page
+    When I fill in "Password" with "password123"
     When I fill in "Name" with "<name>"
     And I fill in "Email" with "<email>"
     And I fill in "Address" with "<address>"
@@ -64,11 +56,9 @@ Feature: User can edit profile
       | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino |       | 1231231234 | error  |
       | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    |            | error  |
 
-  Scenario Outline: User updates personal preferences
-    Given I have an account with email "test@test.com" and password "testpassword"
-    And I am logged in as a user
-    And I am on the edit profile page
-    When I fill in "Password" with "testpassword"
+  Scenario Outline: I update my personal preferences
+    Given I am on the profile page
+    When I fill in "Password" with "password123"
     And I choose "<music>"
     And I choose "<smoking>"
     And I press "Update"

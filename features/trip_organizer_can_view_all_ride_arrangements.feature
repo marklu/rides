@@ -1,30 +1,45 @@
 Feature: Trip organizer can view all ride arrangements
 
+  So that I can verify the trip will proceed without issue
   As a trip organizer
   I want to view all ride arrangements
-  So that I can verify the trip will proceed with no issues
 
-  Scenario: Organizer sees every arrangement
-    Given there is an upcoming trip named "Company Picnic"
-    And the following people are on the same ride arrangement for "Company Picnic":
-      | name   | email              | password |
-      | Allan  | allan@exmaple.com  | Test123! |
-      | Alyssa | alyssa@example.com | Test123! |
-      | Alex   | alex@example.com   | Test123! |
-    And the following people are on the same ride arrangement for "Company Picnic":
-      | name   | email              | password |
-      | Baron  | Baron@exmaple.com  | Test123! |
-      | Bailey | Bailey@example.com | Test123! |
-      | Bob    | bob@example.com    | Test123! |
-    And the following people are on the same ride arrangement for "Company Picnic":
-      | name   | email              | password |
-      | Cassie | cassie@exmaple.com | Test123! |
-      | Caleb  | caleb@example.com  | Test123! |
-      | Chase  | chase@example.com  | Test123! |
-    When I sign in with email "testorganizer@example.com" and password "Test123!" 
-    And I visit the all arrangements page for "Company Picnic"
-    And I should see "Allan"
+  Background: I am the organizer in an upcoming trip having other participants
+    Given I am signed in
+    And I am organizing an upcoming trip named "Company Picnic"
+    And the following people are participants:
+      | name   |
+      | Allan  |
+      | Alyssa |
+      | Alex   |
+      | Baron  |
+      | Bailey |
+      | Bob    |
+      | Cassie |
+      | Caleb  |
+      | Chase  |
+
+  Scenario: I can view the all arrangements page
+
+  Scenario: I see every arrangement
+    Given the following people are on the same ride arrangement:
+      | name   |
+      | Allan  |
+      | Alyssa |
+      | Alex   |
+    And the following people are on the same ride arrangement:
+      | name   |
+      | Baron  |
+      | Bailey |
+      | Bob    |
+    And the following people are on the same ride arrangement:
+      | name   |
+      | Cassie |
+      | Caleb  |
+      | Chase  |
+    When I visit the all arrangements page for "Company Picnic"
+    Then I should see "Allan"
     And I should see "Baron"
     And I should see "Cassie"
 
-  Scenario: Organizer sees details for each arrangement
+  Scenario: I see details for each arrangement

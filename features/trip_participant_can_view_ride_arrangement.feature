@@ -1,28 +1,34 @@
 Feature: Trip participant can view ride arrangement
 
+  So that I can go on the trip
   As a trip participant
   I want to view my ride arrangement
-  So that I can participate in the trip
+
+  Background: I am a participant in an upcoming trip having other participants
+    Given I am signed in
+    And there is an upcoming trip named "Company Picnic"
+    And I am a participant
+    And the following people are participants:
+      | name  |
+      | Alice |
+      | Bob   |
+      | Joe   |
 
   Scenario: I can see who is on my ride arrangement
-  Given there is an upcoming trip named "Company Picnic"
-  And the following people are on the same ride arrangement for "Company Picnic":
-    | name  | email             | password |
-    | Joe   | joe@example.com   | Test123! |
-    | Alice | alice@example.com | Test123! |
-    | Bob   | bob@example.com   | Test123! |
-  When I sign in with email "joe@example.com" and password "Test123!" 
-  And I go to the trips dashboard
-  Then I should see "Company Picnic"
-  And I should see "Alice"
-  And I should see "Bob"
+    Given I am assigned a ride arrangement
+    And the following people are assigned to my ride arrangement:
+      | name  |
+      | Alice |
+      | Bob   |
+      | Joe   |
+    When I go to the dashboard page
+    Then I should see "Company Picnic"
+    And I should see "Alice"
+    And I should see "Bob"
+    And I should see "Joe"
 
   Scenario: I am notified if I am not in a ride arrangement
-  Given there is an upcoming trip named "Company Picnic"
-  And the following people do not have a ride arrangement for "Company Picnic":
-    | name | email           | password |
-    | Joe  | joe@example.com | Test123! |
-  When I sign in with email "joe@example.com" and password "Test123!"
-  And I go to the trips dashboard
-  Then I should see "Company Picnic"
-  And I should see "You have no ride arrangement."
+    Given I am not assigned a ride arrangement
+    When I go to the dashboard page
+    Then I should see "Company Picnic"
+    And I should see "You have no ride arrangement."

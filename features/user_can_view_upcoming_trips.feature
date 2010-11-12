@@ -1,39 +1,30 @@
 Feature: User can view upcoming trips
 
+  So that I know my ride arrangement
   As a user
   I want to view my upcoming trips
-  So that I am aware of my ride assignment
 
-  Scenario: User sees list of upcoming trips on dashboard
-    Given I want to see a list of my upcoming trips
-    And I have an account with email "test@test.com" and password "testpassword"
-    And I am logged in as a user
-    And I have a trip called "Epic Trip" at address "1 Infinite Dr." in city "Berkeley" in state "CA" on "December 25, 2015 10:00"
-    And I have a trip called "Boring Trip" at address "2 Infinite Dr." in city "Berkeley" in state "CA" on "December 26, 2015 10:00"
-    When I go to the dashboard page
-    Then I should see "Epic Trip"
-    Then I should see "Boring Trip"
+  Background: I am a participant of many trips
+    Given I am signed in
+    Given I am participating in a trip named "Trip 1" at "123 Address", "City", "State" on "December 25, 2015 10:00"
+    And I am participating in a trip named "Trip 2" at "123 Address", "City", "State" on "December 25, 2015 10:00"
 
-  Scenario: User sees location and date for each trip
-    Given I want to see location and date for each trip
-    And I have an account with email "test@test.com" and password "testpassword"
-    And I am logged in as a user
-    And I have a trip called "Epic Trip" at address "1 Infinite Dr." in city "Berkeley" in state "CA" on "December 25, 2015 10:00"
+  Scenario: I see a list of upcoming trips on my dashboard
     When I go to the dashboard page
-    Then I should see "1 Infinite Dr."
-    And I should see "Berkeley"
-    And I should see "CA"
+    Then I should see "Trip 1"
+    Then I should see "Trip 2"
+
+  Scenario: I see the location and date for each trip
+    When I go to the dashboard page
+    Then I should see "123 Address"
+    And I should see "City"
+    And I should see "State"
     And I should see "2015-12-25"
 
-
-  Scenario: User can view trip info for each trip
-    Given I want to see trip info for a given trip
-    And I have an account with email "test@test.com" and password "testpassword"
-    And I am logged in as a user
-    And I have a trip called "Epic Trip" at address "1 Infinite Dr." in city "Berkeley" in state "CA" on "December 25, 2015 10:00"
+  Scenario: I can view info for each trip
     When I go to the dashboard page
-    And I follow "Epic Trip"
-    Then I should see "Time: 2015-12-25 10:00:00"
-    And I should see "Address: 1 Infinite Dr."
-    And I should see "City: Berkeley"
-    And I should see "State: CA"
+    And I follow "Trip 1"
+    Then I should see "2015-12-25"
+    And I should see "123 Address"
+    And I should see "City"
+    And I should see "State"

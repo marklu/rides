@@ -1,10 +1,10 @@
 Feature: Trip organizer can invite people to join trip
 
+  So that I can organize rides for the participants of my trip
   As a trip organizer
-  I want to invite potential participants to join the trip
-  So that I can have transportation organized for them
+  I want to invite people to join the trip
 
-  Scenario: Organizer can invite people by e-mail to join trip
+  Scenario: I can invite people by email
 
   Scenario: Invited user can view trip info
 

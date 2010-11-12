@@ -1,14 +1,13 @@
 module NavigationHelpers
   def path_to(page_name)
     case page_name
-    when /the home\s?page/ then '/'
-    when /the edit profile page/ then '/profile'
-    when /the sign up page/ then '/signup'
-    when /the sign in page/ then '/signin'
-    when /the trips dashboard|the dashboard page/ then '/dashboard'
-    when /the person registration page/ then '/signup'
-    when /the create trip page/ then '/trips/new'
-    when /the add vehicle page/ then '/vehicles/new'
+    when /the home\s?page/ then root_path
+    when /the sign in page/ then new_person_session_path
+    when /the sign up page/ then new_person_registration_path
+    when /the dashboard page/ then person_root_path
+    when /the profile page/ then edit_person_registration_path
+    when /the add vehicle page/ then new_vehicle_path
+    when /the plan trip page/ then new_trip_path
     else
       begin
         page_name =~ /the (.*) page/
