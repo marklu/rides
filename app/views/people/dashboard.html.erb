@@ -24,6 +24,21 @@
 </div>
 <% end %>
 
+<h1>Pending Trips</h1>
+<% @pending_trips.each do |trip| %>
+<div class="section">
+	<h2><span class="triptitle"><%= link_to trip.name, trip %></span><span class="tripdate"><%= trip.time.strftime("%B %d, %Y") %></span></h2>
+	<div class="tripinfo">
+		<h3>Location</h3>
+		<p><%= trip.address %><br /><%= trip.city %>, <%= trip.state %></p>
+		<h3>Date</h3>
+		<p><%= trip.time %></p>
+		
+		</p>
+	</div>
+</div>
+<% end %>
+
 <ul>
 <li><%= link_to 'New Trip', new_trip_path %></li>
 <li><%= link_to 'Trip History', trips_path %></li>

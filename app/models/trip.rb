@@ -10,6 +10,8 @@ class Trip < ActiveRecord::Base
   belongs_to :organizer, :class_name => "Person", :foreign_key => "organizer_id"
   has_and_belongs_to_many :participants, :class_name => "Person",
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
+  has_and_belongs_to_many :invitees, :class_name => "Person",
+    :join_table => "invitees_trips", :association_foreign_key => "invitee_id"
   has_and_belongs_to_many :vehicles
   
   def arrangement_for(person)
@@ -18,5 +20,10 @@ class Trip < ActiveRecord::Base
 
   def upcoming?
     return self.time >= Time.now()
+  end
+
+  def organized_by?(person)
+    return self.organizer == person
+
   end
 end

@@ -18,8 +18,11 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :arrangements, :join_table => "arrangements_passengers",
     :foreign_key => "passenger_id"
   has_many :organized_trips, :class_name => "Trip", :foreign_key => "organizer_id"
-  has_and_belongs_to_many :trips, :join_table => "participants_trips",
+  has_and_belongs_to_many :joined_trips, :class_name => "Trip", :join_table => "participants_trips",
     :foreign_key => "participant_id"
+  has_and_belongs_to_many :pending_trips, :class_name => "Trip", :join_table => "invitees_trips",
+    :foreign_key => "invitee_id"
+  
   has_many :vehicles, :foreign_key => "owner_id"
 
   devise :database_authenticatable, :registerable, :validatable
@@ -27,6 +30,6 @@ class Person < ActiveRecord::Base
     :address, :city, :state, :music, :smoking
 
   def upcoming_trips
-    self.trips.select {|trip| trip.upcoming?}
+    self.joined_trips.select {|trip| trip.upcoming?}
   end
 end
