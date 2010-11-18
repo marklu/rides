@@ -15,15 +15,14 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :vehicles
   
   def arrangement_for(person)
-    return arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
-  end
-
-  def upcoming?
-    return self.time >= Time.now()
+    return arrangements.select {|arrangement| arrangement.passengers.include?(person)}.first
   end
 
   def organized_by?(person)
     return self.organizer == person
+  end
 
+  def upcoming?
+    return self.time >= Time.now()
   end
 end

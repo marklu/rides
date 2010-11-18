@@ -47,7 +47,7 @@ Then /^the user with email "([^"]*)" should be a participant in "([^"]*)"$/ do |
   @trip = Trip.find(:first, :conditions => [ "name = ?", tripname ])
 
   @trip.participants.should include(@new_participant)
-  @new_participant.joined_trips.should include(@trip)
+  @new_participant.trips.should include(@trip)
 end
 
 Then /^the user with email "([^"]*)" should not have an invitation to "([^"]*)"$/ do |email, tripname|
