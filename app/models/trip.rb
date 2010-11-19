@@ -10,8 +10,12 @@ class Trip < ActiveRecord::Base
   belongs_to :organizer, :class_name => "Person", :foreign_key => "organizer_id"
   has_and_belongs_to_many :participants, :class_name => "Person",
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
-  has_and_belongs_to_many :invitees, :class_name => "Person",
-    :join_table => "invitees_trips", :association_foreign_key => "invitee_id"
+
+
+  has_many :invitations, :foreign_key => :pending_trip_id
+  has_many :invitees, :through => :invitations, :class_name => "Person", :foreign_key => :invitee_id
+#  has_many :people, :through => :invitations
+
   has_and_belongs_to_many :vehicles
   
   def arrangement_for(person)

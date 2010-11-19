@@ -353,4 +353,57 @@ describe TripsController do
       end
     end
   end
+
+  describe "POST invite" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        delete :destroy, :id => @trip.id
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        signin(@person)
+
+        @invitee = create_valid!("Person", :name => 'Mr. Invitee', :email => 'invitee@invitee.com')
+      end
+
+      it "finds the invitee" do
+        post :invite#, :email => 'invitee@invitee.com'
+        Person.should_receive(:find).with(:first, :conditions => [ "email = ?", 'invitee@invitee.com']).and_return(@invitee)
+      end
+      
+      
+      it "saves the trip" do
+        
+        @trip.should_receive(:save)
+        post :invite
+      end
+
+      it "sets a flash[:notice] message" do
+       
+        flash[:notice].should == "Invited Mr. Invitee to trip."
+        post :invite
+      end
+
+      it "adds the invitee to trip's list of invitees" do
+        
+        @trip.invitees.should_include(@invitee)
+        post :invite
+      end
+
+      it "adds the trip to invitee's list of pending trips" do
+        
+        @invitee.pending_trips.should include(@trip)
+        post :invite
+      end
+
+      it "redirects to the show trip info page" do
+        post :invite
+        response.should redirect_to(:action => "show", :id => @trip.id)
+      end
+    end
+  end
 end

@@ -5,14 +5,14 @@ class TripsController < ApplicationController
   # GET /trips
   def index
     if !params[:month].nil? && !params[:year].nil?
-      @trips = current_person.joined_trips.select do |trip|
+      @trips = current_person.trips.select do |trip|
         trip.time.month == params[:month].to_i && trip.time.year == params[:year].to_i
       end
     else
-      @trips = current_person.joined_trips
+      @trips = current_person.trips
     end
 
-    @months_with_trips = current_person.joined_trips.map do |trip|
+    @months_with_trips = current_person.trips.map do |trip|
       trip.time
     end.sort.reverse.map do |time|
       {:month => time.month, :year => time.year}
@@ -72,10 +72,8 @@ class TripsController < ApplicationController
   end
 
   def invite
-#    @trip = Trip.find(params[:id])
     @invitee = Person.find(:first, :conditions => [ "email = ?", params[:email]] )
     @trip.invitees << @invitee
-#    @invitee.pending_trips << @trip
 
     if @trip.save
       redirect_to(@trip, :notice => "Invited #{@invitee.name} to trip.")

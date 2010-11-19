@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101115031059) do
+ActiveRecord::Schema.define(:version => 20101118011719) do
 
   create_table "arrangements", :force => true do |t|
     t.datetime "created_at"
@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(:version => 20101115031059) do
 
   add_index "arrangements_passengers", ["arrangement_id", "passenger_id"], :name => "index_arrangements_passengers_on_arrangement_id_and_passenger_id", :unique => true
 
-  create_table "invitees_trips", :id => false, :force => true do |t|
-    t.integer "invitee_id", :null => false
-    t.integer "trip_id",    :null => false
+  create_table "invitations", :force => true do |t|
+    t.datetime "created_at"
+    t.integer  "invitee_id",      :null => false
+    t.integer  "pending_trip_id", :null => false
+    t.datetime "updated_at"
   end
-
-  add_index "invitees_trips", ["invitee_id", "trip_id"], :name => "index_invitees_trips_on_invitee_id_and_trip_id", :unique => true
 
   create_table "participants_trips", :id => false, :force => true do |t|
     t.integer "participant_id", :null => false

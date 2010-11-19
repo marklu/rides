@@ -1,10 +1,4 @@
-Given /^there exists a user with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
-  @person = create_valid!('Person',
-    :email => email,
-    :password => password,
-    :password_confirmation => password
-  )
-end
+
 
 Given /^user with email "([^"]*)" is organizing a future trip called "([^"]*)"$/ do |email, tripname|
    @organizer = Person.find(:first, :conditions => [ "email = ?", email ])
@@ -47,7 +41,7 @@ Then /^the user with email "([^"]*)" should be a participant in "([^"]*)"$/ do |
   @trip = Trip.find(:first, :conditions => [ "name = ?", tripname ])
 
   @trip.participants.should include(@new_participant)
-  @new_participant.joined_trips.should include(@trip)
+  @new_participant.trips.should include(@trip)
 end
 
 Then /^the user with email "([^"]*)" should not have an invitation to "([^"]*)"$/ do |email, tripname|
