@@ -1,3 +1,3 @@
-require "#{Rails.root.to_s}/spec/support/ModelFactory"
+require "#{Rails.root.to_s}/spec/support/model_factory"
 
 World(ModelFactory)

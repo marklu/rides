@@ -7,9 +7,7 @@ class Person < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :phone, :presence => true
-  validates :address, :presence => true
-  validates :city, :presence => true
-  validates :state, :presence => true
+  validates :address, :mailing_address => true
   validates :music, :inclusion => {:in => ['no_preference', 'no_music', 'quiet_music', 'loud_music'],
     :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}
   validates :smoking, :inclusion => {:in => ['no_preference', 'no_smoking', 'smoking'],
@@ -27,8 +25,6 @@ class Person < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :validatable
   attr_accessible :email, :password, :password_confirmation, :name, :phone,
     :address, :city, :state, :music, :smoking
-
-  
 
   def upcoming_trips
     self.trips.select {|trip| trip.upcoming?}

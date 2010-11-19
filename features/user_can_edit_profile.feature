@@ -17,8 +17,6 @@ Feature: User can edit profile
     Then I should see "Name"
     And I should see "Email"
     And I should see "Address"
-    And I should see "City"
-    And I should see "State"
     And I should see "Phone"
 
   Scenario: I can indicate personal preferences
@@ -32,29 +30,28 @@ Feature: User can edit profile
     When I fill in "Name" with "<name>"
     And I fill in "Email" with "<email>"
     And I fill in "Address" with "<address>"
-    And I fill in "City" with "<city>"
-    And I fill in "State" with "<state>"
     And I fill in "Phone" with "<phone>"
     And I press "Update"
     Then I should see "<result>"
 
     Scenarios: with valid information
-      | name     | email              | address         | city      | state      | phone            | result                                 |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 1231231234       | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | California | 1231231234       | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 11231231234      | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | (123) 123-1234   | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA         | 1 (123) 123-1234 | You updated your account successfully. |
+      | name     | email              | address                                      | phone            | result                                 |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234       | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234       | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 11231231234      | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | (123) 123-1234   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1 (123) 123-1234 | You updated your account successfully. |
 
     Scenarios: with invalid information
-      | name     | email              | address         | city      | state | phone      | result |
-      |          | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    | 1231231234 | error  |
-      | John Doe |                    | 1 Infinite Loop | Cupertino | CA    | 1231231234 | error  |
-      | John Doe | gmail.com          | 1 Infinite Loop | Cupertino | CA    | 1231231234 | error  |
-      | John Doe | John.Doe@gmail.com |                 | Cupertino | CA    | 1231231234 | error  |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop |           | CA    | 1231231234 | error  |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino |       | 1231231234 | error  |
-      | John Doe | John.Doe@gmail.com | 1 Infinite Loop | Cupertino | CA    |            | error  |
+      | name     | email              | address                                      | phone      | result                                 |
+      |          | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234 | Name can't be blank                    |
+      | John Doe |                    | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234 | Email can't be blank                   |
+      | John Doe | gmail.com          | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234 | Email is invalid                       |
+      | John Doe | John.Doe@gmail.com |                                              | 1231231234 | Address must be a valid street address |
+      | John Doe | John.Doe@gmail.com | Amphitheatre Parkway, Mountain View, CA      | 1231231234 | Address must be a valid street address |
+      | John Doe | John.Doe@gmail.com | 123 Address                                  | 1231231234 | Address must be a valid street address |
+      | John Doe | John.Doe@gmail.com | String                                       | 1231231234 | Address must be a valid street address |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA |            | Phone can't be blank                   |
 
   Scenario Outline: I update my personal preferences
     Given I am on the profile page
