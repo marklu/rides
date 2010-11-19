@@ -72,14 +72,13 @@ describe Person do
       @person.should_not be_valid
     end
 
-    it "is not valid without a city" do
-      @person.city = nil
-      @person.should_not be_valid
-    end
-
-    it "is not valid without a state" do
-      @person.state = nil
-      @person.should_not be_valid
+    it "is not valid with an invalid address" do
+      unstub_geocoder
+      ['123 Address', '2222 Infinite Loop, Cupertino, CA', 'Infinite Loop, Cupertino, CA'].each do |address|
+        @person.address = address
+        @person.should_not be_valid
+      end
+      stub_geocoder
     end
 
     it "is valid with a valid music preference (No Preference, No Music, Quiet Music, Loud Music)" do

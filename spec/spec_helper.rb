@@ -29,6 +29,12 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
 
   # Include custom macros (see spec/support)
-  config.include ModelFactory
+  config.include APIStubs
   config.include Authentication, :type => :controller
+  config.include ModelFactory
+
+  # Stub out APIs by default
+  config.before(:each) do
+    stub_geocoder
+  end
 end

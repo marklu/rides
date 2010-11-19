@@ -25,16 +25,6 @@
   <%= @trip.address %>
 </p>
 
-<p>
-  <b>City:</b>
-  <%= @trip.city %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @trip.state %>
-</p>
-
 <% if @trip.organized_by?(current_person) %>
   <%= form_tag(invite_trip_path, :method => :post) do %>
   <%= label_tag(:email, "Enter email of user to invite") %>

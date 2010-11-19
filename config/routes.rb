@@ -5,15 +5,11 @@ Rides::Application.routes.draw do
   resources :vehicles, :except => [:index, :show]
 
   resources :trips do
-
-
-    post 'invite', :on => :member, :as => 'invite'
-    get 'join', :on => :member, :as => 'join'
+    post :invite, :on => :member, :as => 'invite'
+    get :join, :on => :member, :as => 'join'
     get :invitees, :on => :member, :as => 'invitees'
     get :participants, :on => :member, :as => 'participants'
     resources :arrangements, :only => [:index, :show]
-
-
   end
 
   devise_for :people, :skip => [:sessions, :registrations] do

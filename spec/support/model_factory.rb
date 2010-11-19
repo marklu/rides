@@ -8,27 +8,23 @@ module ModelFactory
         :password_confirmation => 'testpassword123',
         :name => 'First Last',
         :phone => '123-456-7890',
-        :address => '123 Address',
-        :city => 'City',
-        :state => 'State',
+        :address => '1600 Amphitheatre Parkway, Mountain View, CA',
         :music => 'no_preference',
         :smoking => 'no_preference'
       }
     when 'Trip'
       return {
-        :name => "Trip Name",
+        :name => 'Trip Name',
         :time => Time.now,
-        :address => "1234 Address",
-        :city => "City",
-        :state => "State",
-        :organizer => create_valid("Person")
+        :address => '1 Infinite Loop, Cupertino, CA',
+        :organizer => create_valid('Person')
       }
     when 'Vehicle'
       return {
-        :make => "Make",
-        :model => "Model",
+        :make => 'Make',
+        :model => 'Model',
         :capacity => 4,
-        :owner => create_valid("Person")
+        :owner => create_valid('Person')
       }
     else
       raise "Unrecognized Model: #{model}"

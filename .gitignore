@@ -1,12 +1,12 @@
 # Exclude Files
 /coverage/
 /db/*.sqlite3
+/db/schema.rb
 /log/
 /tmp/
 /.project
 /Gemfile.lock
 /webrat.log
-/db/schema.rb
 
 # Keep Empty Directories containing .gitkeep
 !.gitkeep
