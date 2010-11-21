@@ -188,6 +188,20 @@ body
 	margin: 0px 20px 15px 120px;
 }
 
+.ui-autocomplete
+{
+  background-color: #ffffff;
+  border: 1px solid #cfcfcf;
+  list-style-type: none;
+  padding-left: 0px;
+  width: 400px;
+}
+
+.ui-autocomplete a
+{
+  color: #000000;
+}
+
 #footer
 {
 	width: 960px;
