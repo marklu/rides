@@ -13,7 +13,7 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :vehicles
   
   def arrangement_for(person)
-    return self.arrangements.select { |arrangement| self.arrangement.passengers.include?(person) }.first
+    return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
   end
 
   def organized_by?(person)
