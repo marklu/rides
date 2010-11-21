@@ -103,7 +103,9 @@ describe "Routes" do
     end
 
     context "Trip Participants" do
-      it "routes GET /trips/1/participants to trips#participants"
+      it "routes GET /trips/1/participants to trips#participants" do
+        {:get => "/trips/1/participants"}.should route_to(:controller => "trips", :action => "participants", :id => "1")
+      end
     end
 
     context "Join Trip" do
