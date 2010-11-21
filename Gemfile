@@ -5,6 +5,7 @@ gem 'rails', '3.0.1'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "validates_existence", ">= 0.4"
 gem 'validates_timeliness', '~> 3.0.0'
+gem "rails-geocoder", :require => "geocoder"
 
 group :development, :test do
    gem 'webrat'
