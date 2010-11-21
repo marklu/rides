@@ -12,6 +12,7 @@ module NavigationHelpers
     when /the trip info page/ then trip_path(@trip)
     when /the all arrangements page/ then trip_arrangements_path(@trip)
     when /the trip participants page/ then participants_trip_path(@trip)
+    when /the invite user page/ then 
     else
       begin
         page_name =~ /the (.*) page/

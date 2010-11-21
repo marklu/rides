@@ -17,26 +17,23 @@ Feature: User can create trip
     Then I should see "Name"
     And I should see "Time"
     And I should see "Address"
-    And I should see "City"
-    And I should see "State"
 
   Scenario Outline: I plan a new trip
     Given I am on the plan trip page
     When I fill in "Name" with "<name>"
     And I select "<datetime>" as the date and time
     And I fill in "Address" with "<address>"
-    And I fill in "City" with "<city>"
-    And I fill in "State" with "<state>"
     And I press "Create Trip"
     Then I should see "<result>"
 
     Scenarios: with valid information
-      | name      | datetime                | address     | city | state | result                        |
-      | Trip Name | December 25, 2010 10:00 | 123 Address | City | State | Trip was successfully created |
+      | name      | datetime                | address                                      | result                        |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Trip was successfully created |
 
     Scenarios: with invalid information
-      | name      | datetime                | address     | city | state | result                 |
-      |           | December 25, 2010 10:00 | 123 Address | City | State | Name can't be blank    |
-      | Trip Name | December 25, 2010 10:00 |             | City | State | Address can't be blank |
-      | Trip Name | December 25, 2010 10:00 | 123 Address |      | State | City can't be blank    |
-      | Trip Name | December 25, 2010 10:00 | 123 Address | City |       | State can't be blank   |
+      | name      | datetime                | address                                      | result                                 |
+      |           | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Name can't be blank                    |
+      | Trip Name | December 25, 2010 10:00 |                                              | Address must be a valid street address |
+      | Trip Name | December 25, 2010 10:00 | Amphitheatre Parkway, Mountain View, CA      | Address must be a valid street address |
+      | Trip Name | December 25, 2010 10:00 | 123 Address                                  | Address must be a valid street address |
+      | Trip Name | December 25, 2010 10:00 | String                                       | Address must be a valid street address |

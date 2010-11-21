@@ -27,11 +27,13 @@ Feature: User can manage vehicles
       | Toyota | Sienna  | 8        | Vehicle was successfully added. |
 
     Scenarios: with invalid information
-      | make   | model   | capacity | result |
-      |        | Corolla | 4        | error  |
-      | Toyota |         | 4        | error  |
-      | Toyota | Corolla | 0        | error  |
-      | Toyota | Corolla | -1       | error  |
+      | make   | model   | capacity | result                          |
+      |        | Corolla | 4        | Make can't be blank             |
+      | Toyota |         | 4        | Model can't be blank            |
+      | Toyota |         |          | Capacity can't be blank         |
+      | Toyota | Corolla | 0        | Capacity must be greater than 0 |
+      | Toyota | Corolla | -1       | Capacity must be greater than 0 |
+      | Toyota | Corolla | string   | Capacity is not a number        |
 
   Scenario: I can see a list of added vehicles
     Given I have added my "4" passenger "Toyota" "Corolla"

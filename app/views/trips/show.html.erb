@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<% if @trip.invitees.include?(current_person) %>
+<h1><%= link_to "Join this trip", join_trip_path %></h1>
+<% end %>
+
+
 <p>
   <b>Name:</b>
   <%= @trip.name %>
@@ -20,17 +25,17 @@
   <%= @trip.address %>
 </p>
 
-<p>
-  <b>City:</b>
-  <%= @trip.city %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @trip.state %>
-</p>
+<% if @trip.organized_by?(current_person) %>
+  <%= form_tag(invite_trip_path, :method => :post) do %>
+  <%= label_tag(:email, "Enter email of user to invite") %>
+  <%= text_field_tag(:email) %>
+  <%= submit_tag(:invite) %>
+  <% end %>
+<% end %>
 
 <ul>
+  <% if @trip.organized_by?(current_person)%>
   <li><%= link_to 'Edit', edit_trip_path(@trip) %></li>
+  <% end %>
   <li><%= link_to 'Participants', participants_trip_path(@trip) %></li>
 </ul>

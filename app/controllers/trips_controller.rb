@@ -69,4 +69,27 @@ class TripsController < ApplicationController
 
     redirect_to(person_root_url)
   end
+
+  def invite
+    @trip = Trip.find(params[:id])
+    @invitee = Person.find(:first, :conditions => [ "email = ?", params[:email]] )
+    @trip.invitees << @invitee
+
+    if @trip.save
+      redirect_to(@trip, :notice => "Invited #{@invitee.name} to trip.")
+    else
+      render :action => "show"
+    end
+  end
+
+  def join
+    @trip = Trip.find(params[:id])
+    logger.info("JOINING TRIP")
+    @trip.participants << @trip.invitees.delete(current_person) unless !@trip.invitees.include?(current_person)
+    if @trip.save
+      redirect_to(@trip, :notice => "You joined trip #{@trip.name}.")
+    else
+      render :action => "show"
+    end
+  end
 end

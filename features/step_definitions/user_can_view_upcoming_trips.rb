@@ -3,8 +3,6 @@ Given /^I am participating in the following trips:$/ do |trips|
     trip = create_valid!('Trip',
       :name => trip['name'],
       :address => trip['address'],
-      :city => trip['city'],
-      :state => trip['state'],
       :time => Time.parse(trip['time'])
     )
     trip.participants << @person
