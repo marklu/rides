@@ -191,13 +191,14 @@ body
 ul.actions
 {
 	list-style: none;
-	margin-left: 0px;
-	padding-left: 0px;
+	margin-top: 20px 0px;
+	padding: 10px 0px;
 }
 
 ul.actions li
 {
 	display: inline;
+	padding: 10px 0px;
 	margin-right: 20px;
 	font-size: 15px;
 	font-weight: bold;
