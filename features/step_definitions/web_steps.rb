@@ -221,7 +221,7 @@ end
 Then /^the "([^"]*)" field should contain "([^"]*)"$/ do |field, value|
   field_value = field_labeled(field).value
   if field_value.respond_to? :should
-    field_value.should =~ /#{value}/
+    field_value.should == value
   else
     assert_match(/#{value}/, field_value)
   end
@@ -230,7 +230,7 @@ end
 Then /^the "([^"]*)" field should not contain "([^"]*)"$/ do |field, value|
   field_value = field_labeled(field).value
   if field_value.respond_to? :should_not
-    field_value.should_not =~ /#{value}/
+    field_value.should_not == value
   else
     assert_no_match(/#{value}/, field_value)
   end

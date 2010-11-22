@@ -6,12 +6,19 @@ class Person < ActiveRecord::Base
   end
 
   validates :name, :presence => true
-  validates :phone, :presence => true
-  validates :address, :mailing_address => true
+  validates :phone, :presence => true,
+    :format => {:with => /^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
+                :message => "must be a complete and numeric US phone number"}
+  validates :address, :presence => true, :mailing_address => true
   validates :music, :inclusion => {:in => ['no_preference', 'no_music', 'quiet_music', 'loud_music'],
     :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}
   validates :smoking, :inclusion => {:in => ['no_preference', 'no_smoking', 'smoking'],
     :message => "must be one of No Preference, No Smoking, or Smoking"}
+
+  # Process phone numbers
+  after_validation do
+    self.phone.gsub!(/^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, '(\1) \2-\3')
+  end
 
   has_and_belongs_to_many :arrangements, :join_table => "arrangements_passengers",
     :foreign_key => "passenger_id"

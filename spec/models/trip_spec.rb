@@ -11,12 +11,12 @@ describe Trip do
     end
 
     it "is not valid without a name" do
-      @trip.name = nil
+      @trip.name = ''
       @trip.should_not be_valid
     end
 
     it "is not valid without a time" do
-      @trip.time = nil
+      @trip.time = ''
       @trip.should_not be_valid
     end
 
@@ -28,7 +28,7 @@ describe Trip do
     end
 
     it "is not valid without an address" do
-      @trip.address = nil
+      @trip.address = ''
       @trip.should_not be_valid
     end
 
