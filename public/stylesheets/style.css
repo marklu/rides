@@ -188,6 +188,28 @@ body
 	margin: 0px 20px 15px 120px;
 }
 
+ul.actions
+{
+	list-style: none;
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+ul.actions li
+{
+	display: inline;
+	margin-right: 20px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+ul.actions li a
+{
+	padding: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	background-color: #eee;
+}
+
 .ui-autocomplete
 {
   background-color: #ffffff;
