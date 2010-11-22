@@ -1,5 +1,14 @@
 <div id="main">
   <h1>Trip History</h1>
+
+  <div id="sidebar">
+    <h2>Filter</h2>
+    <ul>
+      <% @months_with_trips.each do |m| %>
+        <li><%= link_to "#{Date::MONTHNAMES[m[:month]]} #{m[:year]}", trips_path(:month => m[:month], :year => m[:year]) %></li>
+      <% end %>
+    </ul>
+  </div>
   
   <% @trips.each do |trip| %>
   <div class="section">
@@ -22,13 +31,4 @@
   	</div>
   </div>
   <% end %>
-</div>
-
-<div id="help">
-  <h2>Filter</h2>
-  <ul>
-    <% @months_with_trips.each do |m| %>
-      <li><%= link_to "#{Date::MONTHNAMES[m[:month]]} #{m[:year]}", trips_path(:month => m[:month], :year => m[:year]) %></li>
-    <% end %>
-  </ul>
 </div>
