@@ -4,4 +4,19 @@ Feature: Trip participant can leave trip
   As a trip participant
   I want to be able to leave a trip
 
-  Scenario: I can leave a trip
+  Background: I am a participant in an upcoming trip
+    Given I am signed in
+    And there is an upcoming trip named "Company Picnic"
+    And I am a participant
+
+  Scenario: I leave the trip
+    Given I am on the trip info page
+    When I follow "Leave Trip"
+    Then I should be on the dashboard page
+    And I should see "You are no longer participating in Company Picnic"
+
+  Scenario: After I leave the trip, I do not see it on my dashboard
+    Given I am on the trip info page
+    When I follow "Leave Trip"
+    And I go to the dashboard page
+    Then I should not see "Company Picnic"

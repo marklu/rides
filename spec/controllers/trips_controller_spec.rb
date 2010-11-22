@@ -121,6 +121,34 @@ describe TripsController do
     end
   end
 
+  describe "DELETE participants" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        delete :leave, :id => 1
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in as a trip participant" do
+      before(:each) do
+        @participant = create_valid!('Person', :email => 'participant@email.com')
+        @trip.participants << @participant
+        signin(@participant)
+      end
+
+      it "removes the participant from the trip" do
+        Trip.stub(:find).and_return(@trip)
+        delete :leave, :id => @trip.id
+        @trip.participants.should_not include(@participant)
+      end
+
+      it "redirects to the dashboard page" do
+        delete :leave, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+  end
+
   describe "GET show" do
     context "when not logged in" do
       it "redirects to the signin page" do

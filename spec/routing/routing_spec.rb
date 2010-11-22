@@ -112,6 +112,12 @@ describe "Routes" do
       it "routes POST /trips/1/participants to trips#join"
     end
 
+    context "Leave Trip" do
+      it "routes DELETE /trips/1/participants to trips#leave" do
+        {:delete => "/trips/1/participants"}.should route_to(:controller => "trips", :action => "leave", :id => "1")
+      end
+    end
+
     context "Invite Participants" do
       it "routes GET ... to ... "
       it "routes POST ... to ..."

@@ -24,6 +24,14 @@ class TripsController < ApplicationController
     @participants = @trip.participants.sort_by {|participant| participant.name}
   end
 
+  # DELETE /trips/1/participants
+  def leave
+    @trip = Trip.find(params[:id])
+    @trip.participants.delete(current_person)
+
+    redirect_to(person_root_url, :notice => "You are no longer participating in #{@trip.name}")
+  end
+
   # GET /trips/1
   def show
     @trip = Trip.find(params[:id])
