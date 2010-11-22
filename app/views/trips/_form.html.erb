@@ -11,24 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-	<%= f.label :name %><br />
-	<%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :time %><br />
-	<%= f.datetime_select :time, :discard_second => true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address %><br />
-	<%= f.text_field :address %>
-  </div>
+<div class="section">
+	<!--<h2><%= f.text_field :name %></h2>-->
+	<fieldset>
+		<p><%= f.label :name %><%= f.text_field :name %></p>
+		<p><%= f.label :time %><%= f.datetime_select :time, :discard_second => true %></p>
+		<p><%= f.label :address %><%= f.text_field :address %></p>
+	</fieldset>
+</div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-
-	
