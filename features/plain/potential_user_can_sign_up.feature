@@ -27,12 +27,12 @@ Feature: Potential user can sign up
       | email@email.com | testpassword123 | testpassword123 | First Last | 123.456.7890   | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
       | email@email.com | testpassword123 | testpassword123 | First Last | 123-456-7890   | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
       | email@email.com | testpassword123 | testpassword123 | First Last | 123 456 7890   | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043      | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA            | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, California    | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View                | dashboard | You have signed up successfully. |
+#     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
+#     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA | dashboard | You have signed up successfully. |
+#     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043      | dashboard | You have signed up successfully. |
+#     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA            | dashboard | You have signed up successfully. |
+#     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, California    | dashboard | You have signed up successfully. |
+#     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View                | dashboard | You have signed up successfully. |
 
     Scenarios: with invalid information
       | email           | password        | confirm              | name       | phone         | address                                      | page    | result                                               |
@@ -46,10 +46,10 @@ Feature: Potential user can sign up
       | email@email.com | testpassword123 | testpassword123      | First Last |               | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone can't be blank                                 |
       | email@email.com | testpassword123 | testpassword123      | First Last | 12345678900   | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
       | email@email.com | testpassword123 | testpassword123      | First Last | aaaaaaaaaa    | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  |                                              | sign up | Address must be a valid street address               |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | Amphitheatre Parkway, Mountain View, CA      | sign up | Address must be a valid street address               |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | 123 Address                                  | sign up | Address must be a valid street address               |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | String                                       | sign up | Address must be a valid street address               |
+#     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  |                                              | sign up | Address must be a valid street address               |
+#     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | Amphitheatre Parkway, Mountain View, CA      | sign up | Address must be a valid street address               |
+#     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | 123 Address                                  | sign up | Address must be a valid street address               |
+#     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | String                                       | sign up | Address must be a valid street address               |
 
   Scenario: I see the entered information in my profile
     Given I am on the sign up page

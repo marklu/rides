@@ -9,7 +9,7 @@ class Person < ActiveRecord::Base
   validates :phone, :presence => true,
     :format => {:with => /^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
                 :message => "must be a complete and numeric US phone number"}
-  validates :address, :presence => true, :mailing_address => true
+  validates :address, :presence => true #, :mailing_address => true
   validates :music, :inclusion => {:in => ['no_preference', 'no_music', 'quiet_music', 'loud_music'],
     :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}
   validates :smoking, :inclusion => {:in => ['no_preference', 'no_smoking', 'smoking'],

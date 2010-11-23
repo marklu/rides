@@ -33,7 +33,7 @@ Feature: User can create trip
     Scenarios: with invalid information
       | name      | datetime                | address                                      | result                                 |
       |           | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Name can't be blank                    |
-      | Trip Name | December 25, 2010 10:00 |                                              | Address must be a valid street address |
-      | Trip Name | December 25, 2010 10:00 | Amphitheatre Parkway, Mountain View, CA      | Address must be a valid street address |
-      | Trip Name | December 25, 2010 10:00 | 123 Address                                  | Address must be a valid street address |
-      | Trip Name | December 25, 2010 10:00 | String                                       | Address must be a valid street address |
+#     | Trip Name | December 25, 2010 10:00 |                                              | Address must be a valid street address |
+#     | Trip Name | December 25, 2010 10:00 | Amphitheatre Parkway, Mountain View, CA      | Address must be a valid street address |
+#     | Trip Name | December 25, 2010 10:00 | 123 Address                                  | Address must be a valid street address |
+#     | Trip Name | December 25, 2010 10:00 | String                                       | Address must be a valid street address |
