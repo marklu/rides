@@ -144,6 +144,7 @@ class Trip < ActiveRecord::Base
       num_evaluations = 1
       # Anneal through a schedule as follows
       Trip.anneal_schedule(10, 0.9999) { |temp|
+        done = false
         Trip.all_permutations(passengers, current_path[1..current_path.length-2]) { |new_path|
           # Check to see if we hit maximum evaluations
           if num_evaluations >= max_evaluations
