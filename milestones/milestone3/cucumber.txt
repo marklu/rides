@@ -1,3 +1,86 @@
+D:\Projects\CS169\Rides>cucumber -p selenium --format pretty
+Using the selenium profile...
+Feature: Potential user can sign up
+  So that I can identify myself as a user of the service
+  As a potential user
+  I want to sign up as a user
+
+  Scenario Outline: I can autocomplete my address # features\enhanced\potential_user_can_sign_up.feature:7
+    Given I am on the sign up page                # features/step_definitions/web_steps.rb:15
+    When I type "<address>" into "Address"        # features/step_definitions/selenium.rb:2
+    Then I should see "<autocomplete>"            # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with a valid address
+      | address                   | autocomplete                                         |
+      |==> Waiting for Selenium RC server on port 4444... Ready!
+==> Waiting for rails_thin application server on port 3001... Ready!
+ 1600 Amphitheatre Parkway | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA |
+      | 1 Infinite Loop           | 1 Infinite Loop, Cupertino, CA 95014, USA            |
+      | 795 Folsom St             | 795 Folsom St, San Francisco, CA 94107, USA          |
+      | 1601 South California Ave | 1601 S California Ave, Palo Alto, CA 94304, USA      |
+
+  Scenario: I autocomplete my address                                                    # features\enhanced\potential_user_can_sign_up.feature:19
+    Given I am on the sign up page                                                       # features/step_definitions/web_steps.rb:15
+    When I type "1600 Amphitheatre Parkway" into "Address"                               # features/step_definitions/selenium.rb:2
+    And I select "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"                  # features/step_definitions/selenium.rb:14
+    Then "Address" should contain "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA" # features/step_definitions/selenium.rb:24
+
+Feature: User can create trip
+  So that I can organize transportation for my trip
+  As a user
+  I want to plan a new trip
+
+  Background: I am signed in # features\enhanced\user_can_create_trip.feature:7
+    Given I am signed in     # features/step_definitions/global.rb:9
+
+  Scenario Outline: I can autocomplete my address # features\enhanced\user_can_create_trip.feature:10
+    Given I am on the plan trip page              # features/step_definitions/web_steps.rb:15
+    When I type "<address>" into "Address"        # features/step_definitions/selenium.rb:2
+    Then I should see "<autocomplete>"            # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with a valid address
+      | address                   | autocomplete                                         |
+      | 1600 Amphitheatre Parkway | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA |
+      | 1 Infinite Loop           | 1 Infinite Loop, Cupertino, CA 95014, USA            |
+      | 795 Folsom St             | 795 Folsom St, San Francisco, CA 94107, USA          |
+      | 1601 South California Ave | 1601 S California Ave, Palo Alto, CA 94304, USA      |
+
+  Scenario: I autocomplete my address                                                    # features\enhanced\user_can_create_trip.feature:22
+    Given I am on the plan trip page                                                     # features/step_definitions/web_steps.rb:15
+    When I type "1600 Amphitheatre Parkway" into "Address"                               # features/step_definitions/selenium.rb:2
+    And I select "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"                  # features/step_definitions/selenium.rb:14
+    Then "Address" should contain "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA" # features/step_definitions/selenium.rb:24
+
+Feature: User can edit profile
+  So that I can receive valid and favorable ride arrangements
+  As a user
+  I want to update my profile
+
+  Background: I am signed in # features\enhanced\user_can_edit_profile.feature:7
+    Given I am signed in     # features/step_definitions/global.rb:9
+
+  Scenario Outline: I can autocomplete my address # features\enhanced\user_can_edit_profile.feature:10
+    Given I am on the profile page                # features/step_definitions/web_steps.rb:15
+    When I type "<address>" into "Address"        # features/step_definitions/selenium.rb:2
+    Then I should see "<autocomplete>"            # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with a valid address
+      | address                   | autocomplete                                         |
+      | 1600 Amphitheatre Parkway | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA |
+      | 1 Infinite Loop           | 1 Infinite Loop, Cupertino, CA 95014, USA            |
+      | 795 Folsom St             | 795 Folsom St, San Francisco, CA 94107, USA          |
+      | 1601 South California Ave | 1601 S California Ave, Palo Alto, CA 94304, USA      |
+
+  Scenario: I autocomplete my address                                                    # features\enhanced\user_can_edit_profile.feature:22
+    Given I am on the profile page                                                       # features/step_definitions/web_steps.rb:15
+    When I type "1600 Amphitheatre Parkway" into "Address"                               # features/step_definitions/selenium.rb:2
+    And I select "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"                  # features/step_definitions/selenium.rb:14
+    Then "Address" should contain "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA" # features/step_definitions/selenium.rb:24
+
+15 scenarios (15 passed)
+58 steps (58 passed)
+3m8.749s
+
 D:\Projects\CS169\Rides>cucumber --format pretty
 Using the default profile...
 Feature: Potential user can sign up
@@ -23,17 +106,17 @@ Feature: Potential user can sign up
     And I should see "<result>"                # features/step_definitions/web_steps.rb:143
 
     Scenarios: with valid information
-      | email           | password        | confirm         | name       | phone        | address                                      | page      | result                           |
-      | email@email.com | testpassword123 | testpassword123 | First Last | 1234567890   | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | 123.456.7890 | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
-      | email@email.com | testpassword123 | testpassword123 | First Last | 123 456 7890 | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
-    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
-    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA | dashboard | You have signed up successfully. |
-    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043      | dashboard | You have signed up successfully. |
-    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA            | dashboard | You have signed up successfully. |
-    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, California    | dashboard | You have signed up successfully. |
-    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View                | dashboard | You have signed up successfully. |
+      | email           | password        | confirm         | name       | phone          | address                                              | page      | result                           |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 1234567890     | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 123.456.7890   | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 123-456-7890   | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 123 456 7890   | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043      | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA            | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, California    | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View                | dashboard | You have signed up successfully. |
 
     Scenarios: with invalid information
       | email           | password        | confirm              | name       | phone        | address                                      | page    | result                                               |
@@ -47,11 +130,11 @@ Feature: Potential user can sign up
       | email@email.com | testpassword123 | testpassword123      | First Last |              | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone can't be blank                                 |
       | email@email.com | testpassword123 | testpassword123      | First Last | 12345678900  | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
       | email@email.com | testpassword123 | testpassword123      | First Last | aaaaaaaaaa   | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890 |                                              | sign up | Address must be a valid street address               |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890 | Amphitheatre Parkway, Mountain View, CA      | sign up | Address must be a valid street address               |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890 | 123 Address                                  | sign up | Address must be a valid street address               |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890 | String                                       | sign up | Address must be a valid street address               |
 
-  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  |                                              | sign up | Address must be a valid street address               |
-  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | Amphitheatre Parkway, Mountain View, CA      | sign up | Address must be a valid street address               |
-  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | 123 Address                                  | sign up | Address must be a valid street address               |
-  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | String                                       | sign up | Address must be a valid street address               |
   Scenario: I see the entered information in my profile                                   # features\plain\potential_user_can_sign_up.feature:54
     Given I am on the sign up page                                                        # features/step_definitions/web_steps.rb:15
     When I fill in "Email" with "email@email.com"                                         # features/step_definitions/web_steps.rb:35
@@ -333,8 +416,12 @@ Feature: User can create trip
       | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Trip was successfully created |
 
     Scenarios: with invalid information
-      | name | datetime                | address                                      | result              |
-      |      | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Name can't be blank |
+      | name      | datetime                | address                                      | result                                 |
+      |           | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Name can't be blank                    |
+      | Trip Name | December 25, 2010 10:00 |                                              | Address must be a valid street address |
+      | Trip Name | December 25, 2010 10:00 | Amphitheatre Parkway, Mountain View, CA      | Address must be a valid street address |
+      | Trip Name | December 25, 2010 10:00 | 123 Address                                  | Address must be a valid street address |
+      | Trip Name | December 25, 2010 10:00 | String                                       | Address must be a valid street address |
 
 Feature: User can edit profile
   So that I can receive valid and favorable ride arrangements
@@ -372,18 +459,28 @@ Feature: User can edit profile
     Then I should see "<result>"                     # features/step_definitions/web_steps.rb:143
 
     Scenarios: with valid information
-      | name     | email              | address                                      | phone          | result                                 |
-      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1234567890     | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 123.456.7890   | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 123-456-7890   | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 123 456 7890   | You updated your account successfully. |
-      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | (123) 456-7890 | You updated your account successfully. |
+      | name     | email              | address                                              | phone          | result                                 |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA | 1231231234     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Pkwy, Mountain View, CA 94043      | 1231231234     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Pkwy, Mountain View, CA            | 1231231234     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Pkwy, Mountain View, California    | 1231231234     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Pkwy, Mountain View                | 1231231234     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkkway, Mountain View            | 1231231234     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | 1234567890     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | 123.456.7890   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | 123-456-7890   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | 123 456 7890   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | (123) 456-7890 | You updated your account successfully. |
 
     Scenarios: with invalid information
       | name     | email              | address                                      | phone       | result                                               |
       |          | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234  | Name can't be blank                                  |
       | John Doe |                    | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234  | Email can't be blank                                 |
       | John Doe | gmail.com          | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234  | Email is invalid                                     |
+      | John Doe | John.Doe@gmail.com |                                              | 1231231234  | Address must be a valid street address               |
+      | John Doe | John.Doe@gmail.com | Amphitheatre Parkway, Mountain View, CA      | 1231231234  | Address must be a valid street address               |
+      | John Doe | John.Doe@gmail.com | 123 Address                                  | 1231231234  | Address must be a valid street address               |
+      | John Doe | John.Doe@gmail.com | String                                       | 1231231234  | Address must be a valid street address               |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA |             | Phone can't be blank                                 |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 12345678900 | Phone must be a complete and numeric US phone number |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | aaaaaaaaaa  | Phone must be a complete and numeric US phone number |
@@ -580,6 +677,6 @@ Feature: User can view upcoming trips
     Then I should see "2015-12-25"                    # features/step_definitions/web_steps.rb:143
     And I should see "1 Infinite Loop, Cupertino, CA" # features/step_definitions/web_steps.rb:143
 
-90 scenarios (90 passed)
-677 steps (677 passed)
-0m42.206s
+114 scenarios (114 passed)
+895 steps (895 passed)
+2m10.460s

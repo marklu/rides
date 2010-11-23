@@ -1,7 +1,7 @@
 class Trip < ActiveRecord::Base
   validates :name, :presence => true
   validates :time, :presence => true, :timeliness => {:type => :datetime}
-  validates :address, :presence => true #, :mailing_address => true
+  validates :address, :presence => true, :mailing_address => true
   validates :organizer, :existence => {:allow_nil => false}
 
   has_many :arrangements

@@ -1,5 +1,3 @@
-/*
-
 var geocoder;
     
 function initialize() {
@@ -24,5 +22,3 @@ $(document).ready(function() {
     });
   });
 });
-
-*/

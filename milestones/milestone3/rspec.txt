@@ -170,7 +170,7 @@ Person
     is not valid without a phone
     is not valid with an invalid phone number
     is not valid without an address
-    is not valid with an invalid address (PENDING: No reason given)
+    is not valid with an invalid address
     is valid with a valid music preference (No Preference, No Music, Quiet Music, Loud Music)
     is not valid with an invalid music preference
     is valid with a valid smoking preference (No Preference, No Smoking, Smoking)
@@ -191,7 +191,7 @@ Trip
     is not valid without a time
     is not valid with an invalid time
     is not valid without an address
-    is not valid with an invalid address (PENDING: No reason given)
+    is not valid with an invalid address
     is not valid without an organizer
     is not valid with an invalid organizer
   when upcoming
@@ -265,12 +265,6 @@ Pending:
   Invitation add some examples to (or delete) D:/Projects/CS169/Rides/spec/models/invitation_spec.rb
     # Not Yet Implemented
     # ./spec/models/invitation_spec.rb:4
-  Person when validating is not valid with an invalid address
-    # No reason given
-    # ./spec/models/person_spec.rb:82
-  Trip when validating is not valid with an invalid address
-    # No reason given
-    # ./spec/models/trip_spec.rb:35
   Routes Trip Info Join Trip routes POST /trips/1/participants to trips#join
     # Not Yet Implemented
     # ./spec/routing/routing_spec.rb:112
@@ -281,5 +275,5 @@ Pending:
     # Not Yet Implemented
     # ./spec/routing/routing_spec.rb:123
 
-Finished in 29.59 seconds
-148 examples, 0 failures, 8 pending
+Finished in 31.61 seconds
+148 examples, 0 failures, 6 pending

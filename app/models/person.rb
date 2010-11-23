@@ -11,7 +11,7 @@ class Person < ActiveRecord::Base
                 :message => "must be a complete and numeric US phone number"},
                 :unless => Proc.new {|phone| self.phone.nil?}
   validates_presence_of :password, :unless => Proc.new {|password| self.password.nil?}
-  validates :address, :presence => true, :allow_nil => true #, :mailing_address => true
+  validates :address, :presence => true, :mailing_address => true, :allow_nil => true
   validates :music, :inclusion => {:in => ['no_preference', 'no_music', 'quiet_music', 'loud_music'],
     :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}#, :allow_nil => true
   validates :smoking, :inclusion => {:in => ['no_preference', 'no_smoking', 'smoking'],
