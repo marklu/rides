@@ -373,4 +373,65 @@ describe TripsController do
       end
     end
   end
+
+  describe "POST invite" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        delete :destroy, :id => @trip.id
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        signin(@person)
+        @invitee = create_valid!("Person", :name => 'Mr. Invitee', :email => 'invitee@invitee.com')
+      end
+
+      it "finds the trip" do
+        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
+        post :invite, :id => @trip.id, :email => @invitee.email
+      end
+
+      it "finds the person" do
+        Person.stub(:find).and_return(@person)
+        post :invite, :id => @trip.id, :email => @invitee.email
+        assigns[:invitee].should eq(@person)
+      end
+
+      it "invites the invitee" do
+        Trip.stub(:find).and_return(@trip)
+        @trip.should_receive(:invite!).with(@invitee)
+        post :invite, :id => @trip.id, :email => @invitee.email
+
+      end
+
+      it "saves the trip" do
+        @trip.should_receive(:save).and_return(true)
+        post :invite, :id => @trip.id, :email => 'invitee@invitee.com'
+      end
+
+      it "sets a flash[:notice] message" do
+        post :invite, :id => @trip.id, :email => @invitee.email
+        flash[:notice].should == "Invited #{@invitee.email} to trip."
+      end
+
+      it "adds the invitee to trip's list of invitees" do
+        post :invite, :id => @trip.id, :email => @invitee.email
+        @trip.invitees.should include(@invitee)
+      end
+
+      it "adds the trip to invitee's list of pending trips" do
+        pending
+        post :invite, :id => @trip.id, :email => @invitee.email
+        @invitee.pending_trips.should include(@trip)
+      end
+
+      it "redirects to the show trip info page" do
+        post :invite, :id => @trip.id, :email => @invitee.email
+        response.should redirect_to(:action => "show", :id => @trip.id)
+      end
+    end
+  end
 end

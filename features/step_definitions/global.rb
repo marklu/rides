@@ -1,3 +1,11 @@
+Given /^there exists a user with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
+  @person = create_valid!('Person',
+    :email => email,
+    :password => password,
+    :password_confirmation => password
+  )
+end
+
 Given /^I am signed in$/ do
   @person = create_valid!('Person', :email => 'myemail@email.com')
   visit '/signin'

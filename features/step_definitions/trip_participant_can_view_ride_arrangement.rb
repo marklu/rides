@@ -18,9 +18,11 @@ Given /^the following people are participants:$/ do |participants|
 end
 
 Given /^I am assigned a ride arrangement$/ do
-  @arrangement = @trip.arrangements.create
+  @arrangement = @trip.arrangements.create!(
+    :driver => create_valid!('Person', :email => 'driver@email.com'),
+    :vehicle => create_valid!('Vehicle')
+  )
   @arrangement.passengers << @person
-  @arrangement.save!
 end
 
 Given /^the following people are assigned to my ride arrangement:$/ do |participants|

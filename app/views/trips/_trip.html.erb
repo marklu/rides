@@ -11,9 +11,9 @@
 			<% if trip.arrangement_for(current_person).nil? %>
 				You have no ride arrangement.
 			<% else %>
-				<% trip.arrangement_for(current_person).passengers.each do |passenger| %>
-				<%=h passenger.name %> 
-				<% end %>
+				<% arrangement = trip.arrangement_for(current_person) %>
+				Ride in <strong><%=h arrangement.driver.name %>'s <%=h arrangement.vehicle.make %> <%=h arrangement.vehicle.model %></strong> with
+				<%=h (trip.arrangement_for(current_person).passengers.map {|p| p.name}).join(", ") %>
 			<% end %>
 			</p>
 		<% end %>

@@ -8,8 +8,8 @@ class Trip < ActiveRecord::Base
   belongs_to :organizer, :class_name => "Person", :foreign_key => "organizer_id"
   has_and_belongs_to_many :participants, :class_name => "Person",
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
-  has_and_belongs_to_many :invitees, :class_name => "Person",
-    :join_table => "invitees_trips", :association_foreign_key => "invitee_id"
+  has_many :invitations, :foreign_key => :pending_trip_id
+  has_many :invitees, :through => :invitations
   has_and_belongs_to_many :vehicles
   
   def arrangement_for(person)
@@ -23,6 +23,13 @@ class Trip < ActiveRecord::Base
   def upcoming?
     return self.time >= Time.now()
   end
+
+  def invite!(person)
+    invitation = self.invitations.build(:email => person.email)
+    invitation.invitee = person
+    return invitation
+  end
+  
   
   def generate_arrangements
     if self.vehicles.length != 0
@@ -128,6 +135,7 @@ class Trip < ActiveRecord::Base
       num_evaluations = 1
       # Anneal through a schedule as follows
       Trip.anneal_schedule(10, 0.9999) { |temp|
+        done = false
         Trip.all_permutations(passengers, current_path[1..current_path.length-2]) { |new_path|
           # Check to see if we hit maximum evaluations
           if num_evaluations >= max_evaluations

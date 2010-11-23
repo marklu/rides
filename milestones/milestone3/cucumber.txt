@@ -1,0 +1,585 @@
+D:\Projects\CS169\Rides>cucumber --format pretty
+Using the default profile...
+Feature: Potential user can sign up
+  So that I can identify myself as a user of the service
+  As a potential user
+  I want to sign up as a user
+
+  Scenario: I can view the sign up page  # features\plain\potential_user_can_sign_up.feature:7
+    Given I am on the home page          # features/step_definitions/web_steps.rb:15
+    When I follow "Sign up"              # features/step_definitions/web_steps.rb:27
+    Then I should be on the sign up page # features/step_definitions/web_steps.rb:257
+
+  Scenario Outline: I sign up                  # features\plain\potential_user_can_sign_up.feature:12
+    Given I am on the sign up page             # features/step_definitions/web_steps.rb:15
+    When I fill in "Email" with "<email>"      # features/step_definitions/web_steps.rb:35
+    And I fill in "Password" with "<password>" # features/step_definitions/web_steps.rb:35
+    And I fill in "Confirm" with "<confirm>"   # features/step_definitions/web_steps.rb:35
+    And I fill in "Name" with "<name>"         # features/step_definitions/web_steps.rb:35
+    And I fill in "Phone" with "<phone>"       # features/step_definitions/web_steps.rb:35
+    And I fill in "Address" with "<address>"   # features/step_definitions/web_steps.rb:35
+    And I press "Sign up"                      # features/step_definitions/web_steps.rb:23
+    Then I should be on the <page> page        # features/step_definitions/web_steps.rb:257
+    And I should see "<result>"                # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with valid information
+      | email           | password        | confirm         | name       | phone        | address                                      | page      | result                           |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 1234567890   | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 123.456.7890 | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | 123 456 7890 | 1600 Amphitheatre Parkway, Mountain View, CA | dashboard | You have signed up successfully. |
+    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA         | dashboard | You have signed up successfully. |
+    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA | dashboard | You have signed up successfully. |
+    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043      | dashboard | You have signed up successfully. |
+    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA            | dashboard | You have signed up successfully. |
+    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, California    | dashboard | You have signed up successfully. |
+    #     | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View                | dashboard | You have signed up successfully. |
+
+    Scenarios: with invalid information
+      | email           | password        | confirm              | name       | phone        | address                                      | page    | result                                               |
+      |                 | testpassword123 | testpassword123      | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Email can't be blank                                 |
+      | invalidemail    | testpassword123 | testpassword123      | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Email is invalid                                     |
+      | email@email.com |                 | testpassword123      | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Password can't be blank                              |
+      | email@email.com | 12345           | 12345                | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Password is too short                                |
+      | email@email.com | testpassword123 | differentpassword456 | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Password doesn't match confirmation                  |
+      | email@email.com | testpassword123 |                      | First Last | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Password doesn't match confirmation                  |
+      | email@email.com | testpassword123 | testpassword123      |            | 123-456-7890 | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Name can't be blank                                  |
+      | email@email.com | testpassword123 | testpassword123      | First Last |              | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone can't be blank                                 |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 12345678900  | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
+      | email@email.com | testpassword123 | testpassword123      | First Last | aaaaaaaaaa   | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
+
+  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  |                                              | sign up | Address must be a valid street address               |
+  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | Amphitheatre Parkway, Mountain View, CA      | sign up | Address must be a valid street address               |
+  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | 123 Address                                  | sign up | Address must be a valid street address               |
+  #     | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | String                                       | sign up | Address must be a valid street address               |
+  Scenario: I see the entered information in my profile                                   # features\plain\potential_user_can_sign_up.feature:54
+    Given I am on the sign up page                                                        # features/step_definitions/web_steps.rb:15
+    When I fill in "Email" with "email@email.com"                                         # features/step_definitions/web_steps.rb:35
+    And I fill in "Password" with "testpassword123"                                       # features/step_definitions/web_steps.rb:35
+    And I fill in "Confirm" with "testpassword123"                                        # features/step_definitions/web_steps.rb:35
+    And I fill in "Name" with "First Last"                                                # features/step_definitions/web_steps.rb:35
+    And I fill in "Phone" with "123-456-7890"                                             # features/step_definitions/web_steps.rb:35
+    And I fill in "Address" with "1600 Amphitheatre Parkway, Mountain View, CA"           # features/step_definitions/web_steps.rb:35
+    And I press "Sign up"                                                                 # features/step_definitions/web_steps.rb:23
+    And I follow "Profile"                                                                # features/step_definitions/web_steps.rb:27
+    Then the "Email" field should contain "email@email.com"                               # features/step_definitions/web_steps.rb:221
+    And the "Name" field should contain "First Last"                                      # features/step_definitions/web_steps.rb:221
+    And the "Phone" field should contain "(123) 456-7890"                                 # features/step_definitions/web_steps.rb:221
+    And the "Address" field should contain "1600 Amphitheatre Parkway, Mountain View, CA" # features/step_definitions/web_steps.rb:221
+
+  Scenario Outline: I see a formatted version of my phone number in my profile  # features\plain\potential_user_can_sign_up.feature:69
+    Given I am on the sign up page                                              # features/step_definitions/web_steps.rb:15
+    When I fill in "Email" with "email@email.com"                               # features/step_definitions/web_steps.rb:35
+    And I fill in "Password" with "testpassword123"                             # features/step_definitions/web_steps.rb:35
+    And I fill in "Confirm" with "testpassword123"                              # features/step_definitions/web_steps.rb:35
+    And I fill in "Name" with "First Last"                                      # features/step_definitions/web_steps.rb:35
+    And I fill in "Phone" with "<phone>"                                        # features/step_definitions/web_steps.rb:35
+    And I fill in "Address" with "1600 Amphitheatre Parkway, Mountain View, CA" # features/step_definitions/web_steps.rb:35
+    And I press "Sign up"                                                       # features/step_definitions/web_steps.rb:23
+    And I follow "Profile"                                                      # features/step_definitions/web_steps.rb:27
+    Then the "Phone" field should contain "<formatted>"                         # features/step_definitions/web_steps.rb:221
+
+    Scenarios: Given a valid phone number
+      | phone          | formatted      |
+      | 1234567890     | (123) 456-7890 |
+      | 123.456.7890   | (123) 456-7890 |
+      | 123-456-7890   | (123) 456-7890 |
+      | 123 456 7890   | (123) 456-7890 |
+      | (123) 456-7890 | (123) 456-7890 |
+
+  Scenario: I have neutral default preferences                                  # features\plain\potential_user_can_sign_up.feature:89
+    Given I am on the sign up page                                              # features/step_definitions/web_steps.rb:15
+    When I fill in "Email" with "email@email.com"                               # features/step_definitions/web_steps.rb:35
+    And I fill in "Password" with "testpassword123"                             # features/step_definitions/web_steps.rb:35
+    And I fill in "Confirm" with "testpassword123"                              # features/step_definitions/web_steps.rb:35
+    And I fill in "Name" with "First Last"                                      # features/step_definitions/web_steps.rb:35
+    And I fill in "Phone" with "123-456-7890"                                   # features/step_definitions/web_steps.rb:35
+    And I fill in "Address" with "1600 Amphitheatre Parkway, Mountain View, CA" # features/step_definitions/web_steps.rb:35
+    And I press "Sign up"                                                       # features/step_definitions/web_steps.rb:23
+    And I follow "Profile"                                                      # features/step_definitions/web_steps.rb:27
+    Then the "No preference" radio button for "Music" should be selected        # features/step_definitions/global.rb:17
+    And the "No preference" radio button for "Smoking" should be selected       # features/step_definitions/global.rb:17
+
+Feature: Trip organizer can edit ride arrangements
+  So that I can handle any issues that arise
+  As a trip organizer
+  I want to be able to edit ride arrangements
+
+Feature: Trip organizer can invite people to join trip
+  So that I can organize rides for the participants of my trip
+  As a trip organizer
+  I want to invite people to join the trip
+
+  Background: There's a trip to be invited to                                                       # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:7
+    Given there exists a user with email "organizer@organizer.com" and password "organizer"         # features/step_definitions/global.rb:1
+    And there exists a user with email "invitee@invitee.com" and password "invitee"                 # features/step_definitions/global.rb:1
+    And user with email "organizer@organizer.com" is organizing a future trip called "ExistingTrip" # features/step_definitions/trip_organizer_can_invite_people_to_join_trip.rb:3
+
+  Scenario: I can invite existing, registered users to join a trip                                  # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:12
+    Given I'm signed in as "organizer@organizer.com" and password "organizer"                       # features/step_definitions/trip_organizer_can_invite_people_to_join_trip.rb:25
+    And I am on the trip info page of "ExistingTrip"                                                # features/step_definitions/web_steps.rb:15
+    When I fill in "Enter email of user to invite" with "invitee@invitee.com"                       # features/step_definitions/web_steps.rb:35
+    And I press "Invite"                                                                            # features/step_definitions/web_steps.rb:23
+    Then the user with email "invitee@invitee.com" should have an invitation to "ExistingTrip"      # features/step_definitions/trip_organizer_can_invite_people_to_join_trip.rb:16
+
+  Scenario: I cannot invite an existing, registered user to join a trip if he already has an invitation to that trip # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:19
+    Given I'm signed in as "organizer@organizer.com" and password "organizer"                                        # features/step_definitions/trip_organizer_can_invite_people_to_join_trip.rb:25
+    And I am on the trip info page of "ExistingTrip"                                                                 # features/step_definitions/web_steps.rb:15
+    And I fill in "Enter email of user to invite" with "invitee@invitee.com"                                         # features/step_definitions/web_steps.rb:35
+    And I press "Invite"                                                                                             # features/step_definitions/web_steps.rb:23
+    When I fill in "Enter email of user to invite" with "invitee@invitee.com"                                        # features/step_definitions/web_steps.rb:35
+    And I press "Invite"                                                                                             # features/step_definitions/web_steps.rb:23
+    Then I should see "Error: Invitation already exists."                                                            # features/step_definitions/web_steps.rb:143
+
+  Scenario: I cannot invite an existing, registered user to join a trip if he is already participating in that trip # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:28
+    Given I'm signed in as "organizer@organizer.com" and password "organizer"                                       # features/step_definitions/trip_organizer_can_invite_people_to_join_trip.rb:25
+    And the user with email "invitee@invitee.com" is participating in "ExistingTrip"                                # features/step_definitions/trip_organizer_can_invite_people_to_join_trip.rb:61
+    And I am on the trip info page of "ExistingTrip"                                                                # features/step_definitions/web_steps.rb:15
+    When I fill in "Enter email of user to invite" with "invitee@invitee.com"                                       # features/step_definitions/web_steps.rb:35
+    And I press "Invite"                                                                                            # features/step_definitions/web_steps.rb:23
+    And I should see " is already a participant of that trip."                                                      # features/step_definitions/web_steps.rb:143
+
+  Scenario: I can invite people by email                                                            # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:36
+
+  Scenario: Invited user can view trip info                                                         # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:38
+
+  Scenario: Invited user can join trip                                                              # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:40
+
+  Scenario: Invited non-user can view trip info                                                     # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:42
+
+  Scenario: Invited non-user can join trip after registration                                       # features\plain\trip_organizer_can_invite_people_to_join_trip.feature:44
+
+Feature: Trip organizer can view all ride arrangements
+  So that I can verify the trip will proceed without issue
+  As a trip organizer
+  I want to view all ride arrangements
+
+  Background: I am the organizer in an upcoming trip having other participants # features\plain\trip_organizer_can_view_all_ride_arrangements.feature:7
+    Given I am signed in                                                       # features/step_definitions/global.rb:9
+    And I am organizing an upcoming trip named "Company Picnic"                # features/step_definitions/trip_organizer_can_view_all_ride_arrangements.rb:1
+    And the following people are participants:                                 # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:10
+      | name   |
+      | Allan  |
+      | Alyssa |
+      | Alex   |
+      | Baron  |
+      | Bailey |
+      | Bob    |
+      | Cassie |
+      | Caleb  |
+      | Chase  |
+
+  Scenario: I can view the all arrangements page                # features\plain\trip_organizer_can_view_all_ride_arrangements.feature:22
+
+  Scenario: I see every arrangement                              # features\plain\trip_organizer_can_view_all_ride_arrangements.feature:24
+    Given the following people are on the same ride arrangement: # features/step_definitions/trip_organizer_can_view_all_ride_arrangements.rb:7
+      | name   |
+      | Allan  |
+      | Alyssa |
+      | Alex   |
+    And the following people are on the same ride arrangement:   # features/step_definitions/trip_organizer_can_view_all_ride_arrangements.rb:7
+      | name   |
+      | Baron  |
+      | Bailey |
+      | Bob    |
+    And the following people are on the same ride arrangement:   # features/step_definitions/trip_organizer_can_view_all_ride_arrangements.rb:7
+      | name   |
+      | Cassie |
+      | Caleb  |
+      | Chase  |
+    When I go to the all arrangements page                       # features/step_definitions/web_steps.rb:19
+    Then I should see "Allan"                                    # features/step_definitions/web_steps.rb:143
+    And I should see "Baron"                                     # features/step_definitions/web_steps.rb:143
+    And I should see "Cassie"                                    # features/step_definitions/web_steps.rb:143
+
+  Scenario: I see details for each arrangement                  # features\plain\trip_organizer_can_view_all_ride_arrangements.feature:45
+
+Feature: Trip organizer can view trip participants
+  So that I know who else is participating in the trip
+  As a trip organizer
+  I want to view a list of trip participants
+
+  Background: I am the organizer in an upcoming trip having other participants # features\plain\trip_organizer_can_view_trip_participants.feature:7
+    Given I am signed in                                                       # features/step_definitions/global.rb:9
+    And I am organizing an upcoming trip named "Company Picnic"                # features/step_definitions/trip_organizer_can_view_all_ride_arrangements.rb:1
+    And the following people are participants:                                 # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:10
+      | name  |
+      | Allan |
+      | Baron |
+      | Chase |
+
+  Scenario: I can view the trip participants page               # features\plain\trip_organizer_can_view_trip_participants.feature:16
+    Given I am on the trip info page                            # features/step_definitions/web_steps.rb:15
+    When I follow "Participants"                                # features/step_definitions/web_steps.rb:27
+    Then I should be on the trip participants page              # features/step_definitions/web_steps.rb:257
+
+  Scenario: I see a lis of trip participants                    # features\plain\trip_organizer_can_view_trip_participants.feature:21
+    When I go to the trip participants page                     # features/step_definitions/web_steps.rb:19
+    Then I should see "Allan"                                   # features/step_definitions/web_steps.rb:143
+    And I should see "Baron"                                    # features/step_definitions/web_steps.rb:143
+    And I should see "Chase"                                    # features/step_definitions/web_steps.rb:143
+
+Feature: Trip participant can leave trip
+  So that I will no longer be assigned to any ride arrangements
+  As a trip participant
+  I want to be able to leave a trip
+
+  Background: I am a participant in an upcoming trip     # features\plain\trip_participant_can_leave_trip.feature:7
+    Given I am signed in                                 # features/step_definitions/global.rb:9
+    And there is an upcoming trip named "Company Picnic" # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:1
+    And I am a participant                               # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:5
+
+  Scenario: I leave the trip                                             # features\plain\trip_participant_can_leave_trip.feature:12
+    Given I am on the trip info page                                     # features/step_definitions/web_steps.rb:15
+    When I follow "Leave Trip"                                           # features/step_definitions/web_steps.rb:27
+    Then I should be on the dashboard page                               # features/step_definitions/web_steps.rb:257
+    And I should see "You are no longer participating in Company Picnic" # features/step_definitions/web_steps.rb:143
+
+  Scenario: After I leave the trip, I do not see it on my dashboard # features\plain\trip_participant_can_leave_trip.feature:18
+    Given I am on the trip info page                                # features/step_definitions/web_steps.rb:15
+    When I follow "Leave Trip"                                      # features/step_definitions/web_steps.rb:27
+    And I go to the dashboard page                                  # features/step_definitions/web_steps.rb:19
+    Then I should not see "Company Picnic"                          # features/step_definitions/web_steps.rb:182
+
+Feature: Trip participant can view ride arrangement
+  So that I can go on the trip
+  As a trip participant
+  I want to view my ride arrangement
+
+  Background: I am a participant in an upcoming trip having other participants # features\plain\trip_participant_can_view_ride_arrangement.feature:7
+    Given I am signed in                                                       # features/step_definitions/global.rb:9
+    And there is an upcoming trip named "Company Picnic"                       # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:1
+    And I am a participant                                                     # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:5
+    And the following people are participants:                                 # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:10
+      | name  |
+      | Alice |
+      | Bob   |
+      | Joe   |
+
+  Scenario: I can see who is on my ride arrangement               # features\plain\trip_participant_can_view_ride_arrangement.feature:17
+    Given I am assigned a ride arrangement                        # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:20
+    And the following people are assigned to my ride arrangement: # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:28
+      | name  |
+      | Alice |
+      | Bob   |
+      | Joe   |
+    When I go to the dashboard page                               # features/step_definitions/web_steps.rb:19
+    Then I should see "Company Picnic"                            # features/step_definitions/web_steps.rb:143
+    And I should see "Alice"                                      # features/step_definitions/web_steps.rb:143
+    And I should see "Bob"                                        # features/step_definitions/web_steps.rb:143
+    And I should see "Joe"                                        # features/step_definitions/web_steps.rb:143
+
+  Scenario: I am notified if I am not in a ride arrangement # features\plain\trip_participant_can_view_ride_arrangement.feature:30
+    Given I am not assigned a ride arrangement              # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:35
+    When I go to the dashboard page                         # features/step_definitions/web_steps.rb:19
+    Then I should see "Company Picnic"                      # features/step_definitions/web_steps.rb:143
+    And I should see "You have no ride arrangement."        # features/step_definitions/web_steps.rb:143
+
+Feature: Trip participant can view trip participants
+  So that I know who else is participating in the trip
+  As a trip participant
+  I want to view a list of trip participants
+
+  Background: I participating in an upcoming trip having other participants # features\plain\trip_participant_can_view_trip_participants.feature:7
+    Given I am signed in                                                    # features/step_definitions/global.rb:9
+    And there is an upcoming trip named "Company Picnic"                    # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:1
+    And I am a participant                                                  # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:5
+    And the following people are participants:                              # features/step_definitions/trip_participant_can_view_ride_arrangement.rb:10
+      | name  |
+      | Allan |
+      | Baron |
+      | Chase |
+
+  Scenario: I can view the trip participants page        # features\plain\trip_participant_can_view_trip_participants.feature:17
+    Given I am on the trip info page                     # features/step_definitions/web_steps.rb:15
+    When I follow "Participants"                         # features/step_definitions/web_steps.rb:27
+    Then I should be on the trip participants page       # features/step_definitions/web_steps.rb:257
+
+  Scenario: I see a list of trip participants            # features\plain\trip_participant_can_view_trip_participants.feature:22
+    When I go to the trip participants page              # features/step_definitions/web_steps.rb:19
+    Then I should see "Allan"                            # features/step_definitions/web_steps.rb:143
+    And I should see "Baron"                             # features/step_definitions/web_steps.rb:143
+    And I should see "Chase"                             # features/step_definitions/web_steps.rb:143
+
+Feature: User can create trip
+  So that I can organize transportation for my trip
+  As a user
+  I want to plan a new trip
+
+  Background: I am signed in # features\plain\user_can_create_trip.feature:7
+    Given I am signed in     # features/step_definitions/global.rb:9
+
+  Scenario: I can view the plan trip page  # features\plain\user_can_create_trip.feature:10
+    When I go to the dashboard page        # features/step_definitions/web_steps.rb:19
+    And I follow "New Trip"                # features/step_definitions/web_steps.rb:27
+    Then I should be on the plan trip page # features/step_definitions/web_steps.rb:257
+
+  Scenario: I can plan a trip       # features\plain\user_can_create_trip.feature:15
+    When I go to the plan trip page # features/step_definitions/web_steps.rb:19
+    Then I should see "Name"        # features/step_definitions/web_steps.rb:143
+    And I should see "Time"         # features/step_definitions/web_steps.rb:143
+    And I should see "Address"      # features/step_definitions/web_steps.rb:143
+
+  Scenario Outline: I plan a new trip              # features\plain\user_can_create_trip.feature:21
+    Given I am on the plan trip page               # features/step_definitions/web_steps.rb:15
+    When I fill in "Name" with "<name>"            # features/step_definitions/web_steps.rb:35
+    And I select "<datetime>" as the date and time # features/step_definitions/web_steps.rb:66
+    And I fill in "Address" with "<address>"       # features/step_definitions/web_steps.rb:35
+    And I press "Create Trip"                      # features/step_definitions/web_steps.rb:23
+    Then I should see "<result>"                   # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with valid information
+      | name      | datetime                | address                                      | result                        |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Trip was successfully created |
+
+    Scenarios: with invalid information
+      | name | datetime                | address                                      | result              |
+      |      | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Name can't be blank |
+
+Feature: User can edit profile
+  So that I can receive valid and favorable ride arrangements
+  As a user
+  I want to update my profile
+
+  Background: I am signed in                         # features\plain\user_can_edit_profile.feature:7
+    Given I am signed in with password "password123" # features/step_definitions/user_can_edit_profile.rb:1
+
+  Scenario: I can view the profile page              # features\plain\user_can_edit_profile.feature:10
+    Given I am on the dashboard page                 # features/step_definitions/web_steps.rb:15
+    And I follow "Profile"                           # features/step_definitions/web_steps.rb:27
+    Then I should be on the profile page             # features/step_definitions/web_steps.rb:257
+
+  Scenario: I can modify personal information        # features\plain\user_can_edit_profile.feature:15
+    When I go to the profile page                    # features/step_definitions/web_steps.rb:19
+    Then I should see "Name"                         # features/step_definitions/web_steps.rb:143
+    And I should see "Email"                         # features/step_definitions/web_steps.rb:143
+    And I should see "Address"                       # features/step_definitions/web_steps.rb:143
+    And I should see "Phone"                         # features/step_definitions/web_steps.rb:143
+
+  Scenario: I can indicate personal preferences      # features\plain\user_can_edit_profile.feature:22
+    When I go to the profile page                    # features/step_definitions/web_steps.rb:19
+    Then I should see "Music"                        # features/step_definitions/web_steps.rb:143
+    And I should see "Smoking"                       # features/step_definitions/web_steps.rb:143
+
+  Scenario Outline: I update my personal information # features\plain\user_can_edit_profile.feature:27
+    Given I am on the profile page                   # features/step_definitions/web_steps.rb:15
+    When I fill in "Password" with "password123"     # features/step_definitions/web_steps.rb:35
+    When I fill in "Name" with "<name>"              # features/step_definitions/web_steps.rb:35
+    And I fill in "Email" with "<email>"             # features/step_definitions/web_steps.rb:35
+    And I fill in "Address" with "<address>"         # features/step_definitions/web_steps.rb:35
+    And I fill in "Phone" with "<phone>"             # features/step_definitions/web_steps.rb:35
+    And I press "Update"                             # features/step_definitions/web_steps.rb:23
+    Then I should see "<result>"                     # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with valid information
+      | name     | email              | address                                      | phone          | result                                 |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1234567890     | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 123.456.7890   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 123-456-7890   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 123 456 7890   | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | (123) 456-7890 | You updated your account successfully. |
+
+    Scenarios: with invalid information
+      | name     | email              | address                                      | phone       | result                                               |
+      |          | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234  | Name can't be blank                                  |
+      | John Doe |                    | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234  | Email can't be blank                                 |
+      | John Doe | gmail.com          | 1600 Amphitheatre Parkway, Mountain View, CA | 1231231234  | Email is invalid                                     |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA |             | Phone can't be blank                                 |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | 12345678900 | Phone must be a complete and numeric US phone number |
+      | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA | aaaaaaaaaa  | Phone must be a complete and numeric US phone number |
+
+  Scenario Outline: I update my personal preferences # features\plain\user_can_edit_profile.feature:64
+    Given I am on the profile page                   # features/step_definitions/web_steps.rb:15
+    When I fill in "Password" with "password123"     # features/step_definitions/web_steps.rb:35
+    And I choose "<music>"                           # features/step_definitions/web_steps.rb:119
+    And I choose "<smoking>"                         # features/step_definitions/web_steps.rb:119
+    And I press "Update"                             # features/step_definitions/web_steps.rb:23
+    Then I should see "<result>"                     # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with valid information
+      | music         | smoking       | result                                 |
+      | No Preference | No Preference | You updated your account successfully. |
+      | No Music      | No Smoking    | You updated your account successfully. |
+      | Quiet Music   | No Smoking    | You updated your account successfully. |
+      | Loud Music    | No Smoking    | You updated your account successfully. |
+      | Loud Music    | Smoking       | You updated your account successfully. |
+
+Feature: User can manage vehicles
+  So that I can offer my vehicles for use on future trips
+  As a user
+  I want to manage my list of vehicles
+
+  Background: I am signed in # features\plain\user_can_manage_vehicles.feature:7
+    Given I am signed in     # features/step_definitions/global.rb:9
+
+  Scenario: I can add a vehicle              # features\plain\user_can_manage_vehicles.feature:10
+    Given I am on the profile page           # features/step_definitions/web_steps.rb:15
+    When I follow "Add Vehicle"              # features/step_definitions/web_steps.rb:27
+    Then I should be on the add vehicle page # features/step_definitions/web_steps.rb:257
+
+  Scenario Outline: I add a vehicle            # features\plain\user_can_manage_vehicles.feature:15
+    Given I am on the add vehicle page         # features/step_definitions/web_steps.rb:15
+    When I fill in "Make" with "<make>"        # features/step_definitions/web_steps.rb:35
+    And I fill in "Model" with "<model>"       # features/step_definitions/web_steps.rb:35
+    And I fill in "Capacity" with "<capacity>" # features/step_definitions/web_steps.rb:35
+    And I press "Create Vehicle"               # features/step_definitions/web_steps.rb:23
+    Then I should see "<result>"               # features/step_definitions/web_steps.rb:143
+
+    Scenarios: with valid information
+      | make   | model   | capacity | result                          |
+      | Toyota | Corolla | 4        | Vehicle was successfully added. |
+      | Toyota | 4Runner | 4        | Vehicle was successfully added. |
+      | Toyota | Sienna  | 8        | Vehicle was successfully added. |
+
+    Scenarios: with invalid information
+      | make   | model   | capacity | result                          |
+      |        | Corolla | 4        | Make can't be blank             |
+      | Toyota |         | 4        | Model can't be blank            |
+      | Toyota |         |          | Capacity can't be blank         |
+      | Toyota | Corolla | 0        | Capacity must be greater than 0 |
+      | Toyota | Corolla | -1       | Capacity must be greater than 0 |
+      | Toyota | Corolla | string   | Capacity is not a number        |
+
+  Scenario: I can see a list of added vehicles             # features\plain\user_can_manage_vehicles.feature:38
+    Given I have added my "4" passenger "Toyota" "Corolla" # features/step_definitions/user_can_manage_vehicles.rb:1
+    And I have added my "4" passenger "Toyota" "Prius"     # features/step_definitions/user_can_manage_vehicles.rb:1
+    When I go to the profile page                          # features/step_definitions/web_steps.rb:19
+    Then I should see "Corolla"                            # features/step_definitions/web_steps.rb:143
+    And I should see "Prius"                               # features/step_definitions/web_steps.rb:143
+
+  Scenario: I can see info for each vehicle                # features\plain\user_can_manage_vehicles.feature:45
+    Given I have added my "4" passenger "Toyota" "Corolla" # features/step_definitions/user_can_manage_vehicles.rb:1
+    When I go to the profile page                          # features/step_definitions/web_steps.rb:19
+    Then I should see "Corolla"                            # features/step_definitions/web_steps.rb:143
+    And I should see "Make"                                # features/step_definitions/web_steps.rb:143
+    And I should see "Model"                               # features/step_definitions/web_steps.rb:143
+    And I should see "Capacity"                            # features/step_definitions/web_steps.rb:143
+
+  Scenario: I update a vehicle                             # features\plain\user_can_manage_vehicles.feature:53
+    Given I have added my "4" passenger "Toyota" "Corolla" # features/step_definitions/user_can_manage_vehicles.rb:1
+    And I am on the profile page                           # features/step_definitions/web_steps.rb:15
+    When I follow "Update Vehicle"                         # features/step_definitions/web_steps.rb:27
+    And I fill in "Model" with "Camry"                     # features/step_definitions/web_steps.rb:35
+    And I press "Update Vehicle"                           # features/step_definitions/web_steps.rb:23
+    Then I should see "Camry"                              # features/step_definitions/web_steps.rb:143
+
+  Scenario: I remove a vehicle                             # features\plain\user_can_manage_vehicles.feature:61
+    Given I have added my "4" passenger "Toyota" "Corolla" # features/step_definitions/user_can_manage_vehicles.rb:1
+    And I am on the profile page                           # features/step_definitions/web_steps.rb:15
+    When I follow "Remove Vehicle"                         # features/step_definitions/web_steps.rb:27
+    Then I should not see "Corolla"                        # features/step_definitions/web_steps.rb:182
+
+Feature: User can sign in
+  So that I can use the service
+  As a user
+  I want to identify myself to the service
+
+  Background: I am signed up                                                         # features\plain\user_can_sign_in.feature:7
+    Given I am signed up with email "email@email.com" and password "testpassword123" # features/step_definitions/user_can_sign_in.rb:1
+
+  Scenario: I can view the sign in page                                              # features\plain\user_can_sign_in.feature:10
+    Given I am on the home page                                                      # features/step_definitions/web_steps.rb:15
+    When I follow "Sign in"                                                          # features/step_definitions/web_steps.rb:27
+    Then I should be on the sign in page                                             # features/step_definitions/web_steps.rb:257
+
+  Scenario: I sign in with valid credentials                                         # features\plain\user_can_sign_in.feature:15
+    Given I am on the sign in page                                                   # features/step_definitions/web_steps.rb:15
+    When I fill in "Email" with "email@email.com"                                    # features/step_definitions/web_steps.rb:35
+    And I fill in "Password" with "testpassword123"                                  # features/step_definitions/web_steps.rb:35
+    And I press "Sign in"                                                            # features/step_definitions/web_steps.rb:23
+    Then I should see "Signed in successfully."                                      # features/step_definitions/web_steps.rb:143
+
+  Scenario: I sign in with invalid credentials                                       # features\plain\user_can_sign_in.feature:22
+    Given I am on the sign in page                                                   # features/step_definitions/web_steps.rb:15
+    And I fill in "Email" with "email@email.com"                                     # features/step_definitions/web_steps.rb:35
+    And I fill in "Password" with "wrongpassword123"                                 # features/step_definitions/web_steps.rb:35
+    When I press "Sign in"                                                           # features/step_definitions/web_steps.rb:23
+    Then I should be on the sign in page                                             # features/step_definitions/web_steps.rb:257
+
+Feature: User can view trip history
+  So that I can know which trips I have participated in
+  As a user
+  I want to view my trip history
+
+  Background: I participated and am participating in many trips # features\plain\user_can_view_trip_history.feature:7
+    Given I am signed in                                        # features/step_definitions/global.rb:9
+    And I am participating in the following trips:              # features/step_definitions/user_can_view_upcoming_trips.rb:1
+      | name            | address                               | time                   |
+      | Upcoming Trip 1 | 795 Folsom Street, San Francisco, CA  | January 5, 2012 10:00  |
+      | Upcoming Trip 2 | 1475 Folsom Street, San Francisco, CA | February 5, 2012 10:00 |
+    And I participated in the following trips:                  # features/step_definitions/user_can_view_trip_history.rb:1
+      | name          | address                                             | time                   |
+      | Passed Trip 1 | 1601 South California Avenue, Palo Alto, California | January 5, 2009 10:00  |
+      | Passed Trip 2 | 329 East Jimmie Leeds Road, Absecon, NJ             | February 5, 2009 10:00 |
+
+  Scenario: I can view the trip history page       # features\plain\user_can_view_trip_history.feature:18
+    When I go to the dashboard page                # features/step_definitions/web_steps.rb:19
+    And I follow "Trip History"                    # features/step_definitions/web_steps.rb:27
+    Then I should be on the trip history page      # features/step_definitions/web_steps.rb:257
+
+  Scenario: I can view list of all past and upcomming trips # features\plain\user_can_view_trip_history.feature:23
+    When I go to the trip history page                      # features/step_definitions/web_steps.rb:19
+    Then I should see "Upcoming Trip 1"                     # features/step_definitions/web_steps.rb:143
+    And I should see "Upcoming Trip 2"                      # features/step_definitions/web_steps.rb:143
+    And I should see "Passed Trip 1"                        # features/step_definitions/web_steps.rb:143
+    And I should see "Passed Trip 2"                        # features/step_definitions/web_steps.rb:143
+
+  Scenario: I see the location and date for each trip       # features\plain\user_can_view_trip_history.feature:30
+    When I go to the trip history page                      # features/step_definitions/web_steps.rb:19
+    Then I should see "Upcoming Trip 1"                     # features/step_definitions/web_steps.rb:143
+    And I should see "795 Folsom Street, San Francisco, CA" # features/step_definitions/web_steps.rb:143
+    And I should see "2012-01-05"                           # features/step_definitions/web_steps.rb:143
+
+  Scenario: I can view info for each trip                   # features\plain\user_can_view_trip_history.feature:36
+    When I go to the trip history page                      # features/step_definitions/web_steps.rb:19
+    And I follow "Upcoming Trip 1"                          # features/step_definitions/web_steps.rb:27
+    Then I should see "Upcoming Trip 1"                     # features/step_definitions/web_steps.rb:143
+    And I should see "795 Folsom Street, San Francisco, CA" # features/step_definitions/web_steps.rb:143
+    And I should see "2012-01-05"                           # features/step_definitions/web_steps.rb:143
+
+  Scenario: I can filter by month                  # features\plain\user_can_view_trip_history.feature:43
+    When I go to the trip history page             # features/step_definitions/web_steps.rb:19
+    Then I should see "February 2012"              # features/step_definitions/web_steps.rb:143
+    And I should see "January 2012"                # features/step_definitions/web_steps.rb:143
+    And I should see "February 2009"               # features/step_definitions/web_steps.rb:143
+    And I should see "January 2009"                # features/step_definitions/web_steps.rb:143
+
+  Scenario: I filter by month                      # features\plain\user_can_view_trip_history.feature:50
+    When I go to the trip history page             # features/step_definitions/web_steps.rb:19
+    And I follow "January 2012"                    # features/step_definitions/web_steps.rb:27
+    Then I should see "Upcoming Trip 1"            # features/step_definitions/web_steps.rb:143
+    But I should not see "Upcoming Trip 2"         # features/step_definitions/web_steps.rb:182
+    And I should not see "Passed Trip 1"           # features/step_definitions/web_steps.rb:182
+    And I should not see "Passed Trip 2"           # features/step_definitions/web_steps.rb:182
+
+Feature: User can view upcoming trips
+  So that I know my ride arrangement
+  As a user
+  I want to view my upcoming trips
+
+  Background: I am a participant of many trips       # features\plain\user_can_view_upcoming_trips.feature:7
+    Given I am signed in                             # features/step_definitions/global.rb:9
+    Given I am participating in the following trips: # features/step_definitions/user_can_view_upcoming_trips.rb:1
+      | name   | address                        | time                    |
+      | Trip 1 | 1 Infinite Loop, Cupertino, CA | December 25, 2015 10:00 |
+      | Trip 2 | 1 Infinite Loop, Cupertino, CA | December 25, 2015 10:00 |
+
+  Scenario: I see a list of upcoming trips on my dashboard # features\plain\user_can_view_upcoming_trips.feature:14
+    When I go to the dashboard page                        # features/step_definitions/web_steps.rb:19
+    Then I should see "Trip 1"                             # features/step_definitions/web_steps.rb:143
+    Then I should see "Trip 2"                             # features/step_definitions/web_steps.rb:143
+
+  Scenario: I see the location and date for each trip  # features\plain\user_can_view_upcoming_trips.feature:19
+    When I go to the dashboard page                    # features/step_definitions/web_steps.rb:19
+    Then I should see "1 Infinite Loop, Cupertino, CA" # features/step_definitions/web_steps.rb:143
+    And I should see "2015-12-25"                      # features/step_definitions/web_steps.rb:143
+
+  Scenario: I can view info for each trip             # features\plain\user_can_view_upcoming_trips.feature:24
+    When I go to the dashboard page                   # features/step_definitions/web_steps.rb:19
+    And I follow "Trip 1"                             # features/step_definitions/web_steps.rb:27
+    Then I should see "2015-12-25"                    # features/step_definitions/web_steps.rb:143
+    And I should see "1 Infinite Loop, Cupertino, CA" # features/step_definitions/web_steps.rb:143
+
+90 scenarios (90 passed)
+677 steps (677 passed)
+0m42.206s

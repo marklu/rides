@@ -1,0 +1,285 @@
+D:\Projects\CS169\Rides>rspec spec --format nested
+
+ArrangementsController
+
+PeopleController
+  GET index
+    when not logged in
+      renders the index template
+    when logged in
+      redirects to the dashboard page
+  GET dashboard
+    when not logged in
+      redirects to the signin page
+    when logged in
+      assigns to @upcoming_trips a list of upcoming trips
+      renders the dashboard template
+
+TripsController
+  GET index
+    when not logged in
+      redirects to the signin page
+    when logged in
+      assigns to @months_with_trips a sorted list of months in which a trip occured
+      renders the index template
+      when no month or an invalid month is given
+        assigns to @trips a list of trips in which @person is a participant
+      when a valid month is given
+        assigns to @trips a list of trips occuring in the given month in which @person is a participant
+  GET participants
+    when not logged in
+      redirects to the signin page
+    when logged in as trip organizer
+      assigns to @participants a sorted list of trip participants
+      renders the participants template
+    when logged in as trip participant
+      assigns to @participants a sorted list of trip participants
+      renders the participants template
+  DELETE participants
+    when not logged in
+      redirects to the signin page
+    when logged in as a trip participant
+      removes the participant from the trip
+      redirects to the dashboard page
+  GET show
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the trip
+      renders the show template
+  GET new
+    when not logged in
+      redirects to the signin page
+    when logged in
+      assigns to @trip a new Trip
+      renders the new template
+  GET edit
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the trip
+      renders the edit template
+  POST create
+    when not logged in
+      redirects to the signin page
+    when logged in
+      creates a new trip with the given parameters
+      saves the trip
+      when the trip is successfully saved
+        sets a flash[:notice] message
+        redirects to the trip info page
+      when the trip fails to be saved
+        assigns to @trip the given trip
+        renders the new template
+  PUT update
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the trip
+      updates the trip
+      when the trip is successfully updated
+        sets a flash[:notice] message
+        redirects to the trip info page
+      when the trip fails to be updated
+        assigns to @trip the trip
+        renders the edit template
+  DELETE destroy
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the trip
+      destroys the trip
+      redirects to the dashboard page
+  POST invite
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the trip
+      finds the person
+      invites the invitee
+      saves the trip
+      sets a flash[:notice] message
+      adds the invitee to trip's list of invitees
+      adds the trip to invitee's list of pending trips (PENDING: No reason given)
+      redirects to the show trip info page
+
+VehiclesController
+  GET new
+    when not logged in
+      redirects to the signin page
+    when logged in
+      assigns to @vehicle a new Vehicle
+      renders the new template
+  GET edit
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the vehicle
+      renders the edit template
+  POST create
+    when not logged in
+      redirects to the signin page
+    when logged in
+      creates a new vehicle with the given parameters
+      saves the vehicle
+      when the vehicle is successfully saved
+        sets a flash[:notice] message
+        redirects to the edit profile page
+      when the vehicle fails to be saved
+        assigns to @vehicle a new vehicle
+        renders the new template
+  PUT update
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the vehicle
+      updates the vehicle
+      when the vehicle is successfully updated
+        sets a flash[:notice] message
+        redirects to the edit profile page
+      when the vehicle fails to be updated
+        assigns to @vehicle the vehicle
+        renders the edit template
+  DELETE destroy
+    when not logged in
+      redirects to the signin page
+    when logged in
+      finds the vehicle
+      destroys the vehicle
+      redirects to the edit profile page
+
+PersonMailer
+  add some examples to (or delete) D:/Projects/CS169/Rides/spec/mailers/person_mailer_spec.rb (PENDING: Not Yet Implemented)
+
+Invitation
+  add some examples to (or delete) D:/Projects/CS169/Rides/spec/models/invitation_spec.rb (PENDING: Not Yet Implemented)
+
+Person
+  when creating
+    does not allow an empty password
+    does not allow a password shorter than 6 characters
+    does not allow a mismatch between password and password confirmation
+    does not allow an empty password confirmation
+    sets the music preference to 'No Preference' by default
+    sets the smoking preference to 'No Preference' by default
+  when validating
+    is valid with valid attributes
+    is not valid without an email
+    is not valid with an invalid email
+    is not valid without a name
+    is not valid without a phone
+    is not valid with an invalid phone number
+    is not valid without an address
+    is not valid with an invalid address (PENDING: No reason given)
+    is valid with a valid music preference (No Preference, No Music, Quiet Music, Loud Music)
+    is not valid with an invalid music preference
+    is valid with a valid smoking preference (No Preference, No Smoking, Smoking)
+    is not valid with an invalid smoking preference
+  when organizing many trips
+    has a list of organized trips
+  when participating in many trips
+    has a list of trips
+    has a list of upcoming trips
+    does not have passed trips in its list of upcoming trips
+  when has many vehicles
+    has a list of vehicles
+
+Trip
+  when validating
+    is valid with valid attributes
+    is not valid without a name
+    is not valid without a time
+    is not valid with an invalid time
+    is not valid without an address
+    is not valid with an invalid address (PENDING: No reason given)
+    is not valid without an organizer
+    is not valid with an invalid organizer
+  when upcoming
+    is upcoming
+  when passed
+    is not upcoming
+  when generating arragements
+    should not save when there are no vehicles
+    should save when there are more people than vehicles
+    should save when there are enough vehicles to accommodate passengers
+
+Vehicle
+  when validating
+    is valid with valid attributes
+    is not valid without a make
+    is not valid without a model
+    is not valid without a capacity
+    is not valid with an invalid capacity
+    is not valid without an owner
+    is not valid with an invalid owner
+
+Routes
+  Home
+    routes GET / to people#index
+  Sign In
+    routes GET /signin to devise/sessions#new
+    routes POST /signin to devise/sessions#create
+    routes GET /signout to devise/sessions#destroy
+  Sign Up
+    routes GET /signup to devise/registrations#new
+    routes POST /signup to devise/registrations#create
+  Dashboard
+    routes GET /dashboard to people#dashboard
+    Profile
+      routes GET /profile to devise/registrations#edit
+      routes PUT /profile to devise/registrations#update
+      routes DELETE /profile to devise/registrations#destroy
+      Add Vehicle
+        routes GET /vehicles/new to vehicles#new
+        routes POST /vehicles to vehicles#create
+      Manage Vehicles
+        routes GET /vehicles/1/edit to vehicles#edit
+        routes PUT /vehicles/1 to vehicles#update
+        routes DELETE /vehicles/1 to vehicles#destroy
+    Plan Trip
+      routes GET /trips/new to trips#new
+      routes POST /trips to trips#create
+    Trip History
+      routes GET /trips to trips#index
+  Trip Info
+    routes GET /trips/1 to trips#show
+    All Trip Arrangements
+      routes GET /trips/1/arrangements to arrangements#index
+    Trip Participants
+      routes GET /trips/1/participants to trips#participants
+    Join Trip
+      routes POST /trips/1/participants to trips#join (PENDING: Not Yet Implemented)
+    Leave Trip
+      routes DELETE /trips/1/participants to trips#leave
+    Invite Participants
+      routes GET ... to ...  (PENDING: Not Yet Implemented)
+      routes POST ... to ... (PENDING: Not Yet Implemented)
+
+Pending:
+  TripsController POST invite when logged in adds the trip to invitee's list of pending trips
+    # No reason given
+    # ./spec/controllers/trips_controller_spec.rb:425
+  PersonMailer add some examples to (or delete) D:/Projects/CS169/Rides/spec/mailers/person_mailer_spec.rb
+    # Not Yet Implemented
+    # ./spec/mailers/person_mailer_spec.rb:4
+  Invitation add some examples to (or delete) D:/Projects/CS169/Rides/spec/models/invitation_spec.rb
+    # Not Yet Implemented
+    # ./spec/models/invitation_spec.rb:4
+  Person when validating is not valid with an invalid address
+    # No reason given
+    # ./spec/models/person_spec.rb:82
+  Trip when validating is not valid with an invalid address
+    # No reason given
+    # ./spec/models/trip_spec.rb:35
+  Routes Trip Info Join Trip routes POST /trips/1/participants to trips#join
+    # Not Yet Implemented
+    # ./spec/routing/routing_spec.rb:112
+  Routes Trip Info Invite Participants routes GET ... to ...
+    # Not Yet Implemented
+    # ./spec/routing/routing_spec.rb:122
+  Routes Trip Info Invite Participants routes POST ... to ...
+    # Not Yet Implemented
+    # ./spec/routing/routing_spec.rb:123
+
+Finished in 29.59 seconds
+148 examples, 0 failures, 8 pending
