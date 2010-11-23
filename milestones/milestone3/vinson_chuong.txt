@@ -1,0 +1,16 @@
+Project: TubedIt
+Feature: User should be able to see all shows sorted by rating
+
+I was very interested in the algorithm they would use to rank shows. I expected
+that "likes" and "diklikes" would be weighted against ratings drawn from other
+APIs. That doesn't seem to be the case, so I looked into their API wrapper. It
+turns out TVDB does have their own ratings for each show. I would suggest that
+they incorporate existing ratings into a more comprehensive ranking algorithm.
+
+Also, after a once over of their code-base, their code seems to not be
+well-factored. API wrappers should be pulled out into their own modules and
+referenced by any Model who needs to use it. Also, much of the stub scaffolding
+code is still there. Most of it probably wouldn't be too useful, so it should
+be removed.
+
+Overall, their project seems promising. I wish them good luck for their demo!

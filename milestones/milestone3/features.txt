@@ -1,0 +1,19 @@
+Completed
+Potential user can sign up
+Trip organizer can generate ride arrangements
+Trip organizer can view trip participants
+Trip participant can leave trip
+Trip participant can view trip participants
+User can create trip
+User can edit profile
+User can manage vehicles
+User can sign in
+User can view trip history
+User can view upcoming trips
+
+Partially Completed (enough for basic interaction)
+Trip organizer can invite people to join trip
+  Only currenly registered users may be invited
+Trip organizer can view all ride arrangements
+Trip participant can view ride arrangement
+  No Google Map or directions yet, but ride assignment is there
