@@ -8,8 +8,8 @@ describe Person do
   context "when creating" do
     it "does not allow an empty password" do
       create_valid("Person",
-        :password => nil,
-        :password_confirmation => nil
+        :password => '',
+        :password_confirmation => ''
       ).should_not be_valid
     end
 
@@ -28,7 +28,7 @@ describe Person do
     end
 
     it "does not allow an empty password confirmation" do
-      create_valid("Person", :password_confirmation => nil).should_not be_valid
+      create_valid("Person", :password_confirmation => '').should_not be_valid
     end
 
     it "sets the music preference to 'No Preference' by default" do
@@ -46,7 +46,7 @@ describe Person do
     end
 
     it "is not valid without an email" do
-      @person.email = nil
+      @person.email = ''
       @person.should_not be_valid
     end
 
@@ -58,17 +58,24 @@ describe Person do
     end
 
     it "is not valid without a name" do
-      @person.name = nil
+      @person.name = ''
       @person.should_not be_valid
     end
 
     it "is not valid without a phone" do
-      @person.phone = nil
+      @person.phone = ''
       @person.should_not be_valid
     end
 
+    it "is not valid with an invalid phone number" do
+      ['12345678900', 'aaaaaaaaaa'].each do |phone|
+        @person.phone = phone
+        @person.should_not be_valid
+      end
+    end
+
     it "is not valid without an address" do
-      @person.address = nil
+      @person.address = ''
       @person.should_not be_valid
     end
 

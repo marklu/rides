@@ -77,7 +77,7 @@ body
 	clear: left;
 }
 
-#help
+#sidebar
 {
 	width: 200px;
 	background-color: #eee;
@@ -163,7 +163,7 @@ body
 	margin: auto;
 }
 
-.section input
+.section input, .section select
 {
 	border: none;
 	background-color: #fff;
@@ -186,6 +186,43 @@ body
 .section .tripinfo p
 {
 	margin: 0px 20px 15px 120px;
+}
+
+ul.actions
+{
+	list-style: none;
+	margin-top: 20px 0px;
+	padding: 10px 0px;
+}
+
+ul.actions li
+{
+	display: inline;
+	padding: 10px 0px;
+	margin-right: 20px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+ul.actions li a
+{
+	padding: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	background-color: #eee;
+}
+
+.ui-autocomplete
+{
+  background-color: #ffffff;
+  border: 1px solid #cfcfcf;
+  list-style-type: none;
+  padding-left: 0px;
+  width: 400px;
+}
+
+.ui-autocomplete a
+{
+  color: #000000;
 }
 
 #footer

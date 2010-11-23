@@ -11,17 +11,17 @@ describe Vehicle do
     end
 
     it "is not valid without a make" do
-      @vehicle.make = nil
+      @vehicle.make = ''
       @vehicle.should_not be_valid
     end
 
     it "is not valid without a model" do
-      @vehicle.model = nil
+      @vehicle.model = ''
       @vehicle.should_not be_valid
     end
 
     it "is not valid without a capacity" do
-      @vehicle.capacity = nil
+      @vehicle.capacity = ''
       @vehicle.should_not be_valid
     end
 
