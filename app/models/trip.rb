@@ -27,4 +27,17 @@ class Trip < ActiveRecord::Base
   def upcoming?
     return self.time >= Time.now()
   end
+
+  def invite!(person)
+#    @invitee = Person.find(:first, :conditions => [ "email = ?", email ])
+
+
+    invitation = self.invitations.build(:email => person.email)
+
+    invitation.invitee = person
+#    self.invitees << @invitee
+    return invitation
+  end
+
+  
 end

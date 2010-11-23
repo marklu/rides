@@ -358,20 +358,31 @@ describe TripsController do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
         signin(@person)
-
         @invitee = create_valid!("Person", :name => 'Mr. Invitee', :email => 'invitee@invitee.com')
+
       end
 
-      it "finds the invitee" do
-        post :invite#, :email => 'invitee@invitee.com'
-        Person.should_receive(:find).with(:first, :conditions => [ "email = ?", 'invitee@invitee.com']).and_return(@invitee)
+      it "finds the trip" do
+        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
+        post :invite, :id => @trip.id, :email => @invitee.email
+      end
+
+      it "finds the person" do
+        Person.should_receive(:find).with(:first, :conditions => [" email = ?", @invitee.email]).and_return(@invitee)
+        post :invite, :id => @trip.id, :email => @invitee.email
+      end
+
+      it "invites the invitee" do
+
+        @trip.should_receive(:invite!).with(@invitee)
+        post :invite, :id => @trip.id, :email => @invitee.email
+
       end
       
       
       it "saves the trip" do
-        
+        post :invite, :id => @trip.id, :email => 'invitee@invitee.com'
         @trip.should_receive(:save)
-        post :invite
       end
 
       it "sets a flash[:notice] message" do
@@ -382,7 +393,7 @@ describe TripsController do
 
       it "adds the invitee to trip's list of invitees" do
         
-        @trip.invitees.should_include(@invitee)
+        @trip.invitees.should include(@invitee)
         post :invite
       end
 
@@ -391,6 +402,7 @@ describe TripsController do
         @invitee.pending_trips.should include(@trip)
         post :invite
       end
+
 
       it "redirects to the show trip info page" do
         post :invite

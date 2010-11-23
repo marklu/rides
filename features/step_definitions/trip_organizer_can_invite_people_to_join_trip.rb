@@ -23,6 +23,7 @@ Then /^the user with email "([^"]*)" should have an invitation to "([^"]*)"$/ do
 end
 
 Given /^I'm signed in as "([^"]*)" and password "([^"]*)"$/ do |email, pwd|
+  visit '/signout'
   visit '/signin'
   fill_in 'Email', :with => email
   fill_in 'Password', :with => pwd
@@ -30,10 +31,15 @@ Given /^I'm signed in as "([^"]*)" and password "([^"]*)"$/ do |email, pwd|
 end
 
 Given /^the user with email "([^"]*)" has an invitation to "([^"]*)"$/ do |email, tripname|
+  
+  
   @invitee = Person.find(:first, :conditions => [ "email = ?", email ])
   @trip = Trip.find(:first, :conditions => [ "name = ?", tripname ])
 
   @invitee.pending_trips << @trip
+  @trip.invitees << @invitee
+#  @trip.invitations.build(:email => @invitee.email).invitee = @invitee
+
 end
 
 Then /^the user with email "([^"]*)" should be a participant in "([^"]*)"$/ do |email, tripname|
@@ -50,4 +56,11 @@ Then /^the user with email "([^"]*)" should not have an invitation to "([^"]*)"$
 
   @new_participant.pending_trips.should_not include(@trip)
   @trip.invitees.should_not include(@new_participant)
+end
+
+Given /^the user with email "([^"]*)" is participating in "([^"]*)"$/ do |email, tripname|
+  @participant = Person.find(:first, :conditions => [ "email = ?", email ])
+  @trip = Trip.find(:first, :conditions => [ "name = ?", tripname ])
+
+  @trip.participants << @participant
 end

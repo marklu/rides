@@ -26,6 +26,12 @@ module ModelFactory
         :capacity => 4,
         :owner => create_valid('Person')
       }
+    when 'Invitation'
+      return {
+        :pending_trip => create_valid!('Trip'),
+        :invitee => create_valid!('Person'),
+        :email => "invitee@invitee.com"
+      }
     else
       raise "Unrecognized Model: #{model}"
     end

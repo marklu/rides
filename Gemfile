@@ -6,7 +6,7 @@ gem 'rails-geocoder', :require => 'geocoder'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'validates_existence', '>= 0.4'
 gem 'validates_timeliness', '~> 3.0.0'
-
+gem 'mail'
 group :development, :test do
    gem 'webrat'
    gem 'rspec'

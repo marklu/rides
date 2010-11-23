@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <% if @trip.invitees.include?(current_person) %>
 <h1><%= link_to "Join this trip", join_trip_path %></h1>
 <% end %>

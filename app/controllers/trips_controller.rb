@@ -70,21 +70,47 @@ class TripsController < ApplicationController
     redirect_to(person_root_url)
   end
 
+  # POST /trips/1/invite
   def invite
     @trip = Trip.find(params[:id])
-    @invitee = Person.find(:first, :conditions => [ "email = ?", params[:email]] )
-    @trip.invitees << @invitee
+
+
+    @invitee = Person.find(:first, :conditions => [ "email = ?", params[:email] ])
+
+    if (!@invitee)
+      logger.info("Creating new person")
+      @invitee = Person.create!({:email => params[:email],
+          :name => nil,
+          :phone => nil,
+          :address => nil,
+          :password => "temppassword",
+          :music => 'no_preference',
+          :smoking => 'no_preference'})
+    end
+
+    if @trip.participants.include?(@invitee)
+      flash[:notice] = "Error: #{@invitee.name} is already a participant of that trip."
+      render :action => "show"
+      return
+    else
+      invitation = @trip.invite!(@invitee)
+    end
 
     if @trip.save
-      redirect_to(@trip, :notice => "Invited #{@invitee.name} to trip.")
+      PersonMailer.invitation_notification(@invitee).deliver
+      redirect_to(@trip, :notice => "Invited #{invitation.invitee.email} to trip.")
     else
+      if (duplicate_error = invitation.errors[:pending_trip_id][0])
+        flash[:notice] = duplicate_error
+      end
+      
       render :action => "show"
     end
   end
 
+  # GET /trips/1/join
   def join
     @trip = Trip.find(params[:id])
-    logger.info("JOINING TRIP")
     @trip.participants << @trip.invitees.delete(current_person) unless !@trip.invitees.include?(current_person)
     if @trip.save
       redirect_to(@trip, :notice => "You joined trip #{@trip.name}.")

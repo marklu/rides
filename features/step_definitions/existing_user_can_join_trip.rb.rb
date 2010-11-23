@@ -1,3 +1,4 @@
+
 Given /^user with email "([^"]*)" has an invitation to future trip called "([^"]*)"$/ do |email, tripname|
   @organizer = Person.find(:first, :conditions => [ "email = ?", email ])
   @trip = create_valid!('Trip',
@@ -26,3 +27,4 @@ Then /^I should not have an invitation to "([^"]*)"$/ do |tripname|
   @person.pending_trips.should_not include(@trip)
   @trip.invitees.should_not include(@person)
 end
+

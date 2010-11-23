@@ -5,13 +5,14 @@ class Person < ActiveRecord::Base
     self.smoking ||= 'no_preference'
   end
 
-  validates :name, :presence => true
-  validates :phone, :presence => true
-  validates :address, :mailing_address => true
+  validates_presence_of :name, :unless => Proc.new {|name| self.name.nil?}
+  validates_presence_of :phone, :unless => Proc.new {|phone| self.phone.nil?}
+  validates_presence_of :password, :unless => Proc.new {|phone| self.password.nil?}
+  validates :address, :mailing_address => true, :allow_nil => true
   validates :music, :inclusion => {:in => ['no_preference', 'no_music', 'quiet_music', 'loud_music'],
-    :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}
+    :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}#, :allow_nil => true
   validates :smoking, :inclusion => {:in => ['no_preference', 'no_smoking', 'smoking'],
-    :message => "must be one of No Preference, No Smoking, or Smoking"}
+    :message => "must be one of No Preference, No Smoking, or Smoking"}#, :allow_nil => true
 
   has_and_belongs_to_many :arrangements, :join_table => "arrangements_passengers",
     :foreign_key => "passenger_id"
@@ -21,12 +22,7 @@ class Person < ActiveRecord::Base
 
   has_many :invitations, :foreign_key => :invitee_id
   has_many :pending_trips, :through => :invitations, :class_name => "Trip", :foreign_key => :pending_trip_id
-#  has_many :trips, :through => :invitations
 
-#  has_and_belongs_to_many :trips, :join_table => "participants_trips",
-#    :foreign_key => "participant_id"
-#  has_and_belongs_to_many :pending_trips, :class_name => "Trip", :join_table => "invitees_trips",
-#    :foreign_key => "invitee_id"
   has_many :vehicles, :foreign_key => "owner_id"
 
   devise :database_authenticatable, :registerable, :validatable
@@ -34,6 +30,9 @@ class Person < ActiveRecord::Base
     :address, :city, :state, :music, :smoking
 
   def upcoming_trips
+    
     self.trips.select {|trip| trip.upcoming?}
   end
+
+
 end
