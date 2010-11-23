@@ -119,6 +119,7 @@ class TripsController < ApplicationController
   def join
     @trip = Trip.find(params[:id])
     @trip.participants << @trip.invitees.delete(current_person) unless !@trip.invitees.include?(current_person)
+    @trip.vehicles << current_person.vehicles.first unless current_person.vehicles.empty?
     if @trip.save
       redirect_to(@trip, :notice => "You joined trip #{@trip.name}.")
     else
