@@ -1,0 +1,4 @@
+Project Name: Foodrun
+Cool Feature: Search list of recipes
+
+	From reading their code for searching in the recipes controller, I think it's pretty well-written for two reasons. First, each line of code is succinct and straight-forward in what it is accomplishing. Second, their code for searching the list of recipes sanitizes the input string to prevent SQL injection attacks. However, from their view for search results, I believe there are some issues, as they allow items in the search results to be modified or deleted. Considering how the feature is to return a list of recipes corresponding to the search string, it doesn't make sense to actually be able to delete or modify recipes. Besides this irk, their feature is well-implemented, code-wise.
