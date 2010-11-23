@@ -1,0 +1,4 @@
+Jason Ku
+Project: That's Detabatable
+
+The concept is a very good idea, a better way to organize a simple single-threaded forum conversation. Because most forum posts on the internet occur in the form of a discussion where there are two or more sides, organizing the conversation into two columns is very intuitive. Looking at the debates show page, it's be cool to be able to click on the user who made a particular post and see more information about him, and possibly statistics, such as how many posts he's made or what debates he's cnotributed to. Also, it might be worth looking into whether it is a valid use case to have more than two sides (ie, more than just a pro and a con). 
