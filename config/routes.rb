@@ -10,7 +10,9 @@ Rides::Application.routes.draw do
     get :join, :on => :member, :as => 'join'
     get :participants, :on => :member, :as => 'participants'
     delete '/participants' => 'trips#leave', :on => :member, :as => 'leave'
-    resources :arrangements, :only => [:index, :show]
+    resources :arrangements, :only => [:index, :show] do
+      post :generate, :on => :collection
+    end
   end
 
   devise_for :people, :skip => [:sessions, :registrations] do

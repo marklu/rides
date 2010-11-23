@@ -11,6 +11,9 @@
   <%= text_field_tag(:email) %>
   <%= submit_tag(:invite) %>
   <% end %>
+  <%= form_tag(generate_trip_arrangements_path(@trip), :method => :post) do %>
+  <%= submit_tag "Generate Arrangements" %>
+  <% end %>
 <% end %>
 
 <ul class="actions">

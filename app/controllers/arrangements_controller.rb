@@ -12,6 +12,12 @@ class ArrangementsController < ApplicationController
     @arrangement = @trip.arrangements.find(params[:id])
   end
 
+  # POST /trip/:id/arrangements/generate
+  def generate
+    @trip.generate_arrangements
+    redirect_to @trip
+  end
+
   private
 
   def get_trip

@@ -2,13 +2,16 @@
 
 <% if @arrangements.count > 0 %>
   <% @arrangements.each do |arrangement| %>
-    <table>
-      <tr>
-        <% arrangement.passengers.each do |passenger| %>
-          <td><%= passenger.name %></td>
-        <% end %>
-      </tr>
-    </table>
+    <div class="section">
+      <h2><% if !arrangement.driver.nil? %><%=h arrangement.driver.name %>'s<% end %><% if !arrangement.vehicle.nil? %><%=h arrangement.vehicle.make %> <%=h arrangement.vehicle.model %><% end %></h2>
+      <div class="tripinfo">
+        <% if !arrangement.driver.nil? %>
+	<h3>Driver</h3>
+	<p><%=h arrangement.driver.name %></p>
+	<% end %>
+	<h3>Passengers</h3>
+        <p><%=h (arrangement.passengers.map {|passenger| passenger.name}).join(", ") %></p></div>
+    </div>
   <% end %>
 <% else %>
   <p>This trip has no arrangements yet.</p>
