@@ -1,0 +1,7 @@
+Project: ConstantWin
+
+Interesting Feature: updating of times
+
+When I looked at the project, one of the interesting features is how to update the time accurately and keep it in-sync. This feature is interesting since there are multiple ways to implement this. Since the timer and progress didn't update constantly, I decided to look into it further.
+
+It appears that the back-end stores the start times of each task, and JavaScript is used to load that information and update the page periodically. Whenever theuser adds time, runs out of time, or otherwise changes the task, AJAX is used to sync up the database on the server. To prevent rogue modification and excessive database updates, the start time is stored and everything else is calculated from that in the model. While the code was very similar to what I expect, what surprised me was the unusually long update interval on the client-side. As this consumes no server-side resources and very little client-side resources, I expected this interval to be closer to one second (instead of ten seconds).
