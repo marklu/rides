@@ -27,15 +27,15 @@ describe Trip do
       end
     end
 
-    it "is not valid without an address" do
+    it "is not valid without an location" do
       @trip.location = nil
       @trip.should_not be_valid
     end
 
-    it "is not valid with an invalid address" do
+    it "is not valid with an invalid location" do
       unstub_geocoder
-      ['123 Address', '2222 Infinite Loop, Cupertino, CA', 'Infinite Loop, Cupertino, CA'].each do |address|
-        @trip.location.address = address
+      ['123 Address', '2222 Infinite Loop, Cupertino, CA', 'Infinite Loop, Cupertino, CA'].each do |location|
+        @trip.location.location = location
         @trip.should_not be_valid
       end
       stub_geocoder

@@ -2,7 +2,7 @@ Given /^I am participating in the following trips:$/ do |trips|
   trips.hashes.each do |trip|
     trip = create_valid!('Trip',
       :name => trip['name'],
-      :location => Location.create!(:address => trip['address']),
+      :location => Location.create!(:location => trip['location']),
       :time => Time.parse(trip['time'])
     )
     trip.participants << @person

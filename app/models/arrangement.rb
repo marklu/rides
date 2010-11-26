@@ -12,6 +12,7 @@ class Arrangement < ActiveRecord::Base
   end
 
   def full?
-    self.passengers.count >= self.vehicle.capacity
+    # Driver is counted against total capacity
+    self.passengers.count >= self.vehicle.capacity - 1
   end
 end

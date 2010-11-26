@@ -3,18 +3,18 @@ require 'spec_helper'
 describe Location do
   before(:each) do
     unstub_geocoder
-    @location = Location.create!(:address => '1 Infinite Loop, Cupertino, CA')
+    @location = Location.create!(:location => '1 Infinite Loop, Cupertino, CA')
   end
 
   context "when validating" do
-    it "is not valid without an address" do
-      @location.address = nil
+    it "is not valid without a location" do
+      @location.location = nil
       @location.should_not be_valid
     end
 
-    it "is not valid with an invalid address" do
-      ['123 Address', '2222 Infinite Loop, Cupertino, CA', 'Infinite Loop, Cupertino, CA'].each do |address|
-        @location.address = address
+    it "is not valid with an invalid location" do
+      ['123 Address', '2222 Infinite Loop, Cupertino, CA', 'Infinite Loop, Cupertino, CA'].each do |location|
+        @location.location = location
         @location.should_not be_valid
       end
     end
@@ -29,7 +29,7 @@ describe Location do
 
   describe "#distance_to" do
     it "returns the distance from one location to another location" do
-      @other = Location.create!(:address => '1600 Amphitheatre Pkwy, Mountain View, CA')
+      @other = Location.create!(:location => '1600 Amphitheatre Pkwy, Mountain View, CA')
       @location.distance_to(@other).should == 6.934837206234292
     end
   end

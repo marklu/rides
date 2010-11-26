@@ -16,24 +16,24 @@ Feature: User can create trip
     When I go to the plan trip page
     Then I should see "Name"
     And I should see "Time"
-    And I should see "Address"
+    And I should see "Location"
 
   Scenario Outline: I plan a new trip
     Given I am on the plan trip page
     When I fill in "Name" with "<name>"
     And I select "<datetime>" as the date and time
-    And I fill in "Address" with "<address>"
+    And I fill in "Location" with "<location>"
     And I press "Create Trip"
     Then I should see "<result>"
 
     Scenarios: with valid information
-      | name      | datetime                | address                                      | result                        |
+      | name      | datetime                | location                                     | result                        |
       | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Trip was successfully created |
 
     Scenarios: with invalid information
-      | name      | datetime                | address                                      | result                                               |
-      |           | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Name can't be blank                                  |
-      | Trip Name | December 25, 2010 10:00 |                                              | Location address must point to a valid location      |
-      | Trip Name | December 25, 2010 10:00 | Amphitheatre Parkway, Mountain View, CA      | Location address must point to a valid location      |
-      | Trip Name | December 25, 2010 10:00 | 123 Address                                  | Location address must point to a valid location      |
-      | Trip Name | December 25, 2010 10:00 | String                                       | Location address must point to a valid location      |
+      | name      | datetime                | location                                     | result                       |
+      |           | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Name can't be blank          |
+      | Trip Name | December 25, 2010 10:00 |                                              | Location location is invalid |
+      | Trip Name | December 25, 2010 10:00 | Amphitheatre Parkway, Mountain View, CA      | Location location is invalid |
+      | Trip Name | December 25, 2010 10:00 | 123 Address                                  | Location location is invalid |
+      | Trip Name | December 25, 2010 10:00 | String                                       | Location location is invalid |

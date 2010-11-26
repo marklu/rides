@@ -13,7 +13,7 @@ module ModelFactory
         :password_confirmation => 'testpassword123',
         :name => 'First Last',
         :phone => '123-456-7890',
-        :location => Location.create!(:address => '1600 Amphitheatre Parkway, Mountain View, CA'),
+        :location => Location.create!(:location => '1600 Amphitheatre Parkway, Mountain View, CA'),
         :music => 'no_preference',
         :smoking => 'no_preference'
       }
@@ -21,7 +21,7 @@ module ModelFactory
       return {
         :name => 'Trip Name',
         :time => Time.now,
-        :location => Location.create!(:address => '1 Infinite Loop, Cupertino, CA'),
+        :location => Location.create!(:location => '1 Infinite Loop, Cupertino, CA'),
         :organizer => create_valid!('Person')
       }
     when 'Vehicle'

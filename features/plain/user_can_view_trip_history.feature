@@ -7,11 +7,11 @@ Feature: User can view trip history
   Background: I participated and am participating in many trips
     Given I am signed in
     And I am participating in the following trips:
-      | name            | address                               | time                   |
+      | name            | location                              | time                   |
       | Upcoming Trip 1 | 795 Folsom Street, San Francisco, CA  | January 5, 2012 10:00  |
       | Upcoming Trip 2 | 1475 Folsom Street, San Francisco, CA | February 5, 2012 10:00 |
     And I participated in the following trips:
-      | name          | address                                             | time                   |
+      | name          | location                                            | time                   |
       | Passed Trip 1 | 1601 South California Avenue, Palo Alto, California | January 5, 2009 10:00  |
       | Passed Trip 2 | 329 East Jimmie Leeds Road, Absecon, NJ             | February 5, 2009 10:00 |
 

@@ -7,7 +7,7 @@ Feature: User can view upcoming trips
   Background: I am a participant of many trips
     Given I am signed in
     Given I am participating in the following trips:
-      | name   | address                        | time                    |
+      | name   | location                       | time                    |
       | Trip 1 | 1 Infinite Loop, Cupertino, CA | December 25, 2015 10:00 |
       | Trip 2 | 1 Infinite Loop, Cupertino, CA | December 25, 2015 10:00 |
 

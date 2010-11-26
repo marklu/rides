@@ -1,9 +1,9 @@
 class Location < ActiveRecord::Base
-  validates :address, :presence => true, :location => true
+  validates :location, :presence => true, :location => true
 
   belongs_to :locatable, :polymorphic => true
 
-  geocoded_by :address
+  geocoded_by :location
   after_validation :fetch_coordinates
 
   def distance_to(other)
