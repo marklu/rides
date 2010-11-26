@@ -20,7 +20,9 @@
 	<fieldset>
 		<p><%= f.label :name %><%= f.text_field :name %></p>
 		<p><%= f.label :phone %><%= f.phone_field :phone %></p>
-		<p><%= f.label :address %><%= f.text_field :address %></p>
+    <%= f.fields_for :location do |g| %>
+      <p><%= g.label :address %><%= g.text_field :address %></p>
+    <% end %>
 	</fieldset>
 </div>
 

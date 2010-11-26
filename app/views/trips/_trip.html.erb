@@ -2,7 +2,7 @@
 	<h2><span class="triptitle"><%= link_to trip.name, trip %></span><span class="tripdate"><%= trip.time.strftime("%B %d, %Y") %></span></h2>
 	<div class="tripinfo">
 		<h3>Location</h3>
-		<p><%=h trip.address %></p>
+		<p><%=h trip.location.address %></p>
 		<h3>Date</h3>
 		<p><%=h trip.time %></p>
 		<% if trip.participants.include? current_person %>

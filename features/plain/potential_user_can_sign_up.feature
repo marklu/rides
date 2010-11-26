@@ -46,10 +46,10 @@ Feature: Potential user can sign up
       | email@email.com | testpassword123 | testpassword123      | First Last |               | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone can't be blank                                 |
       | email@email.com | testpassword123 | testpassword123      | First Last | 12345678900   | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
       | email@email.com | testpassword123 | testpassword123      | First Last | aaaaaaaaaa    | 1600 Amphitheatre Parkway, Mountain View, CA | sign up | Phone must be a complete and numeric US phone number |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  |                                              | sign up | Address must be a valid street address               |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | Amphitheatre Parkway, Mountain View, CA      | sign up | Address must be a valid street address               |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | 123 Address                                  | sign up | Address must be a valid street address               |
-      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | String                                       | sign up | Address must be a valid street address               |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  |                                              | sign up | Location address must point to a valid location      |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | Amphitheatre Parkway, Mountain View, CA      | sign up | Location address must point to a valid location      |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | 123 Address                                  | sign up | Location address must point to a valid location      |
+      | email@email.com | testpassword123 | testpassword123      | First Last | 123-456-7890  | String                                       | sign up | Location address must point to a valid location      |
 
   Scenario: I see the entered information in my profile
     Given I am on the sign up page

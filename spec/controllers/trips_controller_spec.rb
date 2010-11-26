@@ -19,22 +19,22 @@ describe TripsController do
         @organizer = create_valid!('Person', :email => 'organizer@email.com')
         @upcoming_trip1 = @organizer.organized_trips.create!(
           :name => 'Upcoming Trip 1',
-          :address => '795 Folsom Street, San Francisco, CA',
+          :location => Location.create!(:address => '795 Folsom Street, San Francisco, CA'),
           :time => Time.parse('January 5, 2012 10:00')
         )
         @upcoming_trip2 = @organizer.organized_trips.create!(
           :name => 'Upcoming Trip 2',
-          :address => '1475 Folsom Street, San Francisco, CA',
+          :location => Location.create!(:address => '1475 Folsom Street, San Francisco, CA'),
           :time => Time.parse('February 5, 2012 10:00')
         )
         @passed_trip1 = @organizer.organized_trips.create!(
           :name => 'Passed Trip 1',
-          :address => '1601 South California Avenue, Palo Alto, California',
+          :location => Location.create!(:address => '1601 South California Avenue, Palo Alto, California'),
           :time => Time.parse('January 5, 2009 10:00')
         )
         @passed_trip2 = @organizer.organized_trips.create!(
           :name => 'Passed Trip 2',
-          :address => '329 East Jimmie Leeds Road, Absecon, NJ',
+          :location => Location.create!(:address => '329 East Jimmie Leeds Road, Absecon, NJ'),
           :time => Time.parse('February 5, 2009 10:00')
         )
         @person.stub(:trips).and_return([@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2])
