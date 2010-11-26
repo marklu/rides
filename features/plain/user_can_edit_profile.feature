@@ -42,6 +42,9 @@ Feature: User can edit profile
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Pkwy, Mountain View, California    | 1231231234       | You updated your account successfully. |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Pkwy, Mountain View                | 1231231234       | You updated your account successfully. |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkkway, Mountain View            | 1231231234       | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | Soda Hall, Berkeley, CA                              | 1231231234       | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | People's Park, Berkeley, CA                          | 1231231234       | You updated your account successfully. |
+      | John Doe | John.Doe@gmail.com | Yosemite National Park                               | 1231231234       | You updated your account successfully. |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | 1234567890       | You updated your account successfully. |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | 123.456.7890     | You updated your account successfully. |
       | John Doe | John.Doe@gmail.com | 1600 Amphitheatre Parkway, Mountain View, CA         | 123-456-7890     | You updated your account successfully. |

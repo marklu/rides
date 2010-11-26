@@ -27,8 +27,16 @@ Feature: User can create trip
     Then I should see "<result>"
 
     Scenarios: with valid information
-      | name      | datetime                | location                                     | result                        |
-      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA | Trip was successfully created |
+      | name      | datetime                | location                                             | result                        |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Parkway, Mountain View, CA         | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Pkwy, Mountain View, CA 94043      | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Pkwy, Mountain View, CA            | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Pkwy, Mountain View, California    | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | 1600 Amphitheatre Pkwy, Mountain View                | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | Soda Hall, Berkeley, CA                              | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | People's Park, Berkeley, CA                          | Trip was successfully created |
+      | Trip Name | December 25, 2010 10:00 | Yosemite National Park                               | Trip was successfully created |
 
     Scenarios: with invalid information
       | name      | datetime                | location                                     | result                       |

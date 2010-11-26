@@ -33,6 +33,9 @@ Feature: Potential user can sign up
       | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, CA            | dashboard | You have signed up successfully. |
       | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View, California    | dashboard | You have signed up successfully. |
       | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | 1600 Amphitheatre Pkwy, Mountain View                | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | Soda Hall, Berkeley, CA                              | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | People's Park, Berkeley, CA                          | dashboard | You have signed up successfully. |
+      | email@email.com | testpassword123 | testpassword123 | First Last | (123) 456-7890 | Yosemite National Park                               | dashboard | You have signed up successfully. |
 
     Scenarios: with invalid information
       | email           | password        | confirm              | name       | phone         | location                                     | page    | result                                       |
