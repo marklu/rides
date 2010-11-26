@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Person do
   before(:each) do
-    @person = create_valid("Person")
+    @person = create_valid!("Person")
   end
 
   context "when creating" do

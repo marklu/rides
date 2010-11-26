@@ -1,6 +1,6 @@
 class LocationValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    location_types = [
+   location_types = [
       'street_address', 'intersection', 'neighborhood', 'subpremise',
       'premise', 'airport', 'natural_feature', 'park', 'point_of_interest'
     ]

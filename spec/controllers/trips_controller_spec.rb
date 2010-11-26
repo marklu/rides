@@ -44,7 +44,7 @@ describe TripsController do
       context "when no month or an invalid month is given" do
         it "assigns to @trips a list of trips in which @person is a participant" do
           get :index
-          assigns[:trips].should == [@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2]
+          assigns[:trips].should == [@upcoming_trip2, @upcoming_trip1, @passed_trip2, @passed_trip1]
         end
       end
 

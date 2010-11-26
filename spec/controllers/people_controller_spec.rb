@@ -38,11 +38,16 @@ describe PeopleController do
         signin(@person)
       end
 
-      it "assigns to @upcoming_trips a list of upcoming trips" do
-        trips = [stub_model(Trip), stub_model(Trip)]
-        @person.stub(:upcoming_trips).and_return(trips)
+      it "assigns to @upcoming_trips a sorted list of upcoming trips" do
+        trips = [
+          stub_model(Trip, :time => Time.now),
+          stub_model(Trip, :time => Time.now + 1000),
+          stub_model(Trip, :time => Time.now + 2000),
+          stub_model(Trip, :time => Time.now + 3000)
+        ]
+        @person.stub(:upcoming_trips).and_return(trips.shuffle)
         get :dashboard
-        assigns[:upcoming_trips].should eq(trips)
+        assigns[:upcoming_trips].should == trips
       end
 
       it "renders the dashboard template" do

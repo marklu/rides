@@ -20,12 +20,12 @@ Feature: User can view trip history
     And I follow "Trip History"
     Then I should be on the trip history page
 
-  Scenario: I can view list of all past and upcomming trips
+  Scenario: I can view a list of all past and upcomming trips
     When I go to the trip history page
-    Then I should see "Upcoming Trip 1"
-    And I should see "Upcoming Trip 2"
-    And I should see "Passed Trip 1"
-    And I should see "Passed Trip 2"
+    Then I should see "Upcoming Trip 2" first
+    And I should see "Upcoming Trip 1" second
+    And I should see "Passed Trip 2" third
+    And I should see "Passed Trip 1" fourth
 
   Scenario: I see the location and date for each trip
     When I go to the trip history page

@@ -8,8 +8,6 @@ class PeopleController < ApplicationController
 
   # GET /dashboard
   def dashboard
-    @upcoming_trips = current_person.upcoming_trips
-    logger.info(current_person.id)
-    @pending_trips = current_person.pending_trips
+    @upcoming_trips = current_person.upcoming_trips.sort {|x, y| x.time <=> y.time}
   end
 end
