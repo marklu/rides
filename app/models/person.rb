@@ -5,12 +5,12 @@ class Person < ActiveRecord::Base
     self.smoking ||= 'no_preference'
   end
 
-  validates_presence_of :name, :unless => Proc.new {|name| self.name.nil?}
+  validates :name, :presence => true, :unless => Proc.new {|name| self.name.nil?}
   validates :phone, :presence => true,
     :format => {:with => /^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-                :message => "must be a complete and numeric US phone number"},
-                :unless => Proc.new {|phone| self.phone.nil?}
-  validates_presence_of :password, :unless => Proc.new {|password| self.password.nil?}
+    :message => "must be a complete and numeric US phone number"},
+    :unless => Proc.new {|phone| self.phone.nil?}
+  validates :password, :presence => true, :unless => Proc.new {|password| self.password.nil?}
   validates :address, :presence => true, :mailing_address => true, :allow_nil => true
   validates :music, :inclusion => {:in => ['no_preference', 'no_music', 'quiet_music', 'loud_music'],
     :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}#, :allow_nil => true
@@ -28,7 +28,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :trips, :class_name => "Trip", :join_table => "participants_trips",
     :foreign_key => "participant_id"
   has_many :invitations, :foreign_key => :invitee_id
-  has_many :pending_trips, :through => :invitations
+#  has_many :pending_trips, :through => :invitations
   has_many :vehicles, :foreign_key => "owner_id"
 
   devise :database_authenticatable, :registerable, :validatable
@@ -38,4 +38,13 @@ class Person < ActiveRecord::Base
   def upcoming_trips
     self.trips.select {|trip| trip.upcoming?}
   end
+
+  def pending_trips
+    Invitation.find_all_by_email(self.email).map! {|invitation| invitation.pending_trip}
+  end
+
+  def invited_to?(trip)
+    self.pending_trips.include?(trip)
+  end
+
 end

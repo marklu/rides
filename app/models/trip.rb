@@ -9,9 +9,13 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :participants, :class_name => "Person",
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
   has_many :invitations, :foreign_key => :pending_trip_id
-  has_many :invitees, :through => :invitations
+#  has_many :invitees, :through => :invitations
   has_and_belongs_to_many :vehicles
-  
+
+  def invitees
+    self.invitations.map {|invitation| Person.find_by_email(invitation.email)}
+  end
+
   def arrangement_for(person)
     return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
   end
@@ -26,7 +30,6 @@ class Trip < ActiveRecord::Base
 
   def invite!(person)
     invitation = self.invitations.build(:email => person.email)
-    invitation.invitee = person
     return invitation
   end
   

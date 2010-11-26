@@ -78,36 +78,41 @@ class TripsController < ApplicationController
     redirect_to(person_root_url)
   end
 
+  # GET /trips/1/manage
+  def manage
+    @trip = Trip.find(params[:id])
+  end
+
   # POST /trips/1/invite
   def invite
     @trip = Trip.find(params[:id])
     @invitee = Person.find(:first, :conditions => [ "email = ?", params[:email] ])
 
-    if (!@invitee)
-      logger.info("Creating new person")
-      @invitee = Person.create!({:email => params[:email],
-          :name => nil,
-          :phone => nil,
-          :address => nil,
-          :password => "temppassword",
-          :music => 'no_preference',
-          :smoking => 'no_preference'
-      })
-    end
+#    if (!@invitee)
+#      logger.info("Creating new person")
+#      @invitee = Person.create!({:email => params[:email],
+#          :name => nil,
+#          :phone => nil,
+#          :address => nil,
+#          :password => Person.generate_password,
+#          :music => 'no_preference',
+#          :smoking => 'no_preference'
+#      })
+#    end
 
     if @trip.participants.include?(@invitee)
       flash[:notice] = "Error: #{@invitee.name} is already a participant of that trip."
       render :action => "show"
       return
     else
-      invitation = @trip.invite!(@invitee)
+      @invitation = @trip.invite!(@invitee)
     end
 
     if @trip.save
-      PersonMailer.invitation_notification(@invitee).deliver
+      PersonMailer.invitation_notification(@invitee, @invitation, @trip).deliver
       redirect_to(@trip, :notice => "Invited #{@invitee.email} to trip.")
     else
-      if (duplicate_error = invitation.errors[:pending_trip_id][0])
+      if (duplicate_error = @invitation.errors[:pending_trip_id][0])
         flash[:notice] = duplicate_error
       end
       
@@ -117,8 +122,12 @@ class TripsController < ApplicationController
 
   # GET /trips/1/join
   def join
+    
     @trip = Trip.find(params[:id])
-    @trip.participants << @trip.invitees.delete(current_person) unless !@trip.invitees.include?(current_person)
+
+    @trip.participants << current_person unless !current_person.invited_to?(@trip)
+    Invitation.delete_all(["pending_trip_id = ? AND email = ?", @trip.id, current_person.email])
+    
     @trip.vehicles << current_person.vehicles.first unless current_person.vehicles.empty?
     if @trip.save
       redirect_to(@trip, :notice => "You joined trip #{@trip.name}.")
