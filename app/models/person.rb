@@ -30,7 +30,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :trips, :class_name => "Trip", :join_table => "participants_trips",
     :foreign_key => "participant_id"
   has_many :invitations, :foreign_key => :invitee_id
-  has_many :pending_trips, :through => :invitations
+#  has_many :pending_trips, :through => :invitations
   has_many :vehicles, :foreign_key => "owner_id"
 
   devise :database_authenticatable, :registerable, :validatable
@@ -40,4 +40,13 @@ class Person < ActiveRecord::Base
   def upcoming_trips
     self.trips.select {|trip| trip.upcoming?}
   end
+
+  def pending_trips
+    Invitation.find_all_by_email(self.email).map! {|invitation| invitation.pending_trip}
+  end
+
+  def invited_to?(trip)
+    self.pending_trips.include?(trip)
+  end
+
 end

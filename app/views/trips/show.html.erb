@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
-<% if @trip.invitees.include?(current_person) %>
-<h1><%= link_to "Join this trip", join_trip_path %></h1>
-<% end %>
+
 
 <%= render :partial => "trip", :object => @trip %>
 
@@ -22,4 +20,7 @@
   <% end %>
   <li><%= link_to 'Leave Trip', leave_trip_path(@trip), :confirm => 'Are you sure?', :method => :delete %></li>
   <li><%= link_to 'Participants', participants_trip_path(@trip) %></li>
+  <% if current_person.invited_to?(@trip)#@trip.invitees.include?(current_person) %>
+    <li><%= link_to "Join this trip", join_trip_path %></li>
+  <% end %>
 </ul>

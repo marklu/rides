@@ -33,7 +33,9 @@ Feature: Trip organizer can invite people to join trip
     And I press "Invite"
     And I should see " is already a participant of that trip."
 
-  Scenario: I can invite people by email
+  Scenario: I can invite a non-existing user to join a trip
+  
+  Scenario: I can
 
   Scenario: Invited user can view trip info
 

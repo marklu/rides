@@ -13,6 +13,8 @@ Rides::Application.routes.draw do
     resources :arrangements, :only => [:index, :show] do
       post :generate, :on => :collection
     end
+    get :manage, :on => :member, :as => 'manage'
+
   end
 
   devise_for :people, :skip => [:sessions, :registrations] do

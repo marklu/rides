@@ -404,7 +404,6 @@ describe TripsController do
         Trip.stub(:find).and_return(@trip)
         @trip.should_receive(:invite!).with(@invitee)
         post :invite, :id => @trip.id, :email => @invitee.email
-
       end
 
       it "saves the trip" do
