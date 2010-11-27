@@ -1,16 +1,25 @@
 class Trip < ActiveRecord::Base
   validates :name, :presence => true
   validates :time, :presence => true, :timeliness => {:type => :datetime}
-  validates :address, :presence => true, :mailing_address => true
-  validates :organizer, :existence => {:allow_nil => false}
+  validates :location, :presence => true
+  validates :organizer, :existence => true
 
   has_many :arrangements
+  has_one :location, :as => :locatable
+  accepts_nested_attributes_for :location
   belongs_to :organizer, :class_name => "Person", :foreign_key => "organizer_id"
   has_and_belongs_to_many :participants, :class_name => "Person",
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
   has_many :invitations, :foreign_key => :pending_trip_id
-#  has_many :invitees, :through => :invitations
   has_and_belongs_to_many :vehicles
+
+  after_initialize do # Initialize location for form helpers
+    self.location ||= self.build_location
+  end
+  
+  def invitees
+    self.invitations.map {|invitation| Person.find_by_email(invitation.email)}
+  end
 
   def arrangement_for(person)
     return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
@@ -213,5 +222,10 @@ class Trip < ActiveRecord::Base
       }
     }
     return distances
+=======
+  def invite!(person)
+    invitation = self.invitations.build(:email => person.email)
+    return invitation
+>>>>>>> 1cc4b7c6e4ee0a3e63d587441dc848f995f007e3
   end
 end

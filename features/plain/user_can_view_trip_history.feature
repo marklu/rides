@@ -7,11 +7,11 @@ Feature: User can view trip history
   Background: I participated and am participating in many trips
     Given I am signed in
     And I am participating in the following trips:
-      | name            | address                               | time                   |
+      | name            | location                              | time                   |
       | Upcoming Trip 1 | 795 Folsom Street, San Francisco, CA  | January 5, 2012 10:00  |
       | Upcoming Trip 2 | 1475 Folsom Street, San Francisco, CA | February 5, 2012 10:00 |
     And I participated in the following trips:
-      | name          | address                                             | time                   |
+      | name          | location                                            | time                   |
       | Passed Trip 1 | 1601 South California Avenue, Palo Alto, California | January 5, 2009 10:00  |
       | Passed Trip 2 | 329 East Jimmie Leeds Road, Absecon, NJ             | February 5, 2009 10:00 |
 
@@ -20,12 +20,12 @@ Feature: User can view trip history
     And I follow "Trip History"
     Then I should be on the trip history page
 
-  Scenario: I can view list of all past and upcomming trips
+  Scenario: I can view a list of all past and upcomming trips
     When I go to the trip history page
-    Then I should see "Upcoming Trip 1"
-    And I should see "Upcoming Trip 2"
-    And I should see "Passed Trip 1"
-    And I should see "Passed Trip 2"
+    Then I should see "Upcoming Trip 2" first
+    And I should see "Upcoming Trip 1" second
+    And I should see "Passed Trip 2" third
+    And I should see "Passed Trip 1" fourth
 
   Scenario: I see the location and date for each trip
     When I go to the trip history page

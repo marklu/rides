@@ -1,29 +1,31 @@
 class Person < ActiveRecord::Base
-  # Set default preferences
-  before_validation do
+  before_validation do # Set default preferences
     self.music ||= 'no_preference'
     self.smoking ||= 'no_preference'
   end
 
-  validates :name, :presence => true, :unless => Proc.new {|name| self.name.nil?}
+  validates :name, :presence => true
   validates :phone, :presence => true,
     :format => {:with => /^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-    :message => "must be a complete and numeric US phone number"},
-    :unless => Proc.new {|phone| self.phone.nil?}
-  validates :password, :presence => true, :unless => Proc.new {|password| self.password.nil?}
-  validates :address, :presence => true, :mailing_address => true, :allow_nil => true
+                :message => "is not a valid numeric US phone number"}
+  validates :location, :presence => true
   validates :music, :inclusion => {:in => ['no_preference', 'no_music', 'quiet_music', 'loud_music'],
-    :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}#, :allow_nil => true
+    :message => "must be one of No Preference, No Music, Quiet Music, or Loud Music"}
   validates :smoking, :inclusion => {:in => ['no_preference', 'no_smoking', 'smoking'],
-    :message => "must be one of No Preference, No Smoking, or Smoking"}#, :allow_nil => true
+    :message => "must be one of No Preference, No Smoking, or Smoking"}
 
-  # Process phone numbers
-  after_validation do
+  after_initialize do # Initialize location for form helpers
+    self.location ||= self.build_location
+  end
+
+  after_validation do # Process phone number
     self.phone.gsub!(/^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, '(\1) \2-\3') unless self.phone.nil?
-  end 
+  end
 
   has_and_belongs_to_many :arrangements, :join_table => "arrangements_passengers",
     :foreign_key => "passenger_id"
+  has_one :location, :as => :locatable
+  accepts_nested_attributes_for :location
   has_many :organized_trips, :class_name => "Trip", :foreign_key => "organizer_id"
   has_and_belongs_to_many :trips, :class_name => "Trip", :join_table => "participants_trips",
     :foreign_key => "participant_id"
@@ -33,7 +35,7 @@ class Person < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :validatable
   attr_accessible :email, :password, :password_confirmation, :name, :phone,
-    :address, :city, :state, :music, :smoking
+    :location, :location_attributes, :music, :smoking
 
   def upcoming_trips
     self.trips.select {|trip| trip.upcoming?}

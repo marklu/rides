@@ -1,14 +1,19 @@
 module ModelFactory
+  def random_string(length)
+    chars = [('A'..'Z'), ('a'..'z'), ('0'..'9')].inject([]) {|arr, ran| arr + ran.to_a}
+    (0...length).inject('') {|str, i| str + chars[Kernel.rand(chars.size)]}
+  end
+
   def valid_attributes_for(model)
     case model
     when 'Person'
       return {
-        :email => 'email@email.com',
+        :email => "#{random_string(10)}@#{random_string(10)}.com",
         :password => 'testpassword123',
         :password_confirmation => 'testpassword123',
         :name => 'First Last',
         :phone => '123-456-7890',
-        :address => '1600 Amphitheatre Parkway, Mountain View, CA',
+        :location => Location.create!(:location => '1600 Amphitheatre Parkway, Mountain View, CA'),
         :music => 'no_preference',
         :smoking => 'no_preference'
       }
@@ -16,15 +21,15 @@ module ModelFactory
       return {
         :name => 'Trip Name',
         :time => Time.now,
-        :address => '1 Infinite Loop, Cupertino, CA',
-        :organizer => create_valid('Person')
+        :location => Location.create!(:location => '1 Infinite Loop, Cupertino, CA'),
+        :organizer => create_valid!('Person')
       }
     when 'Vehicle'
       return {
         :make => 'Make',
         :model => 'Model',
         :capacity => 4,
-        :owner => create_valid('Person')
+        :owner => create_valid!('Person')
       }
     when 'Invitation'
       return {

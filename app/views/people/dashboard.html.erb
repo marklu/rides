@@ -1,8 +1,7 @@
 <h1>Upcoming Trips</h1>
-<%= render :partial => "trips/trip", :collection => @upcoming_trips %> 
-
-<h1>Pending Trips</h1>
-<%= render :partial => "trips/trip", :collection => @pending_trips %> 
+<div id="trips">
+  <%= render :partial => "trips/trip", :collection => @upcoming_trips %>
+</div>
 
 <ul class="actions">
 	<li><%= link_to 'New Trip', new_trip_path %></li>

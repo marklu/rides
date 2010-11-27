@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Person do
   before(:each) do
-    @person = create_valid("Person")
+    @person = create_valid!("Person")
   end
 
   context "when creating" do
@@ -74,15 +74,15 @@ describe Person do
       end
     end
 
-    it "is not valid without an address" do
-      @person.address = ''
+    it "is not valid without a location" do
+      @person.location = nil
       @person.should_not be_valid
     end
 
-    it "is not valid with an invalid address" do
+    it "is not valid with an invalid location" do
       unstub_geocoder
-      ['123 Address', '2222 Infinite Loop, Cupertino, CA', 'Infinite Loop, Cupertino, CA'].each do |address|
-        @person.address = address
+      ['123 Address', '2222 Infinite Loop, Cupertino, CA', 'Infinite Loop, Cupertino, CA'].each do |location|
+        @person.location.location = location
         @person.should_not be_valid
       end
       stub_geocoder

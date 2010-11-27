@@ -10,7 +10,7 @@ class TripsController < ApplicationController
     else
       @trips = current_person.trips
     end
-
+    @trips = @trips.sort {|x, y| x.time <=> y.time}.reverse
     @months_with_trips = current_person.trips.map do |trip|
       trip.time
     end.sort.reverse.map do |time|

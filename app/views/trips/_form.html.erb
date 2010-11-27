@@ -16,7 +16,9 @@
 	<fieldset>
 		<p><%= f.label :name %><%= f.text_field :name %></p>
 		<p><%= f.label :time %><%= f.datetime_select :time, :discard_second => true %></p>
-		<p><%= f.label :address %><%= f.text_field :address %></p>
+    <%= f.fields_for :location do |g| %>
+      <p><%= g.label :location %><%= g.text_field :location %></p>
+    <% end %>
 	</fieldset>
 </div>
 
