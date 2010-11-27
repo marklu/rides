@@ -222,10 +222,5 @@ class Trip < ActiveRecord::Base
       }
     }
     return distances
-=======
-  def invite!(person)
-    invitation = self.invitations.build(:email => person.email)
-    return invitation
->>>>>>> 1cc4b7c6e4ee0a3e63d587441dc848f995f007e3
   end
 end
