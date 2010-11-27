@@ -7,8 +7,9 @@ class PersonMailer < ActionMailer::Base
     mail(:to => invitee.email, :subject => "You've been invited to join a trip.")
   end
 
-  def new_user_invitation(email)
-
-    mail(:to => email, :subject => "Register for our website and join the trip.")
+  def new_user_invitation(invitation, trip)
+    @trip = trip
+    @invitation = invitation
+    mail(:to => @invitation.email, :subject => "Register for our website and join the trip.")
   end
 end

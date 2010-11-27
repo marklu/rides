@@ -29,7 +29,6 @@ module ModelFactory
     when 'Invitation'
       return {
         :pending_trip => create_valid!('Trip'),
-        :invitee => create_valid!('Person'),
         :email => "invitee@invitee.com"
       }
     else

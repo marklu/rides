@@ -5,10 +5,6 @@
 <%= @trip.inspect %>
 <br />
 
-<% if @invitee.nil? %>
-<%= link_to "Get an account", new_person_registration_url %>
-<% else %>
 <%= link_to "Join Trip", manage_trip_url(@trip) %>
-<% end %>
 
 

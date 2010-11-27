@@ -27,7 +27,7 @@ class Person < ActiveRecord::Base
   has_many :organized_trips, :class_name => "Trip", :foreign_key => "organizer_id"
   has_and_belongs_to_many :trips, :class_name => "Trip", :join_table => "participants_trips",
     :foreign_key => "participant_id"
-  has_many :invitations, :foreign_key => :invitee_id
+  has_many :invitations
 #  has_many :pending_trips, :through => :invitations
   has_many :vehicles, :foreign_key => "owner_id"
 

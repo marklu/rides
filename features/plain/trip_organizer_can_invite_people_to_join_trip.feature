@@ -23,7 +23,7 @@ Feature: Trip organizer can invite people to join trip
     And I press "Invite"
     When I fill in "Enter email of user to invite" with "invitee@invitee.com"
     And I press "Invite"
-    Then I should see "Error: Invitation already exists."
+    Then I should see "Email already has an invitation."
 
   Scenario: I cannot invite an existing, registered user to join a trip if he is already participating in that trip
     Given I'm signed in as "organizer@organizer.com" and password "organizer"

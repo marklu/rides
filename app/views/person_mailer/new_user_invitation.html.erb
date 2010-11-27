@@ -1,14 +1,9 @@
-<%= @invitee.name %>, you've been invited to a trip.
-<br />
-<%= @invitation.inspect %>
+You've been invited to trip:
 <br />
 <%= @trip.inspect %>
 <br />
-
-<% if @invitee.nil? %>
-<%= link_to "Get an account", new_person_registration_url %>
-<% else %>
-<%= link_to "Join Trip", manage_trip_url(@trip) %>
-<% end %>
+<%= @invitation.inspect %>
+<br />
+<%= link_to "Get an account", new_person_registration_url << "?token=#{@invitation.token}" %>
 
 

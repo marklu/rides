@@ -387,48 +387,57 @@ describe TripsController do
         Trip.stub(:find).and_return(@trip)
         signin(@person)
         @invitee = create_valid!("Person", :name => 'Mr. Invitee', :email => 'invitee@invitee.com')
+        #        @invitation = @trip.invitations.build(:email => 'invitee@invitee.com', :token => @trip.id)
+#        @invitation = stub_model(Invitation,
+#          :created_at => Time.now,
+#          :updated_at => Time.now,
+#          :pending_trip_id => @trip.id,
+#          :email => @invitee.email,
+#          :token => @trip.id)
+        @invitation  = create_valid!("Invitation", :pending_trip => @trip, :email => @invitee.email, :token => @trip.id)
       end
 
       it "finds the trip" do
         Trip.should_receive(:find).with(@trip.id).and_return(@trip)
-        post :invite, :id => @trip.id, :email => @invitee.email
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
+      end
+
+      it "creates the invitation" do
+        Invitation.stub(:new).and_return(@invitation)
+        @invitation.should_receive(:save).twice.and_return(true)
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
       end
 
       it "finds the person" do
         Person.stub(:find).and_return(@person)
-        post :invite, :id => @trip.id, :email => @invitee.email
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
         assigns[:invitee].should eq(@person)
       end
 
-      it "invites the invitee" do
-        Trip.stub(:find).and_return(@trip)
-        @trip.should_receive(:invite!).with(@invitee)
-        post :invite, :id => @trip.id, :email => @invitee.email
-      end
 
       it "saves the trip" do
         @trip.should_receive(:save).and_return(true)
-        post :invite, :id => @trip.id, :email => 'invitee@invitee.com'
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
       end
 
       it "sets a flash[:notice] message" do
-        post :invite, :id => @trip.id, :email => @invitee.email
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
         flash[:notice].should == "Invited #{@invitee.email} to trip."
       end
 
       it "adds the invitee to trip's list of invitees" do
-        post :invite, :id => @trip.id, :email => @invitee.email
-        @trip.invitees.should include(@invitee)
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
+        @invitee.should be_invited_to(@trip)
       end
 
       it "adds the trip to invitee's list of pending trips" do
         pending
-        post :invite, :id => @trip.id, :email => @invitee.email
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
         @invitee.pending_trips.should include(@trip)
       end
 
       it "redirects to the show trip info page" do
-        post :invite, :id => @trip.id, :email => @invitee.email
+        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
         response.should redirect_to(:action => "show", :id => @trip.id)
       end
     end

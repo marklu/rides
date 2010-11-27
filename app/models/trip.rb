@@ -12,10 +12,6 @@ class Trip < ActiveRecord::Base
 #  has_many :invitees, :through => :invitations
   has_and_belongs_to_many :vehicles
 
-  def invitees
-    self.invitations.map {|invitation| Person.find_by_email(invitation.email)}
-  end
-
   def arrangement_for(person)
     return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
   end
@@ -28,12 +24,6 @@ class Trip < ActiveRecord::Base
     return self.time >= Time.now()
   end
 
-  def invite!(person)
-    invitation = self.invitations.build(:email => person.email)
-    return invitation
-  end
-  
-  
   def generate_arrangements
     if self.vehicles.length != 0
       vehicles = self.vehicles

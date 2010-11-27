@@ -18,7 +18,8 @@ Then /^the user with email "([^"]*)" should have an invitation to "([^"]*)"$/ do
   @trip = Trip.find(:first, :conditions => [ "name = ?", tripname ])
 
   @invitee.pending_trips.should include(@trip)
-  @trip.invitees.should include(@invitee)
+  @invitee.should be_invited_to(@trip)
+
 
 end
 

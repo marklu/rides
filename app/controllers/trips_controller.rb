@@ -35,6 +35,7 @@ class TripsController < ApplicationController
   # GET /trips/1
   def show
     @trip = Trip.find(params[:id])
+    @invitation = Invitation.new
   end
 
   # GET /trips/new
@@ -86,36 +87,34 @@ class TripsController < ApplicationController
   # POST /trips/1/invite
   def invite
     @trip = Trip.find(params[:id])
-    @invitee = Person.find(:first, :conditions => [ "email = ?", params[:email] ])
 
-#    if (!@invitee)
-#      logger.info("Creating new person")
-#      @invitee = Person.create!({:email => params[:email],
-#          :name => nil,
-#          :phone => nil,
-#          :address => nil,
-#          :password => Person.generate_password,
-#          :music => 'no_preference',
-#          :smoking => 'no_preference'
-#      })
-#    end
+    params[:invitation][:token] = params[:id] # Customize token here
 
-    if @trip.participants.include?(@invitee)
-      flash[:notice] = "Error: #{@invitee.name} is already a participant of that trip."
-      render :action => "show"
-      return
+    @invitation = Invitation.new(params[:invitation])
+    @trip.invitations << @invitation
+
+    if @invitation.save
     else
-      @invitation = @trip.invite!(@invitee)
+      render :action => "show" and return
     end
 
+    @invitee = Person.find(:first, :conditions => [ "email = ?", @invitation.email ])
+
+    if @trip.participants.include?(@invitee)
+      flash[:error] = "Error: #{@invitee.name} is already a participant of that trip."
+      render :action => "show" and return
+    end
+
+    if (!@invitee) # Inviting a non-registered user
+      PersonMailer.new_user_invitation(@invitation, @trip).deliver
+      flash[:notice] = "#{@invitation.email} has not registered yet. Invitation to join site has been sent."
+      redirect_to :action => "show" and return
+    end
+    
     if @trip.save
       PersonMailer.invitation_notification(@invitee, @invitation, @trip).deliver
       redirect_to(@trip, :notice => "Invited #{@invitee.email} to trip.")
     else
-      if (duplicate_error = @invitation.errors[:pending_trip_id][0])
-        flash[:notice] = duplicate_error
-      end
-      
       render :action => "show"
     end
   end
