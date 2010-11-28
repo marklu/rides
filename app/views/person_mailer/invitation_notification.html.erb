@@ -1,10 +1,5 @@
-<%= @invitee.name %>, you've been invited to a trip.
+You've been invited to trip:
 <br />
-<%= @invitation.inspect %>
-<br />
-<%= @trip.inspect %>
-<br />
-
-<%= link_to "Join Trip", manage_trip_url(@trip) %>
+<%= link_to "Get an account", manage_trip_url(@invitation.pending_trip_id) << "?token=#{@invitation.token}" %>
 
 

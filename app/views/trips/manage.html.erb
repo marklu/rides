@@ -1,17 +1,33 @@
-<p id="notice"><%= notice %></p>
-<h1>Manage Trip</h1>
-<%= render :partial => "trip", :object => @trip %>
 
 
-<ul class="actions">
-  <% if @trip.organized_by?(current_person)%>
-    <li><%= link_to 'Edit', edit_trip_path(@trip) %></li>
-  <% end %>
-  <% if @trip.participants.include?(current_person) %>
-    <li><%= link_to 'Leave Trip', leave_trip_path(@trip), :confirm => 'Are you sure?', :method => :delete %></li>
-  <% end %>
-  <% if current_person.invited_to?(@trip) %>
-    <li><%= link_to "Join this trip", join_trip_path %></li>
-  <% end %>
-  <li><%= link_to 'Participants', participants_trip_path(@trip) %></li>
-</ul>
+<% if @authorized_for_manage_trip %>
+  <h1>Manage Trip</h1>
+
+  <%= render :partial => "trip", :object => @trip %>
+
+  <% if !@already_participating %>
+    <%= form_tag join_trip_path, :method => :post do %>
+      <%= hidden_field_tag 'token', @token %>
+      <%= submit_tag "Join this trip" %>
+    <% end %>
+  <%  end %>
+
+
+
+  <ul class="actions">
+    <% if @trip.organized_by?(current_person)%>
+      <li><%= link_to 'Edit', edit_trip_path(@trip) %></li>
+    <% end %>
+    <% if @trip.participants.include?(current_person) %>
+      <li><%= link_to 'Leave Trip', leave_trip_path(@trip), :confirm => 'Are you sure?', :method => :delete %></li>
+    <% end %>
+  <%# if current_person.invited_to?(@trip) %>
+
+    <li><%= link_to 'Participants', participants_trip_path(@trip) %></li>
+  </ul>
+<% else %>
+  <%= form_tag(manage_trip_url(@trip.id), :method => :get)  %>
+  Enter token: <%= text_field_tag('token') %>
+  <%= submit_tag "Submit token" %>
+
+<% end %>

@@ -374,26 +374,94 @@ describe TripsController do
     end
   end
 
-  describe "POST invite" do
+  describe "GET manage" do
     context "when not logged in" do
       it "redirects to the signin page" do
-        delete :destroy, :id => @trip.id
+        get :manage, :id => @trip.id
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
 
-    context "when logged in" do
+    context "when providing a correct token" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        signin(@person)
+        @token = "asdftoken"
+        
+        @invitation  = create_valid!("Invitation",
+          :email => "jasonxku@gmail.com",
+          :token => @token)
+        @trip.invitations << @invitation
+      end
+
+      it "finds the trip" do
+        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
+        get :manage, :id => @trip.id, :token => @token
+      end
+
+      it "assigns the token" do
+        get :manage, :id => @trip.id, :token => @token
+        assigns[:token].should == @token
+      end
+
+      it "is authorized to view the manage page" do
+        get :manage, :id => @trip.id, :token => @token
+        assigns[:authorized_for_manage_trip].should be_true
+      end
+
+      it "renders the manage template" do
+        get :manage, :id => @trip.id, :token => @token
+        response.should render_template("manage")
+      end
+    end
+    context "when providing an incorrect token" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        signin(@person)
+        @token = "asdf"
+
+        @invitation  = create_valid!("Invitation",
+          :email => "jasonxku@gmail.com",
+          :token => "correcttoken")
+        @trip.invitations << @invitation
+      end
+
+      it "finds the trip" do
+        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
+        get :manage, :id => @trip.id, :token => @token
+      end
+
+      it "assigns the token" do
+        get :manage, :id => @trip.id, :token => @token
+        assigns[:token].should == @token
+      end
+
+      it "is not authorized to view the manage page" do
+        get :manage, :id => @trip.id, :token => @token
+        assigns[:authorized_for_manage_trip].should be_false
+      end
+
+      it "renders the manage template" do
+        get :manage, :id => @trip.id, :token => @token
+        response.should render_template("manage")
+      end
+    end
+  end
+
+
+  describe "POST invite" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        post :invite, :id => @trip.id
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "inviting a registered user" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
         signin(@person)
         @invitee = create_valid!("Person", :name => 'Mr. Invitee', :email => 'invitee@invitee.com')
-        #        @invitation = @trip.invitations.build(:email => 'invitee@invitee.com', :token => @trip.id)
-#        @invitation = stub_model(Invitation,
-#          :created_at => Time.now,
-#          :updated_at => Time.now,
-#          :pending_trip_id => @trip.id,
-#          :email => @invitee.email,
-#          :token => @trip.id)
         @invitation  = create_valid!("Invitation", :pending_trip => @trip, :email => @invitee.email, :token => @trip.id)
       end
 
@@ -431,7 +499,6 @@ describe TripsController do
       end
 
       it "adds the trip to invitee's list of pending trips" do
-        pending
         post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
         @invitee.pending_trips.should include(@trip)
       end
@@ -441,5 +508,57 @@ describe TripsController do
         response.should redirect_to(:action => "show", :id => @trip.id)
       end
     end
+
+    context "inviting a nonregistered user" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        signin(@person)
+        Invitation.delete(:all)
+        @invitation  = create_valid!("Invitation",
+          :pending_trip => @trip,
+          :email => "jasonxku@gmail.com",
+          :token => Digest::MD5.hexdigest("jasonxku@gmail.com#{@trip.id}"))
+        @invitation.pending_trip = @trip
+        @invitation_notification = PersonMailer.invitation_notification(@invitation, @trip)
+      end
+
+      it "finds the trip" do
+        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
+        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
+      end
+
+      it "creates the invitation" do
+        Invitation.stub(:new).and_return(@invitation)
+        @invitation.should_receive(:save).twice.and_return(true)
+        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
+      end
+
+      it "fails to find the person" do
+        Person.stub(:find).and_return(nil)
+        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
+        assigns[:invitee].should be nil
+      end
+
+      it "delivers the email" do
+        Invitation.stub(:new).and_return(@invitation)
+        PersonMailer.stub(:invitation_notification).and_return(@invitation_notification)
+        @invitation_notification.should_receive(:deliver)
+        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
+      end
+
+      it "sets a flash[:notice] message" do
+        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
+        flash[:notice].should == "#{@invitation.email} has not registered yet. Invitation to join site has been sent."
+      end
+
+      it "render show trip info page" do
+        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
+        response.should redirect_to(:action => "show", :id => @trip.id)
+      end
+    end
+
+
   end
+
+
 end

@@ -7,7 +7,7 @@ Rides::Application.routes.draw do
   resources :trips do
     post :invite, :on => :member, :as => 'invite'
     get :invitees, :on => :member, :as => 'invitees'
-    get :join, :on => :member, :as => 'join'
+    post :join, :on => :member, :as => 'join'
     get :participants, :on => :member, :as => 'participants'
     delete '/participants' => 'trips#leave', :on => :member, :as => 'leave'
     resources :arrangements, :only => [:index, :show] do

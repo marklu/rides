@@ -1,3 +1,6 @@
+
+require 'digest/md5'
+
 module ModelFactory
   def random_string(length)
     chars = [('A'..'Z'), ('a'..'z'), ('0'..'9')].inject([]) {|arr, ran| arr + ran.to_a}
@@ -32,9 +35,10 @@ module ModelFactory
         :owner => create_valid!('Person')
       }
     when 'Invitation'
+      email = "#{random_string(10)}@#{random_string(10)}.com"
       return {
-        :pending_trip => create_valid!('Trip'),
-        :email => "invitee@invitee.com"
+        :email => email,
+        :token => Digest::MD5.hexdigest(email+@trip.id.to_s)
       }
     else
       raise "Unrecognized Model: #{model}"

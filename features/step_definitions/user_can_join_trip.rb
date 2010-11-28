@@ -1,17 +1,26 @@
 
-Given /^user with email "([^"]*)" has an invitation to future trip called "([^"]*)"$/ do |email, tripname|
-  @organizer = Person.find(:first, :conditions => [ "email = ?", email ])
+require 'digest/md5'
+
+
+Given /^there is an invitation to "([^"]*)" sent to "([^"]*)" with token "([^"]*)"$/ do |tripname, email, token|
   @trip = create_valid!('Trip',
     :name => tripname,
-    :time => Time.now + 1000000,
-    :organizer => @organizer)
-  
-  @invitee = Person.find(:first, :conditions => [ "email = ?", email ])
-
-  @invitee.pending_trips << @trip
+    :time => Time.now + 1000000)
+  @invitation = create_valid!('Invitation',
+    :pending_trip => @trip,
+    :email => email,
+    :token => token
+  )
+  @trip.invitations << @invitation
+  @trip.save!
 end
 
+Given /^I'm on the manage trip page with token "([^"]*)"$/ do |token|
+  url = "#{manage_trip_path(@trip)}?token=#{token}"
+  visit(url)
+end
 
+  
 Then /^I should be a participant in "([^"]*)"$/ do |tripname|
   #  @new_participant = Person.find(:first, :conditions => [ "email = ?", email ])
   @trip = Trip.find(:first, :conditions => [ "name = ?", tripname ])

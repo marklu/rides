@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class TripsController < ApplicationController
   before_filter :authenticate_person!
 
@@ -82,19 +84,40 @@ class TripsController < ApplicationController
   # GET /trips/1/manage
   def manage
     @trip = Trip.find(params[:id])
+    @token = params[:token]
+    has_valid_token = @trip.token_valid?(@token)
+    @already_participating = @trip.participants.include?(current_person)
+    @authorized_for_manage_trip = has_valid_token || @already_participating
+    if @authorized_for_manage_trip
+      flash[:error].clear unless !flash[:error]
+    else
+      flash[:error] = "You do not have the correct token."
+    end
   end
 
   # POST /trips/1/invite
   def invite
     @trip = Trip.find(params[:id])
 
-    params[:invitation][:token] = params[:id] # Customize token here
+    params[:invitation][:token] = Digest::MD5.hexdigest(params[:invitation][:email] + @trip.id.to_s) # Generate token here
 
     @invitation = Invitation.new(params[:invitation])
     @trip.invitations << @invitation
 
     if @invitation.save
     else
+      print "\nExisting: \n"
+      print Invitation.find(:all)
+      print "\nInvite: \n"
+      print @invitation.inspect
+      print "\nERRORS\n"
+      #      logger.info("\nExisting: \n")
+      #      logger.info(Invitation.find(:all))
+      #      logger.info("\nInvite: \n")
+      #      logger.info(@invitation.inspect)
+      #      logger.info("\nERRORS\n")
+
+      print @invitation.errors.inspect
       render :action => "show" and return
     end
 
@@ -106,26 +129,26 @@ class TripsController < ApplicationController
     end
 
     if (!@invitee) # Inviting a non-registered user
-      PersonMailer.new_user_invitation(@invitation, @trip).deliver
+      PersonMailer.invitation_notification(@invitation, @trip).deliver
       flash[:notice] = "#{@invitation.email} has not registered yet. Invitation to join site has been sent."
       redirect_to :action => "show" and return
     end
     
     if @trip.save
-      PersonMailer.invitation_notification(@invitee, @invitation, @trip).deliver
+      PersonMailer.invitation_notification(@invitation, @trip).deliver
       redirect_to(@trip, :notice => "Invited #{@invitee.email} to trip.")
     else
       render :action => "show"
     end
   end
 
-  # GET /trips/1/join
+  # POST /trips/1/join
   def join
     
     @trip = Trip.find(params[:id])
-
-    @trip.participants << current_person unless !current_person.invited_to?(@trip)
-    Invitation.delete_all(["pending_trip_id = ? AND email = ?", @trip.id, current_person.email])
+    
+    @trip.participants << current_person #unless !current_person.invited_to?(@trip)
+    Invitation.delete_all(["token = ?", params[:token]])
     
     @trip.vehicles << current_person.vehicles.first unless current_person.vehicles.empty?
     if @trip.save
