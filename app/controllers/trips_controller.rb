@@ -106,18 +106,6 @@ class TripsController < ApplicationController
 
     if @invitation.save
     else
-      print "\nExisting: \n"
-      print Invitation.find(:all)
-      print "\nInvite: \n"
-      print @invitation.inspect
-      print "\nERRORS\n"
-      #      logger.info("\nExisting: \n")
-      #      logger.info(Invitation.find(:all))
-      #      logger.info("\nInvite: \n")
-      #      logger.info(@invitation.inspect)
-      #      logger.info("\nERRORS\n")
-
-      print @invitation.errors.inspect
       render :action => "show" and return
     end
 
