@@ -28,20 +28,22 @@
 
 <div class="section">
 	<h2>Personal Preferences</h2>
-	<fieldset>
-		<p><%= f.label :music %>
-		<% ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref| %>
-			<%= f.radio_button :music, pref %>
-			<%= f.label "music_#{pref}", pref.humanize, {:class => 'choice'} %>
-		<% end %>
-		</p>
-		<p><%= f.label :smoking %>
-		<% ['no_preference', 'no_smoking', 'smoking'].each do |pref| %>
-			<%= f.radio_button :smoking, pref %>
-			<%= f.label "smoking_#{pref}", pref.humanize, {:class => 'choice'} %>
-		<% end %>
-		</p>
-	</fieldset>
+  <fieldset>
+    <%= f.fields_for :preferences do |g| %>
+      <p><%= g.label :music %>
+      <% ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref| %>
+        <%= g.radio_button :music, pref %>
+        <%= g.label "music_#{pref}", pref.humanize, {:class => 'choice'} %>
+      <% end %>
+      </p>
+      <p><%= f.label :smoking %>
+      <% ['no_preference', 'no_smoking', 'smoking'].each do |pref| %>
+        <%= g.radio_button :smoking, pref %>
+        <%= g.label "smoking_#{pref}", pref.humanize, {:class => 'choice'} %>
+      <% end %>
+      </p>
+    <% end %>
+  </fieldset>
 </div>
 
 <p><%= f.submit "Update" %></p>

@@ -31,12 +31,11 @@ describe Person do
       create_valid("Person", :password_confirmation => '').should_not be_valid
     end
 
-    it "sets the music preference to 'No Preference' by default" do
-      create_valid("Person", :music => nil).music.should == 'no_preference'
-    end
-
-    it "sets the smoking preference to 'No Preference' by default" do
-      create_valid("Person", :smoking => nil).smoking.should == 'no_preference'
+    it "sets preferences to 'No Preference' by default" do
+      person = create_valid('Person')
+      [:music, :smoking].each do |preference|
+        person.preferences.send(preference).should == 'no_preference'
+      end
     end
   end
 
@@ -90,28 +89,28 @@ describe Person do
 
     it "is valid with a valid music preference (No Preference, No Music, Quiet Music, Loud Music)" do
       ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |preference|
-        @person.music = preference
+        @person.preferences.music = preference
         @person.should be_valid
       end
     end
 
     it "is not valid with an invalid music preference" do
       ['No Preference', 'invalid', '0'].each do |preference|
-        @person.music = preference
+        @person.preferences.music = preference
         @person.should_not be_valid
       end
     end
 
     it "is valid with a valid smoking preference (No Preference, No Smoking, Smoking)" do
       ['no_preference', 'no_smoking', 'smoking'].each do |preference|
-        @person.smoking = preference
+        @person.preferences.smoking = preference
         @person.should be_valid
       end
     end
 
     it "is not valid with an invalid smoking preference" do
       ['No Preference', 'invalid', '0'].each do |preference|
-        @person.smoking = preference
+        @person.preferences.smoking = preference
         @person.should_not be_valid
       end
     end
@@ -167,6 +166,34 @@ describe Person do
     it "has a list of vehicles" do
       @person.vehicles.should include(@vehicle1)
       @person.vehicles.should include(@vehicle2)
+    end
+  end
+
+  context "when determining incompatibility" do
+    context "with another person" do
+      before(:each) do
+        @other = create_valid!("Person")
+        @other_preferences = Preferences.create!
+        @other.stub(:preferences).and_return(@other_preferences)
+      end
+  
+      it "compares the other person's preferences with its own" do
+        @person.preferences.should_receive(:incompatibility_with).with(@other_preferences)
+        @person.incompatibility_with(@other)
+      end
+    end
+
+    context "with an arrangement" do
+      before(:each) do
+        @other = Arrangement.create!
+        @other_preferences = Preferences.create!
+        @other.stub(:preferences).and_return(@other_preferences)
+      end
+
+      it "compares the arrangement's preferences with its own" do
+        @person.preferences.should_receive(:incompatibility_with).with(@other_preferences)
+        @person.incompatibility_with(@other)
+      end
     end
   end
 end

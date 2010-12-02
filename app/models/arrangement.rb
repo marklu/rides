@@ -12,7 +12,14 @@ class Arrangement < ActiveRecord::Base
   end
 
   def full?
-    # Driver is counted against total capacity
     self.passengers.count >= self.vehicle.capacity - 1
+  end
+
+  def incompatibility_with(other)
+    self.preferences.incompatibility_with(other.preferences)
+  end
+
+  def preferences
+    self.driver.nil? ? Preferences.new : self.driver.preferences
   end
 end
