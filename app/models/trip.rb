@@ -13,22 +13,18 @@ class Trip < ActiveRecord::Base
   belongs_to :organizer, :class_name => "Person", :foreign_key => "organizer_id"
   has_and_belongs_to_many :participants, :class_name => "Person",
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
-  has_many :invitations, :foreign_key => "pending_trip_id"
+  has_many :invitations
   has_one :preferences
   has_and_belongs_to_many :vehicles
 
   accepts_nested_attributes_for :location
 
-  def token_valid?(token) # Does there exist an invitation to this trip for the given token?
-    !self.invitations.select {|invitation| invitation.token == token}.empty?
+  def arrangement_for(person)
+    return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
   end
 
   def invitees
-    self.invitations.map {|invitation| Person.find_by_email(invitation.email)}
-  end
-
-  def arrangement_for(person)
-    return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
+    self.invitations.map {|invitation| invitation.email}
   end
 
   def organized_by?(person)

@@ -5,16 +5,14 @@ Rides::Application.routes.draw do
   resources :vehicles, :except => [:index, :show]
 
   resources :trips do
-    post :invite, :on => :member, :as => 'invite'
-    get :invitees, :on => :member, :as => 'invitees'
-    post :join, :on => :member, :as => 'join'
+    post '/invitations' => 'trips#invite', :on => :member, :as => 'invite'
+
     get :participants, :on => :member, :as => 'participants'
     delete '/participants' => 'trips#leave', :on => :member, :as => 'leave'
+
     resources :arrangements, :only => [:index, :show] do
       post :generate, :on => :collection
     end
-    get :manage, :on => :member, :as => 'manage'
-
   end
 
   devise_for :people, :skip => [:sessions, :registrations] do

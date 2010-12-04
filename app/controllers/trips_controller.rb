@@ -5,7 +5,7 @@ class TripsController < ApplicationController
 
   # GET /trips
   def index
-    if !params[:month].nil? && !params[:year].nil?
+    unless params[:month].nil? || params[:year].nil?
       @trips = current_person.trips.select do |trip|
         trip.time.month == params[:month].to_i && trip.time.year == params[:year].to_i
       end
@@ -13,31 +13,15 @@ class TripsController < ApplicationController
       @trips = current_person.trips
     end
     @trips = @trips.sort {|x, y| x.time <=> y.time}.reverse
-    @months_with_trips = current_person.trips.map do |trip|
-      trip.time
-    end.sort.reverse.map do |time|
-      {:month => time.month, :year => time.year}
-    end.uniq
-  end
 
-  # GET /trips/1/participants
-  def participants
-    @trip = Trip.find(params[:id])
-    @participants = @trip.participants.sort_by {|participant| participant.name}
-  end
-
-  # DELETE /trips/1/participants
-  def leave
-    @trip = Trip.find(params[:id])
-    @trip.participants.delete(current_person)
-
-    redirect_to(person_root_url, :notice => "You are no longer participating in #{@trip.name}")
+    @months_with_trips = current_person.trips.map {|trip| trip.time}.sort.reverse
+      .map {|time| {:month => time.month, :year => time.year}}
+      .uniq
   end
 
   # GET /trips/1
   def show
     @trip = Trip.find(params[:id])
-    @invitation = Invitation.new
   end
 
   # GET /trips/new
@@ -81,68 +65,34 @@ class TripsController < ApplicationController
     redirect_to(person_root_url)
   end
 
-  # GET /trips/1/manage
-  def manage
+  # GET /trips/1/participants
+  def participants
     @trip = Trip.find(params[:id])
-    @token = params[:token]
-    has_valid_token = @trip.token_valid?(@token)
-    @already_participating = @trip.participants.include?(current_person)
-    @authorized_for_manage_trip = has_valid_token || @already_participating
-    if @authorized_for_manage_trip
-      flash[:error].clear unless !flash[:error]
-    else
-      flash[:error] = "You do not have the correct token."
-    end
+    @participants = @trip.participants.sort_by {|participant| participant.name}
+    @invitees = @trip.invitees.sort
+    @invitation = Invitation.new
   end
 
-  # POST /trips/1/invite
+  # DELETE /trips/1/participants
+  def leave
+    @trip = Trip.find(params[:id])
+    @trip.participants.delete(current_person)
+
+    redirect_to(person_root_url, :notice => "You are no longer participating in #{@trip.name}")
+  end
+
+  # POST /trips/1/invitations
   def invite
     @trip = Trip.find(params[:id])
-
-    params[:invitation][:token] = Digest::MD5.hexdigest(params[:invitation][:email] + @trip.id.to_s) # Generate token here
-
-    @invitation = Invitation.new(params[:invitation])
-    @trip.invitations << @invitation
+    @invitation = @trip.invitations.build(params[:invitation])
+    @invitation.token = Digest::MD5.hexdigest(params[:invitation][:email] + @trip.id.to_s)
 
     if @invitation.save
+      redirect_to(participants_trip_url(@trip), :notice => "#{params[:invitation][:email]} has been invited.")
     else
-      render :action => "show" and return
-    end
-
-    @invitee = Person.find(:first, :conditions => [ "email = ?", @invitation.email ])
-
-    if @trip.participants.include?(@invitee)
-      flash[:error] = "Error: #{@invitee.name} is already a participant of that trip."
-      render :action => "show" and return
-    end
-
-    if (!@invitee) # Inviting a non-registered user
-      PersonMailer.invitation_notification(@invitation, @trip).deliver
-      flash[:notice] = "#{@invitation.email} has not registered yet. Invitation to join site has been sent."
-      redirect_to :action => "show" and return
-    end
-    
-    if @trip.save
-      PersonMailer.invitation_notification(@invitation, @trip).deliver
-      redirect_to(@trip, :notice => "Invited #{@invitee.email} to trip.")
-    else
-      render :action => "show"
-    end
-  end
-
-  # POST /trips/1/join
-  def join
-    
-    @trip = Trip.find(params[:id])
-    
-    @trip.participants << current_person #unless !current_person.invited_to?(@trip)
-    Invitation.delete_all(["token = ?", params[:token]])
-    
-    @trip.vehicles << current_person.vehicles.first unless current_person.vehicles.empty?
-    if @trip.save
-      redirect_to(@trip, :notice => "You joined trip #{@trip.name}.")
-    else
-      render :action => "show"
+      @participants = @trip.participants.sort_by {|participant| participant.name}
+      @invitees = @trip.invitees.sort
+      render :action => 'participants'
     end
   end
 end

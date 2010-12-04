@@ -1,11 +1,8 @@
 require 'spec_helper'
 
 describe Invitation do
-
   before(:each) do
-    @trip = create_valid!("Trip")
-    @invitation = create_valid("Invitation")
-    @invitation.pending_trip = @trip
+    @invitation = create_valid!('Invitation')
   end
 
   context "when validating" do
@@ -13,34 +10,54 @@ describe Invitation do
       @invitation.should be_valid
     end
 
-    it "is not valid without a pending trip" do
-      pending
-      @invitation.pending_trip = nil
+    it "is not valid without an email" do
+      @invitation.email = ''
       @invitation.should_not be_valid
+    end
+
+    it "is not valid with an invalid email" do
+      ["invalidemail", "invalidemail@test"].each do |invalid_email|
+        @invitation.email = invalid_email
+        @invitation.should_not be_valid
+      end
+    end
+
+    it "is not valid when there is another invitation for the same email and trip" do
+      @invitation2 = build_valid('Invitation',
+        :email => @invitation.email,
+        :trip => @invitation.trip
+      )
+      @invitation2.should_not be_valid
+    end
+
+    it "is valid when there is another invitation for the same email but different trip" do
+      @invitation2 = create_valid!('Invitation', :email => @invitation.email)
+      @invitation2.should be_valid
+    end
+
+    it "is valid when there is another invitation for a different email but same trip" do
+      @invitation2 = create_valid!('Invitation', :trip => @invitation.trip)
+      @invitation2.should be_valid
     end
 
     it "is not valid without a token" do
-      @invitation.token = nil
+      @invitation.token = ''
       @invitation.should_not be_valid
     end
 
-    it "is not valid without an email" do
-      @invitation.email = nil
-      @invitation.should_not be_valid
-    end
-
-    it "is not valid when there is another invitation with the same email and pending trip" do
-      @trip = create_valid!("Trip")
-
-      @invitation1 = create_valid("Invitation",
-        :email => "asdf@asdf.com")
-      @invitation1.pending_trip = @trip
-      @invitation1.save!
-      @invitation2 = create_valid("Invitation",
-        :email => "asdf@asdf.com")
-      @invitation2.pending_trip = @trip
+    it "is not valid with a non-unique token" do
+      @invitation2 = build_valid('Invitation', :token => @invitation.token)
       @invitation2.should_not be_valid
+    end
+
+    it "is not valid without a trip" do
+      @invitation.trip = nil
+      @invitation.should_not be_valid
+    end
+
+    it "is not valid with an invalid trip" do
+      @invitation.trip.destroy
+      @invitation.should_not be_valid
     end
   end
 end
-

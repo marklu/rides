@@ -119,8 +119,9 @@ describe "Routes" do
     end
 
     context "Invite Participants" do
-      it "routes GET ... to ... "
-      it "routes POST ... to ..."
+      it "routes POST /trips/1/invitations to trips#invite" do
+        {:post => "trips/1/invitations"}.should route_to(:controller => "trips", :action => "invite", :id => "1")
+      end
     end
   end
 end

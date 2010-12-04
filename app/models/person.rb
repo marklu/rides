@@ -33,14 +33,6 @@ class Person < ActiveRecord::Base
     self.preferences.incompatibility_with(other.preferences)
   end
 
-  def invited_to?(trip)
-    self.pending_trips.include?(trip)
-  end
-
-  def pending_trips
-    Invitation.find_all_by_email(self.email).map! {|invitation| invitation.pending_trip}
-  end
-
   def upcoming_trips
     self.trips.select {|trip| trip.upcoming?}
   end

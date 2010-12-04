@@ -1,5 +1,3 @@
-
-
 <% if @authorized_for_manage_trip %>
   <h1>Manage Trip</h1>
 
@@ -11,8 +9,6 @@
       <%= submit_tag "Join this trip" %>
     <% end %>
   <%  end %>
-
-
 
   <ul class="actions">
     <% if @trip.organized_by?(current_person)%>
@@ -29,5 +25,4 @@
   <%= form_tag(manage_trip_url(@trip.id), :method => :get)  %>
   Enter token: <%= text_field_tag('token') %>
   <%= submit_tag "Submit token" %>
-
 <% end %>

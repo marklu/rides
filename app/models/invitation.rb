@@ -1,11 +1,7 @@
 class Invitation < ActiveRecord::Base
-  
-  validates :email, :presence => true
-  validates :token, :presence => true
-  validates_uniqueness_of :email, :scope => :pending_trip_id, :message => ' already has an invitation.'
-#  validates :pending_trip, :existence => true
+  validates :email, :presence => true, :format => {:with => /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i}, :not_participant => true, :uniqueness => {:scope => :trip_id, :message => ' already has an invitation.'}
+  validates :token, :presence => true, :uniqueness => true
+  validates :trip, :existence => true
 
-  belongs_to :pending_trip, :class_name => "Trip", :foreign_key => "pending_trip_id"
- 
-  attr_accessible :email, :token
+  belongs_to :trip
 end

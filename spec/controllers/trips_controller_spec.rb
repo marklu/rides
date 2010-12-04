@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'digest/md5'
 
 describe TripsController do
   before(:each) do
@@ -68,83 +69,6 @@ describe TripsController do
       it "renders the index template" do
         get :index
         response.should render_template("index")
-      end
-    end
-  end
-
-  describe "GET participants" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
-        get :participants, :id => 1
-        response.should redirect_to(:controller => "devise/sessions", :action => "new")
-      end
-    end
-
-    context "when logged in as trip organizer" do
-      before(:each) do
-        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
-        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
-        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
-        @trip.participants << @participant1 << @participant3 << @participant2
-        signin(@person)
-      end
-
-      it "assigns to @participants a sorted list of trip participants" do
-        get :participants, :id => @trip.id
-        assigns[:participants].should == [@participant1, @participant2, @participant3]
-      end
-
-      it "renders the participants template" do
-        get :participants, :id => @trip.id
-        response.should render_template("participants")
-      end
-    end
-
-    context "when logged in as trip participant" do
-      before(:each) do
-        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
-        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
-        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
-        @trip.participants << @participant1 << @participant3 << @participant2
-        signin(@participant1)
-      end
-
-      it "assigns to @participants a sorted list of trip participants" do
-        get :participants, :id => @trip.id
-        assigns[:participants].should == [@participant1, @participant2, @participant3]
-      end
-
-      it "renders the participants template" do
-        get :participants, :id => @trip.id
-        response.should render_template("participants")
-      end
-    end
-  end
-
-  describe "DELETE participants" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
-        delete :leave, :id => 1
-        response.should redirect_to(:controller => "devise/sessions", :action => "new")
-      end
-    end
-
-    context "when logged in as a trip participant" do
-      before(:each) do
-        @participant = create_valid!('Person', :email => 'participant@email.com')
-        @trip.participants << @participant
-        signin(@participant)
-      end
-
-      it "removes the participant from the trip" do
-        Trip.stub(:find).and_return(@trip)
-        delete :leave, :id => @trip.id
-        @trip.participants.should_not include(@participant)
-      end
-
-      it "redirects to the dashboard page" do
-        delete :leave, :id => @trip.id
-        response.should redirect_to(:controller => "people", :action => "dashboard")
       end
     end
   end
@@ -374,80 +298,74 @@ describe TripsController do
     end
   end
 
-  describe "GET manage" do
+  describe "GET participants" do
     context "when not logged in" do
       it "redirects to the signin page" do
-        get :manage, :id => @trip.id
+        get :participants, :id => 1
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
 
-    context "when providing a correct token" do
+    context "when logged in" do
       before(:each) do
-        Trip.stub(:find).and_return(@trip)
+        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
+        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
+        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
+        @trip.participants << @participant1 << @participant3 << @participant2
         signin(@person)
-        @token = "asdftoken"
-        
-        @invitation  = create_valid!("Invitation",
-          :email => "jasonxku@gmail.com",
-          :token => @token)
-        @trip.invitations << @invitation
       end
 
-      it "finds the trip" do
-        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
-        get :manage, :id => @trip.id, :token => @token
+      it "assigns to @participants a sorted list of trip participants" do
+        get :participants, :id => @trip.id
+        assigns[:participants].should == [@participant1, @participant2, @participant3]
       end
 
-      it "assigns the token" do
-        get :manage, :id => @trip.id, :token => @token
-        assigns[:token].should == @token
-      end
-
-      it "is authorized to view the manage page" do
-        get :manage, :id => @trip.id, :token => @token
-        assigns[:authorized_for_manage_trip].should be_true
-      end
-
-      it "renders the manage template" do
-        get :manage, :id => @trip.id, :token => @token
-        response.should render_template("manage")
-      end
-    end
-    context "when providing an incorrect token" do
-      before(:each) do
+      it "assigns to @invitees a sorted list of invited people" do
+        @trip.stub(:invitees).and_return(['b', 'a', 'c'])
         Trip.stub(:find).and_return(@trip)
-        signin(@person)
-        @token = "asdf"
-
-        @invitation  = create_valid!("Invitation",
-          :email => "jasonxku@gmail.com",
-          :token => "correcttoken")
-        @trip.invitations << @invitation
+        get :participants, :id => @trip.id
+        assigns[:invitees].should == ['a', 'b', 'c']
       end
 
-      it "finds the trip" do
-        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
-        get :manage, :id => @trip.id, :token => @token
+      it "assigns to @invitation a new invitation" do
+        get :participants, :id => @trip.id
+        assigns[:invitation].should be_an_instance_of(Invitation)
       end
 
-      it "assigns the token" do
-        get :manage, :id => @trip.id, :token => @token
-        assigns[:token].should == @token
-      end
-
-      it "is not authorized to view the manage page" do
-        get :manage, :id => @trip.id, :token => @token
-        assigns[:authorized_for_manage_trip].should be_false
-      end
-
-      it "renders the manage template" do
-        get :manage, :id => @trip.id, :token => @token
-        response.should render_template("manage")
+      it "renders the participants template" do
+        get :participants, :id => @trip.id
+        response.should render_template("participants")
       end
     end
   end
 
+  describe "DELETE participants" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        delete :leave, :id => 1
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in as a trip participant" do
+      before(:each) do
+        @participant = create_valid!('Person', :email => 'participant@email.com')
+        @trip.participants << @participant
+        signin(@participant)
+      end
+
+      it "removes the participant from the trip" do
+        Trip.stub(:find).and_return(@trip)
+        delete :leave, :id => @trip.id
+        @trip.participants.should_not include(@participant)
+      end
+
+      it "redirects to the dashboard page" do
+        delete :leave, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+  end
 
   describe "POST invite" do
     context "when not logged in" do
@@ -457,108 +375,75 @@ describe TripsController do
       end
     end
 
-    context "inviting a registered user" do
+    context "when logged in" do
       before(:each) do
-        Trip.stub(:find).and_return(@trip)
+        @invitation = create_valid!('Invitation')
+        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
+        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
+        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
+        @trip.participants << @participant1 << @participant3 << @participant2
         signin(@person)
-        @invitee = create_valid!("Person", :name => 'Mr. Invitee', :email => 'invitee@invitee.com')
-        @invitation  = create_valid!("Invitation", :pending_trip => @trip, :email => @invitee.email, :token => @trip.id)
       end
 
-      it "finds the trip" do
-        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
+      it "assigns to @invitation a new invitation with the given parameters" do
+        Invitation.should_receive(:new).with("email" => @invitation.email).and_return(@invitation)
+        post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+        assigns[:invitation].should eq(@invitation)
       end
 
-      it "creates the invitation" do
+      it "generates a token for the invitation" do
+        post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+        assigns[:invitation].token.should == Digest::MD5.hexdigest(@invitation.email + @trip.id.to_s)
+      end
+
+      it "generates a unique token for the invitation"
+
+      it "saves the invitation" do
         Invitation.stub(:new).and_return(@invitation)
-        @invitation.should_receive(:save).twice.and_return(true)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
+        @invitation.should_receive(:save)
+        post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
       end
 
-      it "finds the person" do
-        Person.stub(:find).and_return(@person)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
-        assigns[:invitee].should eq(@person)
+      context "when the invitation is successfully saved" do
+        before(:each) do
+          Invitation.stub(:new).and_return(@invitation)
+          @invitation.stub(:save).and_return(true)
+        end
+
+        it "sets a flash[:notice] message" do
+          post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+          flash[:notice].should == "#{@invitation.email} has been invited."
+        end
+
+        it "redirects to the trip participants page" do
+          post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+          response.should redirect_to(:action => "participants", :id => @trip.id)
+        end
       end
 
+      context "when the invitation fails to be saved" do
+        before(:each) do
+          Invitation.stub(:new).and_return(@invitation)
+          @invitation.stub(:save).and_return(false)
+        end
 
-      it "saves the trip" do
-        @trip.should_receive(:save).and_return(true)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
-      end
+        it "assigns to @participants a sorted list of trip participants" do
+          post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+          assigns[:participants].should == [@participant1, @participant2, @participant3]
+        end
+  
+        it "assigns to @invitees a sorted list of invited people" do
+          @trip.stub(:invitees).and_return(['b', 'a', 'c'])
+          Trip.stub(:find).and_return(@trip)
+          post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+          assigns[:invitees].should == ['a', 'b', 'c']
+        end
 
-      it "sets a flash[:notice] message" do
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
-        flash[:notice].should == "Invited #{@invitee.email} to trip."
-      end
-
-      it "adds the invitee to trip's list of invitees" do
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
-        @invitee.should be_invited_to(@trip)
-      end
-
-      it "adds the trip to invitee's list of pending trips" do
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
-        @invitee.pending_trips.should include(@trip)
-      end
-
-      it "redirects to the show trip info page" do
-        post :invite, :id => @trip.id, :invitation => {:email => @invitee.email}
-        response.should redirect_to(:action => "show", :id => @trip.id)
+        it "renders the participants template" do
+          post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+          response.should render_template("participants")
+        end
       end
     end
-
-    context "inviting a nonregistered user" do
-      before(:each) do
-        Trip.stub(:find).and_return(@trip)
-        signin(@person)
-        Invitation.delete(:all)
-        @invitation  = create_valid!("Invitation",
-          :pending_trip => @trip,
-          :email => "jasonxku@gmail.com",
-          :token => Digest::MD5.hexdigest("jasonxku@gmail.com#{@trip.id}"))
-        @invitation.pending_trip = @trip
-        @invitation_notification = PersonMailer.invitation_notification(@invitation, @trip)
-      end
-
-      it "finds the trip" do
-        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
-      end
-
-      it "creates the invitation" do
-        Invitation.stub(:new).and_return(@invitation)
-        @invitation.should_receive(:save).twice.and_return(true)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
-      end
-
-      it "fails to find the person" do
-        Person.stub(:find).and_return(nil)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
-        assigns[:invitee].should be nil
-      end
-
-      it "delivers the email" do
-        Invitation.stub(:new).and_return(@invitation)
-        PersonMailer.stub(:invitation_notification).and_return(@invitation_notification)
-        @invitation_notification.should_receive(:deliver)
-        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
-      end
-
-      it "sets a flash[:notice] message" do
-        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
-        flash[:notice].should == "#{@invitation.email} has not registered yet. Invitation to join site has been sent."
-      end
-
-      it "render show trip info page" do
-        post :invite, :id => @trip.id, :invitation => {:email => @invitation.email}
-        response.should redirect_to(:action => "show", :id => @trip.id)
-      end
-    end
-
-
   end
-
-
 end
