@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'email_spec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -27,6 +28,10 @@ RSpec.configure do |config|
 
   # Include Devise test helpers
   config.include Devise::TestHelpers, :type => :controller
+
+  # Include email_spec helpers
+  config.include EmailSpec::Helpers
+  config.include EmailSpec::Matchers
 
   # Include custom macros (see spec/support)
   config.include APIStubs

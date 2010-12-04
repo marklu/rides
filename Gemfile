@@ -12,6 +12,7 @@ group :development, :test do
    gem 'cucumber'
    gem 'cucumber-rails'
    gem 'database_cleaner'
+   gem 'email_spec'
    gem 'launchy'
    gem 'rspec'
    gem 'rspec-rails'
