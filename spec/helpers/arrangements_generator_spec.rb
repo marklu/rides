@@ -15,10 +15,10 @@ describe ArrangementsGenerator do
     @passenger2_loc.stub!(:latitude).and_return(37.8555404)
     @passenger2_loc.stub!(:longitude).and_return(-122.2664398)
     
-    @passenger1 = create_valid("Person")
+    @passenger1 = create_valid!(Person)
     @passenger1.email = "random1@rand.org"
     @passenger1.stub(:location).and_return(@passenger1_loc)
-    @passenger2 = create_valid("Person")
+    @passenger2 = create_valid!(Person)
     @passenger2.email = "random2@rand.org"
     @passenger2.stub(:location).and_return(@passenger2_loc)
     

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Vehicle do
   before(:each) do
-    @vehicle = create_valid("Vehicle")
+    @vehicle = create_valid(Vehicle)
   end
 
   context "when validating" do

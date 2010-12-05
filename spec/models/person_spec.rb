@@ -2,37 +2,37 @@ require 'spec_helper'
 
 describe Person do
   before(:each) do
-    @person = create_valid!("Person")
+    @person = create_valid!(Person)
   end
 
   context "when creating" do
     it "does not allow an empty password" do
-      create_valid("Person",
+      create_valid(Person,
         :password => '',
         :password_confirmation => ''
       ).should_not be_valid
     end
 
     it "does not allow a password shorter than 6 characters" do
-      create_valid("Person",
+      create_valid(Person,
         :password => "12345",
         :password_confirmation => "12345"
       ).should_not be_valid
     end
 
     it "does not allow a mismatch between password and password confirmation" do
-      create_valid("Person",
+      create_valid(Person,
         :password => "testpassword123",
         :password_confirmation => "differentpassword456"
       ).should_not be_valid
     end
 
     it "does not allow an empty password confirmation" do
-      create_valid("Person", :password_confirmation => '').should_not be_valid
+      create_valid(Person, :password_confirmation => '').should_not be_valid
     end
 
     it "sets preferences to 'No Preference' by default" do
-      person = create_valid('Person')
+      person = create_valid(Person)
       [:music, :smoking].each do |preference|
         person.preferences.send(preference).should == 'no_preference'
       end
@@ -118,8 +118,8 @@ describe Person do
 
   context "when organizing many trips" do
     before(:each) do
-      @trip1 = create_valid!("Trip", :organizer => @person)
-      @trip2 = create_valid!("Trip", :organizer => @person)
+      @trip1 = create_valid!(Trip, :organizer => @person)
+      @trip2 = create_valid!(Trip, :organizer => @person)
     end
 
     it "has a list of organized trips" do
@@ -172,7 +172,7 @@ describe Person do
   context "when determining incompatibility" do
     context "with another person" do
       before(:each) do
-        @other = create_valid!("Person")
+        @other = create_valid!(Person)
         @other_preferences = Preferences.create!
         @other.stub(:preferences).and_return(@other_preferences)
       end
@@ -185,7 +185,7 @@ describe Person do
 
     context "with an arrangement" do
       before(:each) do
-        @other = Arrangement.create!
+        @other = create_valid!(Arrangement)
         @other_preferences = Preferences.create!
         @other.stub(:preferences).and_return(@other_preferences)
       end

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Invitation do
   before(:each) do
-    @invitation = create_valid!('Invitation')
-    @new_invitation = build_valid('Invitation')
+    @invitation = create_valid!(Invitation)
+    @new_invitation = build_valid(Invitation)
   end
 
   context "when validating" do
@@ -24,7 +24,7 @@ describe Invitation do
     end
 
     it "is not valid when there is another invitation for the same email and trip" do
-      @invitation2 = build_valid('Invitation',
+      @invitation2 = build_valid(Invitation,
         :email => @invitation.email,
         :trip => @invitation.trip
       )
@@ -32,12 +32,12 @@ describe Invitation do
     end
 
     it "is valid when there is another invitation for the same email but different trip" do
-      @invitation2 = create_valid!('Invitation', :email => @invitation.email)
+      @invitation2 = create_valid!(Invitation, :email => @invitation.email)
       @invitation2.should be_valid
     end
 
     it "is valid when there is another invitation for a different email but same trip" do
-      @invitation2 = create_valid!('Invitation', :trip => @invitation.trip)
+      @invitation2 = create_valid!(Invitation, :trip => @invitation.trip)
       @invitation2.should be_valid
     end
 
@@ -47,7 +47,7 @@ describe Invitation do
     end
 
     it "is not valid with a non-unique token" do
-      @invitation2 = create_valid!('Invitation')
+      @invitation2 = create_valid!(Invitation)
       @invitation2.token = @invitation.token
       @invitation2.should_not be_valid
     end
@@ -97,7 +97,7 @@ describe Invitation do
 
   context "when accepting the invitation" do
     before(:each) do
-      @person = create_valid!('Person')
+      @person = create_valid!(Person)
     end
 
     it "adds the given person to the trip" do

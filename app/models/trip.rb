@@ -22,7 +22,9 @@ class Trip < ActiveRecord::Base
   end
 
   def invitees
-    self.invitations.map {|invitation| invitation.email}
+    self.invitations.map do |invitation|
+      {:email => invitation.email}
+    end
   end
 
   def upcoming?

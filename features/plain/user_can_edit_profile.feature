@@ -5,7 +5,7 @@ Feature: User can edit profile
   I want to update my profile
 
   Background: I am signed in
-    Given I am signed in with password "password123"
+    Given I am signed in with password "testpassword123"
 
   Scenario: I can view the profile page
     Given I am on the dashboard page
@@ -26,7 +26,7 @@ Feature: User can edit profile
 
   Scenario Outline: I update my personal information
     Given I am on the profile page
-    When I fill in "Password" with "password123"
+    When I fill in "Password" with "testpassword123"
     When I fill in "Name" with "<name>"
     And I fill in "Email" with "<email>"
     And I fill in "Location" with "<location>"
@@ -66,7 +66,7 @@ Feature: User can edit profile
 
   Scenario Outline: I update my personal preferences
     Given I am on the profile page
-    When I fill in "Password" with "password123"
+    When I fill in "Password" with "testpassword123"
     And I choose "<music>"
     And I choose "<smoking>"
     And I press "Update"

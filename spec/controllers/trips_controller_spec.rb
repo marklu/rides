@@ -3,8 +3,8 @@ require 'digest/md5'
 
 describe TripsController do
   before(:each) do
-    @person = create_valid!("Person")
-    @trip = create_valid!("Trip", :organizer => @person)
+    @person = create_valid!(Person)
+    @trip = create_valid!(Trip, :organizer => @person)
   end
 
   describe "GET index" do
@@ -17,7 +17,7 @@ describe TripsController do
 
     context "when signed in" do
       before(:each) do
-        @organizer = create_valid!('Person', :email => 'organizer@email.com')
+        @organizer = create_valid!(Person, :email => 'organizer@email.com')
         @upcoming_trip1 = @organizer.organized_trips.create!(
           :name => 'Upcoming Trip 1',
           :location => Location.create!(:location => '795 Folsom Street, San Francisco, CA'),
@@ -308,9 +308,9 @@ describe TripsController do
 
     context "when signed in" do
       before(:each) do
-        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
-        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
-        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
+        @participant1 = create_valid!(Person, :name => 'Allan', :email => 'allan@email.com')
+        @participant2 = create_valid!(Person, :name => 'Baron', :email => 'baron@email.com')
+        @participant3 = create_valid!(Person, :name => 'Chase', :email => 'chase@email.com')
         @trip.participants << @participant1 << @participant3 << @participant2
         signin(@person)
       end
@@ -350,10 +350,10 @@ describe TripsController do
 
     context "when signed in" do
       before(:each) do
-        @invitation = create_valid!('Invitation')
-        @participant1 = create_valid!('Person', :name => 'Allan', :email => 'allan@email.com')
-        @participant2 = create_valid!('Person', :name => 'Baron', :email => 'baron@email.com')
-        @participant3 = create_valid!('Person', :name => 'Chase', :email => 'chase@email.com')
+        @invitation = create_valid!(Invitation)
+        @participant1 = create_valid!(Person, :name => 'Allan', :email => 'allan@email.com')
+        @participant2 = create_valid!(Person, :name => 'Baron', :email => 'baron@email.com')
+        @participant3 = create_valid!(Person, :name => 'Chase', :email => 'chase@email.com')
         @trip.participants << @participant1 << @participant3 << @participant2
         signin(@person)
       end
@@ -424,8 +424,8 @@ describe TripsController do
     context "when signed in as a new user" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
-        @invited_person = create_valid!('Person')
-        @invitation = create_valid!('Invitation', :trip => @trip)
+        @invited_person = create_valid!(Person)
+        @invitation = create_valid!(Invitation, :trip => @trip)
         Invitation.stub(:find_by_token).and_return(@invitation)
         signin(@invited_person)
       end
@@ -478,8 +478,8 @@ describe TripsController do
     context "when signed in as a new user" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
-        @new_person = create_valid!('Person')
-        @invitation = create_valid!('Invitation', :trip => @trip)
+        @new_person = create_valid!(Person)
+        @invitation = create_valid!(Invitation, :trip => @trip)
         Invitation.stub(:find_by_token).and_return(@invitation)
         signin(@new_person)
       end
@@ -531,7 +531,7 @@ describe TripsController do
 
     context "when signed in as a trip participant" do
       before(:each) do
-        @participant = create_valid!('Person', :email => 'participant@email.com')
+        @participant = create_valid!(Person, :email => 'participant@email.com')
         @trip.participants << @participant
         signin(@participant)
       end

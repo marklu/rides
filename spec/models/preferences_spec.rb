@@ -7,7 +7,7 @@ describe Preferences do
 
   context "when creating" do
     it "sets preferences to 'No Preference' by default" do
-      person = create_valid('Person')
+      person = create_valid(Person)
       [:music, :smoking].each do |preference|
         person.preferences.send(preference).should == 'no_preference'
       end

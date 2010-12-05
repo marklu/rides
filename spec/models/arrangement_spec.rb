@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Arrangement do
   before(:each) do
-    @arrangement = create_valid!('Arrangement')
+    @arrangement = create_valid!(Arrangement)
   end
 
   context "when validating" do
@@ -46,7 +46,7 @@ describe Arrangement do
       before(:each) do
         @arrangement_preferences = Preferences.create!
         @arrangement.stub(:preferences).and_return(@arrangement_preferences)
-        @other = create_valid!('Arrangement')
+        @other = create_valid!(Arrangement)
         @other_preferences = Preferences.create!
         @other.stub(:preferences).and_return(@other_preferences)
       end
@@ -61,7 +61,7 @@ describe Arrangement do
       before(:each) do
         @arrangement_preferences = Preferences.create!
         @arrangement.stub(:preferences).and_return(@arrangement_preferences)
-        @other = create_valid!("Person")
+        @other = create_valid!(Person)
         @other_preferences = Preferences.create!
         @other.stub(:preferences).and_return(@other_preferences)
       end

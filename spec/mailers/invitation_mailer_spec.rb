@@ -3,7 +3,7 @@ require "spec_helper"
 describe InvitationMailer do
   describe "Invitation Email" do
     before(:each) do
-      @invitation = create_valid!('Invitation')
+      @invitation = create_valid!(Invitation)
       @email = InvitationMailer.invitation(@invitation)
     end
 

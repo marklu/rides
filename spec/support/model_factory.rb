@@ -1,22 +1,17 @@
 module ModelFactory
-  def random_string(length)
-    chars = [('A'..'Z'), ('a'..'z'), ('0'..'9')].inject([]) {|arr, ran| arr + ran.to_a}
-    (0...length).inject('') {|str, i| str + chars[Kernel.rand(chars.size)]}
-  end
-
   def valid_attributes_for(model)
-    case model
+    case model.to_s
     when 'Arrangement'
       return {
-        :driver => create_valid!('Person'),
-        :trip => create_valid!('Trip'),
-        :vehicle => create_valid!('Vehicle')
+        :driver => create_valid!(Person),
+        :trip => create_valid!(Trip),
+        :vehicle => create_valid!(Vehicle)
       }
     when 'Invitation'
       return {
         :email => "#{random_string(10)}@email.com",
         :token => random_string(10),
-        :trip => create_valid!('Trip')
+        :trip => create_valid!(Trip)
       }
     when 'Person'
       return {
@@ -34,29 +29,34 @@ module ModelFactory
         :name => 'Trip Name',
         :time => Time.now,
         :location => Location.create!(:location => '1 Infinite Loop, Cupertino, CA'),
-        :organizer => create_valid!('Person')
+        :organizer => create_valid!(Person)
       }
     when 'Vehicle'
       return {
         :make => 'Make',
         :model => 'Model',
         :capacity => 4,
-        :owner => create_valid!('Person')
+        :owner => create_valid!(Person)
       }
     else
-      raise "Unrecognized Model: #{model}"
+      raise "Unrecognized Model: #{model.to_s}"
     end
   end
 
   def build_valid(model, params = {})
-    model.constantize.new(valid_attributes_for(model).merge(params))    
+    model.new(valid_attributes_for(model).merge(params))    
   end
 
   def create_valid(model, params = {})
-    model.constantize.create(valid_attributes_for(model).merge(params))    
+    model.create(valid_attributes_for(model).merge(params))    
   end
 
   def create_valid!(model, params = {})
-    model.constantize.create!(valid_attributes_for(model).merge(params))    
+    model.create!(valid_attributes_for(model).merge(params))    
+  end
+
+  def random_string(length)
+    chars = [('A'..'Z'), ('a'..'z'), ('0'..'9')].inject([]) {|arr, ran| arr + ran.to_a}
+    (0...length).inject('') {|str, i| str + chars[Kernel.rand(chars.size)]}
   end
 end

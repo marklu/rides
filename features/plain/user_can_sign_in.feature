@@ -5,7 +5,7 @@ Feature: User can sign in
   I want to identify myself to the service
 
   Background: I am signed up
-    Given I am signed up with email "email@email.com" and password "testpassword123"
+    Given I am signed up with email "email@email.com" and with password "testpassword123"
 
   Scenario: I can view the sign in page
     Given I am on the home page

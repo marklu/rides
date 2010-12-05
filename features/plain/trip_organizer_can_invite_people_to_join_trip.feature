@@ -17,7 +17,7 @@ Feature: Trip organizer can invite people to join trip
     And I should see "alice@email.com has been invited."
 
   Scenario: I invite a user to participate in the trip
-    Given "Alice" has signed up
+    Given "Alice" is signed up
     When I go to the trip participants page
     And I fill in "Email" with "alice@email.com"
     And I press "Invite"
@@ -26,7 +26,7 @@ Feature: Trip organizer can invite people to join trip
     And I should see "alice@email.com has been invited."
 
   Scenario: I invite an already invited person to participate in the trip
-    Given "Alice" has signed up
+    Given "Alice" is signed up
     And "Alice" has already been invited to participate in the trip
     When I go to the trip participants page
     And I fill in "Email" with "alice@email.com"

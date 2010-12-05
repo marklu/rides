@@ -20,7 +20,7 @@
     <h2>Invited People</h2>
     <ul>
       <% @invitees.each do |invitee| %>
-        <li><%= invitee %></li>
+        <li><%= invitee[:email] %></li>
       <% end %>
     </ul>
   <% end %>
