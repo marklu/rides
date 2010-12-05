@@ -18,6 +18,7 @@ describe ArrangementsGenerator do
     @passenger1 = create_valid("Person")
     @passenger1.email = "random1@rand.org"
     @passenger1.stub(:location).and_return(@passenger1_loc)
+    @passenger1.stub(:incompatibility_with).and_return(1.0)
     @passenger2 = create_valid("Person")
     @passenger2.email = "random2@rand.org"
     @passenger2.stub(:location).and_return(@passenger2_loc)
@@ -28,6 +29,7 @@ describe ArrangementsGenerator do
     @arrangement_empty.stub!(:destination).and_return(@finish)
     @arrangement_empty.stub!(:capacity).and_return(1)
     @arrangement_empty.stub!(:full?).and_return(false)
+    @arrangement_empty.stub!(:incompatibility_with).and_return(1.0)
     
     # full arrangement
     @arrangement_full = Arrangement.new
@@ -107,10 +109,31 @@ describe ArrangementsGenerator do
     end
     
     it "returns a score for a valid argument" do
+      
       path = [@arrangement_empty, @passenger1, @arrangement_empty.destination]
       distances = ArrangementsGenerator.generate_distance_matrix([@arrangement_empty], [@passenger1])
       path_score = ArrangementsGenerator.score_path(path, distances)
-      path_score.should == 0.9728525291798945
+      path_score.should == 0.6219967665051265
+    end
+  end
+  
+  context "scoring incompatibility" do
+    it "returns no score for an argument with empty paths" do
+      passengers = []
+      incompatibility_score = ArrangementsGenerator.score_incompatibility(passengers)
+      incompatibility_score.should == 0
+    end
+    
+    it "returns no score for an argument with one passenger" do
+      passengers = [@passenger1]
+      incompatibility_score = ArrangementsGenerator.score_incompatibility(passengers)
+      incompatibility_score.should == 0
+    end
+    
+    it "returns a score for a valid argument" do
+      passengers = [@arrangement_empty, @passenger1]
+      incompatibility_score = ArrangementsGenerator.score_incompatibility(passengers)
+      incompatibility_score.should == 1.0
     end
   end
   
