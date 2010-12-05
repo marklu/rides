@@ -3,5 +3,9 @@ class Invitation < ActiveRecord::Base
   validates :token, :presence => true, :uniqueness => true
   validates :trip, :existence => true
 
+  after_save do # Send invitation email
+    InvitationMailer.invitation(self).deliver
+  end
+
   belongs_to :trip
 end

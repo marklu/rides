@@ -60,4 +60,11 @@ describe Invitation do
       @invitation.should_not be_valid
     end
   end
+
+  context "after saving" do
+    it "should deliver an invitation email" do
+      InvitationMailer.should_receive(:invitation).with(@invitation).and_return(double('email', :deliver => true))
+      @invitation.save
+    end
+  end
 end

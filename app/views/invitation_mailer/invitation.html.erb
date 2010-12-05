@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p>You have been invited to participate in:</p>
+    <p>
+      <strong><%= @invitation.trip.name %></strong><br>
+      <em>Place:</em> <%= @invitation.trip.location.location %><br>
+      <em>Time:</em> <%= @invitation.trip.time %>
+    </p>
+      To accept the invitaiton, follow this link: <%= join_trip_url(@invitation.trip_id) << "?token=#{@invitation.token}" %><br>
+      You will be asked to either sign in or sign up to the site.
+    <p>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>

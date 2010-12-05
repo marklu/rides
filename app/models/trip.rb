@@ -34,4 +34,8 @@ class Trip < ActiveRecord::Base
   def upcoming?
     return self.time >= Time.now()
   end
+
+  def valid_token?(token)
+    !self.invitations.find_by_token(token).nil?
+  end
 end

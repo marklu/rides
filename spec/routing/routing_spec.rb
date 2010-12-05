@@ -108,19 +108,25 @@ describe "Routes" do
       end
     end
 
-    context "Join Trip" do
-      it "routes POST /trips/1/participants to trips#join"
-    end
-
     context "Leave Trip" do
-      it "routes DELETE /trips/1/participants to trips#leave" do
-        {:delete => "/trips/1/participants"}.should route_to(:controller => "trips", :action => "leave", :id => "1")
+      it "routes DELETE /trips/1/leave to trips#leave" do
+        {:delete => "/trips/1/leave"}.should route_to(:controller => "trips", :action => "leave", :id => "1")
       end
     end
 
     context "Invite Participants" do
-      it "routes POST /trips/1/invitations to trips#invite" do
-        {:post => "trips/1/invitations"}.should route_to(:controller => "trips", :action => "invite", :id => "1")
+      it "routes POST /trips/1/invite to trips#invite" do
+        {:post => "trips/1/invite"}.should route_to(:controller => "trips", :action => "invite", :id => "1")
+      end
+    end
+
+    context "Join Trip" do
+      it "routes GET /trips/1/join to trips#join" do
+        {:get => "trips/1/join"}.should route_to(:controller => "trips", :action => "join", :id => "1")
+      end
+
+      it "routes POST /trips/1/join to trips#join" do
+        {:post => "trips/1/join"}.should route_to(:controller => "trips", :action => "join", :id => "1")
       end
     end
   end

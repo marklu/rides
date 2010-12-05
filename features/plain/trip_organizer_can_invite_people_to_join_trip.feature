@@ -13,6 +13,7 @@ Feature: Trip organizer can invite people to join trip
     And I fill in "Email" with "alice@email.com"
     And I press "Invite"
     Then "Alice" should be invited to participate in the trip
+    And "alice@email.com" should receive an email with subject "Invitation to Participate in the Company Picnic"
     And I should see "alice@email.com has been invited."
 
   Scenario: I invite a user to participate in the trip
@@ -21,24 +22,27 @@ Feature: Trip organizer can invite people to join trip
     And I fill in "Email" with "alice@email.com"
     And I press "Invite"
     Then "Alice" should be invited to participate in the trip
+    And "alice@email.com" should receive an email with subject "Invitation to Participate in the Company Picnic"
     And I should see "alice@email.com has been invited."
 
   Scenario: I invite an already invited person to participate in the trip
     Given "Alice" has signed up
-    And "Alice" has been invited to participate in the trip
+    And "Alice" has already been invited to participate in the trip
     When I go to the trip participants page
     And I fill in "Email" with "alice@email.com"
     And I press "Invite"
-    Then I should see "Email already has an invitation."
+    Then "alice@email.com" should receive no email
+    And I should see "Email already has an invitation."
 
   Scenario: I invite a participant to participate in the trip
     Given "Alice" is a participant
     When I go to the trip participants page
     And I fill in "Email" with "alice@email.com"
     And I press "Invite"
-    Then I should see "is already a participant of that trip."
+    Then "alice@email.com" should receive no email
+    And I should see "is already a participant of that trip."
 
   Scenario: I can see a list of invited people
-    Given "Alice" has been invited to participate in the trip
+    Given "Alice" has already been invited to participate in the trip
     When I go to the trip participants page
     Then I should see "alice@email.com"

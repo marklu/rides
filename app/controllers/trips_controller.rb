@@ -73,19 +73,15 @@ class TripsController < ApplicationController
     @invitation = Invitation.new
   end
 
-  # DELETE /trips/1/participants
-  def leave
-    @trip = Trip.find(params[:id])
-    @trip.participants.delete(current_person)
-
-    redirect_to(person_root_url, :notice => "You are no longer participating in #{@trip.name}")
-  end
-
-  # POST /trips/1/invitations
+  # POST /trips/1/invite
   def invite
     @trip = Trip.find(params[:id])
     @invitation = @trip.invitations.build(params[:invitation])
+
     @invitation.token = Digest::MD5.hexdigest(params[:invitation][:email] + @trip.id.to_s)
+    while !Invitation.find_by_token(@invitation.token).nil?
+      @invitation.token.next!
+    end
 
     if @invitation.save
       redirect_to(participants_trip_url(@trip), :notice => "#{params[:invitation][:email]} has been invited.")
@@ -94,5 +90,35 @@ class TripsController < ApplicationController
       @invitees = @trip.invitees.sort
       render :action => 'participants'
     end
+  end
+
+  # GET /trips/1/join
+  # POST /trips/1/join
+  def join
+    @trip = Trip.find(params[:id])
+    @token = params[:token]
+
+    if @trip.participants.include?(current_person)
+      redirect_to(@trip, :notice => "You are already a participant in the #{@trip.name}.")
+    end
+
+    if request.get?
+      flash[:error] = "The token you entered is invalid." unless @token.blank? || @trip.valid_token?(@token)
+    else #request.post?
+      if @trip.valid_token?(@token)
+        @trip.participants << current_person
+        redirect_to(@trip, :notice => "You are now a participant in the #{@trip.name}.")
+      else
+        flash[:error] = "The token you entered is invalid."
+      end
+    end
+  end
+
+  # DELETE /trips/1/leave
+  def leave
+    @trip = Trip.find(params[:id])
+    @trip.participants.delete(current_person)
+
+    redirect_to(person_root_url, :notice => "You are no longer participating in #{@trip.name}")
   end
 end

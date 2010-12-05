@@ -1,29 +1,30 @@
 Rides::Application.routes.draw do
   root :to => 'people#index'
-  get '/dashboard' => 'people#dashboard', :as => 'person_root'
+  match '/dashboard', :via => :get, :to => 'people#dashboard', :as => 'person_root'
 
   resources :vehicles, :except => [:index, :show]
 
   resources :trips do
-    post '/invitations' => 'trips#invite', :on => :member, :as => 'invite'
-
-    get :participants, :on => :member, :as => 'participants'
-    delete '/participants' => 'trips#leave', :on => :member, :as => 'leave'
+    match '/participants', :via => :get, :to => 'trips#participants', :on => :member, :as => 'participants'
+    match '/invite', :via => :post, :to => 'trips#invite', :on => :member, :as => 'invite'
+    match '/join', :via => [:get, :post], :to => 'trips#join', :on => :member, :as => 'join'
+    match '/leave', :via => [:get, :delete], :to => 'trips#leave', :on => :member, :as => 'leave'
 
     resources :arrangements, :only => [:index, :show] do
-      post :generate, :on => :collection
+      match '/generate', :via => :get, :to => 'arrangements#generate', :on => :collection, :as => 'generate'
     end
   end
 
   devise_for :people, :skip => [:sessions, :registrations] do
-    get '/signin' => 'devise/sessions#new', :as => 'new_person_session'
-    post '/signin' => 'devise/sessions#create', :as => 'create_person_session'
-    get '/signout' => 'devise/sessions#destroy', :as => 'destroy_person_session'
+    match '/signin', :via => :get, :to => 'devise/sessions#new', :as => 'new_person_session'
+    match '/signin', :via => :post, :to => 'devise/sessions#create', :as => 'create_person_session'
+    match '/signout', :via => :get, :to => 'devise/sessions#destroy', :as => 'destroy_person_session'
 
-    get '/signup' => 'devise/registrations#new', :as => 'new_person_registration'
-    post '/signup' => 'devise/registrations#create', :as => 'create_person_registration'
-    get '/profile' => 'devise/registrations#edit', :as => 'edit_person_registration'
-    put '/profile' => 'devise/registrations#update', :as => 'update_person_registration'
-    delete '/profile' => 'devise/registrations#destroy', :as => 'destroy_person_registration'
+    match '/signup', :via => :get, :to => 'devise/registrations#new', :as => 'new_person_registration'
+    match '/signup', :via => :post, :to => 'devise/registrations#create', :as => 'create_person_registration'
+
+    match '/profile', :via => :get, :to => 'devise/registrations#edit', :as => 'edit_person_registration'
+    match '/profile', :via => :put, :to => 'devise/registrations#update', :as => 'update_person_registration'
+    match '/profile', :via => :delete, :to => 'devise/registrations#destroy', :as => 'destroy_person_registration'
   end
 end

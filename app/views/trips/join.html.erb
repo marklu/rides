@@ -1,0 +1,10 @@
+<h1>Join Trip</h1>
+
+<%= render :partial => "trip", :object => @trip %>
+
+<p>Please confirm that you want to join the above trip.</p>
+
+<%= form_tag(join_trip_path(@trip.id), :method => :post) do %>
+  <p><%= label_tag :token %> <%= text_field_tag :token, @token %></p>
+  <p><%= submit_tag "Join Trip" %></p>
+<% end %>

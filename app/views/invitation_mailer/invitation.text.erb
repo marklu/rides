@@ -1,0 +1,10 @@
+You have been invited to participate in:
+
+<%= @invitation.trip.name %>
+Place: <%= @invitation.trip.location.location %>
+Time: <%= @invitation.trip.time %>
+
+To accept the invitaiton, follow this link: <%= join_trip_url(@invitation.trip_id) << "?token=#{@invitation.token}" %>
+You will be asked to either sign in or sign up to the site.
+
+Thanks and have a great day!

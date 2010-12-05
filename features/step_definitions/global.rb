@@ -1,6 +1,10 @@
 # Authentication
-Given /^I am signed in$/ do
+Given /^I am signed up$/ do
   @person = create_valid!('Person', :email => 'myemail@email.com')
+end
+
+Given /^I am signed in$/ do
+  Given %{I am signed up}
   visit '/signin'
   fill_in 'Email', :with => @person.email
   fill_in 'Password', :with => @person.password
@@ -19,6 +23,13 @@ Given /^I am signed up with email "([^"]*)" and password "([^"]*)"$/ do |email, 
     :password => password,
     :password_confirmation => password
   )
+end
+
+When /^I sign in$/ do
+  visit '/signin'
+  fill_in 'Email', :with => @person.email
+  fill_in 'Password', :with => @person.password
+  click_button('Sign in')
 end
 
 # Application State
@@ -133,8 +144,9 @@ Then /^"([^"]*)" should be invited to participate in the trip$/ do |name|
   @trip.invitees.should include("#{name.downcase}@email.com")
 end
 
-Given /^"([^"]*)" has been invited to participate in the trip$/ do |name|
+Given /^"([^"]*)" has already been invited to participate in the trip$/ do |name|
   @trip.invitations.create!(:email => "#{name.downcase}@email.com", :token => "token")
+  reset_mailer
 end
 
 Given /^"([^"]*)" is a participant$/ do |name|
@@ -146,5 +158,8 @@ end
 
 # User can join trip
 Given /^I have been invited to participate with token "([^"]*)"$/ do |token|
-  @trip.invitations.create!(:email => @person.email, :token => token)
+  @trip.invitations.create!(
+    :email => @person.nil? ? 'myemail@email.com' : @person.email,
+    :token => token
+  )
 end

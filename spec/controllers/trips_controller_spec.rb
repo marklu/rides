@@ -339,34 +339,6 @@ describe TripsController do
     end
   end
 
-  describe "DELETE participants" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
-        delete :leave, :id => 1
-        response.should redirect_to(:controller => "devise/sessions", :action => "new")
-      end
-    end
-
-    context "when logged in as a trip participant" do
-      before(:each) do
-        @participant = create_valid!('Person', :email => 'participant@email.com')
-        @trip.participants << @participant
-        signin(@participant)
-      end
-
-      it "removes the participant from the trip" do
-        Trip.stub(:find).and_return(@trip)
-        delete :leave, :id => @trip.id
-        @trip.participants.should_not include(@participant)
-      end
-
-      it "redirects to the dashboard page" do
-        delete :leave, :id => @trip.id
-        response.should redirect_to(:controller => "people", :action => "dashboard")
-      end
-    end
-  end
-
   describe "POST invite" do
     context "when not logged in" do
       it "redirects to the signin page" do
@@ -396,7 +368,14 @@ describe TripsController do
         assigns[:invitation].token.should == Digest::MD5.hexdigest(@invitation.email + @trip.id.to_s)
       end
 
-      it "generates a unique token for the invitation"
+      it "generates a unique token for the invitation" do
+        post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+        old_invitation = assigns[:invitation]
+        old_invitation.email = "newemail@email.com"
+        old_invitation.save
+        post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+        assigns[:invitation].token.should_not == old_invitation.token
+      end
 
       it "saves the invitation" do
         Invitation.stub(:new).and_return(@invitation)
@@ -443,6 +422,169 @@ describe TripsController do
           post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
           response.should render_template("participants")
         end
+      end
+    end
+  end
+
+  describe "GET join" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        get :join, :id => @trip.id
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in a new user" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        @new_person = create_valid!('Person')
+        signin(@new_person)
+      end
+
+      context "when verifying the given token" do
+        it "does not set a flash[:error] message given a valid token" do
+          @trip.stub(:valid_token?).and_return(true)
+          get :join, :id => @trip.id, :token => 'token'
+          flash[:error].should be_nil
+        end
+
+        it "does not set a flash[:error] message given no token" do
+          get :join, :id => @trip.id, :token => ''
+          flash[:error].should be_nil
+          get :join, :id => @trip.id
+          flash[:error].should be_nil
+        end
+
+        it "sets a flash[:error] message given an invalid token" do
+          @trip.stub(:valid_token?).and_return(false)
+          get :join, :id => @trip.id, :token => 'token'
+          flash[:error].should == "The token you entered is invalid."
+        end
+      end
+
+      it "assigns to @trip the given trip" do
+        Trip.should_receive(:find).and_return(@trip)
+        get :join, :id => @trip.id
+        assigns[:trip].should eq(@trip) 
+      end
+
+      it "assigns to @token the given token" do
+        get :join, :id => @trip.id, :token => 'token'
+        assigns[:token].should == 'token'
+      end
+
+      it "renders the join template" do
+        get :join, :id => @trip.id, :token => 'token'
+        response.should render_template("join")
+      end
+    end
+
+    context "when logged in as a trip participant" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        @trip.participants.stub(:include?).and_return(true)
+        signin(@person)
+      end
+
+      it "redirects to the trip info page" do
+        get :join, :id => @trip.id, :token => 'token'
+        response.should redirect_to(:controller => "trips", :action => "show")
+      end
+    end
+  end
+
+  describe "POST join" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        post :join, :id => @trip.id, :token => 'token'
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in as a new user" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        @new_person = create_valid!('Person')
+        signin(@new_person)
+      end
+
+      context "given a valid token" do
+        before(:each) do
+          @trip.stub(:valid_token?).and_return(true)
+        end
+
+        it "adds the person to the trip's participants" do
+          post :join, :id => @trip.id, :token => 'token'
+          @trip.participants.should include(@new_person)
+        end
+
+        it "redirects to the trip info page" do
+          post :join, :id => @trip.id, :token => 'token'
+          response.should redirect_to(:controller => "trips", :action => "show")
+        end
+      end
+
+      context "given in invalid token or no token" do
+        before(:each) do
+          @trip.stub(:valid_token?).and_return(false)
+        end
+
+        it "sets a flash[:error] message" do
+          get :join, :id => @trip.id, :token => 'token'
+          flash[:error].should == "The token you entered is invalid."
+        end
+
+        it "renders the join template" do
+          post :join, :id => @trip.id, :token => 'token'
+          response.should render_template("join")
+        end
+      end
+
+      it "assigns to @trip the given trip" do
+        Trip.should_receive(:find).and_return(@trip)
+        get :join, :id => @trip.id
+        assigns[:trip].should eq(@trip) 
+      end
+    end
+
+    context "when logged in as a trip participant" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        @trip.participants.stub(:include?).and_return(true)
+        signin(@person)
+      end
+
+      it "redirects to the trip info page" do
+        post :join, :id => @trip.id, :token => 'token'
+        response.should redirect_to(:controller => "trips", :action => "show")
+      end
+    end
+  end
+
+  describe "DELETE leave" do
+    context "when not logged in" do
+      it "redirects to the signin page" do
+        delete :leave, :id => @trip.id
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when logged in as a trip participant" do
+      before(:each) do
+        @participant = create_valid!('Person', :email => 'participant@email.com')
+        @trip.participants << @participant
+        signin(@participant)
+      end
+
+      it "removes the participant from the trip" do
+        Trip.stub(:find).and_return(@trip)
+        delete :leave, :id => @trip.id
+        @trip.participants.should_not include(@participant)
+      end
+
+      it "redirects to the dashboard page" do
+        delete :leave, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
       end
     end
   end

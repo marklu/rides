@@ -8,7 +8,7 @@ module ModelFactory
     case model
     when 'Person'
       return {
-        :email => "#{random_string(10)}@#{random_string(10)}.com",
+        :email => "#{random_string(10)}@email.com",
         :password => 'testpassword123',
         :password_confirmation => 'testpassword123',
         :name => 'First Last',
@@ -33,7 +33,7 @@ module ModelFactory
       }
     when 'Invitation'
       return {
-        :email => "#{random_string(10)}@#{random_string(10)}.com",
+        :email => "#{random_string(10)}@email.com",
         :token => random_string(10),
         :trip => create_valid!('Trip')
       }
