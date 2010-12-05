@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Invitation do
   before(:each) do
     @invitation = create_valid!('Invitation')
+    @new_invitation = build_valid('Invitation')
   end
 
   context "when validating" do
@@ -46,7 +47,8 @@ describe Invitation do
     end
 
     it "is not valid with a non-unique token" do
-      @invitation2 = build_valid('Invitation', :token => @invitation.token)
+      @invitation2 = create_valid!('Invitation')
+      @invitation2.token = @invitation.token
       @invitation2.should_not be_valid
     end
 
@@ -61,10 +63,51 @@ describe Invitation do
     end
   end
 
-  context "after saving" do
-    it "should deliver an invitation email" do
-      InvitationMailer.should_receive(:invitation).with(@invitation).and_return(double('email', :deliver => true))
-      @invitation.save
+  context "when creating" do
+    it "generates a token" do
+      @new_invitation.should_receive(:generate_token)
+      @new_invitation.save
+    end
+
+    it "sends the invitation" do
+      @new_invitation.should_receive(:send_invitation)
+      @new_invitation.save
+    end
+  end
+
+  context "when generating a token" do
+    it "generates a token" do
+      @new_invitation.generate_token
+      @new_invitation.token.should == Digest::MD5.hexdigest(@new_invitation.email + @new_invitation.trip.id.to_s)
+    end
+
+    it "generates a unique token" do
+      @invitation.email, @new_invitation.email = "newemail@email.com", @invitation.email
+      @invitation.save && @new_invitation.save
+      @new_invitation.token.should_not == @invitation.token
+    end
+  end
+
+  context "when sending invitation" do
+    it "sends an invitation email" do
+      InvitationMailer.should_receive(:invitation).with(@new_invitation).and_return(double('email', :deliver => true))
+      @new_invitation.send_invitation
+    end
+  end
+
+  context "when accepting the invitation" do
+    before(:each) do
+      @person = create_valid!('Person')
+    end
+
+    it "adds the given person to the trip" do
+      @invitation.accept(@person)
+      @invitation.trip.participants.should include(@person)
+    end
+
+    it "destroys itself" do
+      @invitation.should_receive(:destroy)
+      @invitation.accept(@person)
     end
   end
 end

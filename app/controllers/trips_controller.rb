@@ -70,18 +70,13 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     @participants = @trip.participants.sort_by {|participant| participant.name}
     @invitees = @trip.invitees.sort
-    @invitation = Invitation.new
+    @invitation = @trip.invitations.build
   end
 
   # POST /trips/1/invite
   def invite
     @trip = Trip.find(params[:id])
     @invitation = @trip.invitations.build(params[:invitation])
-
-    @invitation.token = Digest::MD5.hexdigest(params[:invitation][:email] + @trip.id.to_s)
-    while !Invitation.find_by_token(@invitation.token).nil?
-      @invitation.token.next!
-    end
 
     if @invitation.save
       redirect_to(participants_trip_url(@trip), :notice => "#{params[:invitation][:email]} has been invited.")
@@ -96,21 +91,21 @@ class TripsController < ApplicationController
   # POST /trips/1/join
   def join
     @trip = Trip.find(params[:id])
-    @token = params[:token]
-
     if @trip.participants.include?(current_person)
       redirect_to(@trip, :notice => "You are already a participant in the #{@trip.name}.")
+      return
     end
 
-    if request.get?
-      flash[:error] = "The token you entered is invalid." unless @token.blank? || @trip.valid_token?(@token)
-    else #request.post?
-      if @trip.valid_token?(@token)
-        @trip.participants << current_person
-        redirect_to(@trip, :notice => "You are now a participant in the #{@trip.name}.")
-      else
-        flash[:error] = "The token you entered is invalid."
-      end
+    @token = params[:token]
+    invitation = Invitation.find_by_token(@token)
+    if invitation.nil?
+      redirect_to(person_root_url, :error => "The invitation link you followed is invalid.")
+      return
+    end
+
+    if request.post?
+      invitation.accept(current_person)
+      redirect_to(@trip, :notice => "You are now a participant in the #{@trip.name}.")
     end
   end
 

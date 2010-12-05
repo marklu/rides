@@ -18,28 +18,14 @@ Feature: User can accept an invitation
     And I should see "Place" in the email body
     And I should see "Time" in the email body
 
-  Scenario: I accept the invitation via manual token entry
-    When I sign in
-    And I go to the join trip page
-    And I fill in "Token" with "token"
-    And I press "Join Trip"
-    Then I should see "You are now a participant"
-
-  Scenario: I try to accept the invitation via manual token entry with an invalid token
-    When I sign in
-    And I go to the join trip page
-    And I fill in "Token" with "invalid"
-    And I press "Join Trip"
-    Then I should see "The token you entered is invalid."
-
-  Scenario: I accept the invitation via email link while signed in
+  Scenario: I accept the invitation while signed in
     When I sign in 
     And I open the email
     And I follow "join" in the email
     And I press "Join Trip"
     Then I should see "You are now a participant"
 
-  Scenario: I accept the invitation via email link while signed out
+  Scenario: I accept the invitation while signed out
     When I open the email
     And I follow "join" in the email
     And I fill in "Email" with "myemail@email.com"

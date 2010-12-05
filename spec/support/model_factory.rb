@@ -6,6 +6,18 @@ module ModelFactory
 
   def valid_attributes_for(model)
     case model
+    when 'Arrangement'
+      return {
+        :driver => create_valid!('Person'),
+        :trip => create_valid!('Trip'),
+        :vehicle => create_valid!('Vehicle')
+      }
+    when 'Invitation'
+      return {
+        :email => "#{random_string(10)}@email.com",
+        :token => random_string(10),
+        :trip => create_valid!('Trip')
+      }
     when 'Person'
       return {
         :email => "#{random_string(10)}@email.com",
@@ -30,12 +42,6 @@ module ModelFactory
         :model => 'Model',
         :capacity => 4,
         :owner => create_valid!('Person')
-      }
-    when 'Invitation'
-      return {
-        :email => "#{random_string(10)}@email.com",
-        :token => random_string(10),
-        :trip => create_valid!('Trip')
       }
     else
       raise "Unrecognized Model: #{model}"

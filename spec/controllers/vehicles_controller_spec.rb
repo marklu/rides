@@ -7,8 +7,8 @@ describe VehiclesController do
   end
 
   describe "GET new" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
+    context "when not signed in" do
+      it "redirects to the sign in page" do
         get :new
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
@@ -22,7 +22,7 @@ describe VehiclesController do
       it "assigns to @vehicle a new Vehicle" do
         get :new
         assigns[:vehicle].should be_an_instance_of(Vehicle)
-        assigns[:vehicle].attributes.should == Vehicle.create(:owner => @person).attributes
+        assigns[:vehicle].attributes.should == Vehicle.new(:owner => @person).attributes
       end
 
       it "renders the new template" do
@@ -33,22 +33,23 @@ describe VehiclesController do
   end
 
   describe "GET edit" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
+    context "when not signed in" do
+      it "redirects to the sign in page" do
         get :edit, :id => @vehicle.id
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
 
-    context "when logged in" do
+    context "when signed in" do
       before(:each) do
         @person.vehicles.stub(:find).and_return(@vehicle)
         signin(@person)
       end
 
-      it "finds the vehicle" do
+      it "assigns to @vehicle the given vehicle" do
         @person.vehicles.should_receive(:find).with(@vehicle.id).and_return(@vehicle)
         get :edit, :id => @vehicle.id
+        assigns[:vehicle].should eq(@vehicle)
       end
 
       it "renders the edit template" do
@@ -59,22 +60,23 @@ describe VehiclesController do
   end
 
   describe "POST create" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
+    context "when not signed in" do
+      it "redirects to the sign in page" do
         post :create
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
 
-    context "when logged in" do
+    context "when signed in" do
       before(:each) do
         Vehicle.stub(:new).and_return(@vehicle)
         signin(@person)
       end
 
-      it "creates a new vehicle with the given parameters" do
+      it "assigns to @vehicle a new vehicle with the given parameters" do
         Vehicle.should_receive(:new).with("make" => "Make").and_return(@vehicle)
         post :create, :vehicle => {"make" => "Make"}
+        assigns[:vehicle].should eq(@vehicle)
       end
 
       it "saves the vehicle" do
@@ -103,11 +105,6 @@ describe VehiclesController do
           @vehicle.stub(:save).and_return(false)
         end
 
-        it "assigns to @vehicle a new vehicle" do
-          post :create
-          assigns[:vehicle].should be(@vehicle)
-        end
-
         it "renders the new template" do
           post :create
           response.should render_template("new")
@@ -117,22 +114,23 @@ describe VehiclesController do
   end
 
   describe "PUT update" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
+    context "when not signed in in" do
+      it "redirects to the sign in page" do
         put :update, :id => @vehicle.id
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
 
-    context "when logged in" do
+    context "when signed in" do
       before(:each) do
         @person.vehicles.stub(:find).and_return(@vehicle)
         signin(@person)
       end
 
-      it "finds the vehicle" do
+      it "assigns to @vehicle the given vehicle" do
         @person.vehicles.should_receive(:find).with(@vehicle.id).and_return(@vehicle)
         put :update, :id => @vehicle.id
+        assigns[:vehicle].should eq(@vehicle)
       end
 
       it "updates the vehicle" do
@@ -161,11 +159,6 @@ describe VehiclesController do
           @vehicle.stub(:update_attributes).and_return(false)
         end
 
-        it "assigns to @vehicle the vehicle" do
-          put :update, :id => @vehicle.id
-          assigns[:vehicle].should be(@vehicle)
-        end
-
         it "renders the edit template" do
           put :update, :id => @vehicle.id
           response.should render_template("edit")
@@ -175,22 +168,23 @@ describe VehiclesController do
   end
 
   describe "DELETE destroy" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
+    context "when not signed in" do
+      it "redirects to the sign in page" do
         delete :destroy, :id => @vehicle.id
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
 
-    context "when logged in" do
+    context "when signed in" do
       before(:each) do
         @person.vehicles.stub(:find).and_return(@vehicle)
         signin(@person)
       end
 
-      it "finds the vehicle" do
+      it "assigns to @vehicle the given vehicle" do
         @person.vehicles.should_receive(:find).with(@vehicle.id).and_return(@vehicle)
         delete :destroy, :id => @vehicle.id
+        assigns[:vehicle].should eq(@vehicle)
       end
 
       it "destroys the vehicle" do

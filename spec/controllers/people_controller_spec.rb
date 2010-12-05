@@ -6,14 +6,14 @@ describe PeopleController do
   end
 
   describe "GET index" do
-    context "when not logged in" do
+    context "when not signed in" do
       it "renders the index template" do
         get :index
         response.should render_template("index")
       end
     end
 
-    context "when logged in" do
+    context "when signed in" do
       before(:each) do
         signin(@person)
       end
@@ -26,14 +26,14 @@ describe PeopleController do
   end
 
   describe "GET dashboard" do
-    context "when not logged in" do
-      it "redirects to the signin page" do
+    context "when not signed in" do
+      it "redirects to the sign in page" do
         get :dashboard
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
       end
     end
 
-    context "when logged in" do
+    context "when signed in" do
       before(:each) do
         signin(@person)
       end

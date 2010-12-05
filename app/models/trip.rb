@@ -1,7 +1,5 @@
 class Trip < ActiveRecord::Base
-  after_initialize do # Initialize location for form helpers
-    self.location ||= self.build_location
-  end
+  after_initialize :initialize_nested_attributes
 
   validates :name, :presence => true
   validates :time, :presence => true, :timeliness => {:type => :datetime}
@@ -27,15 +25,11 @@ class Trip < ActiveRecord::Base
     self.invitations.map {|invitation| invitation.email}
   end
 
-  def organized_by?(person)
-    return self.organizer == person
-  end
-
   def upcoming?
     return self.time >= Time.now()
   end
 
-  def valid_token?(token)
-    !self.invitations.find_by_token(token).nil?
+  def initialize_nested_attributes
+    self.location ||= self.build_location
   end
 end

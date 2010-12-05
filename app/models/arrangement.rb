@@ -1,4 +1,8 @@
 class Arrangement < ActiveRecord::Base
+  validates :driver, :existence => true
+  validates :trip, :existence => true
+  validates :vehicle, :existence => true
+
   has_one :destination, :as => :locatable, :class_name => "Location"
   belongs_to :driver, :class_name => "Person", :foreign_key => "driver_id"
   has_one :origin, :as => :locatable, :class_name => "Location"
@@ -7,19 +11,19 @@ class Arrangement < ActiveRecord::Base
   belongs_to :trip
   belongs_to :vehicle
 
+  def preferences
+    self.driver.nil? ? Preferences.new : self.driver.preferences
+  end
+
   def capacity
-    self.vehicle.capacity - 1
+    self.vehicle.passenger_capacity
   end
 
   def full?
-    self.passengers.count >= self.vehicle.capacity - 1
+    self.passengers.count >= self.vehicle.passenger_capacity
   end
 
   def incompatibility_with(other)
     self.preferences.incompatibility_with(other.preferences)
-  end
-
-  def preferences
-    self.driver.nil? ? Preferences.new : self.driver.preferences
   end
 end

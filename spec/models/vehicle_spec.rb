@@ -42,4 +42,8 @@ describe Vehicle do
       @vehicle.should_not be_valid
     end
   end
+
+  it "has passenger capacity: total capacity - 1" do
+    @vehicle.passenger_capacity.should == @vehicle.capacity - 1
+  end
 end
