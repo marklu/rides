@@ -1,9 +1,11 @@
 module ArrangementsGenerator
-  # Instance variables below used for caching combinations and permutations
+  # Instance variables below used to store temporary values
   @passenger_combinations = []
   @path_permutations = []
+  @path_constant = 1.0
   
   def self.generate_arrangements(arrangements, passengers)
+    # Returns a list of modified arrangements
     if not arrangements.empty? and not passengers.empty?
       distances = ArrangementsGenerator.generate_distance_matrix(arrangements, passengers)
       arrangements.each_with_index do |arrangement, index|
@@ -14,8 +16,9 @@ module ArrangementsGenerator
   end
   
   def self.generate_arrangement(current_arrangement, remaining_passengers, distances)
-    # OUTPUT: Updated Arrangement and Updated list of remaining passengers
+    # Returns a modified Arrangement from list of Passengers and list of Passengers remaining
     if not current_arrangement.full? and not remaining_passengers.empty?
+      @path_constant = -Math.log(0.9)/distances[[current_arrangement, current_arrangement.destination]]
       best_path = []
       best_path_score = 0
       if (remaining_passengers.length + current_arrangement.passengers.length) <= current_arrangement.capacity
@@ -25,6 +28,7 @@ module ArrangementsGenerator
         current_combination = @passenger_combinations[0]
         current_path, current_path_score = ArrangementsGenerator.generate_path(current_arrangement, current_combination, distances)
         best_path, best_path_score = Array.new(current_path), current_path_score
+        best_path_score = 0.5*best_path_score + 0.5*ArrangementsGenerator.score_incompatibility([current_arrangement, current_combination])
         num_evaluations = 1
         max_evaluations = Math.exp(remaining_passengers.length).ceil
         ArrangementsGenerator.annealing_schedule(10, 0.9999) do |temperature|
@@ -54,6 +58,7 @@ module ArrangementsGenerator
       best_path.each {|p| current_arrangement.passengers << p}
       remaining_passengers = remaining_passengers - best_path
     end
+    @path_constant = 0.0
     return [current_arrangement, remaining_passengers]
   end
   
@@ -69,7 +74,7 @@ module ArrangementsGenerator
   end
   
   def self.generate_path(current_arrangement, assigned_passengers, distances)
-    # OUTPUT: 'Path' of passengers to go through; consists of passengers in current_arrangement and in assigned_passengers
+    # Returns the best path permuation for an arrangement and passengers
     path_origin = [current_arrangement]
     path_destination = [current_arrangement.destination]
     path = current_arrangement.passengers
@@ -146,6 +151,7 @@ module ArrangementsGenerator
   end
   
   def self.generate_distance_matrix(arrangements, passengers)
+    # Returns Hash with pair-wise keys (combinations of arrangements, passengers, destinations) and values of distances  
     distances = Hash.new
     if not arrangements.empty? and not passengers.empty?
       arrangements.each do |arrangement|
@@ -172,13 +178,29 @@ module ArrangementsGenerator
     return distances
   end
 
+  def self.score_incompatibility(passengers)
+    # Returns an incompatibility score from 0.0 to 1.0
+    incompatibility_score = 0.0
+    if passengers.length > 1
+      num_of_combinations = 0
+      passengers.combination(2) do |combination|
+        incompatibility_score += combination[0].incompatibility_with(combination[1])
+        num_of_combinations += 1
+      end
+      incompatibility_score = incompatibility_score / num_of_combinations
+    end
+    return incompatibility_score
+  end
+
   def self.score_path(path, distances)
+    # Returns a path score from 0.0 to 1.0 using an exponential distribution with lambda of path_constant
     path_score = 0.0
     if not (path.length <= 1) and not distances.empty?
       0.upto(path.length-2) do |index|
         path_score += distances[[path[index], path[index+1]]]
       end
     end
+    path_score = 1 - Math.exp(-@path_constant*path_score)
     return path_score
   end
 end
