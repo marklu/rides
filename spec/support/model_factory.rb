@@ -4,7 +4,6 @@ module ModelFactory
     when 'Arrangement'
       return {
         :destination => create_valid!(Location),
-        :driver => create_valid!(Person),
         :origin => create_valid!(Location),
         :trip => create_valid!(Trip),
         :vehicle => create_valid!(Vehicle)

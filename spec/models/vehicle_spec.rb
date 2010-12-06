@@ -36,11 +36,6 @@ describe Vehicle do
       @vehicle.owner = nil
       @vehicle.should_not be_valid
     end
-
-    it "is not valid with an invalid owner" do
-      @vehicle.owner.destroy
-      @vehicle.should_not be_valid
-    end
   end
 
   it "has passenger capacity: total capacity - 1" do

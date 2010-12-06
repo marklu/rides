@@ -3,8 +3,8 @@ class Trip < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :time, :presence => true, :timeliness => {:type => :datetime}
-  validates :location, :existence => true
-  validates :organizer, :existence => true
+  validates :location, :presence => true
+  validates :organizer, :presence => true
 
   has_many :arrangements, :dependent => :destroy
   belongs_to :location, :dependent => :destroy

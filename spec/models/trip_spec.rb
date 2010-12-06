@@ -45,11 +45,6 @@ describe Trip do
       @trip.organizer = nil
       @trip.should_not be_valid
     end
-
-    it "is not valid with an invalid organizer" do
-      @trip.organizer.destroy
-      @trip.should_not be_valid
-    end
   end
 
   context "when destroying" do

@@ -10,47 +10,23 @@ describe Arrangement do
       @arrangement.should be_valid
     end
 
-    it "is not valid without a driver" do
-      @arrangement.driver = nil
-      @arrangement.should_not be_valid
-    end
-
-    it "is not valid with an invalid driver" do
-      @arrangement.driver.destroy
-      @arrangement.should_not be_valid
-    end
-
     it "is not valid without a trip" do
       @arrangement.trip = nil
       @arrangement.should_not be_valid
     end
 
-    it "is not valid with an invalid trip" do
-      @arrangement.trip.destroy
-      @arrangement.should_not be_valid
-    end
-
     it "is not valid without an origin" do
-      @arrangement.origin.destroy
-      @arrangement.should_not be_valid
       @arrangement.origin = nil
       @arrangement.should_not be_valid
     end
 
     it "is not valid without a destination" do
-      @arrangement.destination.destroy
-      @arrangement.should_not be_valid
       @arrangement.destination = nil
       @arrangement.should_not be_valid
     end
 
     it "is not valid without a vehicle" do
       @arrangement.vehicle = nil
-      @arrangement.should_not be_valid
-    end
-
-    it "is not valid with an invalid vehicle" do
-      @arrangement.vehicle.destroy
       @arrangement.should_not be_valid
     end
   end
@@ -117,6 +93,10 @@ describe Arrangement do
         @arrangement.preferences.should eq(@preferences)
       end
     end
+  end
+
+  it "has a driver: its vehicle's owner" do
+    @arrangement.driver.should eq(@arrangement.vehicle.owner)
   end
 
   it "has capacity equal to its vehicle's passenger capacity" do

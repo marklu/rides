@@ -9,7 +9,7 @@ class Person < ActiveRecord::Base
       :with => /^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
       :message => "is not a valid numeric US phone number"
     }
-  validates :location, :existence => true
+  validates :location, :presence => true
 
   has_and_belongs_to_many :arrangements,
     :join_table => "arrangements_passengers", :foreign_key => "passenger_id"

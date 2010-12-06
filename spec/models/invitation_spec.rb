@@ -56,11 +56,6 @@ describe Invitation do
       @invitation.trip = nil
       @invitation.should_not be_valid
     end
-
-    it "is not valid with an invalid trip" do
-      @invitation.trip.destroy
-      @invitation.should_not be_valid
-    end
   end
 
   context "when creating" do

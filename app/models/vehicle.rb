@@ -4,7 +4,7 @@ class Vehicle < ActiveRecord::Base
   validates :capacity,
     :presence => true,
     :numericality => {:only_integer => true, :greater_than => 0}
-  validates :owner, :existence => true
+  validates :owner, :presence => true
 
   belongs_to :owner, :class_name => "Person", :foreign_key => "owner_id"
 

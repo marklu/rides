@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe ArrangementsGenerator do
   before(:each) do
-    origin = create_valid!(Location, :latitude => 37.875535, :longitude => -122.255618)
-    destination = create_valid!(Location, :latitude => 37.867417, :longitude => -122.260408)
+    origin = build_valid(Location, :latitude => 37.875535, :longitude => -122.255618)
+    destination = build_valid(Location, :latitude => 37.867417, :longitude => -122.260408)
 
-    @passenger1 = create_valid!(Person,
-      :location => create_valid!(Location, :latitude => 37.866054, :longitude => -122.254856)
+    @passenger1 = build_valid(Person,
+      :location => build_valid(Location, :latitude => 37.866054, :longitude => -122.254856)
     )
-    @passenger2 = create_valid!(Person,
-      :location => create_valid!(Location, :latitude => 37.8555404, :longitude => -122.2664398)
+    @passenger2 = build_valid(Person,
+      :location => build_valid(Location, :latitude => 37.8555404, :longitude => -122.2664398)
     )
 
     @empty_arrangement = build_valid(Arrangement,
@@ -98,7 +98,6 @@ describe ArrangementsGenerator do
     end
     
     it "returns a score for a valid argument" do
-      
       path = [@empty_arrangement, @passenger1, @empty_arrangement.destination]
       distances = ArrangementsGenerator.generate_distance_matrix([@empty_arrangement], [@passenger1])
       path_score = ArrangementsGenerator.score_path(path, distances)

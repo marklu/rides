@@ -23,7 +23,7 @@ describe Preferences do
     end
 
     it "is not valid with an invalid music preference" do
-      ['No Preference', 'invalid', '0'].each do |preference|
+      ['No Preference', 'invalid', '0', nil].each do |preference|
         @preferences.music = preference
         @preferences.should_not be_valid
       end
@@ -37,7 +37,7 @@ describe Preferences do
     end
 
     it "is not valid with an invalid smoking preference" do
-      ['No Preference', 'invalid', '0'].each do |preference|
+      ['No Preference', 'invalid', '0', nil].each do |preference|
         @preferences.smoking = preference
         @preferences.should_not be_valid
       end

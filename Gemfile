@@ -5,7 +5,6 @@ gem 'jquery-rails'
 gem 'rails'
 gem 'rails-geocoder', :require => 'geocoder'
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'validates_existence'
 gem 'validates_timeliness'
 
 group :development, :test do
