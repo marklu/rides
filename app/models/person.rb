@@ -9,16 +9,17 @@ class Person < ActiveRecord::Base
       :with => /^\(?\b([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
       :message => "is not a valid numeric US phone number"
     }
-  validates :location, :presence => true
+  validates :location, :existence => true
 
   has_and_belongs_to_many :arrangements,
     :join_table => "arrangements_passengers", :foreign_key => "passenger_id"
-  has_one :location, :as => :locatable 
-  has_many :organized_trips, :class_name => "Trip", :foreign_key => "organizer_id"
-  has_one :preferences
+  belongs_to :location, :dependent => :destroy
+  has_many :organized_trips, :class_name => "Trip", :foreign_key => "organizer_id",
+    :dependent => :destroy
+  has_one :preferences, :dependent => :destroy
   has_and_belongs_to_many :trips, :join_table => "participants_trips",
     :foreign_key => "participant_id"
-  has_many :vehicles, :foreign_key => "owner_id"
+  has_many :vehicles, :foreign_key => "owner_id", :dependent => :destroy
 
   accepts_nested_attributes_for :location, :preferences
 

@@ -3,7 +3,9 @@ module ModelFactory
     case model.to_s
     when 'Arrangement'
       return {
+        :destination => create_valid!(Location),
         :driver => create_valid!(Person),
+        :origin => create_valid!(Location),
         :trip => create_valid!(Trip),
         :vehicle => create_valid!(Vehicle)
       }
@@ -13,6 +15,12 @@ module ModelFactory
         :token => random_string(10),
         :trip => create_valid!(Trip)
       }
+    when 'Location'
+      return {
+        :location => '1600 Amphitheatre Parkway, Mountain View, CA',
+        :latitude => 37.422782,
+        :longitude => -122.085099
+      }
     when 'Person'
       return {
         :email => "#{random_string(10)}@email.com",
@@ -20,7 +28,7 @@ module ModelFactory
         :password_confirmation => 'testpassword123',
         :name => 'First Last',
         :phone => '123-456-7890',
-        :location => Location.create!(:location => '1600 Amphitheatre Parkway, Mountain View, CA'),
+        :location => create_valid!(Location),
         :music => 'no_preference',
         :smoking => 'no_preference'
       }
@@ -28,7 +36,7 @@ module ModelFactory
       return {
         :name => 'Trip Name',
         :time => Time.now,
-        :location => Location.create!(:location => '1 Infinite Loop, Cupertino, CA'),
+        :location => create_valid!(Location),
         :organizer => create_valid!(Person)
       }
     when 'Vehicle'

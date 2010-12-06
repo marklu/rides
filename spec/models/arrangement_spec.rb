@@ -30,6 +30,20 @@ describe Arrangement do
       @arrangement.should_not be_valid
     end
 
+    it "is not valid without an origin" do
+      @arrangement.origin.destroy
+      @arrangement.should_not be_valid
+      @arrangement.origin = nil
+      @arrangement.should_not be_valid
+    end
+
+    it "is not valid without a destination" do
+      @arrangement.destination.destroy
+      @arrangement.should_not be_valid
+      @arrangement.destination = nil
+      @arrangement.should_not be_valid
+    end
+
     it "is not valid without a vehicle" do
       @arrangement.vehicle = nil
       @arrangement.should_not be_valid
@@ -38,6 +52,18 @@ describe Arrangement do
     it "is not valid with an invalid vehicle" do
       @arrangement.vehicle.destroy
       @arrangement.should_not be_valid
+    end
+  end
+
+  context "when destroying" do
+    it "destroys its destination location" do
+      @arrangement.destination.should_receive(:destroy)
+      @arrangement.destroy
+    end
+
+    it "destroys its origin location" do
+      @arrangement.origin.should_receive(:destroy)
+      @arrangement.destroy
     end
   end
 

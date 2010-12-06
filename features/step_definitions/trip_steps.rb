@@ -30,7 +30,7 @@ Given /^I (?:am participating|participated) in the following trips:$/ do |trips|
   trips.hashes.each do |trip|
     trip = create_valid!(Trip,
       :name => trip['name'],
-      :location => Location.create!(:location => trip['location']),
+      :location => create_valid!(Location, :location => trip['location']),
       :time => Time.parse(trip['time'])
     )
     trip.participants << @person

@@ -3,16 +3,15 @@ class Trip < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :time, :presence => true, :timeliness => {:type => :datetime}
-  validates :location, :presence => true
+  validates :location, :existence => true
   validates :organizer, :existence => true
 
-  has_many :arrangements
-  has_one :location, :as => :locatable
+  has_many :arrangements, :dependent => :destroy
+  belongs_to :location, :dependent => :destroy
   belongs_to :organizer, :class_name => "Person", :foreign_key => "organizer_id"
   has_and_belongs_to_many :participants, :class_name => "Person",
     :join_table => "participants_trips", :association_foreign_key => "participant_id"
-  has_many :invitations
-  has_one :preferences
+  has_many :invitations, :dependent => :destroy
   has_and_belongs_to_many :vehicles
 
   accepts_nested_attributes_for :location

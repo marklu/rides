@@ -116,6 +116,32 @@ describe Person do
     end
   end
 
+  context "when destroying" do
+    it "destroys its location" do
+      @person.location.should_receive(:destroy)
+      @person.destroy
+    end
+
+    it "destroys its organized trips" do
+      trip1 = create_valid!(Trip, :organizer => @person)
+      trip2 = create_valid!(Trip, :organizer => @person)
+      @person.destroy
+      @person.organized_trips.count.should == 0
+    end
+
+    it "destroys its preferences" do
+      @person.preferences.should_receive(:destroy)
+      @person.destroy
+    end
+
+    it "destroys its vehicles" do
+      vehicle1 = create_valid!(Vehicle, :owner => @person)
+      vehicle2 = create_valid!(Vehicle, :owner => @person)
+      @person.destroy
+      @person.vehicles.count.should == 0
+    end
+  end
+
   context "when organizing many trips" do
     before(:each) do
       @trip1 = create_valid!(Trip, :organizer => @person)

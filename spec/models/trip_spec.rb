@@ -52,6 +52,27 @@ describe Trip do
     end
   end
 
+  context "when destroying" do
+    it "destroys its arrangements" do
+      arrangement1 = create_valid!(Arrangement, :trip => @trip)
+      arrangement2 = create_valid!(Arrangement, :trip => @trip)
+      @trip.destroy
+      @trip.arrangements.count.should == 0
+    end
+
+    it "destroys its location" do
+      @trip.location.should_receive(:destroy)
+      @trip.destroy
+    end
+
+    it "destroys its invitations" do
+      invitation1 = create_valid!(Invitation, :trip => @trip)
+      invitation2 = create_valid!(Invitation, :trip => @trip)
+      @trip.destroy
+      @trip.invitations.count.should == 0
+    end
+  end
+
   context "when upcoming" do
     before(:each) do
       @trip.time = Time.now + 1200000

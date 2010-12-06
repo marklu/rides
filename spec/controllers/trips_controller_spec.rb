@@ -18,25 +18,25 @@ describe TripsController do
     context "when signed in" do
       before(:each) do
         @organizer = create_valid!(Person, :email => 'organizer@email.com')
-        @upcoming_trip1 = @organizer.organized_trips.create!(
+        @upcoming_trip1 = create_valid!(Trip,
           :name => 'Upcoming Trip 1',
-          :location => Location.create!(:location => '795 Folsom Street, San Francisco, CA'),
-          :time => Time.parse('January 5, 2012 10:00')
+          :time => Time.parse('January 5, 2012 10:00'),
+          :organizer => @organizer
         )
-        @upcoming_trip2 = @organizer.organized_trips.create!(
+        @upcoming_trip2 = create_valid!(Trip,
           :name => 'Upcoming Trip 2',
-          :location => Location.create!(:location => '1475 Folsom Street, San Francisco, CA'),
-          :time => Time.parse('February 5, 2012 10:00')
+          :time => Time.parse('February 5, 2012 10:00'),
+          :organizer => @organizer
         )
-        @passed_trip1 = @organizer.organized_trips.create!(
+        @passed_trip1 = create_valid!(Trip,
           :name => 'Passed Trip 1',
-          :location => Location.create!(:location => '1601 South California Avenue, Palo Alto, California'),
-          :time => Time.parse('January 5, 2009 10:00')
+          :time => Time.parse('January 5, 2009 10:00'),
+          :organizer => @organizer
         )
-        @passed_trip2 = @organizer.organized_trips.create!(
+        @passed_trip2 = create_valid!(Trip,
           :name => 'Passed Trip 2',
-          :location => Location.create!(:location => '329 East Jimmie Leeds Road, Absecon, NJ'),
-          :time => Time.parse('February 5, 2009 10:00')
+          :time => Time.parse('February 5, 2009 10:00'),
+          :organizer => @organizer
         )
         @person.stub(:trips).and_return([@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2])
         signin(@person)

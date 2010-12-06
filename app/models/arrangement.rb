@@ -1,15 +1,17 @@
 class Arrangement < ActiveRecord::Base
   validates :driver, :existence => true
-  validates :trip, :existence => true
   validates :vehicle, :existence => true
+  validates :trip, :existence => true
+  validates :origin, :existence => true
+  validates :destination, :existence => true
 
-  has_one :destination, :as => :locatable, :class_name => "Location"
   belongs_to :driver, :class_name => "Person", :foreign_key => "driver_id"
-  has_one :origin, :as => :locatable, :class_name => "Location"
   has_and_belongs_to_many :passengers, :class_name => "Person",
     :join_table => "arrangements_passengers", :association_foreign_key => "passenger_id"
-  belongs_to :trip
   belongs_to :vehicle
+  belongs_to :trip
+  belongs_to :origin, :class_name => "Location", :dependent => :destroy
+  belongs_to :destination, :class_name => "Location", :dependent => :destroy
 
   def preferences
     self.driver.nil? ? Preferences.new : self.driver.preferences
