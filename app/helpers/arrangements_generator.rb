@@ -1,9 +1,16 @@
+# ArrangementsGenerator - Module used to generate new Arrangements and update existing Arrangements with passengers
+# generate_arrangement is the only method to be called. It returns a list of updated Arrangements given Arrangements and Passengers.
+# To generate an optimal solution, generate_arrangements works through two stages of simulated annealing.
+# The first stage runs an annealing on the combination of passengers that will minimize the distance for a given Arrangement
+# The second stage runs an annealing to find the best permuptation for a given passenger for the minimal distance path
+
 module ArrangementsGenerator
   # Instance variables below used to store temporary values
   @passenger_combinations = []
   @path_permutations = []
   @path_constant = 1.0
   
+  # generate_arrangements updates the list of arrangements given with the best subset of passengers
   def self.generate_arrangements(arrangements, passengers)
     # Returns a list of modified arrangements
     if not arrangements.empty? and not passengers.empty?
@@ -15,8 +22,8 @@ module ArrangementsGenerator
     return arrangements
   end
   
+  # generate_arrangement updates an individual arrangement with the best subset of passengers
   def self.generate_arrangement(current_arrangement, remaining_passengers, distances)
-    # Returns a modified Arrangement from list of Passengers and list of Passengers remaining
     if not current_arrangement.full? and not remaining_passengers.empty?
       @path_constant = -Math.log(0.9)/distances[[current_arrangement, current_arrangement.destination]]
       best_path = []
@@ -73,6 +80,7 @@ module ArrangementsGenerator
     end
   end
   
+  # generate_path returns an optimal permuation for a given arrangement and assigned passengers
   def self.generate_path(current_arrangement, assigned_passengers, distances)
     # Returns the best path permuation for an arrangement and passengers
     path_origin = [current_arrangement]
@@ -121,7 +129,7 @@ module ArrangementsGenerator
     return [path, path_score]
   end
   
-  # Helper methods for generate_path below
+  # Helper method for generate_path below
   def self.random_path_permutations(current_path)
     # Returns all permutations of the array specified in @path_permutations
     random_paths = @path_permutations.shuffle
@@ -132,7 +140,7 @@ module ArrangementsGenerator
     end
   end
   
-  # Helper methods for generate_path and generate_arrangement
+  # Helper method for generate_path and generate_arrangement
   def self.annealing_schedule(temperature, alpha)
     # Yields a temperature schedule for simulated annealing
     while true
@@ -140,7 +148,8 @@ module ArrangementsGenerator
       temperature = alpha*temperature
     end
   end
-  
+
+  # Helper method for generate_path and generate_arrangement  
   def self.annealing_probability(current_score, new_score, temperature)
     # Returns the chance that current solution is chosen over new solution
     if new_score < current_score
@@ -150,6 +159,7 @@ module ArrangementsGenerator
     end
   end
   
+  # Helper method for generate_path and generate_arrangement  
   def self.generate_distance_matrix(arrangements, passengers)
     # Returns Hash with pair-wise keys (combinations of arrangements, passengers, destinations) and values of distances  
     distances = Hash.new
@@ -178,6 +188,7 @@ module ArrangementsGenerator
     return distances
   end
 
+  # Helper method for generate_path and generate_arrangement  
   def self.score_incompatibility(passengers)
     # Returns an incompatibility score from 0.0 to 1.0
     incompatibility_score = 0.0
@@ -192,6 +203,7 @@ module ArrangementsGenerator
     return incompatibility_score
   end
 
+  # Helper method for generate_path and generate_arrangement
   def self.score_path(path, distances)
     # Returns a path score from 0.0 to 1.0 using an exponential distribution with lambda of path_constant
     path_score = 0.0
