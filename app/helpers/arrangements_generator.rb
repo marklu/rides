@@ -1,8 +1,18 @@
-# ArrangementsGenerator - Module used to generate new Arrangements and update existing Arrangements with passengers
-# generate_arrangement is the only method to be called. It returns a list of updated Arrangements given Arrangements and Passengers.
-# To generate an optimal solution, generate_arrangements works through two stages of simulated annealing.
-# The first stage runs an annealing on the combination of passengers that will minimize the distance for a given Arrangement
-# The second stage runs an annealing to find the best permuptation for a given passenger for the minimal distance path
+# ArrangementsGenerator - Module used to create new Arrangements and update existing Arrangements
+# USE CASE: Given a list of Arrangements and list of Passengers, generate_arrangements returns
+#           a list of updated Arrangements. This is the only method that should be called. All
+#           other methods act as helper functions for it.
+# HOW IT WORKS: generate_arrangements generates an optimal solution by choosing the best subset of
+#               passengers for each Arrangement that minimizes the score that equally weights
+#               passenger incompatibility and driving distance (i.e. generate_arrangement). 
+#               The process of selecting this subset is powered by simulated annealing. An annealing
+#               is run to select the optimal passenger combination that minimizes the score for a given
+#               Arrangement. As the score is dependent on the actual distance, another annealing
+#               (i.e. generate_path) is run on each passenger combination to determine the shortest path
+#               permutation and driving distance. After the annealing is run and the Arrangement is
+#               updated, the new passengers assigned onto that Arrangement are removed from the list of 
+#               remaining passengers, and the process restarts using this new list and the remaining 
+#               Arrangements.
 
 module ArrangementsGenerator
   # Instance variables below used to store temporary values
