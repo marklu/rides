@@ -3,8 +3,11 @@ require 'digest/md5'
 
 describe TripsController do
   before(:each) do
+    @organizer = create_valid!(Person)
+    @participant = create_valid!(Person)
     @person = create_valid!(Person)
-    @trip = create_valid!(Trip, :organizer => @person)
+    @trip = create_valid!(Trip, :organizer => @organizer)
+    @trip.participants << @participant
   end
 
   describe "GET index" do
@@ -38,19 +41,19 @@ describe TripsController do
           :time => Time.parse('February 5, 2009 10:00'),
           :organizer => @organizer
         )
-        @person.stub(:trips).and_return([@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2])
-        signin(@person)
+        @organizer.stub(:trips).and_return([@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2])
+        signin(@organizer)
       end
 
       context "when no month or an invalid month is given" do
-        it "assigns to @trips a list of trips in which @person is a participant" do
+        it "assigns to @trips a list of trips in which @organizer is a participant" do
           get :index
           assigns[:trips].should == [@upcoming_trip2, @upcoming_trip1, @passed_trip2, @passed_trip1]
         end
       end
 
       context "when a valid month is given" do
-        it "assigns to @trips a list of trips occuring in the given month in which @person is a participant" do
+        it "assigns to @trips a list of trips occuring in the given month in which @organizer is a participant" do
           get :index, :month => 1, :year => 2012
           assigns[:trips].should == [@upcoming_trip1]
         end
@@ -81,16 +84,39 @@ describe TripsController do
       end
     end
 
-    context "when signed in" do
+    context "when signed in as non-participant and non-organizer" do
+      before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        get :show, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as a participant" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
-        signin(@person)
+        signin(@participant)
       end
 
       it "assigns to @trip the given trip" do
         Trip.should_receive(:find).with(@trip.id).and_return(@trip)
         get :show, :id => @trip.id
         assigns[:trip].should eq(@trip)
+      end
+
+      it "renders the show template" do
+        get :show, :id => @trip.id
+        response.should render_template("show")
+      end
+    end
+
+    context "when signed in as an organizer" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        signin(@organizer)
       end
 
       it "renders the show template" do
@@ -134,14 +160,36 @@ describe TripsController do
       end
     end
 
-    context "when signed in" do
+    context "when signed in as non-participant and non-organizer" do
       before(:each) do
-        @person.organized_trips.stub(:find).and_return(@trip)
         signin(@person)
       end
 
+      it "redirects to the dashboard page" do
+        get :edit, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as participant" do
+      before(:each) do
+        signin(@participant)
+      end
+
+      it "redirects to the trip info page" do
+        get :edit, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+      end
+    end
+
+    context "when signed in as organizer" do
+      before(:each) do
+        @organizer.organized_trips.stub(:find).and_return(@trip)
+        signin(@organizer)
+      end
+
       it "assigns to @trip the given trip" do
-        @person.organized_trips.should_receive(:find).with(@trip.id).and_return(@trip)
+        Trip.should_receive(:find).with(@trip.id).and_return(@trip)
         get :edit, :id => @trip.id
         assigns[:trip].should eq(@trip)
       end
@@ -220,10 +268,32 @@ describe TripsController do
       end
     end
 
-    context "when signed in" do
+    context "when signed in as non-participant and non-organizer" do
+      before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        put :update, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as participant" do
+      before(:each) do
+        signin(@participant)
+      end
+
+      it "redirects to the trip info page" do
+        put :update, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+      end
+    end
+
+    context "when signed in as organizer" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
-        signin(@person)
+        signin(@organizer)
       end
 
       it "assigns to @trip the given trip" do
@@ -275,10 +345,33 @@ describe TripsController do
       end
     end
 
-    context "when signed in" do
+    context "when signed in as non-participant and non-organizer" do
+      before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        delete :destroy, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as participant" do
+      before(:each) do
+        signin(@participant)
+      end
+
+      it "redirects to the trip info page" do
+        delete :destroy, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+      end
+    end
+
+
+    context "when signed in as organizer" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
-        signin(@person)
+        signin(@organizer)
       end
 
       it "finds the trip" do
@@ -306,13 +399,36 @@ describe TripsController do
       end
     end
 
-    context "when signed in" do
+    context "when signed in as non-participant and non-organizer" do
       before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        get :participants, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as participant" do
+      before(:each) do
+        signin(@participant)
+      end
+
+      it "renders the participants template" do
+        get :participants, :id => @trip.id
+        response.should render_template("participants")
+      end
+    end
+
+    context "when signed in as an organizer" do
+      before(:each) do
+        @trip.participants.clear
         @participant1 = create_valid!(Person, :name => 'Allan', :email => 'allan@email.com')
         @participant2 = create_valid!(Person, :name => 'Baron', :email => 'baron@email.com')
         @participant3 = create_valid!(Person, :name => 'Chase', :email => 'chase@email.com')
         @trip.participants << @participant1 << @participant3 << @participant2
-        signin(@person)
+        signin(@organizer)
       end
 
       it "assigns to @participants a sorted list of trip participants" do
@@ -348,14 +464,37 @@ describe TripsController do
       end
     end
 
-    context "when signed in" do
+    context "when signed in as non-participant and non-organizer" do
       before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        post :invite, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as participant" do
+      before(:each) do
+        signin(@participant)
+      end
+
+      it "redirects to the trip info page" do
+        post :invite, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+      end
+    end
+
+    context "when signed in as organizer" do
+      before(:each) do
+        @trip.participants.clear
         @invitation = create_valid!(Invitation)
         @participant1 = create_valid!(Person, :name => 'Allan', :email => 'allan@email.com')
         @participant2 = create_valid!(Person, :name => 'Baron', :email => 'baron@email.com')
         @participant3 = create_valid!(Person, :name => 'Chase', :email => 'chase@email.com')
         @trip.participants << @participant1 << @participant3 << @participant2
-        signin(@person)
+        signin(@organizer)
       end
 
       it "assigns to @invitation a new invitation with the given parameters" do
@@ -421,7 +560,7 @@ describe TripsController do
       end
     end
 
-    context "when signed in as a new user" do
+    context "when signed in as an invited non-participant and non-organizer" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
         @invited_person = create_valid!(Person)
@@ -457,13 +596,23 @@ describe TripsController do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
         @trip.participants.stub(:include?).and_return(true)
-        signin(@person)
+        signin(@participant)
       end
 
       it "redirects to the trip info page" do
         get :join, :id => @trip.id, :token => 'token'
         response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
       end
+    end
+
+    context "when signed in as a non-participant organizer" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        @trip.participants.stub(:include?).and_return(true)
+        signin(@organizer)
+      end
+
+      it "renders the join template"
     end
   end
 
@@ -475,7 +624,7 @@ describe TripsController do
       end
     end
 
-    context "when signed in as a new user" do
+    context "when signed in as an invited non-participant and non-organizer" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
         @new_person = create_valid!(Person)
@@ -511,13 +660,23 @@ describe TripsController do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
         @trip.participants.stub(:include?).and_return(true)
-        signin(@person)
+        signin(@participant)
       end
 
       it "redirects to the trip info page" do
         post :join, :id => @trip.id, :token => 'token'
         response.should redirect_to(:controller => "trips", :action => "show")
       end
+    end
+
+    context "when signed in as a non-participant organizer" do
+      before(:each) do
+        Trip.stub(:find).and_return(@trip)
+        @trip.participants.stub(:include?).and_return(true)
+        signin(@organizer)
+      end
+
+      it "adds the organizer to the list of participants"
     end
   end
 
@@ -526,6 +685,17 @@ describe TripsController do
       it "redirects to the sign in page" do
         delete :leave, :id => @trip.id
         response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when signed in as non-participant and non-organizer" do
+      before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        delete :leave, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
       end
     end
 
@@ -546,6 +716,14 @@ describe TripsController do
         delete :leave, :id => @trip.id
         response.should redirect_to(:controller => "people", :action => "dashboard")
       end
+    end
+
+    context "when signed in as a non-participant organizer" do
+      before(:each) do
+        signin(@organizer)
+      end
+
+      it "redirects to the trip info page"
     end
   end
 end

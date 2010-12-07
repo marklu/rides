@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'cancan'
 gem 'devise'
 gem 'jquery-rails'
 gem 'rails'

@@ -5,7 +5,7 @@ end
 Given /^I am organizing an upcoming trip named "([^"]*)"$/ do |trip_name|
   Given %{there is an upcoming trip named "#{trip_name}"}
   @trip.organizer = @person
-  @trip.save
+  @trip.save!
 end
 
 Given /^(?:I am|"([^"]*)" is) a participant$/ do |name|
@@ -13,7 +13,7 @@ Given /^(?:I am|"([^"]*)" is) a participant$/ do |name|
     @person :
     create_valid!(Person, :name => name, :email => "#{name.downcase}@email.com")
   @trip.participants << person
-  @trip.save
+  @trip.save!
 end
 
 Given /^the following people are participants:$/ do |participants|
@@ -23,7 +23,7 @@ Given /^the following people are participants:$/ do |participants|
       :email => "#{participant['name'].downcase}@email.com"
     )
   end
-  @trip.save
+  @trip.save!
 end
 
 Given /^I (?:am participating|participated) in the following trips:$/ do |trips|
@@ -34,7 +34,7 @@ Given /^I (?:am participating|participated) in the following trips:$/ do |trips|
       :time => Time.parse(trip['time'])
     )
     trip.participants << @person
-    trip.save
+    trip.save!
   end
 end
 
@@ -43,6 +43,6 @@ Given /^the following people are driving:$/ do |drivers|
     person = Person.where(:name => driver['name']).first
     vehicle = person.vehicles.first
     @trip.vehicles << vehicle
-    @trip.save
+    @trip.save!
   end
 end

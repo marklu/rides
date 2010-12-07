@@ -1,6 +1,8 @@
 class ArrangementsController < ApplicationController
   before_filter :authenticate_person!
-  before_filter :get_trip
+  load_resource :trip
+  load_resource :through => :trip, :except => [:index]
+  before_filter :check_abilities
 
   # GET /arrangements
   def index
@@ -9,7 +11,6 @@ class ArrangementsController < ApplicationController
 
   # GET /arrangements/1
   def show
-    @arrangement = @trip.arrangements.find(params[:id])
   end
 
   # POST /trip/:id/arrangements/generate
@@ -20,7 +21,9 @@ class ArrangementsController < ApplicationController
 
   private
 
-  def get_trip
-    @trip = Trip.find(params[:trip_id])
+  def check_abilities
+    new_arrangement = @trip.arrangements.build
+    authorize!(params[:action].to_sym, @arrangement || new_arrangement)
+    @trip.arrangements.delete(new_arrangement)
   end
 end

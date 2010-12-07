@@ -1,6 +1,7 @@
 Given /^I am assigned a ride arrangement$/ do
   @arrangement = create_valid!(Arrangement, :trip => @trip)
   @arrangement.passengers << @person
+  @arrangement.save!
 end
 
 Given /^I am not assigned a ride arrangement$/ do
