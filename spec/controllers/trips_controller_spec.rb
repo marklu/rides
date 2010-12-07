@@ -6,7 +6,7 @@ describe TripsController do
     @organizer = create_valid!(Person)
     @participant = create_valid!(Person)
     @person = create_valid!(Person)
-    @trip = create_valid!(Trip, :organizer => @organizer)
+    @trip = create_valid!(Trip, :organizers => [@organizer])
     @trip.participants << @participant
   end
 
@@ -24,22 +24,22 @@ describe TripsController do
         @upcoming_trip1 = create_valid!(Trip,
           :name => 'Upcoming Trip 1',
           :time => Time.parse('January 5, 2012 10:00'),
-          :organizer => @organizer
+          :organizers => [@organizer]
         )
         @upcoming_trip2 = create_valid!(Trip,
           :name => 'Upcoming Trip 2',
           :time => Time.parse('February 5, 2012 10:00'),
-          :organizer => @organizer
+          :organizers => [@organizer]
         )
         @passed_trip1 = create_valid!(Trip,
           :name => 'Passed Trip 1',
           :time => Time.parse('January 5, 2009 10:00'),
-          :organizer => @organizer
+          :organizers => [@organizer]
         )
         @passed_trip2 = create_valid!(Trip,
           :name => 'Passed Trip 2',
           :time => Time.parse('February 5, 2009 10:00'),
-          :organizer => @organizer
+          :organizers => [@organizer]
         )
         @organizer.stub(:trips).and_return([@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2])
         signin(@organizer)
@@ -142,7 +142,7 @@ describe TripsController do
       it "assigns to @trip a new Trip" do
         get :new
         assigns[:trip].should be_an_instance_of(Trip)
-        assigns[:trip].attributes.should == Trip.create(:organizer => @person).attributes
+        assigns[:trip].attributes.should == Trip.create(:organizers => [@person]).attributes
       end
 
       it "renders the new template" do

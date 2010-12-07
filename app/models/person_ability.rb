@@ -9,29 +9,29 @@ class PersonAbility
       # Can View Trip
       can [:show, :participants], Trip do |trip|
         trip.participants.include?(person) ||
-        trip.organizer == person
+        trip.organizers.include?(person)
       end
 
       # Can Manage Trip Participantship
       can [:leave], Trip do |trip|
         trip.participants.include?(person) ||
-        trip.organizer == person
+        trip.organizers.include?(person)
       end
 
       # Can Manage Trip
       can [:edit, :update, :destroy, :invite], Trip do |trip|
-        trip.organizer == person
+        trip.organizers.include?(person)
       end
 
       # Can View Trip Arrangements
       can [:index, :show], Arrangement do |arrangement|
         arrangement.trip.participants.include?(person) ||
-        arrangement.trip.organizer == person
+        arrangement.trip.organizers.include?(person)
       end
 
       # Can Manage Trip Arrangements
       can [:generate], Arrangement do |arrangement|
-        arrangement.trip.organizer == person
+        arrangement.trip.organizers.include?(person)
       end
     end
   end

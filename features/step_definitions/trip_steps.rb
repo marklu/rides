@@ -4,7 +4,7 @@ end
 
 Given /^I am organizing an upcoming trip named "([^"]*)"$/ do |trip_name|
   Given %{there is an upcoming trip named "#{trip_name}"}
-  @trip.organizer = @person
+  @trip.organizers << @person
   @trip.save!
 end
 

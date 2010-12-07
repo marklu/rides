@@ -1,7 +1,7 @@
 <div id="main">
   <h1>Trip Participants</h1>
 
-  <% if @trip.organizer == current_person %>
+  <% if @trip.organizers.include?(current_person) %>
     <h2>Invite Participant</h2>
     <%= form_for @invitation, :method => :post, :url => invite_trip_path do |f| %>
       <% if @invitation.errors.any? %>

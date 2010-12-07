@@ -14,8 +14,8 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :arrangements,
     :join_table => "arrangements_passengers", :foreign_key => "passenger_id"
   belongs_to :location, :dependent => :destroy
-  has_many :organized_trips, :class_name => "Trip", :foreign_key => "organizer_id",
-    :dependent => :destroy
+  has_and_belongs_to_many :organized_trips, :class_name => "Trip",
+    :join_table => "organizers_trips", :foreign_key => "organizer_id"
   has_one :preferences, :dependent => :destroy
   has_and_belongs_to_many :trips, :join_table => "participants_trips",
     :foreign_key => "participant_id"

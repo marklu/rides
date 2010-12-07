@@ -41,8 +41,8 @@ describe Trip do
       stub_geocoder
     end
 
-    it "is not valid without an organizer" do
-      @trip.organizer = nil
+    it "is not valid without any organizers" do
+      @trip.organizers.clear
       @trip.should_not be_valid
     end
   end

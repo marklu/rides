@@ -1,7 +1,7 @@
 <%= render :partial => "trip", :object => @trip %>
 
 <ul class="actions">
-  <% if @trip.organizer == current_person %>
+  <% if @trip.organizers.include?(current_person) %>
     <li><%= link_to 'Edit', edit_trip_path(@trip) %></li>
     <li>
       <%= form_tag(generate_trip_arrangements_path(@trip), :method => :post) do %>

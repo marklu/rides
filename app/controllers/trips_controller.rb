@@ -25,7 +25,7 @@ class TripsController < ApplicationController
 
   # GET /trips/new
   def new
-    @trip = current_person.organized_trips.build
+    @trip = Trip.new(:organizers => [current_person])
   end
 
   # GET /trips/1/edit
@@ -34,7 +34,8 @@ class TripsController < ApplicationController
 
   # POST /trips
   def create
-    @trip = current_person.organized_trips.build(params[:trip])
+    @trip = Trip.new(params[:trip])
+    @trip.organizers << current_person
     @trip.participants << current_person
 
     if @trip.save

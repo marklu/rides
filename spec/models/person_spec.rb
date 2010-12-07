@@ -123,8 +123,8 @@ describe Person do
     end
 
     it "destroys its organized trips" do
-      trip1 = create_valid!(Trip, :organizer => @person)
-      trip2 = create_valid!(Trip, :organizer => @person)
+      trip1 = create_valid!(Trip, :organizers => [@person])
+      trip2 = create_valid!(Trip, :organizers => [@person])
       @person.destroy
       @person.organized_trips.count.should == 0
     end
@@ -144,8 +144,8 @@ describe Person do
 
   context "when organizing many trips" do
     before(:each) do
-      @trip1 = create_valid!(Trip, :organizer => @person)
-      @trip2 = create_valid!(Trip, :organizer => @person)
+      @trip1 = create_valid!(Trip, :organizers => [@person])
+      @trip2 = create_valid!(Trip, :organizers => [@person])
     end
 
     it "has a list of organized trips" do

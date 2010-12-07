@@ -36,7 +36,7 @@ module ModelFactory
         :name => 'Trip Name',
         :time => Time.now,
         :location => create_valid!(Location),
-        :organizer => create_valid!(Person)
+        :organizers => [create_valid!(Person)]
       }
     when 'Vehicle'
       return {

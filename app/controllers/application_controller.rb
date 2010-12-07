@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
     if trip.nil?
       redirect_to(person_root_url, :alert => exception.message)
-    elsif trip.participants.include?(current_person) || trip.organizer == current_person
+    elsif trip.participants.include?(current_person) || trip.organizers.include?(current_person)
       redirect_to(trip, :alert => exception.message)
     else
       redirect_to(person_root_url, :alert => exception.message)
