@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'cancan'
 gem 'devise'
+gem 'haml'
 gem 'jquery-rails'
 gem 'rails'
 gem 'rails-geocoder', :require => 'geocoder'

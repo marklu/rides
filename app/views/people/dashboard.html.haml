@@ -1,0 +1,5 @@
+%h1 Upcoming Trips
+#trips!= render :partial => "trips/trip", :collection => @upcoming_trips
+%ul.actions
+  %li!= link_to 'New Trip', new_trip_path 
+  %li!= link_to 'Trip History', trips_path

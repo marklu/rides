@@ -1,0 +1,16 @@
+.section
+  %h2<
+    %span.triptitle!= link_to trip.name, trip
+    %span.tripdate!= trip.time.strftime('%B %d, %Y')
+  .tripinfo
+    %h3 Location
+    %p= trip.location.location
+    %h3 Date
+    %p= trip.time
+    - if trip.participants.include? current_person
+      %h3 Arrangement
+      - if trip.arrangement_for(current_person).nil?
+        %p You have no ride arrangement.
+      - else
+        - arrangement = trip.arrangement_for(current_person)
+        %p Ride in #{arrangement.driver.name}'s #{arrangement.vehicle.make} #{arrangement.vehicle.model} with #{(trip.arrangement_for(current_person).passengers.map {|p| p.name}).join(", ")}

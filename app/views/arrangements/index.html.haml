@@ -1,0 +1,14 @@
+%h1 Ride Arrangements
+- if @arrangements.count > 0
+  - @arrangements.each do |arrangement|
+    .section
+      %h2 #{arrangement.driver.name}'s #{arrangement.vehicle.make} #{arrangement.vehicle.model}
+      .tripinfo
+        %h3 Driver
+        %p= arrangement.driver.name
+        %h3 Passengers
+        %p= (arrangement.passengers.map {|passenger| passenger.name}).join(", ")
+- else
+  %p This trip has no arrangements yet.
+%br
+%p!= link_to 'Back', @trip  

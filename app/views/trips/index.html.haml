@@ -1,0 +1,9 @@
+#main
+  %h1 Trip History
+  #sidebar
+    %h2 Filter
+    %ul
+      - @months_with_trips.each do |m|
+        %li!= link_to "#{Date::MONTHNAMES[m[:month]]} #{m[:year]}", trips_path(:month => m[:month], :year => m[:year])
+  #trips
+    != render :partial => "trip", :collection => @trips

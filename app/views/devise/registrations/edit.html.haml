@@ -1,0 +1,70 @@
+%h1 Profile
+!= form_for(resource, :as => resource_name, :url => update_person_registration_path, :html => { :method => :put }) do |f|
+  != devise_error_messages!
+  .section
+    %h2 Account
+    %fieldset
+      %p
+        != f.label :email
+        != f.text_field :email
+      %p
+        %em Leave blank to keep your current password:
+      %p
+        != f.label :password, 'New Password'
+        != f.password_field :password
+      %p
+        != f.label :password_confirmation, 'Confirm'
+        != f.password_field :password_confirmation
+      %p
+        %em Confirm your current password to edit account information:
+      %p
+        != f.label :current_password, 'Password'
+        != f.password_field :current_password
+  .section
+    %h2 Profile
+    %fieldset
+      %p
+        != f.label :name
+        != f.text_field :name
+      %p
+        != f.label :phone
+        != f.phone_field :phone
+      != f.fields_for :location do |g|
+        %p
+          != g.label :location
+          != g.text_field :location
+  .section
+    %h2 Personal Preferences
+    %fieldset
+      != f.fields_for :preferences do |g|
+        %p
+          != g.label :music
+          - ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref|
+            != g.radio_button :music, pref
+            != g.label "music_#{pref}", pref.humanize, {:class => 'choice'}
+        %p
+          != f.label :smoking
+          - ['no_preference', 'no_smoking', 'smoking'].each do |pref|
+            != g.radio_button :smoking, pref
+            != g.label "smoking_#{pref}", pref.humanize, {:class => 'choice'}
+  %p!= f.submit "Update"
+%h2 Vehicles
+- if resource.vehicles.count > 0
+  %table
+    %tr
+      %th Make
+      %th Model
+      %th Capacity
+      %th
+      %th
+      %th
+    - resource.vehicles.each do |vehicle|
+      %tr
+        %td= vehicle.make
+        %td= vehicle.model
+        %td= vehicle.capacity
+        %td!= link_to 'Update Vehicle', edit_vehicle_path(vehicle)
+        %td!= link_to 'Remove Vehicle', vehicle, :confirm => 'Are you sure?', :method => :delete
+- else
+  %p You haven't added any cars yet.
+%p!= link_to 'Add Vehicle', new_vehicle_path

@@ -1,0 +1,6 @@
+%h1 Join Trip
+!= render :partial => 'trip', :object => @trip
+%p Please confirm that you want to join the above trip.
+!= form_tag(join_trip_path(@trip.id), :method => :post) do
+  != hidden_field_tag :token, @token
+  %p!= submit_tag 'Join Trip'
