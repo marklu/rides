@@ -45,10 +45,9 @@ Feature: User can manage vehicles
   Scenario: I can see info for each vehicle
     Given I have added my "4" passenger "Toyota" "Corolla"
     When I go to the profile page
-    Then I should see "Corolla"
-    And I should see "Make"
-    And I should see "Model"
-    And I should see "Capacity"
+    Then I should see "Toyota"
+    And I should see "Corolla"
+    And I should see "4"
 
   Scenario: I update a vehicle
     Given I have added my "4" passenger "Toyota" "Corolla"

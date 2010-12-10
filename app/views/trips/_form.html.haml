@@ -5,16 +5,19 @@
       %ul
         - @trip.errors.full_messages.each do |msg|
           %li= msg
-  .section
-    %fieldset
-      %p
+  %fieldset.section
+    %h3 Trip Info
+    %ul
+      %li
         != f.label :name
         != f.text_field :name
-      %p
+      %li
         != f.label :time
         != f.datetime_select :time, :discard_second => true
       != f.fields_for :location do |g|
-        %p
+        %li
           != g.label :location
           != g.text_field :location
-  .actions!= f.submit
+  %fieldset.section
+    %h3 Submit
+    != f.submit

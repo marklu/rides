@@ -1,22 +1,48 @@
-#main
-  %h1 Trip Participants
+- content_for :trip_navigation do
+  %li{:class => 'current'}
+    != link_to 'Trip Info', @trip, :id => 'trip_info'
+    %ul
+      %li!= link_to 'Participants', participants_trip_path(@trip)
+      - if @trip.organizers.include?(current_person)
+        %li!= link_to 'Update Trip', edit_trip_path(@trip)
+      - if @trip.participants.include?(current_person)
+        %li!= link_to 'Leave Trip', leave_trip_path(@trip), :confirm => 'Are you sure?', :method => :delete
+%h2 Trip Participants
+.section
+  %h3 Invited Participants
   - if @trip.organizers.include?(current_person)
-    %h2 Invite Participant
     != form_for @invitation, :method => :post, :url => invite_trip_path do |f|
       - if @invitation.errors.any?
         #errorExplanation
-          %h2 #{pluralize(@invitation.errors.count, 'error')} prohibited the invitation from being sent:
+          %h4 #{pluralize(@invitation.errors.count, 'error')} prohibited the invitation from being sent:
           %ul
             - @invitation.errors.full_messages.each do |msg|
               %li= msg
-      != f.label :email, 'Email'
-      != f.text_field :email 
-      != f.submit 'Invite'
-    %h2 Invited Participants
-    %ul
-      - @invitees.each do |invitee|
-        %li= invitee[:email]
-  %h2 Current Participants
+      %fieldset.compact
+        %h4 Invitee Info
+        %ul
+          %li
+            != f.label :email, 'Email'
+            != f.text_field :email
+      %fieldset.compact
+        %h4 Submit
+        != f.submit 'Invite Participant'
   %ul
-    - @participants.each do |participant|
-      %li= participant.name
+    - @invitees.each do |invitee|
+      %li= invitee[:email]
+.section
+  %h3 Current Participants
+  %table
+    %thead
+      %tr
+        %th{:scope => 'col'} Name
+        %th{:scope => 'col'} Phone
+        %th{:scope => 'col'} Email
+        %th{:scope => 'col'} Address
+    %tbody
+      - @participants.each do |participant|
+        %tr
+          %td= participant.name
+          %td= participant.phone
+          %td= participant.email
+          %td= participant.location.location

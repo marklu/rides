@@ -1,4 +1,7 @@
-%h1 New Trip
+- content_for :dashboard_navigation do
+  %li{:class => 'current'}
+    != link_to 'Dashboard', person_root_path, :id => 'dashboard'
+    %ul
+      %li!= link_to 'Create Trip', new_trip_path
+%h2 Create Trip
 != render 'form'
-%ul.actions
-  %li!= link_to 'Back', trips_path

@@ -31,14 +31,14 @@ Feature: User can view trip history
     When I go to the trip history page
     Then I should see "Upcoming Trip 1"
     And I should see "795 Folsom Street, San Francisco, CA"
-    And I should see "2012-01-05"
+    And I should see "January 05, 2012"
 
   Scenario: I can view info for each trip
     When I go to the trip history page
     And I follow "Upcoming Trip 1"
     Then I should see "Upcoming Trip 1"
     And I should see "795 Folsom Street, San Francisco, CA"
-    And I should see "2012-01-05"
+    And I should see "January 05, 2012"
 
   Scenario: I can filter by month
     When I go to the trip history page

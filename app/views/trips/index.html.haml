@@ -1,9 +1,8 @@
-#main
-  %h1 Trip History
-  #sidebar
-    %h2 Filter
+- content_for :trip_history_navigation do
+  %li{:class => 'current'}
+    != link_to 'Trip History', trips_path, :id => 'trip_history'
     %ul
       - @months_with_trips.each do |m|
         %li!= link_to "#{Date::MONTHNAMES[m[:month]]} #{m[:year]}", trips_path(:month => m[:month], :year => m[:year])
-  #trips
-    != render :partial => "trip", :collection => @trips
+%h2 Trip History
+!= render :partial => 'trip', :collection => @trips

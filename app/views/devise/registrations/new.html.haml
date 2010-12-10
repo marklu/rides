@@ -1,29 +1,31 @@
-%h1 Sign Up
+%h2 Sign Up
 != form_for(resource, :as => resource_name, :url => create_person_registration_path) do |f|
   != devise_error_messages!
-  .section
-    %h2 Account
-    %fieldset
-      %p
+  %fieldset.section
+    %h3 Account
+    %ul
+      %li
         != f.label :email
         != f.text_field :email
-      %p
+      %li
         != f.label :password
         != f.password_field :password
-      %p
+      %li
         != f.label :password_confirmation, 'Confirm'
         != f.password_field :password_confirmation
-  .section
-    %h2 Profile
-    %fieldset
-      %p
+  %fieldset.section
+    %h3 Profile
+    %ul
+      %li
         != f.label :name
         != f.text_field :name
-      %p
+      %li
         != f.label :phone
         != f.text_field :phone
       != f.fields_for :location do |g|
-        %p
+        %li
           != g.label :location
           != g.text_field :location
-  %p!= f.submit "Sign up"
+  %fieldset.section
+    %h3 Submit
+    != f.submit 'Sign up'

@@ -24,3 +24,8 @@ Feature: Trip participant can view trip participants
     Then I should see "Allan"
     And I should see "Baron"
     And I should see "Chase"
+
+  Scenario: I see a details for each trip participant
+    When I go to the trip participants page
+    Then I should see "Allan"
+    And I should see "allan@email.com"

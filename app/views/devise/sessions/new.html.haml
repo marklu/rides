@@ -1,12 +1,14 @@
+%h2 Sign In
 != form_for(resource, :as => resource_name, :url => create_person_session_path) do |f|
-  .section
-    %h2 Sign In
-    %fieldset
-      %p
+  %fieldset.section
+    %h3 Account
+    %ul
+      %li
         != f.label :email
         != f.text_field :email
-      %p
+      %li
         != f.label :password
         != f.password_field :password
-  %p!= f.submit 'Sign in'
-!= render :partial => 'devise/shared/links'
+  %fieldset.section
+    %h3 Submit
+    != f.submit 'Sign In'

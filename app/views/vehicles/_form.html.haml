@@ -1,20 +1,22 @@
 != form_for(@vehicle) do |f|
   - if @vehicle.errors.any?
     #error_explanation
-      %h2 #{pluralize(@vehicle.errors.count, "error")} prohibited this vehicle from being saved:
+      %h3 #{pluralize(@vehicle.errors.count, "error")} prohibited this vehicle from being saved:
       %ul
         - @vehicle.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    != f.label :make
-    %br
-    != f.text_field :make
-  .field
-    != f.label :model
-    %br
-    != f.text_field :model
-  .field
-    != f.label :capacity
-    %br
-    != f.text_field :capacity
-  .actions!= f.submit
+  %fieldset.section
+    %h3 Vehicle Info
+    %ul
+      %li
+        != f.label :make
+        != f.text_field :make
+      %li
+        != f.label :model
+        != f.text_field :model
+      %li
+        != f.label :capacity
+        != f.text_field :capacity
+  %fieldset.section
+    %h3 Submit
+    != f.submit

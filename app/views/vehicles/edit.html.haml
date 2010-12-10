@@ -1,3 +1,4 @@
-%h1 Editing Vehicles
+- content_for :profile_navigation do
+  %li{:class => 'current'}!= link_to 'Profile', edit_person_registration_path, :id => 'profile'
+%h2 Update Vehicle
 != render 'form'
-!= link_to 'Back', edit_person_registration_path

@@ -19,10 +19,10 @@ Feature: User can view upcoming trips
   Scenario: I see the location and date for each trip
     When I go to the dashboard page
     Then I should see "1 Infinite Loop, Cupertino, CA"
-    And I should see "2013-12-25"
+    And I should see "December 25, 2013"
 
   Scenario: I can view info for each trip
     When I go to the dashboard page
     And I follow "Trip 1"
-    Then I should see "2013-12-25"
+    Then I should see "December 25, 2013"
     And I should see "1 Infinite Loop, Cupertino, CA"

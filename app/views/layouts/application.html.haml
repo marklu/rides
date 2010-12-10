@@ -1,32 +1,62 @@
-!!! Strict
+!!!
 %html
   %head
     %title Rides - Create a trip. Invite Participants. Go.
-    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/style.css'}
+    %link{:rel => 'stylesheet', :href => '/stylesheets/base.css', :type => 'text/css', :media => 'screen, projection'}
+    %link{:rel => 'stylesheet', :href => '/stylesheets/main.css', :type => 'text/css', :media => 'screen, projection'}
+    %link{:rel => 'stylesheet', :href => '/stylesheets/print.css', :type => 'text/css', :media => 'print'}
     != javascript_include_tag :defaults
     != javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=false'
     != csrf_meta_tag
   %body
-    #header
-      #logo
-        != link_to image_tag("/images/rides.png", :alt => "Rideshare Organizer"), root_path
-      #account
+    #masthead
+      - if person_signed_in?
+        %h1!= link_to 'Rides', person_root_path
+      - else
+        %h1!= link_to 'Rides', root_path
+      %ul
         - if person_signed_in?
-          %p.large Hello, #{current_person.name}
+          %li
+            %span{:class => 'black_box'} Hi, #{current_person.name.split(' ').first}
+          %li!= link_to 'Sign Out', destroy_person_session_path, :class => 'black_box'
         - else
-          %p.large Not logged in.
+          %li!= link_to 'Sign Up', new_person_registration_path, :class => 'black_box'
+          %li!= link_to 'Sign In', new_person_session_path, :class => 'black_box'
+    #navigation
+      - if person_signed_in?
         %ul
-          - if person_signed_in?
-            %li= link_to 'Dashboard', person_root_path
-            %li= link_to 'Profile', edit_person_registration_path
-            %li= link_to 'Sign out', destroy_person_session_path
+          - if content_for?(:dashboard_navigation)
+            != content_for(:dashboard_navigation)
           - else
-            %li= link_to 'Sign up', new_person_registration_path
-            %li= link_to 'Sign in', new_person_session_path
-    #main
-      %p{:style => 'color: green'}= flash[:notice]
-      %p{:style => 'color: red'}= flash[:error]
-      %p{:style => 'color: red'}= flash[:alert]
-      != yield
+            %li!= link_to 'Dashboard', person_root_path, :id => 'dashboard'
+          - if content_for?(:profile_navigation)
+            != content_for(:profile_navigation)
+          - else
+            %li!= link_to 'Profile', edit_person_registration_path, :id => 'profile'
+          - if content_for?(:trip_history_navigation)
+            != content_for(:trip_history_navigation)
+          - else
+            %li!= link_to 'Trip History', trips_path, :id => 'trip_history'
+          - if content_for?(:trip_navigation)
+            != content_for(:trip_navigation)
+    - if current_page?(:controller => '/people', :action => 'index')
+      #content.one-col
+        %p{:style => 'color: green'}= flash[:notice]
+        %p{:style => 'color: red'}= flash[:error]
+        %p{:style => 'color: red'}= flash[:alert]
+        != yield
+    - elsif controller_name == 'sessions' || current_page?(:controller => '/devise/registrations', :action => 'new')
+      #content.half-col
+        %p{:style => 'color: green'}= flash[:notice]
+        %p{:style => 'color: red'}= flash[:error]
+        %p{:style => 'color: red'}= flash[:alert]
+        != yield
+    - else
+      #content.two-col
+        %p{:style => 'color: green'}= flash[:notice]
+        %p{:style => 'color: red'}= flash[:error]
+        %p{:style => 'color: red'}= flash[:alert]
+        != yield
     #footer
-      %p CS169 Project
+      %p!= "A #{link_to 'CS169', 'https://docs.google.com/View?id=dj8rzs7_665crqd4kcg'} Project by Vinson Chuong, Mark Lu, Young Kim, Jason Ku"
+      %p!= "Navigation icons by #{link_to 'Evan Brooks', 'http://brsev.com/#licensing'}"

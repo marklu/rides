@@ -1,3 +1,14 @@
-%h1 Home
-%p This is the homepage. It will have an overall description of the project.
-%p To access the app, please sign in or sign up (at the top right).
+%p#tagline Create a trip. Invite participants. Go.
+#pitch
+  %h2 Plan your next trip with Rides
+  %ul
+    %li.section
+      %h3 Section 1
+      %p Content for section 1
+    %li.section
+      %h3 Section 2
+      %p Content for section 2
+    %li.section
+      %h3 Section 3
+      %p Content for section 3
+  != link_to 'Sign Up', new_person_registration_path, :class => 'black_box'

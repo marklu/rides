@@ -1,5 +1,7 @@
-%h1 Upcoming Trips
-#trips!= render :partial => "trips/trip", :collection => @upcoming_trips
-%ul.actions
-  %li!= link_to 'New Trip', new_trip_path 
-  %li!= link_to 'Trip History', trips_path
+- content_for :dashboard_navigation do
+  %li{:class => 'current'}
+    != link_to 'Dashboard', person_root_path, :id => 'dashboard'
+    %ul
+      %li!= link_to 'Create Trip', new_trip_path
+%h2 Upcoming Trips
+!= render :partial => 'trips/trip', :collection => @upcoming_trips

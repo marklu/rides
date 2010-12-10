@@ -18,8 +18,13 @@ Feature: Trip organizer can view trip participants
     When I follow "Participants"
     Then I should be on the trip participants page
 
-  Scenario: I see a lis of trip participants
+  Scenario: I see a list of trip participants
     When I go to the trip participants page
     Then I should see "Allan"
     And I should see "Baron"
     And I should see "Chase"
+
+  Scenario: I see a details for each trip participant
+    When I go to the trip participants page
+    Then I should see "Allan"
+    And I should see "allan@email.com"

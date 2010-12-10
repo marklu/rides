@@ -31,4 +31,4 @@ Feature: Trip participant can view ride arrangement
     Given I am not assigned a ride arrangement
     When I go to the dashboard page
     Then I should see "Company Picnic"
-    And I should see "You have no ride arrangement."
+    And I should see "You have no ride arrangement yet."

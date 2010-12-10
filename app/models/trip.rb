@@ -27,6 +27,13 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def roles_for(person)
+    roles = Array.new
+    roles << 'organizer' if self.organizers.include?(person)
+    roles << 'participant' if self.participants.include?(person)
+    return roles
+  end
+
   def upcoming?
     return self.time >= Time.now()
   end

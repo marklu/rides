@@ -9,7 +9,7 @@ Feature: User can create trip
 
   Scenario: I can view the plan trip page
     When I go to the dashboard page
-    And I follow "New Trip"
+    And I follow "Create Trip"
     Then I should be on the plan trip page
 
   Scenario: I can plan a trip

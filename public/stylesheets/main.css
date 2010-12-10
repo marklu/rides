@@ -1,0 +1,254 @@
+@charset "utf-8";
+
+/* Basic Elements */
+html {
+  background-color: #4e6383;
+}
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  margin: 0 auto;
+  overflow: auto;
+  position: relative;
+  width: 960px;
+}
+
+h2 {
+  color: #92CDCF;
+  font-size: 3.2em;
+}
+a {
+  text-decoration: none;
+}
+
+/* Common Classes */
+.black_box {
+  background-image: url(/images/black_box.png);
+  color: #eeeff7;
+  display: block;
+  font-size: 2.0em;
+  height: 36px;
+  padding-top: 10px;
+  text-align: center;
+  width: 146px;
+}
+a.black_box {
+  color: #eeeff7;
+}
+a.black_box:hover {
+  color: #92cdcf;
+}
+.section {
+  background-color: #eeeff7;
+  margin: 40px 0;
+  padding: 10px;
+}
+.section:last-child {
+  margin-botom: 0;
+}
+.section h3 {
+  background-color: #31353d;
+  color: #eeeff7;
+  display: block;
+  font-size: 2.4em;
+  margin: -10px -10px 10px -10px;
+  padding: 10px;  
+}
+.section h3 a {
+  color: #eeeff7;
+}
+.section h3 a:hover {
+  color: #92cdcf;
+}
+.section table {
+  font-size: 1.6em;
+}
+.section table th, .section table td  {
+  padding: 0 0 10px 20px;
+}
+.section table th:first-child, .section table td:first-child  {
+  padding-left: 0;
+}
+.section.trip h3 span {
+  position: absolute;
+  right: 20px;
+}
+.section.trip dl {
+  color: #31353d;
+  font-size: 1.6em;
+  line-height: 1.8;
+}
+.section.trip dt {
+  display: block;
+  float: left;
+  width: 120px;
+}
+.section.trip dd {
+  color: #31353d;
+}
+fieldset.section > ul > li {
+  clear: both;
+  margin: 10px 0;
+}
+fieldset.section > ul > li > label {
+  display: block;
+  float: left;
+  font-size: 1.6em;
+  margin-top: 5px;
+  width: 120px;
+}
+fieldset.section > ul > li > ul {
+  float: left;
+  margin: -2px 0 5px 0;
+}
+fieldset.section > ul > li > ul > li {
+  font-size: 1.6em;
+  margin: 5px 0;
+}
+fieldset.compact label {
+  font-size: 1.6em;
+}
+fieldset.compact h4 {
+  display: none;
+}
+.ui-autocomplete {
+  background-color: #ffffff;
+  border: 1px solid #cfcfcf;
+  list-style-type: none;
+  padding-left: 0px;
+  width: 400px;
+}
+.ui-autocomplete a {
+  color: #000000;
+}
+
+/* Masthead */
+#masthead {
+  padding: 20px 10px;
+}
+#masthead h1 {
+  margin-left: 18px;
+}
+#masthead h1 a {
+  background-image: url(/images/logo.png);
+  display: block;
+  height: 98px;
+  text-indent: -5000px;
+  width: 217px;
+}
+#masthead ul {
+  position: absolute;
+  top: -2px;
+  left: 640px;
+  width: 320px;
+}
+#masthead ul li {
+  float: left;
+  margin-right: 12px;
+}
+
+/* Navigation Bar */
+#navigation {
+  float: left;
+  font-size: 1.4em;
+  padding: 20px 10px;
+  text-align: center;
+  width: 140px;
+}
+#navigation a {
+  color: #eeeff7;
+}
+#navigation a#dashboard {
+  background-image: url(/images/dashboard.png);
+  height: 74px;
+  margin-left: 36px;
+  width: 64px;
+}
+#navigation a#profile {
+  background-image: url(/images/profile.png);
+  height: 74px;
+  margin-left: 48px;
+  width: 42px;
+}
+#navigation a#trip_history {
+  background-image: url(/images/trip_history.png);
+  height: 76px;
+  margin-left: 31px;
+  width: 74px;
+}
+#navigation a#trip_info {
+  background-image: url(/images/trip_info.png);
+  height: 73px;
+  margin-left: 41px;
+  width: 59px;
+}
+#navigation > ul > li {
+  padding: 20px 0;
+}
+#navigation > ul > li.current {
+  background-image: url(/images/line.png), url(/images/line.png);
+  background-repeat: no-repeat;
+  background-position: top, bottom;
+}
+#navigation > ul > li > a {
+  display: block;
+  text-indent: -5000px;
+}
+#navigation > ul > li > ul > li {
+  margin: 20px 0;
+}
+#navigation > ul > li > ul > li:last-child {
+  margin-bottom: 0;
+}
+
+/* Content */
+.half-col {
+  margin-left: 250px;
+  width: 700px;
+}
+.two-col {
+  float: left;
+  margin-left: 90px;
+  width: 700px;
+}
+#content {
+  padding: 20px 0;
+}
+#tagline {
+  color: #eeeff7;
+  font-size: 3.2em;
+  margin-left: 170px;
+}
+#pitch {
+  margin-top: 40px;
+}
+#pitch h2 {
+  color: #eeeff7;
+  font-size: 3.2em;
+  padding-bottom: 20px;
+  text-align: center;
+}
+#pitch ul {
+  clear: both;
+  overflow: hidden;
+}
+#pitch ul li {
+  float: left;
+  height: 180px;
+  margin: 0 10px;
+  width: 280px;
+}
+#pitch > a {
+  margin: 20px auto 0;
+}
+
+/* Footer */
+#footer {
+  clear: both;
+  color: #eeeff7;
+  font-size: 1.4em;
+  padding: 20px 10px;
+  text-align: center;
+}
+#footer a {
+  color: #92cdcf
+}
