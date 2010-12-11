@@ -24,7 +24,7 @@ class PersonAbility
       end
 
       # Can View Trip Arrangements
-      can [:index, :show], Arrangement do |arrangement|
+      can [:index], Arrangement do |arrangement|
         arrangement.trip.participants.include?(person) ||
         arrangement.trip.organizers.include?(person)
       end

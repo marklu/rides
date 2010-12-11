@@ -96,7 +96,7 @@ describe "Routes" do
       {:get => "trips/1"}.should route_to(:controller => "trips", :action => "show", :id => "1")
     end
 
-    context "All Trip Arrangements" do
+    context "Arrangements" do
       it "routes GET /trips/1/arrangements to arrangements#index" do
         {:get => "/trips/1/arrangements"}.should route_to(:controller => "arrangements", :action => "index", :trip_id => "1")
       end

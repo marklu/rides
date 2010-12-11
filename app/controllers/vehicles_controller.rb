@@ -23,8 +23,12 @@ class VehiclesController < ApplicationController
       if redirect_parser.nil?
         redirect_to(edit_person_registration_url, :notice => 'Vehicle was successfully added.')
       else
-        trip = Trip.find(redirect_parser[1].to_i)
-        redirect_to(manage_membership_trip_url(trip), :notice => 'Vehicle was successfully added.')
+        trip = Trip.where(:id => redirect_parser[1].to_i).first
+        if trip.nil?
+          redirect_to(edit_person_registration_url, :notice => 'Vehicle was successfully added.')
+        else
+          redirect_to(manage_membership_trip_url(trip), :notice => 'Vehicle was successfully added.')
+        end
       end
     else
       @redirect = params[:redirect]

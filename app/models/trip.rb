@@ -21,8 +21,12 @@ class Trip < ActiveRecord::Base
     return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
   end
 
+  def drivers
+    return self.vehicles.map {|v| v.owner}
+  end
+
   def driving?(person)
-    return (self.vehicles & person.vehicles).empty?
+    return !(self.vehicles & person.vehicles).empty?
   end
 
   def invitees
@@ -47,7 +51,7 @@ class Trip < ActiveRecord::Base
   end
 
   def vehicle_for(person)
-    return (self.vehicles & person.vehicles).firs
+    return (self.vehicles & person.vehicles).first
   end
 
   def initialize_nested_attributes

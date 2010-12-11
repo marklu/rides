@@ -18,13 +18,12 @@ Feature: Trip organizer can generate ride arrangements
       | Alice | Honda  | Civic |
       | Dave  | Toyota | Camry | 
 
-  Scenario: I want to generate ride arrangements
+  Scenario: I generate ride arrangements
     Given the following people are driving:
       | name |
       | Dave |
-    When I go to the trip info page
+    When I go to the arrangements page
     And I press "Generate Arrangements"
-    And I go to the arrangements page
     Then I should see "Dave"
     And I should see "Alice"
     And I should see "Bob"

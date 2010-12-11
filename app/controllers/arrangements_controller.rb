@@ -9,14 +9,24 @@ class ArrangementsController < ApplicationController
     @arrangements = @trip.arrangements
   end
 
-  # GET /arrangements/1
-  def show
-  end
-
   # POST /trip/:id/arrangements/generate
   def generate
-    @trip.generate_arrangements
-    redirect_to @trip
+    if @trip.vehicles.map {|v| v.capacity}.sum >= @trip.participants.count
+      arrangements = @trip.vehicles.map do |vehicle|
+        Arrangement.new(
+          :origin => vehicle.owner.location,
+          :destination => @trip.location,
+          :trip => @trip,
+          :vehicle => vehicle
+        )
+      end
+      unassigned_passengers = @trip.participants - @trip.drivers
+      @trip.arrangements = ArrangementsGenerator.generate_arrangements(arrangements, unassigned_passengers)
+      @trip.save!
+      redirect_to(trip_arrangements_path(@trip), :notice => 'Arrangements have been generated')
+    else
+      redirect_to(trip_arrangements_path(@trip), :alert => 'There are not enough cars to generate arrangements')
+    end
   end
 
   private

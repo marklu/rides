@@ -29,12 +29,12 @@ Given /^I am signed in(?: with email "([^"]*)")?(?:(?: and)? with password "([^"
   visit '/signin'
   fill_in 'Email', :with => @person.email
   fill_in 'Password', :with => @person.password
-  click_button('Sign in')
+  click_button('Sign In')
 end
 
 When /^I sign in$/ do
   visit '/signin'
   fill_in 'Email', :with => @person.email
   fill_in 'Password', :with => @person.password
-  click_button('Sign in')
+  click_button('Sign In')
 end

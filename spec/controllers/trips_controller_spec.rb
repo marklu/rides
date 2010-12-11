@@ -756,13 +756,20 @@ describe TripsController do
 
     context "when signed in as a trip participant" do
       before(:each) do
+        @vehicle = create_valid!(Vehicle, :owner => @participant)
+        @trip.vehicles << @vehicle
+        Trip.stub(:find).and_return(@trip)
         signin(@participant)
       end
 
       it "removes the participant from the trip" do
-        Trip.stub(:find).and_return(@trip)
         delete :leave, :id => @trip.id
         @trip.participants.should_not include(@participant)
+      end
+
+      it "removes the participant's vehicles from the trip" do
+        delete :leave, :id => @trip.id
+        @trip.vehicles.should_not include(@vehicle)
       end
 
       it "redirects to the dashboard page" do
@@ -773,14 +780,21 @@ describe TripsController do
 
     context "when signed in as an organizer and participant" do
       before(:each) do
+        @vehicle = create_valid!(Vehicle, :owner => @organizer)
+        @trip.vehicles << @vehicle
+        Trip.stub(:find).and_return(@trip)
         @trip.participants << @organizer
         signin(@organizer)
       end
 
       it "removes the participant from the trip" do
-        Trip.stub(:find).and_return(@trip)
         delete :leave, :id => @trip.id
         @trip.participants.should_not include(@organizer)
+      end
+
+      it "removes the participant's vehicles from the trip" do
+        delete :leave, :id => @trip.id
+        @trip.vehicles.should_not include(@vehicle)
       end
 
       it "redirects to the trip info page" do

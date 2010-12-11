@@ -12,8 +12,8 @@ Rides::Application.routes.draw do
     match '/leave', :via => [:get, :delete], :to => 'trips#leave', :on => :member, :as => 'leave'
     match '/vehicles', :via => :post, :to => 'trips#manage_vehicles', :on => :member, :as => 'manage_vehicles'
 
-    resources :arrangements, :only => [:index, :show] do
-      match '/generate', :via => :get, :to => 'arrangements#generate', :on => :collection, :as => 'generate'
+    resources :arrangements, :only => [:index] do
+      match '/generate', :via => :post, :to => 'arrangements#generate', :on => :collection, :as => 'generate'
     end
   end
 

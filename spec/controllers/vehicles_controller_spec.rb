@@ -104,6 +104,13 @@ describe VehiclesController do
           response.should redirect_to(:controller => "devise/registrations", :action => "edit")
         end
 
+        it "redirects to the edit profile page given an invalid redirect identifier" do
+          ['invalid', 'trip_9999'].each do |identifier|
+            post :create, :redirect => identifier
+            response.should redirect_to(:controller => "devise/registrations", :action => "edit")
+          end
+        end
+
         it "redirects to the manage membership page given a redirect identifier for a trip" do
           trip = create_valid!(Trip)
           trip.participants << @person

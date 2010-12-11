@@ -111,6 +111,7 @@ class TripsController < ApplicationController
     end
 
     @trip.participants.delete(current_person)
+    @trip.vehicles.reject! {|v| v.owner == current_person}
     if @trip.organizers.include?(current_person)
       redirect_to(@trip, :notice => "You are no longer participating in #{@trip.name}")
     else

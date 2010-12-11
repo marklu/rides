@@ -122,4 +122,29 @@ describe Trip do
       @trip.roles_for(@participant_organizer).sort.should == ['organizer', 'participant']
     end
   end
+
+  context "when has many drivers" do
+    before(:each) do
+      @person1 = create_valid!(Person)
+      @vehicle1 = create_valid!(Vehicle, :owner => @person1)
+      @person2 = create_valid!(Person)
+      @vehicle2 = create_valid!(Vehicle, :owner => @person2)
+      @trip.participants << @person1 << @person2
+      @trip.vehicles << @vehicle1 << @vehicle2
+      Trip.stub(:find).and_return(@trip)
+    end
+
+    it "has a list of drivers" do
+      @trip.drivers.should include(@person1)
+      @trip.drivers.should include(@person2)
+    end
+
+    it "knows if a given person is a driver" do
+      @trip.driving?(@person1).should be_true
+    end
+
+    it "knows the the vehicle being driven by a given driver" do
+      @trip.vehicle_for(@person1).should == @vehicle1
+    end
+  end
 end
