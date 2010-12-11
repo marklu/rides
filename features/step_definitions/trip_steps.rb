@@ -38,6 +38,16 @@ Given /^I (?:am participating|participated) in the following trips:$/ do |trips|
   end
 end
 
+Given /^the following people are organizers:$/ do |organizers|
+  organizers.hashes.each do |organizer|
+    @trip.organizers << create_valid!(Person,
+      :name => organizer['name'],
+      :email => "#{organizer['name'].downcase}@email.com"
+    )
+  end
+  @trip.save!
+end
+
 Given /^the following people are driving:$/ do |drivers|
   drivers.hashes.each do |driver|
     person = Person.where(:name => driver['name']).first

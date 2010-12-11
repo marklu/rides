@@ -5,7 +5,6 @@
       %li!= link_to 'Participants', participants_trip_path(@trip)
       - if @trip.organizers.include?(current_person)
         %li!= link_to 'Update Trip', edit_trip_path(@trip)
-      - if @trip.participants.include?(current_person)
-        %li!= link_to 'Leave Trip', leave_trip_path(@trip), :confirm => 'Are you sure?', :method => :delete
+      %li!= link_to 'Manage Membership', manage_membership_trip_path(@trip)
 %h2 Update Trip
 != render 'form'

@@ -24,7 +24,7 @@ Feature: Trip organizer can generate ride arrangements
       | Dave |
     When I go to the trip info page
     And I press "Generate Arrangements"
-    And I go to the all arrangements page
+    And I go to the arrangements page
     Then I should see "Dave"
     And I should see "Alice"
     And I should see "Bob"

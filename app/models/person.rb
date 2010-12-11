@@ -32,7 +32,7 @@ class Person < ActiveRecord::Base
   end
 
   def upcoming_trips
-    self.trips.select {|trip| trip.upcoming?}
+    (self.trips | self.organized_trips).select {|trip| trip.upcoming?}
   end
 
   def initialize_nested_attributes

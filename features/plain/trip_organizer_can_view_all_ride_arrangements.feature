@@ -19,7 +19,7 @@ Feature: Trip organizer can view all ride arrangements
       | Caleb  |
       | Chase  |
 
-  Scenario: I can view the all arrangements page
+  Scenario: I can view the arrangements page
 
   Scenario: I see every arrangement
     Given the following people are on the same ride arrangement:
@@ -37,7 +37,7 @@ Feature: Trip organizer can view all ride arrangements
       | Cassie |
       | Caleb  |
       | Chase  |
-    When I go to the all arrangements page
+    When I go to the arrangements page
     Then I should see "Allan"
     And I should see "Baron"
     And I should see "Cassie"

@@ -19,4 +19,5 @@
         != f.text_field :capacity
   %fieldset.section
     %h3 Submit
+    != hidden_field_tag :redirect, @redirect
     != f.submit

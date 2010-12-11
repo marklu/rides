@@ -30,3 +30,4 @@ Feature: Potential user can accept an invitation
     And I press "Sign up"
     And I press "Join Trip"
     Then I should see "You are now a participant"
+    And I should be on the manage membership page

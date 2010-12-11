@@ -5,18 +5,11 @@ class TripsController < ApplicationController
 
   # GET /trips
   def index
+    @trips = (current_person.trips | current_person.organized_trips).sort {|x, y| x.time <=> y.time}.reverse
     unless params[:month].nil? || params[:year].nil?
-      @trips = current_person.trips.select do |trip|
-        trip.time.month == params[:month].to_i && trip.time.year == params[:year].to_i
-      end
-    else
-      @trips = current_person.trips
+      @trips = @trips.select {|t| t.time.month == params[:month].to_i && t.time.year == params[:year].to_i}
     end
-    @trips = @trips.sort {|x, y| x.time <=> y.time}.reverse
-
-    @months_with_trips = current_person.trips.map {|trip| trip.time}.sort.reverse
-      .map {|time| {:month => time.month, :year => time.year}}
-      .uniq
+    @months_with_trips = @trips.map {|t| t.time}.sort.reverse.map {|t| {:month => t.month, :year => t.year}}.uniq
   end
 
   # GET /trips/1
@@ -62,9 +55,14 @@ class TripsController < ApplicationController
 
   # GET /trips/1/participants
   def participants
-    @participants = @trip.participants.sort_by {|participant| participant.name}
     @invitees = @trip.invitees.sort_by {|invitee| invitee[:name]}
+    @organizers = @trip.organizers.sort_by {|organizer| organizer.name}
+    @participants = @trip.participants.sort_by {|participant| participant.name}
     @invitation = @trip.invitations.build
+  end
+
+  # GET /trips/1/membership
+  def manage_membership
   end
 
   # POST /trips/1/invite
@@ -74,8 +72,9 @@ class TripsController < ApplicationController
     if @invitation.save
       redirect_to(participants_trip_url(@trip), :notice => "#{params[:invitation][:email]} has been invited.")
     else
-      @participants = @trip.participants.sort_by {|participant| participant.name}
       @invitees = @trip.invitees.sort_by {|invitee| invitee[:name]}
+      @organizers = @trip.organizers.sort_by {|organizer| organizer.name}
+      @participants = @trip.participants.sort_by {|participant| participant.name}
       render :action => 'participants'
     end
   end
@@ -86,25 +85,54 @@ class TripsController < ApplicationController
     if @trip.participants.include?(current_person)
       redirect_to(@trip, :notice => "You are already a participant in the #{@trip.name}.")
       return
-    end
-
-    @token = params[:token]
-    invitation = Invitation.find_by_token(@token)
-    if invitation.nil?
-      redirect_to(person_root_url, :error => "The invitation link you followed is invalid.")
-      return
-    end
-
-    if request.post?
-      invitation.accept(current_person)
-      redirect_to(@trip, :notice => "You are now a participant in the #{@trip.name}.")
+    elsif @trip.organizers.include?(current_person) && request.post?
+      @trip.participants << current_person
+      redirect_to(manage_membership_trip_url(@trip), :notice => "You are now a participant in the #{@trip.name}.")
+    else
+      @token = params[:token]
+      invitation = Invitation.find_by_token(@token)
+      if invitation.nil?
+        redirect_to(person_root_url, :error => "The invitation link you followed is invalid.")
+        return
+      end
+  
+      if request.post?
+        invitation.accept(current_person)
+        redirect_to(manage_membership_trip_url(@trip), :notice => "You are now a participant in the #{@trip.name}.")
+      end
     end
   end
 
   # DELETE /trips/1/leave
   def leave
+    unless @trip.participants.include?(current_person)
+      redirect_to(@trip, :alert => "You are not participating in #{@trip.name}")
+      return
+    end
+
     @trip.participants.delete(current_person)
-    redirect_to(person_root_url, :notice => "You are no longer participating in #{@trip.name}")
+    if @trip.organizers.include?(current_person)
+      redirect_to(@trip, :notice => "You are no longer participating in #{@trip.name}")
+    else
+      redirect_to(person_root_url, :notice => "You are no longer participating in #{@trip.name}")
+    end
+  end
+
+  # POST /trips/1/vehicles
+  def manage_vehicles
+    unless @trip.participants.include?(current_person)
+      redirect_to(@trip, :alert => "You are not participating in #{@trip.name}")
+      return
+    end
+
+    vehicle = params[:vehicle].nil? ? nil :
+              current_person.vehicles.where(:id => params[:vehicle].to_i).first
+    if vehicle.nil?
+      redirect_to(manage_membership_trip_url(@trip), :alert => "The vehicle you selected is invalid.")
+    else
+      @trip.vehicles << vehicle
+      redirect_to(@trip, :notice => "You are now a driver for the #{@trip.name}.")
+    end
   end
 
   private

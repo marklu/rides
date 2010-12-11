@@ -144,13 +144,27 @@ describe Person do
 
   context "when organizing many trips" do
     before(:each) do
-      @trip1 = create_valid!(Trip, :organizers => [@person])
-      @trip2 = create_valid!(Trip, :organizers => [@person])
+      @trip1 = create_valid!(Trip)
+      @trip2 = create_valid!(Trip)
+      @person.organized_trips << @trip1 << @trip2
     end
 
     it "has a list of organized trips" do
       @person.organized_trips.should include(@trip1)
       @person.organized_trips.should include(@trip2)
+    end
+
+    it "has a list of upcoming trips" do
+      @trip1.stub(:upcoming?).and_return(true)
+      @trip2.stub(:upcoming?).and_return(true)
+      @person.upcoming_trips.should include(@trip1)
+      @person.upcoming_trips.should include(@trip2)
+    end
+
+    it "does not have passed trips in its list of upcoming trips" do
+      @trip1.stub(:upcoming?).and_return(false)
+      @trip2.stub(:upcoming?).and_return(true)
+      @person.upcoming_trips.should_not include(@trip1)
     end
   end
 

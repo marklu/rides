@@ -62,13 +62,21 @@ a.black_box:hover {
 .section h3 a:hover {
   color: #92cdcf;
 }
-.section table {
+.section > a {
+  color: #445878;
   font-size: 1.6em;
 }
-.section table th, .section table td  {
+.section > p {
+  font-size: 1.6em;
+  line-height: 1.3;
+}
+.section > table {
+  font-size: 1.6em;
+}
+.section > table th, .section > table td  {
   padding: 0 0 10px 20px;
 }
-.section table th:first-child, .section table td:first-child  {
+.section > table th:first-child, .section > table td:first-child  {
   padding-left: 0;
 }
 .section.trip h3 span {
@@ -111,23 +119,33 @@ fieldset.compact {
   float: left;
   margin-bottom: 10px;
 }
-fieldset.compact h4 {
+fieldset.compact:last-child {
+  margin: 12px 0 0 0;
+}
+fieldset.compact h3, fieldset.compact h4 {
   display: none;
 }
-fieldset.compact label {
+fieldset.compact > label {
   display: block;
   font-size: 1.4em;
   margin-left: 4px;
 }
-fieldset.compact ul li {
+fieldset.compact > ul li {
   float: left;
   margin: 0 10px;
 }
-fieldset.compact ul li:first-child {
+fieldset.compact > ul li:first-child {
   margin-left: 0;
 }
-fieldset.compact:last-child {
-  margin: 12px 0 0 8px;
+fieldset.embedded {
+  font-size: 1.6em;
+  margin: 15px 0;
+}
+fieldset.embedded h4 {
+  display: none;
+}
+fieldset.embedded ul li {
+  margin: 10px 0;
 }
 .ui-autocomplete {
   background-color: #ffffff;

@@ -1,5 +1,10 @@
 Given /^I have added my "([^"]*)" passenger "([^"]*)" "([^"]*)"$/ do |capacity, make, model|
-  @person.vehicles.create!(:make => make, :model => model, :capacity => capacity)
+  @vehicle = create_valid!(Vehicle,
+    :make => make,
+    :model => model,
+    :capacity => capacity,
+    :owner => @person
+  )
 end
 
 Given /^the following people have the following cars:$/ do |cars|

@@ -12,6 +12,10 @@ Feature: Trip organizer can view trip participants
       | Allan  |
       | Baron  |
       | Chase  |
+    And the following people are organizers:
+      | name   |
+      | Dan    |
+      | Ellen  |
 
   Scenario: I can view the trip participants page
     Given I am on the trip info page
@@ -24,7 +28,17 @@ Feature: Trip organizer can view trip participants
     And I should see "Baron"
     And I should see "Chase"
 
-  Scenario: I see a details for each trip participant
+  Scenario: I see details for each trip participant
     When I go to the trip participants page
     Then I should see "Allan"
     And I should see "allan@email.com"
+
+  Scenario: I see a list of trip organizers
+    When I go to the trip participants page
+    Then I should see "Dan"
+    And I should see "Ellen"
+
+  Scenario: I see details for each trip organizer
+    When I go to the trip participants page
+    Then I should see "Dan"
+    And I should see "dan@email.com"

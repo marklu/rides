@@ -43,25 +43,36 @@
             - ['no_preference', 'no_music', 'quiet_music', 'loud_music'].each do |pref|
               %li
                 != g.radio_button :music, pref
-                != g.label "music_#{pref}", pref.humanize, {:class => 'choice'}
+                != g.label "music_#{pref}", pref.humanize
         %li
           != f.label :smoking
           %ul
             - ['no_preference', 'no_smoking', 'smoking'].each do |pref|
               %li
                 != g.radio_button :smoking, pref
-                != g.label "smoking_#{pref}", pref.humanize, {:class => 'choice'}
+                != g.label "smoking_#{pref}", pref.humanize
   %fieldset.section
     %h3 Submit
     != f.submit 'Update Profile'
-%h3 Vehicles
-- if resource.vehicles.count > 0
-  %ul
-    - resource.vehicles.each do |vehicle|
-      %li
-        %span #{vehicle.make} #{vehicle.model} with capacity #{vehicle.capacity}
-        != link_to 'Update Vehicle', edit_vehicle_path(vehicle)
-        != link_to 'Remove Vehicle', vehicle, :confirm => 'Are you sure?', :method => :delete
-- else
-  %p You haven't added any vehicles yet.
-!= link_to 'Add Vehicle', new_vehicle_path
+.section
+  %h3 Vehicles
+  - if resource.vehicles.count > 0
+    %table
+      %thead
+        %tr
+          %th{:scope => 'col'} Make
+          %th{:scope => 'col'} Model
+          %th{:scope => 'col'} Capacity
+          %th{:scope => 'col'}
+          %th{:scope => 'col'}
+      %tbody
+        - resource.vehicles.each do |vehicle|
+          %tr
+            %td= vehicle.make
+            %td= vehicle.model
+            %td= vehicle.capacity
+            %td!= link_to 'Update Vehicle', edit_vehicle_path(vehicle)
+            %td!= link_to 'Remove Vehicle', vehicle, :confirm => 'Are you sure?', :method => :delete
+  - else
+    %p You haven't added any vehicles yet.
+  != link_to 'Add Vehicle', new_vehicle_path

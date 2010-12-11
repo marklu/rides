@@ -108,15 +108,15 @@ describe "Routes" do
       end
     end
 
-    context "Leave Trip" do
-      it "routes DELETE /trips/1/leave to trips#leave" do
-        {:delete => "/trips/1/leave"}.should route_to(:controller => "trips", :action => "leave", :id => "1")
-      end
-    end
-
     context "Invite Participants" do
       it "routes POST /trips/1/invite to trips#invite" do
         {:post => "trips/1/invite"}.should route_to(:controller => "trips", :action => "invite", :id => "1")
+      end
+    end
+
+    context "Manage Membership" do
+      it "routes GET /trips/1/membership to trips#manage_membership" do
+        {:get => "/trips/1/membership"}.should route_to(:controller => "trips", :action => "manage_membership", :id => "1")
       end
     end
 
@@ -127,6 +127,18 @@ describe "Routes" do
 
       it "routes POST /trips/1/join to trips#join" do
         {:post => "trips/1/join"}.should route_to(:controller => "trips", :action => "join", :id => "1")
+      end
+    end
+
+    context "Leave Trip" do
+      it "routes DELETE /trips/1/leave to trips#leave" do
+        {:delete => "/trips/1/leave"}.should route_to(:controller => "trips", :action => "leave", :id => "1")
+      end
+    end
+
+    context "Manage Vehicles" do
+      it "routes POST /trips/1/vehicles to trips#manage_vehicles" do
+        {:post => "/trips/1/vehicles"}.should route_to(:controller => "trips", :action => "manage_vehicles", :id => "1")
       end
     end
   end

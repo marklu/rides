@@ -5,8 +5,7 @@
       %li!= link_to 'Participants', participants_trip_path(@trip)
       - if @trip.organizers.include?(current_person)
         %li!= link_to 'Update Trip', edit_trip_path(@trip)
-      - if @trip.participants.include?(current_person)
-        %li!= link_to 'Leave Trip', leave_trip_path(@trip), :confirm => 'Are you sure?', :method => :delete
+      %li!= link_to 'Manage Membership', manage_membership_trip_path(@trip)
 %h2 Trip Participants
 .section
   %h3 Invited People
@@ -45,6 +44,20 @@
           %td= invitee[:name]
           %td= invitee[:email]
           %td= invitee[:role].capitalize
+.section
+  %h3 Organizers
+  %table
+    %thead
+      %tr
+        %th{:scope => 'col'} Name
+        %th{:scope => 'col'} Phone
+        %th{:scope => 'col'} Email
+    %tbody
+      - @organizers.each do |organizer|
+        %tr
+          %td= organizer.name
+          %td= organizer.phone
+          %td= organizer.email
 .section
   %h3 Participants
   %table

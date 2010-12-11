@@ -14,4 +14,6 @@
         - if arrangement.nil?
           You have no ride arrangement yet.
         - else
-          Riding in #{arrangement.driver.name}'s #{arrangement.vehicle.make} #{arrangement.vehicle.model} with #{arrangement.passengers.map {|p| p.name}.join(', ')} 
+          Riding in #{arrangement.driver.name}'s #{arrangement.vehicle.make} #{arrangement.vehicle.model} with #{arrangement.passengers.map {|p| p.name}.join(', ')}
+      - else
+        You are not participating in the trip.

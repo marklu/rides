@@ -4,6 +4,7 @@ class VehiclesController < ApplicationController
   # GET /vehicles/new
   def new
     @vehicle = current_person.vehicles.build
+    @redirect = params[:redirect]
   end
 
   # GET /vehicles/1/edit
@@ -14,11 +15,20 @@ class VehiclesController < ApplicationController
   # POST /vehicles
   def create
     @vehicle = current_person.vehicles.build(params[:vehicle])
+    @redirect = params[:redirect]
 
     if @vehicle.save
-      redirect_to(edit_person_registration_url, :notice => 'Vehicle was successfully added.')
+      redirect_parser = /^trip_(\d+)$/.match(params[:redirect])
+      redirect_trip_id = /^trip_(\d+)$/.match('trip_265')[1].to_i
+      if redirect_parser.nil?
+        redirect_to(edit_person_registration_url, :notice => 'Vehicle was successfully added.')
+      else
+        trip = Trip.find(redirect_parser[1].to_i)
+        redirect_to(manage_membership_trip_url(trip), :notice => 'Vehicle was successfully added.')
+      end
     else
-      render :action => "new"
+      @redirect = params[:redirect]
+      render :action => 'new'
     end
   end
 
@@ -29,7 +39,7 @@ class VehiclesController < ApplicationController
     if @vehicle.update_attributes(params[:vehicle])
       redirect_to(edit_person_registration_url, :notice => 'Vehicle was successfully updated.')
     else
-      render :action => "edit"
+      render :action => 'edit'
     end
   end
 

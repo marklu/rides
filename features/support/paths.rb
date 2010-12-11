@@ -7,12 +7,13 @@ module NavigationHelpers
     when /the dashboard page/ then person_root_path
     when /the profile page/ then edit_person_registration_path
     when /the add vehicle page/ then new_vehicle_path
-    when /the plan trip page/ then new_trip_path
+    when /the create trip page/ then new_trip_path
     when /the trip history page/ then trips_path
     when /the trip info page/ then trip_path(@trip)
-    when /the all arrangements page/ then trip_arrangements_path(@trip)
+    when /the arrangements page/ then trip_arrangements_path(@trip)
     when /the trip participants page/ then participants_trip_path(@trip)
     when /the join trip page/ then join_trip_path(@trip)
+    when /the manage membership page/ then manage_membership_trip_path(@trip)
     else
       begin
         page_name =~ /the (.*) page/

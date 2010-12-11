@@ -7,7 +7,7 @@
     %dt Location
     %dd= @trip.location.location
 %p Please confirm that you want to join the above trip:
-!= form_tag(join_trip_path(@trip.id), :method => :post) do
+!= form_tag(join_trip_path(@trip), :method => :post) do
   %fieldset.section
     %h3 Submit
     != hidden_field_tag :token, @token

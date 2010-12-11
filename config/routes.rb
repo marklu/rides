@@ -7,8 +7,10 @@ Rides::Application.routes.draw do
   resources :trips do
     match '/participants', :via => :get, :to => 'trips#participants', :on => :member, :as => 'participants'
     match '/invite', :via => :post, :to => 'trips#invite', :on => :member, :as => 'invite'
+    match '/membership', :via => :get, :to => 'trips#manage_membership', :on => :member, :as => 'manage_membership'
     match '/join', :via => [:get, :post], :to => 'trips#join', :on => :member, :as => 'join'
     match '/leave', :via => [:get, :delete], :to => 'trips#leave', :on => :member, :as => 'leave'
+    match '/vehicles', :via => :post, :to => 'trips#manage_vehicles', :on => :member, :as => 'manage_vehicles'
 
     resources :arrangements, :only => [:index, :show] do
       match '/generate', :via => :get, :to => 'arrangements#generate', :on => :collection, :as => 'generate'

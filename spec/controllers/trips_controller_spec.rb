@@ -20,40 +20,36 @@ describe TripsController do
 
     context "when signed in" do
       before(:each) do
-        @organizer = create_valid!(Person, :email => 'organizer@email.com')
-        @upcoming_trip1 = create_valid!(Trip,
+        @upcoming_trip1 = create_valid!(Trip, 
           :name => 'Upcoming Trip 1',
-          :time => Time.parse('January 5, 2012 10:00'),
-          :organizers => [@organizer]
+          :time => Time.parse('January 5, 2012 10:00')
         )
         @upcoming_trip2 = create_valid!(Trip,
           :name => 'Upcoming Trip 2',
-          :time => Time.parse('February 5, 2012 10:00'),
-          :organizers => [@organizer]
+          :time => Time.parse('February 5, 2012 10:00')
         )
         @passed_trip1 = create_valid!(Trip,
           :name => 'Passed Trip 1',
-          :time => Time.parse('January 5, 2009 10:00'),
-          :organizers => [@organizer]
+          :time => Time.parse('January 5, 2009 10:00')
         )
         @passed_trip2 = create_valid!(Trip,
           :name => 'Passed Trip 2',
-          :time => Time.parse('February 5, 2009 10:00'),
-          :organizers => [@organizer]
+          :time => Time.parse('February 5, 2009 10:00')
         )
-        @organizer.stub(:trips).and_return([@upcoming_trip1, @upcoming_trip2, @passed_trip1, @passed_trip2])
-        signin(@organizer)
+        @person.organized_trips << @upcoming_trip1 << @upcoming_trip2
+        @person.trips << @passed_trip1 << @passed_trip2
+        signin(@person)
       end
 
       context "when no month or an invalid month is given" do
-        it "assigns to @trips a list of trips in which @organizer is a participant" do
+        it "assigns to @trips a sorted list of trips in which @organizer is a participant" do
           get :index
           assigns[:trips].should == [@upcoming_trip2, @upcoming_trip1, @passed_trip2, @passed_trip1]
         end
       end
 
       context "when a valid month is given" do
-        it "assigns to @trips a list of trips occuring in the given month in which @organizer is a participant" do
+        it "assigns to @trips a sorted list of trips occuring in the given month in which @organizer is a participant" do
           get :index, :month => 1, :year => 2012
           assigns[:trips].should == [@upcoming_trip1]
         end
@@ -428,12 +424,9 @@ describe TripsController do
         @participant2 = create_valid!(Person, :name => 'Baron', :email => 'baron@email.com')
         @participant3 = create_valid!(Person, :name => 'Chase', :email => 'chase@email.com')
         @trip.participants << @participant1 << @participant3 << @participant2
+        @organizer2 = create_valid!(Person, :name => 'Zed', :email => 'zed@email.com')
+        @trip.organizers << @organizer2
         signin(@organizer)
-      end
-
-      it "assigns to @participants a sorted list of trip participants" do
-        get :participants, :id => @trip.id
-        assigns[:participants].should == [@participant1, @participant2, @participant3]
       end
 
       it "assigns to @invitees a sorted list of invited people" do
@@ -441,6 +434,16 @@ describe TripsController do
         Trip.stub(:find).and_return(@trip)
         get :participants, :id => @trip.id
         assigns[:invitees].map {|i| i[:name]}.should == ['a', 'b', 'c']
+      end
+
+      it "assigns to @organizers a sorted list of trip organizers" do
+        get :participants, :id => @trip.id
+        assigns[:organizers].should == [@organizer, @organizer2]
+      end
+
+      it "assigns to @participants a sorted list of trip participants" do
+        get :participants, :id => @trip.id
+        assigns[:participants].should == [@participant1, @participant2, @participant3]
       end
 
       it "assigns to @invitation a new invitation" do
@@ -452,6 +455,48 @@ describe TripsController do
       it "renders the participants template" do
         get :participants, :id => @trip.id
         response.should render_template("participants")
+      end
+    end
+  end
+
+  describe "GET manage_membership" do
+    context "when not signed in" do
+      it "redirects to the sign in page" do
+        get :manage_membership, :id => @trip.id
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when signed in as non-participant and non-organizer" do
+      before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        get :manage_membership, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as participant" do
+      before(:each) do
+        signin(@participant)
+      end
+
+      it "renders the manage_membership template" do
+        get :manage_membership, :id => @trip.id
+        response.should render_template("manage_membership")
+      end
+    end
+
+    context "when signed in as an organizer" do
+      before(:each) do
+        signin(@organizer)
+      end
+
+      it "renders the manage_membership template" do
+        get :manage_membership, :id => @trip.id
+        response.should render_template("manage_membership")
       end
     end
   end
@@ -494,6 +539,8 @@ describe TripsController do
         @participant2 = create_valid!(Person, :name => 'Baron', :email => 'baron@email.com')
         @participant3 = create_valid!(Person, :name => 'Chase', :email => 'chase@email.com')
         @trip.participants << @participant1 << @participant3 << @participant2
+        @organizer2 = create_valid!(Person, :name => 'Zed', :email => 'zed@email.com')
+        @trip.organizers << @organizer2
         signin(@organizer)
       end
 
@@ -535,6 +582,11 @@ describe TripsController do
         before(:each) do
           Invitation.stub(:new).and_return(@invitation)
           @invitation.stub(:save).and_return(false)
+        end
+
+        it "assigns to @organizers a sorted list of trip organizers" do
+          post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+          assigns[:organizers].should == [@organizer, @organizer2]
         end
 
         it "assigns to @participants a sorted list of trip participants" do
@@ -609,16 +661,6 @@ describe TripsController do
         response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
       end
     end
-
-    context "when signed in as a non-participant organizer" do
-      before(:each) do
-        Trip.stub(:find).and_return(@trip)
-        @trip.participants.stub(:include?).and_return(true)
-        signin(@organizer)
-      end
-
-      it "renders the join template"
-    end
   end
 
   describe "POST join" do
@@ -655,9 +697,9 @@ describe TripsController do
         post :join, :id => @trip.id, :token => @invitation.token
       end
 
-      it "redirects to the trip info page" do
+      it "redirects to the manage membership page" do
         post :join, :id => @trip.id, :token => @invitation.token
-        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+        response.should redirect_to(:controller => "trips", :action => "manage_membership", :id => @trip.id)
       end
     end
 
@@ -677,11 +719,19 @@ describe TripsController do
     context "when signed in as a non-participant organizer" do
       before(:each) do
         Trip.stub(:find).and_return(@trip)
-        @trip.participants.stub(:include?).and_return(true)
+        @trip.organizers.stub(:include?).and_return(true)
         signin(@organizer)
       end
 
-      it "adds the organizer to the list of participants"
+      it "adds the organizer to the list of participants" do
+        post :join, :id => @trip.id
+        @trip.participants.should include(@organizer)
+      end
+
+      it "redirects to the manage membership page" do
+        post :join, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "manage_membership")
+      end
     end
   end
 
@@ -706,8 +756,6 @@ describe TripsController do
 
     context "when signed in as a trip participant" do
       before(:each) do
-        @participant = create_valid!(Person, :email => 'participant@email.com')
-        @trip.participants << @participant
         signin(@participant)
       end
 
@@ -723,12 +771,106 @@ describe TripsController do
       end
     end
 
+    context "when signed in as an organizer and participant" do
+      before(:each) do
+        @trip.participants << @organizer
+        signin(@organizer)
+      end
+
+      it "removes the participant from the trip" do
+        Trip.stub(:find).and_return(@trip)
+        delete :leave, :id => @trip.id
+        @trip.participants.should_not include(@organizer)
+      end
+
+      it "redirects to the trip info page" do
+        delete :leave, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+      end
+    end
+
     context "when signed in as a non-participant organizer" do
       before(:each) do
         signin(@organizer)
       end
 
-      it "redirects to the trip info page"
+      it "sets a flash[:alert] message" do
+        delete :leave, :id => @trip.id
+        flash[:alert].should == "You are not participating in #{@trip.name}"
+      end
+
+      it "redirects to the trip info page" do
+        delete :leave, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+      end
+    end
+  end
+
+  describe "POST manage_vehicles" do
+    context "when not signed in" do
+      it "redirects to the sign in page" do
+        post :manage_vehicles, :id => @trip.id
+        response.should redirect_to(:controller => "devise/sessions", :action => "new")
+      end
+    end
+
+    context "when signed in as non-participant and non-organizer" do
+      before(:each) do
+        signin(@person)
+      end
+
+      it "redirects to the dashboard page" do
+        post :manage_vehicles, :id => @trip.id
+        response.should redirect_to(:controller => "people", :action => "dashboard")
+      end
+    end
+
+    context "when signed in as a non-participant organizer" do
+      before(:each) do
+        signin(@organizer)
+      end
+
+      it "sets a flash[:alert] message" do
+        post :manage_vehicles, :id => @trip.id
+        flash[:alert].should == "You are not participating in #{@trip.name}"
+      end
+
+      it "redirects to the trip info page" do
+        post :manage_vehicles, :id => @trip.id
+        response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+      end
+    end
+
+    context "when signed in as a trip participant" do
+      before(:each) do
+        @vehicle = create_valid!(Vehicle, :owner => @participant)
+        signin(@participant)
+      end
+
+      context "given a valid vehicle" do
+        it "adds the vehicle to the trip" do
+          Trip.stub(:find).and_return(@trip)
+          post :manage_vehicles, :id => @trip.id, :vehicle => @vehicle.id
+          @trip.vehicles.should include(@vehicle)
+        end
+
+        it "redirects to the trip info page" do
+          post :manage_vehicles, :id => @trip.id, :vehicle => @vehicle.id
+          response.should redirect_to(:controller => "trips", :action => "show", :id => @trip.id)
+        end
+      end
+
+      context "given an invalid vehicle" do
+        it "sets a flash[:alert] message" do
+          post :manage_vehicles, :id => @trip.id, :vehicle => 5000
+          flash[:alert].should == "The vehicle you selected is invalid."
+        end
+
+        it "redirects to the manage membership page" do
+          post :manage_vehicles, :id => @trip.id, :vehicle => 5000
+          response.should redirect_to(:controller => "trips", :action => "manage_membership", :id => @trip.id)
+        end
+      end
     end
   end
 end

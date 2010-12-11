@@ -1,8 +1,9 @@
-You have been invited to participate in:
+Hi, <%=h @invitation.invitee! %>
 
-<%= @invitation.trip.name %>
-Place: <%= @invitation.trip.location.location %>
-Time: <%= @invitation.trip.time %>
+You have been invited by <%=h @invitation.inviter %> to participate in:
+<%=h @invitation.trip.name %>
+Place: <%=h @invitation.trip.location.location %>
+Time: <%=h @invitation.trip.time %>
 
 To accept the invitaiton, follow this link: <%= join_trip_url(@invitation.trip_id) << "?token=#{@invitation.token}" %>
 You will be asked to either sign in or sign up to the site.

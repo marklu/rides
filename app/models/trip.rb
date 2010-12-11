@@ -21,6 +21,10 @@ class Trip < ActiveRecord::Base
     return self.arrangements.select { |arrangement| arrangement.passengers.include?(person) }.first
   end
 
+  def driving?(person)
+    return (self.vehicles & person.vehicles).empty?
+  end
+
   def invitees
     self.invitations.map do |invitation|
       {
@@ -40,6 +44,10 @@ class Trip < ActiveRecord::Base
 
   def upcoming?
     return self.time >= Time.now()
+  end
+
+  def vehicle_for(person)
+    return (self.vehicles & person.vehicles).firs
   end
 
   def initialize_nested_attributes

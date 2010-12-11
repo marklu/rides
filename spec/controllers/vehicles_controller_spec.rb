@@ -25,6 +25,11 @@ describe VehiclesController do
         assigns[:vehicle].attributes.should == Vehicle.new(:owner => @person).attributes
       end
 
+      it "assigns to @redirect the given redirect identifier" do
+        get :new, :redirect => 'trip_1'
+        assigns[:redirect].should == 'trip_1'
+      end
+
       it "renders the new template" do
         get :new
         response.should render_template("new")
@@ -94,15 +99,27 @@ describe VehiclesController do
           flash[:notice].should == "Vehicle was successfully added."
         end
 
-        it "redirects to the edit profile page" do
+        it "redirects to the edit profile page given no redirect identifier" do
           post :create
           response.should redirect_to(:controller => "devise/registrations", :action => "edit")
+        end
+
+        it "redirects to the manage membership page given a redirect identifier for a trip" do
+          trip = create_valid!(Trip)
+          trip.participants << @person
+          post :create, :redirect => "trip_#{trip.id}"
+          response.should redirect_to(:controller => "trips", :action => "manage_membership", :id => trip.id)
         end
       end
 
       context "when the vehicle fails to be saved" do
         before(:each) do
           @vehicle.stub(:save).and_return(false)
+        end
+
+        it "assigns to @redirect the given redirect identifier" do
+          post :create, :redirect => 'trip_1'
+          assigns[:redirect].should == 'trip_1'
         end
 
         it "renders the new template" do

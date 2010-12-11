@@ -12,8 +12,8 @@ class PersonAbility
         trip.organizers.include?(person)
       end
 
-      # Can Manage Trip Participantship
-      can [:leave], Trip do |trip|
+      # Can Manage Trip Membership
+      can [:manage_membership, :manage_vehicles, :leave], Trip do |trip|
         trip.participants.include?(person) ||
         trip.organizers.include?(person)
       end
