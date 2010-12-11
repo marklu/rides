@@ -63,18 +63,19 @@ class TripsController < ApplicationController
   # GET /trips/1/participants
   def participants
     @participants = @trip.participants.sort_by {|participant| participant.name}
-    @invitees = @trip.invitees.sort
+    @invitees = @trip.invitees.sort_by {|invitee| invitee[:name]}
     @invitation = @trip.invitations.build
   end
 
   # POST /trips/1/invite
   def invite
     @invitation = @trip.invitations.build(params[:invitation])
+    @invitation.inviter = current_person.name
     if @invitation.save
       redirect_to(participants_trip_url(@trip), :notice => "#{params[:invitation][:email]} has been invited.")
     else
       @participants = @trip.participants.sort_by {|participant| participant.name}
-      @invitees = @trip.invitees.sort
+      @invitees = @trip.invitees.sort_by {|invitee| invitee[:name]}
       render :action => 'participants'
     end
   end

@@ -437,10 +437,10 @@ describe TripsController do
       end
 
       it "assigns to @invitees a sorted list of invited people" do
-        @trip.stub(:invitees).and_return(['b', 'a', 'c'])
+        @trip.stub(:invitees).and_return([{:name => 'b'}, {:name => 'a'}, {:name => 'c'}])
         Trip.stub(:find).and_return(@trip)
         get :participants, :id => @trip.id
-        assigns[:invitees].should == ['a', 'b', 'c']
+        assigns[:invitees].map {|i| i[:name]}.should == ['a', 'b', 'c']
       end
 
       it "assigns to @invitation a new invitation" do
@@ -503,6 +503,11 @@ describe TripsController do
         assigns[:invitation].should eq(@invitation)
       end
 
+      it "marks the current person as the inviter" do
+        post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
+        assigns[:invitation].inviter.should == @organizer.name
+      end
+
       it "saves the invitation" do
         Invitation.stub(:new).and_return(@invitation)
         @invitation.should_receive(:save)
@@ -538,10 +543,10 @@ describe TripsController do
         end
   
         it "assigns to @invitees a sorted list of invited people" do
-          @trip.stub(:invitees).and_return(['b', 'a', 'c'])
+          @trip.stub(:invitees).and_return([{:name => 'b'}, {:name => 'a'}, {:name => 'c'}])
           Trip.stub(:find).and_return(@trip)
           post :invite, :id => @trip.id, :invitation => {"email" => @invitation.email}
-          assigns[:invitees].should == ['a', 'b', 'c']
+          assigns[:invitees].map {|i| i[:name]}.should == ['a', 'b', 'c']
         end
 
         it "renders the participants template" do

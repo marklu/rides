@@ -2,11 +2,18 @@ class Invitation < ActiveRecord::Base
   before_validation(:on => :create) {generate_token}
   after_save :send_invitation
 
+  validates :invitee, :presence => true
   validates :email,
     :presence => true,
     :format => {:with => /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i},
     :not_participant => true,
     :uniqueness => {:scope => :trip_id, :message => ' already has an invitation.'}
+  validates :role,
+    :inclusion => {
+      :in => ['participant', 'organizer'],
+      :message => "must be one of Participant or Organizer"
+    }
+  validates :inviter, :presence => true
   validates :token, :presence => true, :uniqueness => true
   validates :trip, :presence => true
 
@@ -26,6 +33,7 @@ class Invitation < ActiveRecord::Base
 
   def accept(person)
     self.trip.participants << person
+    self.trip.organizers << person if self.role == 'organizer'
     self.destroy
   end
 end

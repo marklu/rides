@@ -23,7 +23,11 @@ class Trip < ActiveRecord::Base
 
   def invitees
     self.invitations.map do |invitation|
-      {:email => invitation.email}
+      {
+        :name => invitation.invitee,
+        :email => invitation.email,
+        :role => invitation.role
+      }
     end
   end
 

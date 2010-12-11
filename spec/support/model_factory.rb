@@ -10,7 +10,10 @@ module ModelFactory
       }
     when 'Invitation'
       return {
+        :invitee => 'Invitee Name',
         :email => "#{random_string(10)}@email.com",
+        :role => 'participant',
+        :inviter => 'Inviter Name',
         :token => random_string(10),
         :trip => create_valid!(Trip)
       }

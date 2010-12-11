@@ -19,7 +19,10 @@ h2 {
 a {
   text-decoration: none;
 }
-
+form {
+  clear: both;
+  overflow: auto;
+}
 /* Common Classes */
 .black_box {
   background-image: url(/images/black_box.png);
@@ -104,11 +107,27 @@ fieldset.section > ul > li > ul > li {
   font-size: 1.6em;
   margin: 5px 0;
 }
-fieldset.compact label {
-  font-size: 1.6em;
+fieldset.compact {
+  float: left;
+  margin-bottom: 10px;
 }
 fieldset.compact h4 {
   display: none;
+}
+fieldset.compact label {
+  display: block;
+  font-size: 1.4em;
+  margin-left: 4px;
+}
+fieldset.compact ul li {
+  float: left;
+  margin: 0 10px;
+}
+fieldset.compact ul li:first-child {
+  margin-left: 0;
+}
+fieldset.compact:last-child {
+  margin: 12px 0 0 8px;
 }
 .ui-autocomplete {
   background-color: #ffffff;

@@ -11,6 +11,11 @@ describe Invitation do
       @invitation.should be_valid
     end
 
+    it "is not valid without an invitee" do
+      @invitation.invitee = ''
+      @invitation.should_not be_valid
+    end
+
     it "is not valid without an email" do
       @invitation.email = ''
       @invitation.should_not be_valid
@@ -39,6 +44,25 @@ describe Invitation do
     it "is valid when there is another invitation for a different email but same trip" do
       @invitation2 = create_valid!(Invitation, :trip => @invitation.trip)
       @invitation2.should be_valid
+    end
+
+    it "is valid with a valid role" do
+      ['participant', 'organizer'].each do |role|
+        @invitation.role = role
+        @invitation.should be_valid
+      end
+    end
+
+    it "is not valid with an invalid role" do
+      ['admin', nil].each do |role|
+        @invitation.role = role
+        @invitation.should_not be_valid
+      end
+    end
+
+    it "is not valid without an inviter" do
+      @invitation.inviter = ''
+      @invitation.should_not be_valid
     end
 
     it "is not valid without a token" do
@@ -95,9 +119,27 @@ describe Invitation do
       @person = create_valid!(Person)
     end
 
-    it "adds the given person to the trip" do
-      @invitation.accept(@person)
-      @invitation.trip.participants.should include(@person)
+    context "to participate" do
+      before(:each) do
+        @invitation.role = 'participant'
+      end
+
+      it "adds the given person to the trip as a participant" do
+        @invitation.accept(@person)
+        @invitation.trip.participants.should include(@person)
+      end
+    end
+
+    context "to organize" do
+      before(:each) do
+        @invitation.role = 'organizer'
+      end
+
+      it "adds the given person to the trip as both a participant and organizer" do
+        @invitation.accept(@person)
+        @invitation.trip.participants.should include(@person)
+        @invitation.trip.organizers.should include(@person)
+      end
     end
 
     it "destroys itself" do

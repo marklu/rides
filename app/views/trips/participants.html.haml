@@ -9,7 +9,7 @@
         %li!= link_to 'Leave Trip', leave_trip_path(@trip), :confirm => 'Are you sure?', :method => :delete
 %h2 Trip Participants
 .section
-  %h3 Invited Participants
+  %h3 Invited People
   - if @trip.organizers.include?(current_person)
     != form_for @invitation, :method => :post, :url => invite_trip_path do |f|
       - if @invitation.errors.any?
@@ -22,16 +22,31 @@
         %h4 Invitee Info
         %ul
           %li
-            != f.label :email, 'Email'
+            != f.label :invitee, 'Name'
+            != f.text_field :invitee
+          %li
+            != f.label :email
             != f.text_field :email
+          %li
+            != f.label :role
+            != f.select :role, [['Participant', 'participant'], ['Organizer', 'organizer']]
       %fieldset.compact
         %h4 Submit
-        != f.submit 'Invite Participant'
-  %ul
-    - @invitees.each do |invitee|
-      %li= invitee[:email]
+        != f.submit 'Invite'
+  %table
+    %thead
+      %tr
+        %th{:scope => 'col'} Name
+        %th{:scope => 'col'} Email
+        %th{:scope => 'col'} Role
+    %tbody
+      - @invitees.each do |invitee|
+        %tr
+          %td= invitee[:name]
+          %td= invitee[:email]
+          %td= invitee[:role].capitalize
 .section
-  %h3 Current Participants
+  %h3 Participants
   %table
     %thead
       %tr
