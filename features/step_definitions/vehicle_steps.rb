@@ -13,3 +13,8 @@ Given /^the following people have the following cars:$/ do |cars|
     vehicle = Vehicle.create!(:owner => person, :make => car['make'], :model => car['model'], :capacity => 5)
   end
 end
+
+Then /^vehicle with ID "([^"]*)" should be selected$/ do |id|
+#  input("#vehicle_#{id}").should be_checked
+  response.should have_selector("#vehicle_#{id}", :type => "radio", :checked => "checked")
+end

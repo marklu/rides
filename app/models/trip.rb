@@ -29,6 +29,10 @@ class Trip < ActiveRecord::Base
     return !(self.vehicles & person.vehicles).empty?
   end
 
+  def vehicle_used?(vehicle)
+    return self.vehicles.include?(vehicle)
+  end
+
   def invitees
     self.invitations.map do |invitation|
       {

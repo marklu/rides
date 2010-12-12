@@ -35,3 +35,5 @@ Feature: Trip participant can manage trip membership
     And I choose "Toyota Camry with capacity 4"
     And I press "Drive"
     Then I should see "You are now a driver for the Company Picnic"
+    And I go to the manage membership page
+    And vehicle with ID "1" should be selected
