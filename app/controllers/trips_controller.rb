@@ -127,10 +127,15 @@ class TripsController < ApplicationController
     end
 
     vehicle = params[:vehicle].nil? ? nil :
+              params[:vehicle].to_i == 0 ? 'not_driving' :
               current_person.vehicles.where(:id => params[:vehicle].to_i).first
     if vehicle.nil?
       redirect_to(manage_membership_trip_url(@trip), :alert => "The vehicle you selected is invalid.")
+    elsif vehicle == 'not_driving'
+      @trip.vehicles -= @trip.vehicles & current_person.vehicles
+      redirect_to(@trip, :notice => "You are no longer a driver for the #{@trip.name}.")
     else
+      @trip.vehicles -= @trip.vehicles & current_person.vehicles
       @trip.vehicles << vehicle
       redirect_to(@trip, :notice => "You are now a driver for the #{@trip.name}.")
     end
