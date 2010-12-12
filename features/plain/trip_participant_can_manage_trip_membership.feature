@@ -24,6 +24,11 @@ Feature: Trip participant can manage trip membership
     Then I should be on the manage membership page
     And I should see "Vehicle was successfully added"
 
+  Scenario: I already have a vehicle in my profile, but haven't opted in to drive
+    Given I have added my "4" passenger "Toyota" "Camry"
+    When I go to the manage membership page
+    Then I should see "You are currently not a driver for this trip."
+
   Scenario: I volunteer to drive for the trip
     Given I have added my "4" passenger "Toyota" "Camry"
     When I go to the manage membership page

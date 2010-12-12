@@ -10,7 +10,7 @@
 %h2 Manage Membership
 .section
   %h3 Driver
-  - if @trip.driving?(current_person)
+  - if !@trip.driving?(current_person)
     %p You are currently not a driver for this trip. Would you like to volunteer to drive?
   - else
     %p You are currently a driver for this trip. You can choose to drive a different vehicle or choose not to drive.
