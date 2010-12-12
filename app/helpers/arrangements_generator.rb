@@ -45,7 +45,7 @@ module ArrangementsGenerator
         current_combination = @passenger_combinations[0]
         current_path, current_path_score = ArrangementsGenerator.generate_path(current_arrangement, current_combination, distances)
         best_path, best_path_score = Array.new(current_path), current_path_score
-        best_path_score = 0.5*best_path_score + 0.5*ArrangementsGenerator.score_incompatibility([current_arrangement, current_combination])
+        best_path_score = 0.5*best_path_score + 0.5*ArrangementsGenerator.score_incompatibility([current_arrangement] + current_combination)
         num_evaluations = 1
         max_evaluations = Math.exp(remaining_passengers.length).ceil
         ArrangementsGenerator.annealing_schedule(10, 0.9999) do |temperature|
@@ -57,6 +57,7 @@ module ArrangementsGenerator
             end
             num_evaluations += 1
             new_path, new_path_score = ArrangementsGenerator.generate_path(current_arrangement, new_combination, distances)
+            new_path_score = 0.5*new_path_score + 0.5*ArrangementsGenerator.score_incompatibility([current_arrangement] + current_combination)
             if best_path_score > new_path_score
               best_path = Array.new(new_path)
               best_path_score = new_path_score
@@ -204,8 +205,8 @@ module ArrangementsGenerator
     incompatibility_score = 0.0
     if passengers.length > 1
       num_of_combinations = 0
-      passengers.combination(2) do |combination|
-        incompatibility_score += combination[0].incompatibility_with(combination[1])
+      passengers.combination(2) do |combi|
+        incompatibility_score += combi[0].incompatibility_with(combi[1])
         num_of_combinations += 1
       end
       incompatibility_score = incompatibility_score / num_of_combinations
