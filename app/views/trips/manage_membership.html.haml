@@ -24,8 +24,14 @@
             %ul
               - current_person.vehicles.each do |vehicle|
                 %li
-                  != radio_button_tag 'vehicle', "#{vehicle.id}", @trip.vehicle_used?(vehicle)
+                  != radio_button_tag 'vehicle', "#{vehicle.id}", vehicle == @trip.vehicle_for(current_person)
                   != label_tag "vehicle_#{vehicle.id}", "#{vehicle.make} #{vehicle.model} with capacity #{vehicle.capacity}"
+              %li
+                - unless @trip.driving?(current_person)
+                  != radio_button_tag 'vehicle', 0, true
+                - else
+                  != radio_button_tag 'vehicle', 0
+                != label_tag 'vehicle_0', "Not Driving"
       %fieldset.embedded
         %h4 Submit
         != submit_tag 'Drive'
