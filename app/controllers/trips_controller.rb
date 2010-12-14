@@ -16,12 +16,12 @@ class TripsController < ApplicationController
   def show
   	if(@trip.arrangement_for(current_person).nil?)
 	  @origin = current_person.location.location
-	  @waypoints = {}
+	  @waypoints = []
 	  @destination = @trip.location.location
 	else
-	  @origin = @trip.arrangement_for(current_person).origin
+	  @origin = @trip.arrangement_for(current_person).origin.location
 	  @waypoints = @trip.arrangement_for(current_person).passengers.map { |passenger| passenger.location.location }
-	  @destination = @trip.arrangement_for(current_person).destination
+	  @destination = @trip.arrangement_for(current_person).destination.location
 	end
   	@direction_request = {:origin => @origin, :destination => @destination, :waypoints => @waypoints, :travelMode => :DRIVING, :optimizeWaypoints => true}
   end

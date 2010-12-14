@@ -29,7 +29,7 @@
     var request = {
       origin: "#{@origin}",
       destination: "#{@destination}",
-      waypoints: #{@waypoints.values},
+      waypoints: [#{@waypoints.map {|waypoint| "{location: \"" + waypoint + "\", stopover: true}"}.join(",")}],
       travelMode: google.maps.DirectionsTravelMode.DRIVING,
       optimizeWaypoints: true
     }
