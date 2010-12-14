@@ -14,6 +14,16 @@ class TripsController < ApplicationController
 
   # GET /trips/1
   def show
+  	if(@trip.arrangement_for(current_person).nil?)
+	  @origin = current_person.location.location
+	  @waypoints = {}
+	  @destination = @trip.location.location
+	else
+	  @origin = @trip.arrangement_for(current_person).origin
+	  @waypoints = @trip.arrangement_for(current_person).passengers.map { |passenger| passenger.location.location }
+	  @destination = @trip.arrangement_for(current_person).destination
+	end
+  	@direction_request = {:origin => @origin, :destination => @destination, :waypoints => @waypoints, :travelMode => :DRIVING, :optimizeWaypoints => true}
   end
 
   # GET /trips/new

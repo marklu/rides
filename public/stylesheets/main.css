@@ -281,6 +281,10 @@ fieldset.embedded ul li {
 #pitch > a {
   margin: 20px auto 0;
 }
+#map_canvas {
+  width: 700px;
+  height: 350px;
+}
 
 /* Footer */
 #footer {

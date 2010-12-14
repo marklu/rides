@@ -9,3 +9,33 @@
       %li!= link_to 'Manage Membership', manage_membership_trip_path(@trip)
 %h2 Trip Info
 != render :partial => 'trip', :object => @trip
+%div#map_canvas{ :onload => "initialize()" }
+:javascript
+  var directionDisplay;
+  var directionsService = new google.maps.DirectionsService();
+  var map;
+
+  function initialize() {
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    var myOptions = {
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    directionsDisplay.setMap(map);
+    calcRoute();
+  }
+  
+  function calcRoute() {
+    var request = {
+      origin: "#{@origin}",
+      destination: "#{@destination}",
+      waypoints: #{@waypoints.values},
+      travelMode: google.maps.DirectionsTravelMode.DRIVING,
+      optimizeWaypoints: true
+    }
+    directionsService.route(request, function(result, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(result);
+      }
+    });
+  }
