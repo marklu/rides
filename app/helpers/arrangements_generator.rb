@@ -47,7 +47,7 @@ module ArrangementsGenerator
         best_path, best_path_score = Array.new(current_path), current_path_score
         best_path_score = 0.5*best_path_score + 0.5*ArrangementsGenerator.score_incompatibility([current_arrangement] + current_combination)
         num_evaluations = 1
-        max_evaluations = Math.exp(remaining_passengers.length).ceil
+        max_evaluations = (1000*(1-Math.exp(-0.0725*remaining_passengers.length))).ceil
         ArrangementsGenerator.annealing_schedule(10, 0.9999) do |temperature|
           done = false
           ArrangementsGenerator.random_passenger_combinations(current_combination) do |new_combination|
@@ -109,7 +109,7 @@ module ArrangementsGenerator
         best_path = Array.new(path)
         best_score = path_score
         num_evaluations = 1
-        max_evaluations = Math.exp(path.length + assigned_passengers.length).ceil
+        max_evaluations = (1000*(1-Math.exp(-0.0725*(path.length + assigned_passengers.length)))).ceil
         ArrangementsGenerator.annealing_schedule(10, 0.9999) do |temperature|
           done = false
           ArrangementsGenerator.random_path_permutations(path) do |new_path|
