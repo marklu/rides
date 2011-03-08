@@ -4,7 +4,7 @@ class CreateArrangementsPassengers < ActiveRecord::Migration
       t.integer :arrangement_id, :null => false
       t.integer :passenger_id, :null => false
     end
-    add_index :arrangements_passengers, [:arrangement_id, :passenger_id], :unique => true
+    add_index :arrangements_passengers, [:arrangement_id, :passenger_id], :unique => true, :name => 'my_index'
   end
 
   def self.down
